@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import Layout from 'components/layouts/SignUpLayout';
 
@@ -104,6 +104,18 @@ const mapStateToProps = ({ user }) => ({
 });
 
 /* eslint-disable no-unexpected-multiline */
+SignupForm.propTypes = {
+  loading: PropTypes.bool,
+  register: PropTypes.func,
+  error: PropTypes.objectOf(PropTypes.string),
+  classes: PropTypes.shape({
+    divider: PropTypes.string,
+    header: PropTypes.string,
+    input: PropTypes.string,
+    link: PropTypes.string,
+    text: PropTypes.string,
+  }),
+};
 
 export default connect(
   mapStateToProps,
