@@ -4,7 +4,7 @@ import history from 'utils/history';
 import Layout from 'components/layouts/Default';
 // import Nav from 'components/Nav';
 import HomePage from 'components/HomePage';
-import Login from 'pages/Login';
+import LoginContainer from 'pages/Login/LoginContainer';
 import SignupForm from 'pages/Register';
 import Districts from 'components/Districts';
 import Students from 'pages/Students';
@@ -19,7 +19,7 @@ export default function () {
   return (
       <Router history={history}>
           <Switch>
-              <Route exact path="/login" component={Login} />
+              <Route exact path="/login" component={LoginContainer} />
               <Route exact path="/register" component={SignupForm} />
               <Switch>
                   <Layout>
