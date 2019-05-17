@@ -26,7 +26,8 @@ function LoginContainer(props) {
     error,
   } = props;
 
-  const completeLogin = () => {
+  const completeLogin = (event) => {
+    event.preventDefault();
     setSubmitted(true);
     if (username && password) logIn({ username, password });
   };
