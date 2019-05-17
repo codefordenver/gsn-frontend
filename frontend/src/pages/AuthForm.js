@@ -14,11 +14,20 @@ const AuthForm = (props) => {
     setPassword,
     submitted,
     completeLogin,
+    completeSignup,
     buttonLabel,
   } = props;
 
+  const handleSubmit = () => {
+    if (window.location.includes('login')) {
+      completeLogin();
+    } else {
+      completeSignup();
+    }
+  };
+
   return (
-      <>
+      <form onSubmit={handleSubmit}>
           {/* TODO Add Error Field */}
           {error && (
           <p>
@@ -36,7 +45,7 @@ const AuthForm = (props) => {
             placeholder="User Name"
             value={username}
             disabled={loading}
-            onKeyPress={e => (e.key === 'Enter' ? completeLogin() : () => {})}
+            // onKeyPress={e => (e.key === 'Enter' ? completeLogin() : () => {})}
             fullWidth
           />
 
@@ -49,12 +58,12 @@ const AuthForm = (props) => {
             placeholder="Password"
             value={password}
             disabled={loading}
-            onKeyPress={e => (e.key === 'Enter' ? completeLogin() : () => {})}
+            // onKeyPress={e => (e.key === 'Enter' ? completeLogin() : () => {})}
             fullWidth
           />
 
           <Button
-            onClick={completeLogin}
+            type="submit"
             disabled={loading}
             variant="contained"
             color="secondary"
@@ -62,7 +71,7 @@ const AuthForm = (props) => {
           >
               {buttonLabel}
           </Button>
-      </>
+      </form>
   );
 };
 
@@ -74,6 +83,7 @@ AuthForm.propTypes = {
   setPassword: PropTypes.func,
   submitted: PropTypes.func,
   completeLogin: PropTypes.func,
+  completeSignup: PropTypes.func,
   buttonLabel: PropTypes.func,
   error: PropTypes.objectOf(PropTypes.string),
   classes: PropTypes.shape({
