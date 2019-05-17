@@ -6,16 +6,17 @@ import Layout from 'components/layouts/SignUpLayout';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as userActions from 'state/UserActions';
-
 import {
   Button, InputBase, Typography, Divider, withStyles,
 } from '@material-ui/core';
+import AuthForm from '../AuthForm';
 import styles from '../../components/sharedStyles/LoginStyles';
 
 function SignupForm(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [buttonLabel, changeButtonLabel] = useState('Register');
 
   const {
     classes: {
@@ -41,49 +42,20 @@ function SignupForm(props) {
           Register
           </Typography>
 
-          {/* TODO Add Error Field */}
-          {error && (
-          <p>
-Error:
-              {error}
-          </p>
-          )}
-
-          <InputBase
-            className={input}
-            onChange={e => setUsername(e.target.value)}
-            type="text"
-            error={submitted && !username}
-            name="username"
-            placeholder="User Name"
-            value={username}
-            disabled={loading}
-            onKeyPress={e => (e.key === 'Enter' ? completeSignup() : () => {})}
-            fullWidth
+          <AuthForm
+            input={input}
+            header={header}
+            setUsername={setUsername}
+            username={username}
+            password={password}
+            setPassword={setPassword}
+            loading={loading}
+            submitted={submitted}
+            register={register}
+            completeSignup={completeSignup}
+            error={error}
+            buttonLabel={buttonLabel}
           />
-
-          <InputBase
-            className={input}
-            onChange={e => setPassword(e.target.value)}
-            type="password"
-            error={submitted && !password}
-            name="password"
-            placeholder="Password"
-            value={password}
-            disabled={loading}
-            onKeyPress={e => (e.key === 'Enter' ? completeSignup() : () => {})}
-            fullWidth
-          />
-
-          <Button
-            onClick={completeSignup}
-            disabled={loading}
-            variant="contained"
-            color="secondary"
-            fullWidth
-          >
-          Register
-          </Button>
 
           {loading && <Typography>Loading...</Typography>}
 
@@ -91,7 +63,7 @@ Error:
 
           <Typography className={text}>
           Already Have an account? &nbsp;
-              <Link to="/login" className={link}>
+              <Link to="/login" onClick={() => changeButtonLabel('Log In')} className={link}>
             Log In
               </Link>
           </Typography>
