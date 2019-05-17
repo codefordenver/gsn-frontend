@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as userActions from 'state/UserActions';
 import {
-  Button, InputBase, Typography, Divider, withStyles,
+  Button, Typography, Divider, withStyles,
 } from '@material-ui/core';
+import AuthForm from '../AuthForm';
 import Layout from '../../components/layouts/SignUpLayout';
 import styles from '../../components/sharedStyles/LoginStyles';
 
@@ -14,6 +15,7 @@ function LoginContainer(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [buttonLabel, changeButtonLabel] = useState('Log In');
 
   const {
     classes: {
@@ -39,49 +41,20 @@ function LoginContainer(props) {
           Log In
           </Typography>
 
-          {/* TODO Add Error Field */}
-          {error && (
-          <p>
-Error:
-              {error}
-          </p>
-          )}
-
-          <InputBase
-            className={input}
-            onChange={e => setUsername(e.target.value)}
-            type="text"
-            error={submitted && !username}
-            name="username"
-            placeholder="User Name"
-            value={username}
-            disabled={loading}
-            onKeyPress={e => (e.key === 'Enter' ? completeLogin() : () => {})}
-            fullWidth
+          <AuthForm
+            input={input}
+            header={header}
+            setUsername={setUsername}
+            username={username}
+            password={password}
+            setPassword={setPassword}
+            loading={loading}
+            submitted={submitted}
+            logIn={logIn}
+            completeLogin={completeLogin}
+            error={error}
+            buttonLabel={buttonLabel}
           />
-
-          <InputBase
-            className={input}
-            onChange={e => setPassword(e.target.value)}
-            type="password"
-            error={submitted && !password}
-            name="password"
-            placeholder="Password"
-            value={password}
-            disabled={loading}
-            onKeyPress={e => (e.key === 'Enter' ? completeLogin() : () => {})}
-            fullWidth
-          />
-
-          <Button
-            onClick={completeLogin}
-            disabled={loading}
-            variant="contained"
-            color="secondary"
-            fullWidth
-          >
-          Log In
-          </Button>
 
           {loading && <Typography>Loading...</Typography>}
 
@@ -89,7 +62,7 @@ Error:
 
           <Typography className={text}>
           No account?&nbsp;
-              <Link to="/register" className={link}>
+              <Link to="/register" onClick={() => changeButtonLabel('Register')} className={link}>
             Register
               </Link>
           </Typography>
