@@ -38,7 +38,7 @@ export const setUserState = () => (dispatch) => {
   }
 };
 
-export const logIn = ({ username, password, path = '/' }) => (dispatch) => {
+export const logIn = ({ username, password, path = '/students' }) => (dispatch) => {
   dispatch(authRequest());
   loginUser({ username, password })
     .then((json) => {
@@ -58,7 +58,7 @@ export const register = ({ username, password }) => (dispatch) => {
   dispatch(setLoading(true));
   signupUser({ username, password })
     .then((json) => {
-      console.log('register json', json);
+      // console.log('register json', json);
       dispatch(setLoading(false));
       dispatch(
         authSuccess({
