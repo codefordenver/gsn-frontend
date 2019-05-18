@@ -19,11 +19,7 @@ const AuthForm = (props) => {
   } = props;
 
   const handleSubmit = () => {
-    if (window.location.includes('login')) {
-      completeLogin();
-    } else {
-      completeSignup();
-    }
+    window.location.href.includes('login') ? completeLogin() : completeSignup();
   };
 
   return (
