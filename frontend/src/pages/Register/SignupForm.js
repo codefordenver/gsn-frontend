@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as userActions from 'state/UserActions';
 import {
-  Button, InputBase, Typography, Divider, withStyles,
+  Typography, Divider, withStyles,
 } from '@material-ui/core';
 import AuthForm from '../AuthForm';
 import styles from '../../components/sharedStyles/LoginStyles';
