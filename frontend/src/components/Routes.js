@@ -5,7 +5,7 @@ import Layout from 'components/layouts/Default';
 // import Nav from 'components/Nav';
 import HomePage from 'components/HomePage';
 import LoginContainer from 'pages/Login/LoginContainer';
-import SignupForm from 'pages/Register';
+import SignupContainer from 'pages/Register';
 import Districts from 'components/Districts';
 import Students from 'pages/Students';
 import StudentDetail from 'pages/StudentDetail';
@@ -20,7 +20,7 @@ export default function () {
       <Router history={history}>
           <Switch>
               <Route exact path="/login" component={LoginContainer} />
-              <Route exact path="/register" component={SignupForm} />
+              <Route exact path="/register" component={SignupContainer} />
               <Switch>
                   <Layout>
                       <PrivateRoute exact path="/" component={HomePage} />
