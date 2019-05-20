@@ -1,0 +1,39 @@
+{
+   "courseId":1,
+   "courseName":"Algebra",
+   "gradeSet":[
+      {
+         "courseTerm": "Fall 2019",
+         "studentId": 1,
+         "studentName":"Linton Stephens",
+         "gradeId":4,
+         "grade": 0.3,
+         "finalGradeForTerm": "Final"
+      },
+      {
+         "courseTerm": "Spring 2018",
+         "studentId": 1,
+         "studentName":"Linton Stephens",
+         "gradeId":3,
+         "grade": 0.53,
+         "finalGradeForTerm": "Not Final"
+      },
+      {
+         "courseTerm": "Fall 2018",
+         "studentId": 2,
+         "studentName":"Brent Ros·rio",
+         "gradeId":1,
+         "grade": 0.73,
+         "finalGradeForTerm": "Not Final"
+      },
+      {
+         "courseTerm": "Spring 2019",
+         "studentId": 2,
+         "studentName":"Brent Ros·rio",
+         "gradeId":2,
+         "grade":0.71,
+         "finalGradeForTerm": "Not Final"
+
+      }
+   ]
+}
