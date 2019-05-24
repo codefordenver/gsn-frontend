@@ -3,10 +3,12 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import user from 'state/UserReducer';
+import studentReducer from './studentReducer';
 
 const store = createStore(
   combineReducers({
     user,
+    students: studentReducer,
   }),
   compose(
     applyMiddleware(thunk),
