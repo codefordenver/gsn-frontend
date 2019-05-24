@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getStudents } from 'state/StudentActions';
+import { connect } from 'react-redux';
+import { fetchStudents } from 'state/StudentActions';
 import PropTypes from 'prop-types';
 
 import {
@@ -19,7 +20,7 @@ function Students(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getStudents().then((s) => {
+    fetchStudents().then((s) => {
       setStudents(s);
       setLoading(false);
     });
@@ -104,3 +105,4 @@ Students.propTypes = {
 };
 
 export default withStyles(styles)(Students);
+connect(null, { fetchStudents })(Students);
