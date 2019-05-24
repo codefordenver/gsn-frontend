@@ -1,0 +1,2 @@
+export const REQUEST_STUDENTS = 'REQUEST_STUDENTS';
+export const GET_STUDENT = 'GET_STUDENT';
