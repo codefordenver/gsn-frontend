@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-import { getStudentDetail } from 'services/studentServices';
+import { getStudentDetail } from 'state/StudentActions';
 
 const DetailBase = ({ k, val, classes: { lDiv, rDiv, root } }) => (
     <Typography color="primary" className={root}>
