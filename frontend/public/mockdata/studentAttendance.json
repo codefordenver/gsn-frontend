@@ -1,7 +1,6 @@
-
 {
   "studentId": 13,
-  "name" : "Linton Jefferson Stephens",
+  "studentName" : "Linton Jefferson Stephens",
   "attendanceSet": [
     {
       "attendanceEntryDate": "01/01/2019",

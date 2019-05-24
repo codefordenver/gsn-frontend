@@ -1,7 +1,7 @@
 {
-   "courseId":1,
-   "courseName":"Algebra",
-   "gradeSet":[
+    "schoolId":1,
+    "schoolName":"Bear Creek High School",
+    "gradeSet":[
       {
          "gradeId":1,
          "courseId":1,
@@ -27,5 +27,5 @@
          "finalGradeForTerm": "Not Final"
 
       }
-   ]
-}
+    ]
+ }

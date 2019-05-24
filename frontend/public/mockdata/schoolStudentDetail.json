@@ -1,0 +1,27 @@
+{
+    "schoolId":1,
+    "schoolName":"Aguilar Middle/High School",
+    "studentSet":[
+       {
+        "studentId": 1,
+        "studentName": "Linton Stephens",
+        "birthdate": "9/16/1992"
+       },
+       {
+        "studentId": 2,
+        "studentName": "Brent Ros·rio",
+        "birthdate": "12/10/1992"
+       },
+       {
+        "studentId": 3,
+        "studentName": "Banu Rounds",
+        "birthdate": "7/24/1996"
+       },
+       {
+        "studentId": 4,
+        "studentName": "Biel Morgan",
+        "birthdate": "7/29/1997"
+ 
+       }
+    ]
+ }

@@ -1,7 +1,7 @@
 {
-   "courseId":1,
-   "courseName":"Algebra",
-   "gradeSet":[
+    "districtId":1,
+    "districtName":"Jeffco Public Schools",
+    "gradeSet":[
       {
          "gradeId":1,
          "courseId":1,
@@ -27,5 +27,5 @@
          "finalGradeForTerm": "Not Final"
 
       }
-   ]
-}
+    ]
+ }
