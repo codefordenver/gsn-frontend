@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getStudents } from 'services/studentServices';
+import { getStudents } from 'state/StudentActions';
 import PropTypes from 'prop-types';
 
 import {
