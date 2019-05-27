@@ -41,7 +41,7 @@ function StudentAttendanceDetail(props) {
 
   return (
     < CreateAttendanceTable header = {header} title = {studentName} 
-    tHead = {tHead} data = {studentAttendanceDetail.AttendanceSet} tRow = {tRow} 
+    tHead = {tHead} data = {studentAttendanceDetail.attendanceSet} tRow = {tRow} 
     striped = {striped} />
 );
 }
