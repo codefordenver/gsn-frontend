@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
-  Link as StyledLink, Typography, withStyles,
+   Typography, withStyles,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 import { getDistrictDetail } from 'services/districtServices';
-import { DetailLink, DetailItem} from 'components/sharedStyles/Table/DetailStyles';
+import {  DetailItem} from 'components/sharedStyles/Table/DetailStyles';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
+import { CreateSchoolTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+
 
 
 
@@ -16,6 +17,11 @@ function DistrictDetail(props) {
   const [districtDetail, setDistrictDetail] = useState({});
   const [loading, setLoading] = useState(true);
   const { classes: { header }, match: { params } } = props;
+  const {
+    classes: {
+       striped, tHead, tRow,
+    },
+  } = props;
   const districtIdParam = params;
 
   useEffect(() => {
@@ -33,10 +39,10 @@ function DistrictDetail(props) {
 
   const {
     districtName,
-    districtId,
     state,
     city,
-    code
+    code,
+    schoolSet
   } = districtDetail;
 
   return (
@@ -45,11 +51,11 @@ function DistrictDetail(props) {
           <DetailItem k="Code" val={code} />
           <DetailItem k="City" val={city} />
           <DetailItem k="State" val={state} />
-          <DetailLink k="Schools" val="Click Here" link={`/district/school/${districtId}`} />
-          <DetailLink k="Students" val="Click Here" link={`/district/student/${districtId}`} />
-          <DetailLink k="Courses" val="Click Here" link={`/district/course/${districtId}`} />
-          <DetailLink k="Grades" val="Click Here" link={`/district/grade/${districtId}`} />
-          <DetailLink k="Attendance" val="Click Here" link={`/district/attendance/${districtId}`} />
+
+          < CreateSchoolTable header = {header} title = "School"
+          tHead = {tHead} data = {schoolSet} tRow = {tRow} 
+          striped = {striped} />
+
       </div>
   );
 }
