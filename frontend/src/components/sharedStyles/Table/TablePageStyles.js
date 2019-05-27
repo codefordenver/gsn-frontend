@@ -1,12 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { getCourses } from 'services/courseServices';
-import PropTypes from 'prop-types';
 
-import {
-  Link as StyledLink,
-  Table, TableBody, TableCell, TableHead, TableRow, Typography, withStyles,
-} from '@material-ui/core';
 
 const TablePageStyles = theme => ({
     header: {
