@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
-  Link as StyledLink, Typography, withStyles,
+  Typography, withStyles,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 import { getProgramDetail } from 'services/programServices';
-import { DetailLink } from 'components/sharedStyles/Table/DetailStyles';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
+import { CreateGradeTable, CreateStudentTable, CreateCourseTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+
 
 
 
 function ProgramDetail(props) {
   const [programDetail, setProgramDetail] = useState({});
   const [loading, setLoading] = useState(true);
+  const {
+    classes: {
+       striped, tHead, tRow,
+    },
+  } = props;
   const { classes: { header }, match: { params } } = props;
   const programIdParam = params;
 
@@ -33,15 +38,28 @@ function ProgramDetail(props) {
 
   const {
     programName,
-    programId,
+    studentSet,
+    courseSet,
+    gradeSet
   } = programDetail;
 
   return (
       <div>
           <Typography className={header} component="h1" variant="h4">{programName}</Typography>
-          <DetailLink k="Students" val="Click Here" link={`/program/student/${programId}`} />
-          <DetailLink k="Courses" val="Click Here" link={`/program/course/${programId}`} />
-          <DetailLink k="Grades" val="Click Here" link={`/program/grade/${programId}`} />
+
+          < CreateGradeTable header = {header} title = "Grades"
+          tHead = {tHead} data = {gradeSet} tRow = {tRow} 
+          striped = {striped} />
+
+          < CreateCourseTable header = {header} title = "Course"
+          tHead = {tHead} data = {courseSet} tRow = {tRow} 
+          striped = {striped} />
+
+          < CreateStudentTable header = {header} title = "Student"
+          tHead = {tHead} data = {studentSet} tRow = {tRow} 
+          striped = {striped} />
+
+
       </div>
   );
 }
