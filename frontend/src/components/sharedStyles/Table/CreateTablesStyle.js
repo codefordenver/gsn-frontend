@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {
     Link as StyledLink,
-    Table, TableBody, TableCell, TableHead, TableRow, Typography, withStyles,
+    Table, TableBody, TableCell, TableHead, TableRow, Typography, 
   } from '@material-ui/core';
 
 
@@ -19,6 +19,7 @@ function CreateGradeTable(props) {
         <Table>
             <TableHead>
                 <TableRow>
+                    <TableCell className={props.tHead}>Student</TableCell>
                     <TableCell className={props.tHead}>Course</TableCell>
                     <TableCell className={props.tHead}>Term</TableCell>
                     <TableCell className={props.tHead}>Grade</TableCell>
@@ -31,6 +32,8 @@ function CreateGradeTable(props) {
                     gradeId,
                     courseName,
                     courseId,
+                    studentName,
+                    studentId,
                     courseTerm,
                     grade,
                     finalGradeForTerm,
@@ -40,6 +43,11 @@ function CreateGradeTable(props) {
                         key={gradeId}
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                       >
+                          <TableCell>
+                              <Link to={`/student/${studentId}`}>
+                                  <StyledLink>{studentName}</StyledLink>
+                              </Link>
+                          </TableCell>
                           <TableCell>
                               <Link to={`/course/${courseId}`}>
                                   <StyledLink>{courseName}</StyledLink>
@@ -86,7 +94,7 @@ function CreateStudentTable(props) {
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                         >
                            <TableCell>
-                                <Link to={`/students/${studentId}`}>
+                                <Link to={`/student/${studentId}`}>
                                     <StyledLink>{studentName}</StyledLink>
                                 </Link>
                             </TableCell>
@@ -119,6 +127,7 @@ function CreateAttendanceTable(props) {
         <Table>
             <TableHead>
                 <TableRow>
+                <TableCell className={props.tHead}>Student</TableCell>
                 <TableCell className={props.tHead}>Entry Date</TableCell>
                 <TableCell className={props.tHead}>Total Unexcused Absencse</TableCell>
                 <TableCell className={props.tHead}>Total Excused Absencse</TableCell>
@@ -132,6 +141,8 @@ function CreateAttendanceTable(props) {
                     const {
                         attendanceId,
                         attendanceEntryDate,
+                        studentName,
+                        studentId,
                         attendanceTermFinalValue,
                         totalUnexabs,
                         totalExabs,
@@ -143,6 +154,11 @@ function CreateAttendanceTable(props) {
                         key={attendanceId}
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                         >
+                            <TableCell>
+                                <Link to={`/student/${studentId}`}>
+                                    <StyledLink>{studentName}</StyledLink>
+                                </Link>
+                            </TableCell>
                             <TableCell align="left">{attendanceEntryDate}</TableCell>
                             <TableCell align="left">{totalUnexabs}</TableCell>
                             <TableCell align="left">{totalExabs}</TableCell>
@@ -352,5 +368,56 @@ function CreateSchoolTable(props) {
         }
 
 
+function CreateBehaviorTable(props) {
+    return (
+        <div>
+        <Typography
+            variant="h4"
+            component="h1"
+            className={props.header}
+        >{props.title}
+        </Typography>
+        <Table>
+            <TableHead>
+                <TableRow>
+                <TableCell className={props.tHead}>Student</TableCell>
+                <TableCell className={props.tHead}>Date</TableCell>
+                <TableCell className={props.tHead}>Context</TableCell>
+                <TableCell className={props.tHead}>Result</TableCell>
+            </TableRow>
+            </TableHead>
+            <TableBody>
+                {props.data.map((behaviorDetail, i) => {
+                    const {
+                        behaviorId,
+                        studentName,
+                        studentId,
+                        date,
+                        context,
+                        result
+                    } = behaviorDetail;
+                    return (
+                        <TableRow
+                        key={behaviorId}
+                        className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
+                        >
+                            <TableCell align="left">
+                                <Link to={`/student/${studentId}`}>
+                                    <StyledLink>{studentName}</StyledLink>
+                                </Link>
+                            </TableCell>
+                            <TableCell align="left">{date}</TableCell>
+                            <TableCell align="left">{context}</TableCell>
+                            <TableCell align="left">{result}</TableCell>
+                        </TableRow>
+                    );
+                })}
+            </TableBody>
+        </Table>
+    </div>
+    );
+        }
 
-export { CreateGradeTable, CreateSchoolTable, CreateStudentTable, CreateProgramTable, CreateAttendanceTable, CreateCourseTable, CreateDistrictTable };
+
+
+export { CreateGradeTable, CreateSchoolTable, CreateStudentTable, CreateBehaviorTable, CreateProgramTable, CreateAttendanceTable, CreateCourseTable, CreateDistrictTable };
