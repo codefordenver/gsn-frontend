@@ -1,4 +1,87 @@
 {
   "programId": 15,
-  "programName": "The Program Name"
+  "programName": "GSN",
+  "gradeSet":[
+    {
+       "gradeId":1,
+       "studentId": 1,
+       "studentName": "Hannah Amundson",
+       "courseId":1,
+       "courseName": "Algebra",
+       "courseTerm": "Fall 2019",
+       "grade": 0.3,
+       "finalGradeForTerm": "Final"
+    },
+    {
+       "gradeId":1,
+       "studentId": 1,
+       "studentName": "Hannah Amundson",
+       "courseId":1,
+       "courseName": "Algebra",
+       "courseTerm": "Fall 2019",
+       "grade": 0.53,
+       "finalGradeForTerm": "Not Final"
+    },
+    {
+       "gradeId":2,
+       "studentId": 1,
+       "studentName": "Hannah Amundson",
+       "courseId":2,
+       "courseName": "Geometry",
+       "courseTerm": "Spring 2019",
+       "grade":0.71,
+       "finalGradeForTerm": "Not Final"
+
+    }
+  ],
+  "studentSet":[
+    {
+     "studentId": 1,
+     "schoolId": 4,
+     "schoolName": "Bear Creek High School",
+     "studentName": "Linton Stephens",
+     "birthdate": "9/16/1992"
+    },
+    {
+     "studentId": 2,
+     "studentName": "Brent Ros·rio",
+     "schoolId": 2,
+     "schoolName": "Lakewood High School",
+     "birthdate": "12/10/1992"
+    },
+    {
+     "studentId": 3,
+     "studentName": "Banu Rounds",
+     "schoolId": 3,
+     "schoolName": "Halsville High School",
+     "birthdate": "7/24/1996"
+    },
+    {
+     "studentId": 4,
+     "studentName": "Biel Morgan",
+     "schoolId": 5,
+     "schoolName": "Longview High School",
+     "birthdate": "7/29/1997"
+
+    }
+ ],
+ "courseSet":
+  [
+    {
+    "courseId": 1,
+    "schoolName": "Aguilar Middle/High School",
+    "schoolId": 15,
+    "courseName": "Algebra",
+    "courseCode": "MTH-101",
+    "courseSubject": "MTH"
+    },
+    {
+    "courseId": 3,
+    "schoolName": "Bear Creek High School",
+    "schoolId": 5,
+    "courseName": "English",
+    "courseCode": "ENG-101",
+    "courseSubject": "ENG"
+    }
+  ]
 }

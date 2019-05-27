@@ -5,6 +5,8 @@
     {
       "attendanceEntryDate": "01/01/2019",
       "attendanceTermFinalValue": "Final",
+      "studentId": 1,
+         "studentName": "Hannah Amundson",
       "attendanceId": 1,
       "totalUnexabs": 4,
       "totalExabs": 1,
@@ -14,6 +16,8 @@
     {
       "attendanceEntryDate": "01/05/2019",
       "attendanceTermFinalValue": "Not Final",
+      "studentId": 1,
+         "studentName": "Hannah Amundson",
       "attendanceId": 9,
       "totalUnexabs": 7,
       "totalExabs": 5,
@@ -23,6 +27,8 @@
     {
       "attendanceEntryDate": "01/04/2019",
       "attendanceTermFinalValue": "Not Final",
+      "studentId": 1,
+      "studentName": "Hannah Amundson",
       "attendanceId": 17,
       "totalUnexabs": 15,
       "totalExabs": 7,
