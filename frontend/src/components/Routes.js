@@ -6,9 +6,24 @@ import Layout from 'components/layouts/Default';
 import HomePage from 'components/HomePage';
 import LoginContainer from 'pages/Login/LoginContainer';
 import SignupContainer from 'pages/Register';
-import Districts from 'components/Districts';
-import Students from 'pages/Students';
-import StudentDetail from 'pages/StudentDetail';
+
+import Districts from 'pages/Table/District/Districts';
+import DistrictDetail from 'pages/Table/District/DistrictDetail';
+
+import Programs from 'pages/Table/Program/Programs';
+import ProgramDetail from 'pages/Table/Program/ProgramDetail';
+
+import Students from 'pages/Table/Student/Students';
+import StudentDetail from 'pages/Table/Student/StudentDetail';
+
+
+import Courses from 'pages/Table/Course/Courses';
+import CourseDetail from 'pages/Table/Course/CourseDetail';
+
+import Schools from 'pages/Table/School/Schools';
+import SchoolDetail from 'pages/Table/School/SchoolDetail';
+
+
 
 import PrivateRoute from './PrivateRoute';
 // username: user.get('username'),
@@ -24,9 +39,22 @@ export default function () {
               <Switch>
                   <Layout>
                       <PrivateRoute exact path="/" component={HomePage} />
-                      <PrivateRoute path="/districts" component={Districts} />
-                      <PrivateRoute exact path="/students" component={Students} />
-                      <PrivateRoute path="/students/:studentId" component={StudentDetail} />
+
+                      <PrivateRoute exact path="/district" component={Districts} />
+                      <PrivateRoute exact path="/district/:districtId" component={DistrictDetail} />
+
+                      <PrivateRoute exact path="/program" component={Programs} />
+                      <PrivateRoute exact path="/program/:programId" component={ProgramDetail} />
+
+                      <PrivateRoute exact path="/student" component={Students} />
+                      <PrivateRoute exact path="/student/:studentId" component={StudentDetail} />
+
+                      <PrivateRoute exact path="/course" component={Courses} />
+                      <PrivateRoute exact path="/course/:courseId" component={CourseDetail} />      
+
+                      <PrivateRoute exact path="/school" component={Schools} />
+                      <PrivateRoute exact path="/school/:schoolId" component={SchoolDetail} />
+
                   </Layout>
               </Switch>
           </Switch>

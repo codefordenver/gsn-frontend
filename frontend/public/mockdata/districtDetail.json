@@ -1,0 +1,19 @@
+{
+  "districtName": "Jefferson County Public Schools",
+  "districtId": 7,
+  "state": "CO",
+  "city": "Lakewood",
+  "code": "JH1",
+  "schoolSet":[
+    {
+       "schoolName": "Aguilar Middle/High School",
+       "schoolId": 15
+       },
+       {
+         "schoolName": "Bear Creek High School",
+         "schoolId": 7
+         }
+        ]
+
+}
+  

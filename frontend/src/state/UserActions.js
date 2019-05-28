@@ -38,7 +38,7 @@ export const setUserState = () => (dispatch) => {
   }
 };
 
-export const logIn = ({ username, password, path = '/students' }) => (dispatch) => {
+export const logIn = ({ username, password, path = '/student' }) => (dispatch) => {
   dispatch(authRequest());
   loginUser({ username, password })
     .then((json) => {

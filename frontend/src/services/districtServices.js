@@ -1,5 +1,6 @@
-import { request } from './request';
+export const getDistricts = () => fetch('/mockdata/districts.json')
+    .then(result => result.json());
 
-export const getDistricts = () => request({
-  url: 'gsndb/district/',
-});
+export const getDistrictDetail = () => fetch('/mockdata/districtDetail.json')
+    .then(result => result.json());
+  

@@ -1,0 +1,14 @@
+[
+    {
+    "schoolName": "Aguilar Middle/High School",
+    "schoolId": 15,
+    "districtName": "Jefferson County Public Schools",
+    "districtId": 7
+    },
+    {
+      "schoolName": "Bear Creek High School",
+      "schoolId": 7,
+      "districtName": "Denver Public Schools",
+      "districtId": 5
+      }
+  ]

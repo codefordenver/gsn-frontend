@@ -1,0 +1,107 @@
+{
+  "courseId": 1,
+  "schoolName": "Aguilar Middle/High School",
+  "schoolId": 15,
+  "courseName": "Algebra",
+  "courseCode": "MTH-101",
+  "courseSubject": "MTH",
+  "studentSet":[
+    {
+     "studentId": 1,
+     "schoolId": 4,
+     "schoolName": "Bear Creek High School",
+     "studentName": "Linton Stephens",
+     "birthdate": "9/16/1992"
+    },
+    {
+     "studentId": 2,
+     "studentName": "Brent Ros·rio",
+     "schoolId": 2,
+     "schoolName": "Lakewood High School",
+     "birthdate": "12/10/1992"
+    },
+    {
+     "studentId": 3,
+     "studentName": "Banu Rounds",
+     "schoolId": 3,
+     "schoolName": "Halsville High School",
+     "birthdate": "7/24/1996"
+    },
+    {
+     "studentId": 4,
+     "studentName": "Biel Morgan",
+     "schoolId": 5,
+     "schoolName": "Longview High School",
+     "birthdate": "7/29/1997"
+
+    }
+ ],
+ "gradeSet":[
+  {
+     "gradeId":1,
+     "studentId": 1,
+     "studentName": "Hannah Amundson",
+     "courseId":1,
+     "courseName": "Algebra",
+     "courseTerm": "Fall 2019",
+     "grade": 0.3,
+     "finalGradeForTerm": "Final"
+  },
+  {
+     "gradeId":1,
+     "studentId": 1,
+     "studentName": "Hannah Amundson",
+     "courseId":1,
+     "courseName": "Algebra",
+     "courseTerm": "Fall 2019",
+     "grade": 0.53,
+     "finalGradeForTerm": "Not Final"
+  },
+  {
+     "gradeId":2,
+     "studentId": 1,
+     "studentName": "Hannah Amundson",
+     "courseId":2,
+     "courseName": "Geometry",
+     "courseTerm": "Spring 2019",
+     "grade":0.71,
+     "finalGradeForTerm": "Not Final"
+
+  }
+],
+"attendanceSet": [
+  {
+    "attendanceEntryDate": "01/01/2019",
+    "attendanceTermFinalValue": "Final",
+    "studentId": 1,
+     "studentName": "Hannah Amundson",
+    "attendanceId": 1,
+    "totalUnexabs": 4,
+    "totalExabs": 1,
+    "totalTardies": 4,
+    "avgDailyAttendance": 0.83
+  },
+  {
+    "attendanceEntryDate": "01/05/2019",
+    "attendanceTermFinalValue": "Not Final",
+    "studentId": 1,
+     "studentName": "Hannah Amundson",
+    "attendanceId": 9,
+    "totalUnexabs": 7,
+    "totalExabs": 5,
+    "totalTardies": 9,
+    "avgDailyAttendance": 0.8
+  },
+  {
+    "attendanceEntryDate": "01/04/2019",
+    "attendanceTermFinalValue": "Not Final",
+    "studentId": 1,
+     "studentName": "Hannah Amundson",
+    "attendanceId": 17,
+    "totalUnexabs": 15,
+    "totalExabs": 7,
+    "totalTardies": 15,
+    "avgDailyAttendance": 0.76
+  }
+]
+}
