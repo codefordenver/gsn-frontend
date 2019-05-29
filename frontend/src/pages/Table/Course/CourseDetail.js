@@ -8,6 +8,7 @@ import { DetailLink, DetailItem} from 'components/sharedStyles/Table/DetailStyle
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateGradeTable, CreateStudentTable, CreateAttendanceTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
 
 
@@ -54,15 +55,28 @@ function CourseDetail(props) {
           <DetailItem k="Subject" val={courseSubject} />
           <DetailLink k="School" val={schoolName} link={`/school/${schoolId}`} />
 
-          < CreateGradeTable header = {header} title = "Grades"
-          tHead = {tHead} data = {gradeSet} tRow = {tRow} 
-          striped = {striped} />
 
-          < CreateAttendanceTable header = {header} title = "Attendance"
+          <CreateTableHeader
+            headerClassStyle = {header}
+            title = "Grades" />
+          < CreateGradeTable 
+            header = {header}
+            tHead = {tHead} 
+            data = {gradeSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+
+          <CreateTableHeader
+            headerClassStyle = {header}
+            title = "Attendance" />
+          < CreateAttendanceTable header = {header} 
           tHead = {tHead} data = {attendanceSet} tRow = {tRow} 
           striped = {striped} />
 
-          < CreateStudentTable header = {header} title = "Student"
+          <CreateTableHeader
+            headerClassStyle = {header}
+            title = "Student" />
+          < CreateStudentTable header = {header} 
           tHead = {tHead} data = {studentSet} tRow = {tRow} 
           striped = {striped} />
 
