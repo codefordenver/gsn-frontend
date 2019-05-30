@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
     Link as StyledLink,
-    Table, TableBody, TableCell, TableHead, TableRow, Typography, 
+    Table, TableBody, TableCell, TableHead, TableRow,
   } from '@material-ui/core';
 
 
@@ -10,12 +10,6 @@ import {
 function CreateGradeTable(props) {
     return (
         <div>
-        <Typography
-          variant="h4"
-          component="h1"
-          className={props.header}
-        >{props.title}
-        </Typography>
         <Table>
             <TableHead>
                 <TableRow>
@@ -69,12 +63,6 @@ function CreateGradeTable(props) {
 function CreateStudentTable(props) {
     return (
         <div>
-        <Typography
-            variant="h4"
-            component="h1"
-            className={props.header}
-        >{props.title}
-        </Typography>
         <Table>
             <TableHead>
                   <TableRow>
@@ -118,19 +106,13 @@ function CreateStudentTable(props) {
 function CreateAttendanceTable(props) {
     return (
         <div>
-        <Typography
-            variant="h4"
-            component="h1"
-            className={props.header}
-        >{props.title}
-        </Typography>
         <Table>
             <TableHead>
                 <TableRow>
                 <TableCell className={props.tHead}>Student</TableCell>
                 <TableCell className={props.tHead}>Entry Date</TableCell>
-                <TableCell className={props.tHead}>Total Unexcused Absencse</TableCell>
-                <TableCell className={props.tHead}>Total Excused Absencse</TableCell>
+                <TableCell className={props.tHead}>Total Unexcused Absence</TableCell>
+                <TableCell className={props.tHead}>Total Excused Absence</TableCell>
                 <TableCell className={props.tHead}>Total Tardies</TableCell>
                 <TableCell className={props.tHead}>Average Daily Attendance</TableCell>
                 <TableCell className={props.tHead}>Final</TableCell>
@@ -177,12 +159,6 @@ function CreateAttendanceTable(props) {
 function CreateCourseTable(props) {
     return (
         <div>
-        <Typography
-            variant="h4"
-            component="h1"
-            className={props.header}
-        >{props.title}
-        </Typography>
         <Table>
             <TableHead>
                 <TableRow>
@@ -231,12 +207,6 @@ function CreateCourseTable(props) {
 function CreateDistrictTable(props) {
     return (
         <div>
-        <Typography
-            variant="h4"
-            component="h1"
-            className={props.header}
-        >{props.title}
-        </Typography>
         <Table>
             <TableHead>
                 <TableRow>
@@ -280,12 +250,6 @@ function CreateDistrictTable(props) {
 function CreateProgramTable(props) {
     return (
         <div>
-        <Typography
-            variant="h4"
-            component="h1"
-            className={props.header}
-        >{props.title}
-        </Typography>
         <Table>
             <TableHead>
                 <TableRow>
@@ -320,12 +284,6 @@ function CreateProgramTable(props) {
 function CreateSchoolTable(props) {
     return (
         <div>
-        <Typography
-            variant="h4"
-            component="h1"
-            className={props.header}
-        >{props.title}
-        </Typography>
         <Table>
             <TableHead>
                 <TableRow>
@@ -371,12 +329,6 @@ function CreateSchoolTable(props) {
 function CreateBehaviorTable(props) {
     return (
         <div>
-        <Typography
-            variant="h4"
-            component="h1"
-            className={props.header}
-        >{props.title}
-        </Typography>
         <Table>
             <TableHead>
                 <TableRow>

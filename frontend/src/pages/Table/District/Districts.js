@@ -8,6 +8,8 @@ import { withStyles,
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateDistrictTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
+
 
 
 function Districts(props) {
@@ -34,9 +36,17 @@ function Districts(props) {
 
 
   return (
-    < CreateDistrictTable header = {header} title = 'All District' 
-    tHead = {tHead} data = {districts} tRow = {tRow} 
-    striped = {striped} />
+    <div>
+      <CreateTableHeader
+        headerClassStyle = {header}
+        title = "All Districts" />
+      < CreateDistrictTable 
+        header = {header}
+        tHead = {tHead} 
+        data = {districts} 
+        tRow = {tRow} 
+        striped = {striped} />
+    </div>
   );
 }
 

@@ -8,7 +8,7 @@ import { getProgramDetail } from 'services/programServices';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateGradeTable, CreateStudentTable, CreateCourseTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-
+import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
 
 
@@ -47,17 +47,36 @@ function ProgramDetail(props) {
       <div>
           <Typography className={header} component="h1" variant="h4">{programName}</Typography>
 
-          < CreateGradeTable header = {header} title = "Grades"
-          tHead = {tHead} data = {gradeSet} tRow = {tRow} 
-          striped = {striped} />
 
-          < CreateCourseTable header = {header} title = "Course"
-          tHead = {tHead} data = {courseSet} tRow = {tRow} 
-          striped = {striped} />
+          <CreateTableHeader
+            headerClassStyle = {header}
+            title = "Grades" />
+          < CreateGradeTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {gradeSet} 
+            tRow = {tRow} 
+            striped = {striped} />
 
-          < CreateStudentTable header = {header} title = "Student"
-          tHead = {tHead} data = {studentSet} tRow = {tRow} 
-          striped = {striped} />
+          <CreateTableHeader
+            headerClassStyle = {header}
+            title = "Course" />
+          < CreateCourseTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {courseSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+
+          <CreateTableHeader
+            headerClassStyle = {header}
+            title = "Student" />
+          < CreateStudentTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {studentSet} 
+            tRow = {tRow} 
+            striped = {striped} />
 
 
       </div>

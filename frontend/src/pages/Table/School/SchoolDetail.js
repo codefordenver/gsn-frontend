@@ -10,7 +10,7 @@ import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateGradeTable, CreateAttendanceTable, CreateStudentTable, 
   CreateCourseTable, CreateBehaviorTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-
+import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
 
 
@@ -54,25 +54,55 @@ function SchoolDetail(props) {
           <Typography className={header} component="h1" variant="h4">{schoolName}</Typography>
           <DetailLink k="District Name" val={districtName} link={`/district/${districtId}`} />
 
-          < CreateGradeTable header = {header} title = "Grades"
-          tHead = {tHead} data = {gradeSet} tRow = {tRow} 
-          striped = {striped} />
+          <CreateTableHeader
+            headerClassStyle = {header}
+            title = "Grades" />
+          < CreateGradeTable 
+            header = {header}
+            tHead = {tHead} 
+            data = {gradeSet} 
+            tRow = {tRow} 
+            striped = {striped} />
 
-          < CreateAttendanceTable header = {header} title = "Attendance"
-          tHead = {tHead} data = {attendanceSet} tRow = {tRow} 
-          striped = {striped} />
+          <CreateTableHeader
+            headerClassStyle = {header}
+            title = "Attendance" />
+          < CreateAttendanceTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {attendanceSet} 
+            tRow = {tRow} 
+            striped = {striped} />
 
-          < CreateBehaviorTable header = {header} title = "Behavior"
-          tHead = {tHead} data = {behaviorSet} tRow = {tRow} 
-          striped = {striped} />
+          <CreateTableHeader
+            headerClassStyle = {header}
+            title = "Behavior" />
+          < CreateBehaviorTable 
+            header = {header}
+            tHead = {tHead} 
+            data = {behaviorSet} 
+            tRow = {tRow} 
+            striped = {striped} />
 
-          < CreateCourseTable header = {header} title = "Course"
-          tHead = {tHead} data = {courseSet} tRow = {tRow} 
-          striped = {striped} />
+          <CreateTableHeader
+            headerClassStyle = {header}
+            title = "Course" />
+          < CreateCourseTable 
+            header = {header}
+            tHead = {tHead} 
+            data = {courseSet} 
+            tRow = {tRow} 
+            striped = {striped} />
 
-          < CreateStudentTable header = {header} title = "Student"
-          tHead = {tHead} data = {studentSet} tRow = {tRow} 
-          striped = {striped} />
+          <CreateTableHeader
+            headerClassStyle = {header}
+            title = "Student" />
+          < CreateStudentTable 
+            header = {header}
+            tHead = {tHead} 
+            data = {studentSet} 
+            tRow = {tRow} 
+            striped = {striped} />
 
       </div>
   );

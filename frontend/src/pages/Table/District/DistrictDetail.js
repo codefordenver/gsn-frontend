@@ -9,7 +9,7 @@ import {  DetailItem} from 'components/sharedStyles/Table/DetailStyles';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateSchoolTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-
+import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
 
 
@@ -52,9 +52,16 @@ function DistrictDetail(props) {
           <DetailItem k="City" val={city} />
           <DetailItem k="State" val={state} />
 
-          < CreateSchoolTable header = {header} title = "School"
-          tHead = {tHead} data = {schoolSet} tRow = {tRow} 
-          striped = {striped} />
+
+          <CreateTableHeader
+            headerClassStyle = {header}
+            title = "School" />
+          < CreateSchoolTable 
+            header = {header}
+            tHead = {tHead} 
+            data = {schoolSet} 
+            tRow = {tRow} 
+            striped = {striped} />
 
       </div>
   );

@@ -9,6 +9,8 @@ import {
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateCourseTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
+
 
 
 function Courses(props) {
@@ -34,9 +36,17 @@ function Courses(props) {
   }
 
   return (
-    < CreateCourseTable header = {header} title = 'All Courses'
-    tHead = {tHead} data = {courses} tRow = {tRow} 
-    striped = {striped} />
+    <div>
+      <CreateTableHeader
+        headerClassStyle = {header}
+        title = "All Courses" />
+      < CreateCourseTable 
+        header = {header} 
+        tHead = {tHead} 
+        data = {courses} 
+        tRow = {tRow} 
+        striped = {striped} />
+    </div>
   );
 }
 

@@ -8,6 +8,8 @@ import { withStyles,
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateSchoolTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
+
 
 
 function Schools(props) {
@@ -34,9 +36,17 @@ function Schools(props) {
 
 
   return (
-    < CreateSchoolTable header = {header} title = 'All Schools' 
-    tHead = {tHead} data = {schools} tRow = {tRow} 
-    striped = {striped} />
+    <div>
+      <CreateTableHeader
+          headerClassStyle = {header}
+          title = "All Schools" />
+      < CreateSchoolTable 
+        header = {header} 
+        tHead = {tHead} 
+        data = {schools} 
+        tRow = {tRow} 
+        striped = {striped} />
+    </div>
   );
 }
 

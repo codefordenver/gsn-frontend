@@ -9,6 +9,8 @@ import {
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateStudentTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
+
 
 function Students(props) {
   const {
@@ -33,9 +35,17 @@ function Students(props) {
   }
 
   return (
-    < CreateStudentTable header = {header} title = 'All Students'
-    tHead = {tHead} data = {students} tRow = {tRow} 
-    striped = {striped} />
+    <div>
+      <CreateTableHeader
+          headerClassStyle = {header}
+          title = "All Students" />
+      < CreateStudentTable 
+        header = {header}
+        tHead = {tHead} 
+        data = {students} 
+        tRow = {tRow} 
+        striped = {striped} />
+    </div>
   );
 }
 

@@ -9,7 +9,7 @@ import { DetailLink, DetailItem} from 'components/sharedStyles/Table/DetailStyle
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateGradeTable, CreateAttendanceTable, CreateBehaviorTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-
+import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
 
 
@@ -20,7 +20,7 @@ function StudentDetail(props) {
   const studentIdParam = params;
   const {
     classes: {
-       striped, tHead, tRow,
+       striped, tHead, tRow,tableTitle
     },
   } = props;
 
@@ -64,18 +64,35 @@ function StudentDetail(props) {
           <DetailItem k="State Id" val={stateId} />
           <DetailLink k="School" val={school} link={`/school/${schoolId}`} />
           
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
+            title = "Grades" />
+          < CreateGradeTable 
+            header = {header}
+            tHead = {tHead} 
+            data = {gradeSet} 
+            tRow = {tRow} 
+            striped = {striped} />
 
-          < CreateGradeTable header = {header} title = "Grades"
-          tHead = {tHead} data = {gradeSet} tRow = {tRow} 
-          striped = {striped} />
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
+            title = "Attendance" />
+          < CreateAttendanceTable 
+            headerClassStyle = {header}
+            tHead = {tHead} 
+            data = {attendanceSet} 
+            tRow = {tRow} 
+            striped = {striped} />
 
-          < CreateAttendanceTable header = {header} title = "Attendance"
-          tHead = {tHead} data = {attendanceSet} tRow = {tRow} 
-          striped = {striped} />
-
-          < CreateBehaviorTable header = {header} title = "Behavior"
-          tHead = {tHead} data = {behaviorSet} tRow = {tRow} 
-          striped = {striped} />
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
+            title = "Behavior" />
+          < CreateBehaviorTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {behaviorSet} 
+            tRow = {tRow} 
+            striped = {striped} />
 
 
 

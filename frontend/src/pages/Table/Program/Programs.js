@@ -8,6 +8,8 @@ import { withStyles,
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateProgramTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
+
 
 
 function Programs(props) {
@@ -34,9 +36,17 @@ function Programs(props) {
 
 
   return (
-    < CreateProgramTable header = {header} title = 'All Programs' 
-    tHead = {tHead} data = {programs} tRow = {tRow} 
-    striped = {striped} />
+    <div>
+      <CreateTableHeader
+        headerClassStyle = {header}
+        title = "All Programs" />
+    < CreateProgramTable 
+      header = {header} 
+      tHead = {tHead} 
+      data = {programs} 
+      tRow = {tRow} 
+      striped = {striped} />
+    </div>
   );
 }
 
