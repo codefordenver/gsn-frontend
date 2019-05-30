@@ -3,15 +3,15 @@ import * as types from './StudentConstants';
 
 const getStudents = students => ({
   type: types.REQUEST_STUDENTS,
-  students,
+  payload: students,
 });
 
 const getStudent = student => ({
   type: types.GET_STUDENT,
-  student,
+  payload: student,
 });
 
-export const fetchStudents = dispatch => fetch('http://gsndev.com/gsndb/students/', {
+export const fetchStudents = dispatch => fetch('http://gsndev.com/gsndb/student/', {
   method: 'GET',
   headers: {
     Accept: 'application/json',
