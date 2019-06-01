@@ -9,11 +9,8 @@ function CreateTableHeader(props) {
   function ChangeHiddenTable() {
     setHiddenTable(!hiddenTable) ;
   }
-
-  const table = hiddenTable ? null : props.table;
-    return(
-        <div>
-          <Typography
+  /*
+  <Typography
           variant="h4"
           component="h1"
           className={props.headerClassStyle}
@@ -21,7 +18,16 @@ function CreateTableHeader(props) {
           >{props.title}
           </Typography>
           {table}
+          */
+  const table = hiddenTable ? null : props.table;
+    return(
+      <div>
+        <div onClick={ChangeHiddenTable}
+          >{props.title}
         </div>
+        {table}
+      </div>
+        
     );
 }
 
