@@ -5,7 +5,7 @@ import {
 import PropTypes from 'prop-types';
 
 import { getStudentDetail } from 'services/studentServices';
-import { DetailLink, DetailItem} from 'components/sharedStyles/Table/DetailStyles';
+import { DetailLink, DetailItem, DetailTable } from 'components/sharedStyles/Table/DetailStyles';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateGradeTable, CreateAttendanceTable, CreateBehaviorTable } from 'components/sharedStyles/Table/CreateTablesStyle';
@@ -81,6 +81,24 @@ function StudentDetail(props) {
             striped = {striped} />
   );
 
+  const gradeHeader = (
+    <CreateTableHeader
+            title = "Grades" 
+            table = {gradeTable}/>
+  );
+
+  const attendanceHeader = (
+    <CreateTableHeader
+            title = "Attendance" 
+            table = {attendanceTable}/>
+  );
+
+  const behaviorHeader = (
+    <CreateTableHeader
+            title = "Behavior" 
+            table = {behaviorTable}/>
+  );
+
   
 
   return (
@@ -94,19 +112,10 @@ function StudentDetail(props) {
           <DetailItem k="Term" val={studentTerm} />
           <DetailItem k="State Id" val={stateId} />
           <DetailLink k="School" val={school} link={`/school/${schoolId}`} />
-          
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Grades" 
-            table = {gradeTable}/> 
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Attendance" 
-            table = {attendanceTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Behavior" 
-            table = {behaviorTable}/>
+
+          <DetailTable k={gradeHeader} />
+          <DetailTable k={attendanceHeader} />
+          <DetailTable k={behaviorHeader} />
     </div>
   );
 }
