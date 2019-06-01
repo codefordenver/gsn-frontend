@@ -45,24 +45,26 @@ function DistrictDetail(props) {
     schoolSet
   } = districtDetail;
 
+  const schoolTable = (
+    < CreateSchoolTable 
+            header = {header}
+            tHead = {tHead} 
+            data = {schoolSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
   return (
       <div>
           <Typography className={header} component="h1" variant="h4">{districtName}</Typography>
           <DetailItem k="Code" val={code} />
           <DetailItem k="City" val={city} />
           <DetailItem k="State" val={state} />
-
-
+          
           <CreateTableHeader
             headerClassStyle = {header}
-            title = "School" />
-          < CreateSchoolTable 
-            header = {header}
-            tHead = {tHead} 
-            data = {schoolSet} 
-            tRow = {tRow} 
-            striped = {striped} />
-
+            title = "School" 
+            table = {schoolTable}/>
       </div>
   );
 }

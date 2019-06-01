@@ -49,6 +49,51 @@ function SchoolDetail(props) {
       behaviorSet
   } = schoolDetail;
 
+  const gradeTable = (
+    < CreateGradeTable 
+            header = {header}
+            tHead = {tHead} 
+            data = {gradeSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
+  const attendanceTable = (
+    < CreateAttendanceTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {attendanceSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
+  const behaviorTable = (
+    < CreateBehaviorTable 
+            header = {header}
+            tHead = {tHead} 
+            data = {behaviorSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
+  const courseTable = (
+    < CreateCourseTable 
+            header = {header}
+            tHead = {tHead} 
+            data = {courseSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
+  const studentTable = (
+    < CreateStudentTable 
+            header = {header}
+            tHead = {tHead} 
+            data = {studentSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
   return (
       <div>
           <Typography className={header} component="h1" variant="h4">{schoolName}</Typography>
@@ -56,54 +101,24 @@ function SchoolDetail(props) {
 
           <CreateTableHeader
             headerClassStyle = {header}
-            title = "Grades" />
-          < CreateGradeTable 
-            header = {header}
-            tHead = {tHead} 
-            data = {gradeSet} 
-            tRow = {tRow} 
-            striped = {striped} />
-
+            title = "Grades" 
+            table = {gradeTable}/>
           <CreateTableHeader
             headerClassStyle = {header}
-            title = "Attendance" />
-          < CreateAttendanceTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {attendanceSet} 
-            tRow = {tRow} 
-            striped = {striped} />
-
+            title = "Attendance" 
+            table = {attendanceTable}/>
           <CreateTableHeader
             headerClassStyle = {header}
-            title = "Behavior" />
-          < CreateBehaviorTable 
-            header = {header}
-            tHead = {tHead} 
-            data = {behaviorSet} 
-            tRow = {tRow} 
-            striped = {striped} />
-
+            title = "Behavior" 
+            table = {behaviorTable}/>
           <CreateTableHeader
             headerClassStyle = {header}
-            title = "Course" />
-          < CreateCourseTable 
-            header = {header}
-            tHead = {tHead} 
-            data = {courseSet} 
-            tRow = {tRow} 
-            striped = {striped} />
-
+            title = "Course" 
+            table = {courseTable}/>
           <CreateTableHeader
             headerClassStyle = {header}
-            title = "Student" />
-          < CreateStudentTable 
-            header = {header}
-            tHead = {tHead} 
-            data = {studentSet} 
-            tRow = {tRow} 
-            striped = {striped} />
-
+            title = "Student" 
+            table = {studentTable}/>
       </div>
   );
 }

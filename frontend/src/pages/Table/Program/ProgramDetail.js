@@ -43,6 +43,33 @@ function ProgramDetail(props) {
     gradeSet
   } = programDetail;
 
+  const gradeTable = (
+    < CreateGradeTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {gradeSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
+  const courseTable = (
+    < CreateCourseTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {courseSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
+  const studentTable = (
+    < CreateStudentTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {studentSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
   return (
       <div>
           <Typography className={header} component="h1" variant="h4">{programName}</Typography>
@@ -50,33 +77,17 @@ function ProgramDetail(props) {
 
           <CreateTableHeader
             headerClassStyle = {header}
-            title = "Grades" />
-          < CreateGradeTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {gradeSet} 
-            tRow = {tRow} 
-            striped = {striped} />
-
+            title = "Grades" 
+            table = {gradeTable}/>
           <CreateTableHeader
             headerClassStyle = {header}
-            title = "Course" />
-          < CreateCourseTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {courseSet} 
-            tRow = {tRow} 
-            striped = {striped} />
-
+            title = "Course" 
+            table = {courseTable}/>
           <CreateTableHeader
             headerClassStyle = {header}
-            title = "Student" />
-          < CreateStudentTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {studentSet} 
-            tRow = {tRow} 
-            striped = {striped} />
+            title = "Student" 
+            table = {studentTable}/>
+          
 
 
       </div>
