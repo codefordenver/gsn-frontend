@@ -18,7 +18,7 @@ function CourseDetail(props) {
   const [loading, setLoading] = useState(true);
   const {
     classes: {
-       striped, tHead, tRow,
+       striped, tHead, tRow, tableTitle
     },
   } = props;
   const { classes: { header }, match: { params } } = props;
@@ -83,15 +83,15 @@ function CourseDetail(props) {
           <DetailLink k="School" val={schoolName} link={`/school/${schoolId}`} />
 
           <CreateTableHeader
-            headerClassStyle = {header}
+            headerClassStyle = {tableTitle}
             title = "Grades" 
             table = {gradeTable}/>
           <CreateTableHeader
-            headerClassStyle = {header}
+            headerClassStyle = {tableTitle}
             title = "Attendance" 
             table = {attendanceTable}/>
           <CreateTableHeader
-            headerClassStyle = {header}
+            headerClassStyle = {tableTitle}
             title = "Student" 
             table = {studentTable}/>
       </div>

@@ -20,7 +20,7 @@ function SchoolDetail(props) {
   const { classes: { header }, match: { params } } = props;
   const {
     classes: {
-       striped, tHead, tRow,
+       striped, tHead, tRow,tableTitle
     },
   } = props;
   const schoolIdParam = params;
@@ -100,23 +100,23 @@ function SchoolDetail(props) {
           <DetailLink k="District Name" val={districtName} link={`/district/${districtId}`} />
 
           <CreateTableHeader
-            headerClassStyle = {header}
+            headerClassStyle = {tableTitle}
             title = "Grades" 
             table = {gradeTable}/>
           <CreateTableHeader
-            headerClassStyle = {header}
+            headerClassStyle = {tableTitle}
             title = "Attendance" 
             table = {attendanceTable}/>
           <CreateTableHeader
-            headerClassStyle = {header}
+            headerClassStyle = {tableTitle}
             title = "Behavior" 
             table = {behaviorTable}/>
           <CreateTableHeader
-            headerClassStyle = {header}
+            headerClassStyle = {tableTitle}
             title = "Course" 
             table = {courseTable}/>
           <CreateTableHeader
-            headerClassStyle = {header}
+            headerClassStyle = {tableTitle}
             title = "Student" 
             table = {studentTable}/>
       </div>

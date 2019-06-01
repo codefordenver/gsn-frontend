@@ -19,7 +19,7 @@ function DistrictDetail(props) {
   const { classes: { header }, match: { params } } = props;
   const {
     classes: {
-       striped, tHead, tRow,
+       striped, tHead, tRow, tableTitle
     },
   } = props;
   const districtIdParam = params;
@@ -62,7 +62,7 @@ function DistrictDetail(props) {
           <DetailItem k="State" val={state} />
           
           <CreateTableHeader
-            headerClassStyle = {header}
+            headerClassStyle = {tableTitle}
             title = "School" 
             table = {schoolTable}/>
       </div>

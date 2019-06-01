@@ -16,12 +16,11 @@ import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 function StudentDetail(props) {
   const [studentDetail, setStudentDetail] = useState({});
   const [loading, setLoading] = useState(true);
-  const [hiddenGrade, setHiddenGrade] = useState(true);
   const { classes: { header }, match: { params } } = props;
   const studentIdParam = params;
   const {
     classes: {
-       striped, tHead, tRow,tableTitle
+       striped, tHead, tRow, tableTitle
     },
   } = props;
 

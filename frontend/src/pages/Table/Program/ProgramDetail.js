@@ -17,7 +17,7 @@ function ProgramDetail(props) {
   const [loading, setLoading] = useState(true);
   const {
     classes: {
-       striped, tHead, tRow,
+       striped, tHead, tRow, tableTitle
     },
   } = props;
   const { classes: { header }, match: { params } } = props;
@@ -76,15 +76,15 @@ function ProgramDetail(props) {
 
 
           <CreateTableHeader
-            headerClassStyle = {header}
+            headerClassStyle = {tableTitle}
             title = "Grades" 
             table = {gradeTable}/>
           <CreateTableHeader
-            headerClassStyle = {header}
+            headerClassStyle = {tableTitle}
             title = "Course" 
             table = {courseTable}/>
           <CreateTableHeader
-            headerClassStyle = {header}
+            headerClassStyle = {tableTitle}
             title = "Student" 
             table = {studentTable}/>
           
