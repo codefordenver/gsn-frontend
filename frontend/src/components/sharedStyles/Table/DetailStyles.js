@@ -18,6 +18,19 @@ val: PropTypes.string,
 classes: PropTypes.object,
 };
 
+const DTable = ({ k, classes: { lDiv, rDiv, root } }) => (
+  <Typography color="primary" className={root}>
+      <div className={lDiv}>{k}{' '}</div>
+      <div className={rDiv}></div>
+  </Typography>
+);
+
+DTable.propTypes = {
+k: PropTypes.string,
+val: PropTypes.string,
+classes: PropTypes.object,
+};
+
 const DLinkBase = ({
   k, val, link, classes: { lDiv, rDiv, root },
 }) => (
@@ -53,5 +66,6 @@ const dStyles = theme => ({
 
 const DetailItem = withStyles(dStyles, { withTheme: true })(DetailBase);
 const DetailLink = withStyles(dStyles)(DLinkBase);
+const DetailTable = withStyles(dStyles)(DTable)
 
-export { DetailLink, DetailItem };
+export { DetailLink, DetailItem, DetailTable };
