@@ -1,2 +1,2 @@
-export const REQUEST_STUDENTS = 'REQUEST_STUDENTS';
-export const GET_STUDENT = 'GET_STUDENT';
+export const SET_STUDENTS = 'REQUEST_STUDENTS';
+export const SET_STUDENT = 'GET_STUDENT';
