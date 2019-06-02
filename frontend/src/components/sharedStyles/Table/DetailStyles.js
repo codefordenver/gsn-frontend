@@ -20,8 +20,8 @@ classes: PropTypes.object,
 
 const DTable = ({ k, classes: { lDiv, rDiv, root } }) => (
   <Typography color="primary" className={root}>
-      <div className={lDiv}>{k}{' '}</div>
-      <div className={rDiv}></div>
+      <div className={rDiv}>{k}{' '}</div>
+      <div className={lDiv}></div>
   </Typography>
 );
 
