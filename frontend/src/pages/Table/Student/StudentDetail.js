@@ -81,25 +81,6 @@ function StudentDetail(props) {
             striped = {striped} />
   );
 
-  const gradeHeader = (
-    <CreateTableHeader
-            title = "Grades" 
-            table = {gradeTable}/>
-  );
-
-  const attendanceHeader = (
-    <CreateTableHeader
-            title = "Attendance" 
-            table = {attendanceTable}/>
-  );
-
-  const behaviorHeader = (
-    <CreateTableHeader
-            title = "Behavior" 
-            table = {behaviorTable}/>
-  );
-
-  
 
   return (
       <div>
@@ -112,10 +93,25 @@ function StudentDetail(props) {
           <DetailItem k="Term" val={studentTerm} />
           <DetailItem k="State Id" val={stateId} />
           <DetailLink k="School" val={school} link={`/school/${schoolId}`} />
+          
+          <CreateTableHeader
+            title = "Grades" 
+            table = {gradeTable}
+            headerClassStyle={tableTitle}
+            />
 
-          <DetailTable k={gradeHeader} />
-          <DetailTable k={attendanceHeader} />
-          <DetailTable k={behaviorHeader} />
+          <CreateTableHeader
+            title = "Attendance" 
+            table = {attendanceTable}
+            headerClassStyle={tableTitle}
+            />
+
+          <CreateTableHeader
+            title = "Behavior" 
+            table = {behaviorTable}
+            headerClassStyle={tableTitle}
+            />
+
     </div>
   );
 }
