@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getStudents } from 'services/studentServices';
 import PropTypes from 'prop-types';
+import { Typography } from '@material-ui/core';
 
 import {
   withStyles,
@@ -36,9 +37,12 @@ function Students(props) {
 
   return (
     <div>
-      <CreateTableHeader
-          headerClassStyle = {header}
-          title = "All Students" />
+      <Typography
+        variant="h4"
+        component="h1"
+        className={header}>
+        My Students
+      </Typography>
       < CreateStudentTable 
         header = {header}
         tHead = {tHead} 

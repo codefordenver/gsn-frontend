@@ -21,3 +21,11 @@ export const Wrench = () => (
 export const UserSolidCircle = () => (
     <SvgIcon><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM7 6v2a3 3 0 1 0 6 0V6a3 3 0 1 0-6 0zm-3.65 8.44a8 8 0 0 0 13.3 0 15.94 15.94 0 0 0-13.3 0z" /></svg></SvgIcon>
 );
+
+export const ChevronRightOutlined = () => (
+    <SvgIcon><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" ><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z" /></svg></SvgIcon>
+);
+
+export const ChevronDownOutlined = () => (
+    <SvgIcon><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 15 20" transform="rotate(90 10 10)"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z" /></svg></SvgIcon>
+);

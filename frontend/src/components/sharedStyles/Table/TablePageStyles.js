@@ -8,9 +8,9 @@ const TablePageStyles = theme => ({
     },
     tableTitle: {
       color: theme.palette.primary.main,
-      fontWeight: 800,
+      //fontWeight: 800,
       minWidth: 120,
-      fontSize: 16,
+      fontSize: 22,
 
     },
     striped: {

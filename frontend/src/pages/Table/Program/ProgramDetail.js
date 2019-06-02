@@ -17,7 +17,7 @@ function ProgramDetail(props) {
   const [loading, setLoading] = useState(true);
   const {
     classes: {
-       striped, tHead, tRow,
+       striped, tHead, tRow, tableTitle
     },
   } = props;
   const { classes: { header }, match: { params } } = props;
@@ -43,40 +43,51 @@ function ProgramDetail(props) {
     gradeSet
   } = programDetail;
 
+  const gradeTable = (
+    < CreateGradeTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {gradeSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
+  const courseTable = (
+    < CreateCourseTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {courseSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
+  const studentTable = (
+    < CreateStudentTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {studentSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
   return (
       <div>
           <Typography className={header} component="h1" variant="h4">{programName}</Typography>
 
 
           <CreateTableHeader
-            headerClassStyle = {header}
-            title = "Grades" />
-          < CreateGradeTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {gradeSet} 
-            tRow = {tRow} 
-            striped = {striped} />
-
+            headerClassStyle = {tableTitle}
+            title = "Grades" 
+            table = {gradeTable}/>
           <CreateTableHeader
-            headerClassStyle = {header}
-            title = "Course" />
-          < CreateCourseTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {courseSet} 
-            tRow = {tRow} 
-            striped = {striped} />
-
+            headerClassStyle = {tableTitle}
+            title = "Course" 
+            table = {courseTable}/>
           <CreateTableHeader
-            headerClassStyle = {header}
-            title = "Student" />
-          < CreateStudentTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {studentSet} 
-            tRow = {tRow} 
-            striped = {striped} />
+            headerClassStyle = {tableTitle}
+            title = "Student" 
+            table = {studentTable}/>
+          
 
 
       </div>
