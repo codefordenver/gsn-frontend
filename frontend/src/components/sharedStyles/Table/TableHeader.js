@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
     Typography, 
   } from '@material-ui/core';
+import { ChevronRightOutlined, ChevronDownOutlined } from 'components/Icons';
 
 
 function CreateTableHeader(props) {
@@ -19,13 +20,25 @@ function CreateTableHeader(props) {
           </Typography>
           {table}
           */
-  const table = hiddenTable ? null : props.table;
-    return(
-      <div>
+
+    /*
+
+<div>
         <div onClick={ChangeHiddenTable}
-          >{props.title}
+          >{props.title} {"\n"}
         </div>
         {table}
+    */
+  const table = hiddenTable ? null : props.table;
+  const icon = hiddenTable ? <ChevronRightOutlined/> : <ChevronDownOutlined/>;
+    return(
+      <div>
+        <Typography
+          className={props.headerClassStyle}
+          onClick={ChangeHiddenTable}
+          >{icon}{props.title}
+          </Typography>
+          {table}
       </div>
         
     );
