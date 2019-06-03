@@ -1,15 +1,15 @@
 import * as types from './StudentConstants';
 
-export const initialState = ({
+const initialState = ({
   students: [],
 });
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case types.REQUEST_STUDENTS:
-      return { ...state, students: action.students };
+    case types.SET_STUDENTS:
+      return { ...state, students: action.payload };
 
-    case types.GET_STUDENT:
+    case types.SET_STUDENT:
       return action.student;
 
     default:
