@@ -8,7 +8,7 @@ import { withStyles,
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateSchoolTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
+import { Typography } from '@material-ui/core';
 
 
 
@@ -37,9 +37,12 @@ function Schools(props) {
 
   return (
     <div>
-      <CreateTableHeader
-          headerClassStyle = {header}
-          title = "All Schools" />
+      <Typography
+        variant="h4"
+        component="h1"
+        className={header}>
+        All Schools
+      </Typography>
       < CreateSchoolTable 
         header = {header} 
         tHead = {tHead} 

@@ -9,7 +9,7 @@ import {
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateCourseTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
+import { Typography } from '@material-ui/core';
 
 
 
@@ -37,9 +37,12 @@ function Courses(props) {
 
   return (
     <div>
-      <CreateTableHeader
-        headerClassStyle = {header}
-        title = "All Courses" />
+      <Typography
+        variant="h4"
+        component="h1"
+        className={header}>
+        All Courses
+      </Typography>
       < CreateCourseTable 
         header = {header} 
         tHead = {tHead} 

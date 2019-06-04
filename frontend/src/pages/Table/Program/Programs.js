@@ -8,7 +8,8 @@ import { withStyles,
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateProgramTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
+import { Typography } from '@material-ui/core';
+
 
 
 
@@ -37,9 +38,12 @@ function Programs(props) {
 
   return (
     <div>
-      <CreateTableHeader
-        headerClassStyle = {header}
-        title = "All Programs" />
+      <Typography
+        variant="h4"
+        component="h1"
+        className={header}>
+        All Programs
+        </Typography>
     < CreateProgramTable 
       header = {header} 
       tHead = {tHead} 
