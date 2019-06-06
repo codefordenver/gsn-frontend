@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux'
 // useEffect, useState, useReducer
 import { Link } from 'react-router-dom';
 // import { connect } from 'react-redux';
@@ -32,13 +33,15 @@ function Students(props) {
 
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
   // const [state, dispatch] = useReducer(Reducer.StudentReducer, Reducer.initialState);
 
   useEffect(() => {
-    fetchStudents().then((s) => {
-      setStudents(s);
-      // setLoading(false);
-    });
+    dispatch(fetchStudents())
+    // .then((s) => {
+    //   setStudents(s);
+    //   // setLoading(false);
+    // });
   }, []);
 
   // componentDidMount = () => {
