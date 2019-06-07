@@ -16,16 +16,6 @@ const getStudent = student => ({
   payload: student,
 });
 
-// export const fetchStudents = () => (dispatch) => {
-//   dispatch(authRequest());
-//   requestStudents()
-//     .then((json) => {
-//       dispatch(
-//         studentSuccess(),
-//       );
-//     });
-// };
-
 export const fetchStudents = (students) => {
   return (dispatch) => {
     return fetch('http://gsndev.com/gsndb/student/', {
@@ -46,9 +36,3 @@ export const fetchStudents = (students) => {
 
 export const getStudentDetail = () => fetch('/mockdata/studentDetail.json')
   .then(result => result.json());
-
-// export const studentSuccess = students => (dispatch) => {
-//   console.log('studentSuccess was hit');
-//   dispatch(setLoading(false));
-//   dispatch(getStudents(students));
-// };
