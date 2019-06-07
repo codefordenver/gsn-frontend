@@ -26,18 +26,22 @@ const getStudent = student => ({
 //     });
 // };
 
-export const fetchStudents = dispatch => fetch('http://gsndev.com/gsndb/student/', {
-  method: 'GET',
-  headers: {
-    Accept: 'application/json',
-    Authorization: `JWT ${localStorage.token}`,
-  },
-})
-  .then(response => response.json())
-  .then((students) => {
-    dispatch(getStudents(students));
-  })
-  .catch(error => (error));
+export const fetchStudents = (students) => {
+  return (dispatch) => {
+    return fetch('http://gsndev.com/gsndb/student/', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`,
+      },
+    })
+      .then(response => response.json())
+      .then((s) => {
+        dispatch(getStudents(s));
+      })
+      .catch(error => (error));
+  };
+};
 
 
 export const getStudentDetail = () => fetch('/mockdata/studentDetail.json')
