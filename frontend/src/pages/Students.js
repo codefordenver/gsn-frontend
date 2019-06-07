@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux'
-// useEffect, useState, useReducer
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { connect } from 'react-redux';
 import { fetchStudents } from 'state/StudentActions';
 import PropTypes from 'prop-types';
 
@@ -10,47 +8,23 @@ import {
   Link as StyledLink,
   Table, TableBody, TableCell, TableHead, TableRow, Typography, withStyles,
 } from '@material-ui/core';
-// import * as Reducer from '../state/studentReducer';
-// class Students extends Component {
-function Students(props) {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     loading: true,
-  //   };
-  // }
 
+function Students(props) {
   const {
     classes: {
       header, striped, tHead, tRow,
     },
   } = props;
 
-  // const classes = () => {
-  //   header, striped, tHead, tRow,
-  // } = this.props;
-
-
-  const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const students = useSelector(state => state.students.students);
   const dispatch = useDispatch();
-  // const [state, dispatch] = useReducer(Reducer.StudentReducer, Reducer.initialState);
 
   useEffect(() => {
-    dispatch(fetchStudents())
-    // .then((s) => {
-    //   setStudents(s);
-    //   // setLoading(false);
-    // });
+    dispatch(fetchStudents());
+    setLoading(false);
   }, []);
 
-  // componentDidMount = () => {
-  //   this.props.fetchStudents();
-  // }
-
-  // const { header, striped, tHead, tRow } = props;
-
-  // render() {
   if (loading) {
     return (
         <div>
@@ -79,24 +53,24 @@ function Students(props) {
               <TableBody>
                   {students.map((student, i) => {
                     const {
-                      studentId, name, school, schoolId, birthdate,
+                      id, firstName, lastName, currentSchool, birthDate,
                     } = student;
                     return (
                         <TableRow
-                          key={studentId}
+                          key={id}
                           className={`${tRow} ${i % 2 !== 0 ? striped : ''}`}
                         >
                             <TableCell>
-                                <Link to={`/students/${studentId}`}>
-                                    <StyledLink>{name}</StyledLink>
+                                <Link to={`/students/${id}`}>
+                                    <StyledLink>{firstName} {lastName}</StyledLink>
                                 </Link>
                             </TableCell>
                             <TableCell>
-                                <Link to={`/schools/${schoolId}`}>
-                                    <StyledLink>{school}</StyledLink>
+                                <Link to={`/schools/${currentSchool}`}>
+                                    <StyledLink>{currentSchool}</StyledLink>
                                 </Link>
                             </TableCell>
-                            <TableCell align="right">{birthdate}</TableCell>
+                            <TableCell align="right">{birthDate}</TableCell>
                         </TableRow>
                     );
                   })}
@@ -128,15 +102,6 @@ const styles = theme => ({
 
 Students.propTypes = {
   classes: PropTypes.object,
-  // header: PropTypes.element,
-  // tHead: PropTypes.element,
-  // tRow: PropTypes.element,
-  // striped: PropTypes.element,
-  // students: PropTypes.object,
-  // fetchStudents: PropTypes.func,
 };
 
-// const mapStateToProps = state => ({ students: state.students });
-
 export default withStyles(styles)(Students);
-// connect(mapStateToProps, { fetchStudents })(withStyles(styles)(Students));
