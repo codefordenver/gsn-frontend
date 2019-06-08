@@ -1,47 +1,46 @@
 import React, { useState } from 'react';
-import {
-    Typography, 
-  } from '@material-ui/core';
+import { Typography, Button, Grid } from '@material-ui/core';
 import { ChevronRightOutlined, ChevronDownOutlined } from 'components/Icons';
+import { CreateButton, SaveButton, EntryComponent } from 'components/sharedStyles/ManageData/CreateSaveButton';
 
 
 function CreateTableHeader(props) {
   const [hiddenTable, setHiddenTable] = useState(true);
+  const [haveCreateButton, setHaveCreateButton] = useState(false);
   function ChangeHiddenTable() {
     setHiddenTable(!hiddenTable) ;
   }
-  /*
-  <Typography
-          variant="h4"
-          component="h1"
-          className={props.headerClassStyle}
-          onClick={ChangeHiddenTable}
-          >{props.title}
-          </Typography>
-          {table}
-          */
-
-    /*
-
-<div>
-        <div onClick={ChangeHiddenTable}
-          >{props.title} {"\n"}
-        </div>
-        {table}
-    */
+  function ChangeButton() {
+    setHaveCreateButton(!haveCreateButton);
+  }
+  const entryComponent = props.haveCreateSaveButtonBool ? (haveCreateButton ? <EntryComponent /> : null) : null
+  const button = props.haveCreateSaveButtonBool ? (haveCreateButton ? <SaveButton /> : <CreateButton />) : null
   const table = hiddenTable ? null : props.table;
   const icon = hiddenTable ? <ChevronRightOutlined/> : <ChevronDownOutlined/>;
+
     return(
       <div>
-        <Typography
-          className={props.headerClassStyle}
-          onClick={ChangeHiddenTable}
-          >{icon}{props.title}
-          </Typography>
+        <Grid 
+          container spacing="auto"
+          alignItems="center" 
+          justify="left" 
+          >
+        <Button variant="text">
+            <Typography
+              className={props.headerClassStyle}
+              onClick={ChangeHiddenTable}>
+                {icon}{props.title}
+            </Typography>
+          </Button>
+        <Typography onClick={ ChangeButton }>
+              { button }
+          </Typography></Grid>
+          { entryComponent }
           {table}
       </div>
         
     );
 }
 
+//<View style={{ flexDirection:"row" }}></View>
 export default CreateTableHeader;
