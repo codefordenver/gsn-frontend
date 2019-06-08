@@ -12,7 +12,6 @@ import { CreateGradeTable, CreateAttendanceTable, CreateBehaviorTable } from 'co
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
 
-
 function StudentDetail(props) {
   const [studentDetail, setStudentDetail] = useState({});
   const [loading, setLoading] = useState(true);
@@ -97,7 +96,7 @@ function StudentDetail(props) {
           <CreateTableHeader
             title = "Grades" 
             table = {gradeTable}
-            headerClassStyle={tableTitle}
+            headerClassStyle = {tableTitle}
             />
 
           <CreateTableHeader
@@ -110,7 +109,8 @@ function StudentDetail(props) {
             title = "Behavior" 
             table = {behaviorTable}
             headerClassStyle={tableTitle}
-            />
+            haveCreateSaveButtonBool={true}
+            /> 
 
     </div>
   );
