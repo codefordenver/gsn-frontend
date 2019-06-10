@@ -23,23 +23,27 @@ function Breadcrumbs(props) {
   } = props;
   const routes = getRoutes(location.pathname);
 
+  const MapList = () => (
+    <nav className={nav}>
+      <ul className={list}>
+        {routes.map((x, i) => (
+          <Typography component="li" className={crumb} key={x.name}>
+            <Link
+              component={RouterLink}
+              color="primary"
+              to={x.route}
+            >
+              {x.name}
+            </Link>
+            {i !== routes.length - 1 && <span className={spacer}>{'>'}</span>}
+          </Typography>
+        ))}
+      </ul>
+    </nav>
+  );
+
   return (
-      <nav className={nav}>
-          <ul className={list}>
-              {routes.map((x, i) => (
-                  <Typography component="li" className={crumb} key={x.name}>
-                      <Link
-                        component={RouterLink}
-                        color="primary"
-                        to={x.route}
-                      >
-                          {x.name}
-                      </Link>
-                      {i !== routes.length - 1 && <span className={spacer}>{'>'}</span>}
-                  </Typography>
-              ))}
-          </ul>
-      </nav>
+    <MapList />
   );
 }
 
