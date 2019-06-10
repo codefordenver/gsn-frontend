@@ -17,6 +17,11 @@ const navItems = [
     route: 'student',
   },
   {
+    name: 'My Programs',
+    icon: <UserGroup />,
+    route: '/myprograms',
+  },
+  {
     name: 'Visualize',
     icon: <ViewShow />,
     route: 'visualize',
