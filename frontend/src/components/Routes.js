@@ -23,6 +23,9 @@ import CourseDetail from 'pages/Table/Course/CourseDetail';
 import Schools from 'pages/Table/School/Schools';
 import SchoolDetail from 'pages/Table/School/SchoolDetail';
 
+import MyPrograms from 'pages/Table/Program/MyPrograms';
+
+
 
 
 import PrivateRoute from './PrivateRoute';
@@ -54,6 +57,9 @@ export default function () {
 
                       <PrivateRoute exact path="/school" component={Schools} />
                       <PrivateRoute exact path="/school/:schoolId" component={SchoolDetail} />
+
+                      <PrivateRoute exact path="/myprograms" component={MyPrograms} />
+                    >
 
                   </Layout>
               </Switch>
