@@ -19,12 +19,12 @@ const navItems = [
   {
     name: 'My Programs',
     icon: <UserGroup />,
-    route: '/myprograms',
+    route: '/program',
   },
   {
     name: 'Visualize',
     icon: <ViewShow />,
-    route: 'visualize',
+    route: '/myprograms',
   },
   {
     name: 'Analyze Data',
