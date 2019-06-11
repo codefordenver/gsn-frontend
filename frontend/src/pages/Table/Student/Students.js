@@ -10,7 +10,6 @@ import {
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateStudentTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
 
 function Students(props) {
