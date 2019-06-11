@@ -110,7 +110,8 @@ function SchoolDetail(props) {
           <CreateTableHeader
             headerClassStyle = {tableTitle}
             title = "Behavior" 
-            table = {behaviorTable}/>
+            table = {behaviorTable}
+            haveCreateSaveButtonBool={true}/>
           <CreateTableHeader
             headerClassStyle = {tableTitle}
             title = "Course" 
