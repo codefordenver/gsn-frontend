@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Typography, Button, Grid } from '@material-ui/core';
 import { ChevronRightOutlined, ChevronDownOutlined } from 'components/Icons';
-import { CreateButton, SaveButton, EntryComponent } from 'components/sharedStyles/ManageData/CreateSaveButton';
+import { CreateButton, SaveButton, EntryComponent } from 'components/sharedStyles/ManageData/CreateSaveButtons';
 
 
 function CreateTableHeader(props) {
