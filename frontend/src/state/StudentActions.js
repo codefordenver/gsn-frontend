@@ -1,8 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { createAction } from 'utils/actionUtils';
 import * as types from './StudentConstants';
-// import { authRequest } from './UserActions';
-// import { requestStudents } from '../services/studentServices';
 
 export const setLoading = createAction(types.SET_LOADING);
 
