@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { getDistricts } from 'services/districtServices';
 import PropTypes from 'prop-types';
 
-import { withStyles,
+import { withStyles, Typography
 } from '@material-ui/core';
+
 
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateDistrictTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
 
 
@@ -37,9 +37,12 @@ function Districts(props) {
 
   return (
     <div>
-      <CreateTableHeader
-        headerClassStyle = {header}
-        title = "All Districts" />
+      <Typography
+        variant="h4"
+        component="h1"
+        className={header}>
+        All Districts
+        </Typography>
       < CreateDistrictTable 
         header = {header}
         tHead = {tHead} 
