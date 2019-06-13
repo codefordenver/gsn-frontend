@@ -21,9 +21,9 @@ const navItems = [
     route: '/program',
   },
   {
-    name: 'Visualize',
+    name: 'View All Data',
     icon: <ViewShow />,
-    route: '/myprograms',
+    route: '/viewalldata',
   },
   {
     name: 'Analyze Data',
