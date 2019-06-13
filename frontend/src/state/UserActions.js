@@ -54,7 +54,7 @@ export const logIn = ({ username, password, path = '/student' }) => (dispatch) =
     });
 };
 
-export const register = ({ username, password }) => (dispatch) => {
+export const register = ({ username, password, path = '/students' }) => (dispatch) => {
   dispatch(setLoading(true));
   signupUser({ username, password })
     .then((json) => {
@@ -66,6 +66,7 @@ export const register = ({ username, password }) => (dispatch) => {
           username: json.username,
         }),
       );
+      history.push(path);
     }).catch((error) => {
       dispatch(authError(error));
     });

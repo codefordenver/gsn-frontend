@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getStudents } from 'services/studentServices';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchStudents } from 'state/StudentActions';
 import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
 
@@ -19,14 +20,13 @@ function Students(props) {
     },
   } = props;
 
-  const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const students = useSelector(state => state.students.students);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getStudents().then((s) => {
-      setStudents(s);
-      setLoading(false);
-    });
+    dispatch(fetchStudents());
+    setLoading(false);
   }, []);
 
   if (loading) {
@@ -42,11 +42,11 @@ function Students(props) {
         className={header}>
         My Students
       </Typography>
-      < CreateStudentTable 
+      < CreateStudentTable
         header = {header}
-        tHead = {tHead} 
-        data = {students} 
-        tRow = {tRow} 
+        tHead = {tHead}
+        data = {students}
+        tRow = {tRow}
         striped = {striped} />
     </div>
   );
