@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import {
   List, ListItem, ListItemIcon, ListItemText, withStyles,
 } from '@material-ui/core';
@@ -14,22 +13,27 @@ const navItems = [
   {
     name: 'My Students',
     icon: <UserGroup />,
-    route: 'students',
+    route: '/student',
+  },
+  {
+    name: 'My Programs',
+    icon: <UserGroup />,
+    route: '/program',
   },
   {
     name: 'Visualize',
     icon: <ViewShow />,
-    route: 'visualize',
+    route: '/myprograms',
   },
   {
     name: 'Analyze Data',
     icon: <Radar />,
-    route: 'analyze-data',
+    route: '/analyze-data',
   },
   {
     name: 'Manage Data',
     icon: <Wrench />,
-    route: 'manage-data',
+    route: '/manage-data',
   },
 ];
 

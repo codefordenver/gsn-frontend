@@ -1,0 +1,16 @@
+[
+    {
+    "districtName": "Jefferson County Public Schools",
+    "districtId": 7,
+    "state": "CO",
+    "city": "Lakewood",
+    "code": "JH1"
+    },
+    {
+      "districtName": "Denver Public Schools",
+      "districtId": 5,
+      "state": "TX",
+      "city": "Austin",
+      "code": "RF8"
+      }
+  ]

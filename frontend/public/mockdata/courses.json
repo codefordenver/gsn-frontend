@@ -1,0 +1,18 @@
+[
+    {
+    "courseId": 1,
+    "schoolName": "Aguilar Middle/High School",
+    "schoolId": 15,
+    "courseName": "Algebra",
+    "courseCode": "MTH-101",
+    "courseSubject": "MTH"
+    },
+    {
+    "courseId": 3,
+    "schoolName": "Bear Creek High School",
+    "schoolId": 5,
+    "courseName": "English",
+    "courseCode": "ENG-101",
+    "courseSubject": "ENG"
+    }
+  ]
