@@ -16,9 +16,14 @@ const navItems = [
     route: '/student',
   },
   {
+    name: 'My Programs',
+    icon: <UserGroup />,
+    route: '/program',
+  },
+  {
     name: 'Visualize',
     icon: <ViewShow />,
-    route: '/visualize',
+    route: '/myprograms',
   },
   {
     name: 'Analyze Data',
