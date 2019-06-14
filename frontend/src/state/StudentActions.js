@@ -24,13 +24,27 @@ export const fetchStudents = (students) => {
       },
     })
       .then(response => response.json())
-      .then((s) => {
-        dispatch(getStudents(s));
+      .then((allStudents) => {
+        dispatch(getStudents(allStudents));
       })
       .catch(error => (error));
   };
 };
 
 
-export const getStudentDetail = () => fetch('/mockdata/studentDetail.json')
-  .then(result => result.json());
+export const fetchStudent = (student) => {
+  return (dispatch) => {
+    return fetch('http://gsndev.com/gsndb/student/', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`,
+      },
+    })
+      .then(response => response.json())
+      .then((s) => {
+        dispatch(getStudent(s));
+      })
+      .catch(error => (error));
+  };
+};
