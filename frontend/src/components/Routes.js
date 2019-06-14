@@ -53,13 +53,12 @@ export default function () {
                       <PrivateRoute exact path="/student/:studentId" component={StudentDetail} />
 
                       <PrivateRoute exact path="/course" component={Courses} />
-                      <PrivateRoute exact path="/course/:courseId" component={CourseDetail} />      
+                      <PrivateRoute exact path="/course/:courseId" component={CourseDetail} />
 
                       <PrivateRoute exact path="/school" component={Schools} />
                       <PrivateRoute exact path="/school/:schoolId" component={SchoolDetail} />
 
                       <PrivateRoute exact path="/myprograms" component={MyPrograms} />
-                    >
 
                   </Layout>
               </Switch>
