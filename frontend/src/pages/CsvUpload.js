@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography, InputBase, Button } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 
 function CsvUpload(props) {
   const {
@@ -8,6 +9,14 @@ function CsvUpload(props) {
     header,
     CSVEndpoint
   } = props;
+
+  const csrv_token = useSelector(state => state.user.token);
+
+  if (!csrv_token) {
+    return (
+      <div>Token required</div>
+    )
+  }
 
   return (
     <div>
