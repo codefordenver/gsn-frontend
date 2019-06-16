@@ -25,7 +25,7 @@ function CreateTableHeader(props) {
           alignItems="center" 
           justify="left" 
           >
-        <Button variant="text">
+        <Button variant="text" style={{textAlign: 'left'}}>
             <Typography
               className={props.headerClassStyle}
               onClick={ChangeHiddenTable}>
