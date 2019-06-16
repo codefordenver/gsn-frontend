@@ -9,7 +9,14 @@ import {
 
 
 function CreateGradeTable(props) {
-    
+
+    if(props.data == undefined) {
+    return (
+    <div>
+        Currently there isn't any data available.
+    </div>
+    );
+} else {
     return (
         <div>
         <Table>
@@ -59,10 +66,17 @@ function CreateGradeTable(props) {
         </Table>
     </div>
     );
-
+            }
         }
 
 function CreateStudentTable(props) {
+    if(props.data == undefined) {
+        return (
+        <div>
+            Currently there isn't any data available.
+        </div>
+        );
+    } else {
     return (
         <div>
         <Table>
@@ -101,11 +115,18 @@ function CreateStudentTable(props) {
         </Table>
     </div>
     );
-
+            }
         }
 
 
 function CreateAttendanceTable(props) {
+    if(props.data == undefined) {
+        return (
+        <div>
+            Currently there isn't any data available.
+        </div>
+        );
+    } else {
     return (
         <div>
         <Table>
@@ -156,9 +177,17 @@ function CreateAttendanceTable(props) {
         </Table>
     </div>
     );
+            }
         }
 
 function CreateCourseTable(props) {
+    if(props.data == undefined) {
+        return (
+        <div>
+            Currently there isn't any data available.
+        </div>
+        );
+    } else {
     return (
         <div>
         <Table>
@@ -204,9 +233,17 @@ function CreateCourseTable(props) {
         </Table>
     </div>
     );
+            }
         }
 
 function CreateDistrictTable(props) {
+    if(props.data == undefined) {
+        return (
+        <div>
+            Currently there isn't any data available.
+        </div>
+        );
+    } else {
     return (
         <div>
         <Table>
@@ -247,9 +284,17 @@ function CreateDistrictTable(props) {
         </Table>
     </div>
     );
+            }
         }
 
 function CreateProgramTable(props) {
+    if(props.data == undefined) {
+        return (
+        <div>
+            Currently there isn't any data available.
+        </div>
+        );
+    } else {
     return (
         <div>
         <Table>
@@ -281,9 +326,17 @@ function CreateProgramTable(props) {
         </Table>
     </div>
     );
+            }
         }
 
 function CreateSchoolTable(props) {
+    if(props.data == undefined) {
+        return (
+        <div>
+            Currently there isn't any data available.
+        </div>
+        );
+    } else {
     return (
         <div>
         <Table>
@@ -325,10 +378,18 @@ function CreateSchoolTable(props) {
         </Table>
     </div>
     );
+            }
         }
 
 
 function CreateBehaviorTable(props) {
+    if(props.data == undefined) {
+        return (
+        <div>
+            Currently there isn't any data available.
+        </div>
+        );
+    } else {
     return (
         <div>
         <Table>
@@ -370,8 +431,51 @@ function CreateBehaviorTable(props) {
         </Table>
     </div>
     );
+            }
         }
 
 
+function CreateNoteTable(props) {
 
-export { CreateGradeTable, CreateSchoolTable, CreateStudentTable, CreateBehaviorTable, CreateProgramTable, CreateAttendanceTable, CreateCourseTable, CreateDistrictTable };
+if(props.data == undefined) {
+    return (
+    <div>
+        Currently there isn't any data available.
+    </div>
+    );
+} else {
+return (
+    <div>
+    <Table>
+        <TableHead>
+            <TableRow>
+                <TableCell className={props.tHead}>Date</TableCell>
+                <TableCell className={props.tHead}>Note</TableCell>
+            </TableRow>
+        </TableHead>
+        <TableBody>
+            {props.data.map((noteDetail, i) => {
+                const {
+                created,
+                context,
+                } = noteDetail;
+                return (
+                    <TableRow
+                    key={context}
+                    className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
+                    >
+                        <TableCell align="left">{created}</TableCell>
+                        <TableCell align="left">{context}</TableCell>
+                    </TableRow>
+                );
+            })}
+        </TableBody>
+    </Table>
+</div>
+);
+        }
+    }
+
+
+
+export { CreateGradeTable, CreateSchoolTable, CreateStudentTable, CreateBehaviorTable, CreateProgramTable, CreateAttendanceTable, CreateCourseTable, CreateDistrictTable, CreateNoteTable };
