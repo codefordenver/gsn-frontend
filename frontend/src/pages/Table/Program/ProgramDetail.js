@@ -7,7 +7,8 @@ import PropTypes from 'prop-types';
 import { getProgramDetail } from 'services/programServices';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
-import { CreateGradeTable, CreateStudentTable, CreateCourseTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+import { CreateGradeTable, CreateStudentTable, CreateCourseTable, CreateNoteTable,
+CreateAttendanceTable, CreateBehaviorTable} from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
 
@@ -40,7 +41,10 @@ function ProgramDetail(props) {
     programName,
     studentSet,
     courseSet,
-    gradeSet
+    gradeSet,
+    behaviorSet,
+    attendanceSet,
+    noteSet
   } = programDetail;
 
   const gradeTable = (
@@ -61,11 +65,38 @@ function ProgramDetail(props) {
             striped = {striped} />
   );
 
+  const behaviorTable = (
+    < CreateBehaviorTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {behaviorSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
   const studentTable = (
     < CreateStudentTable 
             header = {header} 
             tHead = {tHead} 
             data = {studentSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
+  const attendanceTable = (
+    < CreateAttendanceTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {attendanceSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
+  const noteTable = (
+    < CreateNoteTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {noteSet} 
             tRow = {tRow} 
             striped = {striped} />
   );
@@ -81,13 +112,26 @@ function ProgramDetail(props) {
             table = {gradeTable}/>
           <CreateTableHeader
             headerClassStyle = {tableTitle}
+            title = "Attendance" 
+            table = {attendanceTable}/>
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
+            title = "Behavior" 
+            table = {behaviorTable}
+            haveCreateSaveButtonBool={true}/>
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
             title = "Course" 
             table = {courseTable}/>
           <CreateTableHeader
             headerClassStyle = {tableTitle}
             title = "Student" 
             table = {studentTable}/>
-          
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
+            title = "Note" 
+            table = {noteTable}
+            haveCreateSaveButtonBool={true}/>
 
 
       </div>

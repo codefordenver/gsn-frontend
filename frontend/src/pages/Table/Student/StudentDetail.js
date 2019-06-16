@@ -8,7 +8,7 @@ import { getStudentDetail } from 'services/studentServices';
 import { DetailLink, DetailItem, DetailTable } from 'components/sharedStyles/Table/DetailStyles';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
-import { CreateGradeTable, CreateAttendanceTable, CreateBehaviorTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+import { CreateGradeTable, CreateAttendanceTable, CreateBehaviorTable, CreateNoteTable } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
 
@@ -50,7 +50,8 @@ function StudentDetail(props) {
     studentTerm,
     gradeSet,
     attendanceSet,
-    behaviorSet
+    behaviorSet,
+    noteSet
   } = studentDetail;
 
   const gradeTable = (
@@ -73,6 +74,15 @@ function StudentDetail(props) {
 
   const behaviorTable = (
     < CreateBehaviorTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {behaviorSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
+  const noteTable = (
+    < CreateNoteTable 
             header = {header} 
             tHead = {tHead} 
             data = {behaviorSet} 
@@ -108,6 +118,13 @@ function StudentDetail(props) {
           <CreateTableHeader
             title = "Behavior" 
             table = {behaviorTable}
+            headerClassStyle={tableTitle}
+            haveCreateSaveButtonBool={true}
+            /> 
+          
+          <CreateTableHeader
+            title = "Note" 
+            table = {noteTable}
             headerClassStyle={tableTitle}
             haveCreateSaveButtonBool={true}
             /> 

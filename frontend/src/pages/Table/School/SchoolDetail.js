@@ -9,7 +9,7 @@ import { DetailLink } from 'components/sharedStyles/Table/DetailStyles';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateGradeTable, CreateAttendanceTable, CreateStudentTable, 
-  CreateCourseTable, CreateBehaviorTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+  CreateCourseTable, CreateBehaviorTable, CreateNoteTable } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
 
@@ -46,7 +46,8 @@ function SchoolDetail(props) {
       courseSet,
       gradeSet,
       attendanceSet,
-      behaviorSet
+      behaviorSet,
+      noteSet
   } = schoolDetail;
 
   const gradeTable = (
@@ -94,6 +95,15 @@ function SchoolDetail(props) {
             striped = {striped} />
   );
 
+  const noteTable = (
+    < CreateNoteTable 
+            header = {header}
+            tHead = {tHead} 
+            data = {noteSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
   return (
       <div>
           <Typography className={header} component="h1" variant="h4">{schoolName}</Typography>
@@ -120,6 +130,11 @@ function SchoolDetail(props) {
             headerClassStyle = {tableTitle}
             title = "Student" 
             table = {studentTable}/>
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
+            title = "Note" 
+            table = {noteTable}
+            haveCreateSaveButtonBool={true}/>
       </div>
   );
 }
