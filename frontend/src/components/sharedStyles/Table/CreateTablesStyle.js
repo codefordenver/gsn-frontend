@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
     Link as StyledLink,
-    Table, TableBody, TableCell, TableHead, TableRow,
+    Table, TableBody, TableCell, TableHead, TableRow, TableSortLabel
   } from '@material-ui/core';
 
 
 
 
 function CreateGradeTable(props) {
+    const [orderBy, setOrderBy] = useState('grade'); // Initial state is columns are sorted by Grade
+    const [order, setOrder] = useState('asc') // Initial State is ascending
+
+    function ascCompare(a, b ) {
+        if( a[orderBy] > b[orderBy]) return 1;
+        if( a[orderBy] < b[orderBy]) return -1;
+        return 0;
+    }
+    function desCompare(a,b ) {
+        if( a[orderBy] > b[orderBy]) return -1;
+        if( a[orderBy] < b[orderBy]) return 1;
+        return 0;
+    }
+    const handleSort = (tableHeader) => {
+        // is the sort orderBy Changed??
+        console.log('table header ', tableHeader, 'orderby ', orderBy);
+        if( orderBy !== tableHeader)
+            setOrderBy(tableHeader);
+        else 
+            setOrder(order === 'asc' ? 'desc': 'asc');
+       
+    }
 
     if(props.data == undefined) {
     return (
@@ -22,15 +44,15 @@ function CreateGradeTable(props) {
         <Table>
             <TableHead>
                 <TableRow>
-                    <TableCell className={props.tHead}>Student</TableCell>
-                    <TableCell className={props.tHead}>Course</TableCell>
-                    <TableCell className={props.tHead}>Term</TableCell>
-                    <TableCell className={props.tHead}>Grade</TableCell>
-                    <TableCell className={props.tHead}>Final</TableCell> 
+                    <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('studentName')} >Student</TableSortLabel></TableCell>
+                    <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('courseName')} >Course</TableSortLabel></TableCell>
+                    <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('courseTerm')} >Term</TableSortLabel></TableCell>
+                    <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('grade')} >Grade</TableSortLabel></TableCell>
+                    <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('finalGradeForTerm')} >Final</TableSortLabel></TableCell> 
                 </TableRow>
             </TableHead>
             <TableBody>
-                {props.data.map((gradeDetail, i) => {
+                {props.data.sort(order === 'asc'? ascCompare: desCompare ).map((gradeDetail, i) => {
                   const {
                     gradeId,
                     courseName,
@@ -43,7 +65,7 @@ function CreateGradeTable(props) {
                   } = gradeDetail;
                   return (
                       <TableRow
-                        key={gradeId}
+                        key={i}
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                       >
                           <TableCell>
@@ -70,6 +92,28 @@ function CreateGradeTable(props) {
         }
 
 function CreateStudentTable(props) {
+    const [orderBy, setOrderBy] = useState('studentName'); // Initial state is columns are sorted by Grade
+    const [order, setOrder] = useState('asc') // Initial State is ascending
+
+    function ascCompare(a, b ) {
+        if( a[orderBy] > b[orderBy]) return 1;
+        if( a[orderBy] < b[orderBy]) return -1;
+        return 0;
+    }
+    function desCompare(a,b ) {
+        if( a[orderBy] > b[orderBy]) return -1;
+        if( a[orderBy] < b[orderBy]) return 1;
+        return 0;
+    }
+    const handleSort = (tableHeader) => {
+        // is the sort orderBy Changed??
+        console.log('table header ', tableHeader, 'orderby ', orderBy);
+        if( orderBy !== tableHeader)
+            setOrderBy(tableHeader);
+        else 
+            setOrder(order === 'asc' ? 'desc': 'asc');
+       
+    }
     if(props.data == undefined) {
         return (
         <div>
@@ -82,19 +126,19 @@ function CreateStudentTable(props) {
         <Table>
             <TableHead>
                   <TableRow>
-                      <TableCell className={props.tHead}>Name</TableCell>
-                      <TableCell className={props.tHead}>School</TableCell>
-                      <TableCell className={props.tHead} align="right">Birthdate</TableCell>
+                      <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('studentName')} >Name</TableSortLabel></TableCell>
+                      <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('schoolName')} >School</TableSortLabel></TableCell>
+                      <TableCell className={props.tHead} align="right"><TableSortLabel  onClick={() => handleSort('birthdate')} >Birthdate</TableSortLabel></TableCell>
                   </TableRow>
               </TableHead>
             <TableBody>
-                {props.data.map((studentDetail, i) => {
+            {props.data.sort(order === 'asc'? ascCompare: desCompare ).map((studentDetail, i) => {
                     const {
                         studentId, studentName,  birthdate, schoolId, schoolName
                     } = studentDetail;
                     return (
                         <TableRow
-                        key={studentId}
+                        key={i}
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                         >
                            <TableCell>
@@ -120,6 +164,28 @@ function CreateStudentTable(props) {
 
 
 function CreateAttendanceTable(props) {
+    const [orderBy, setOrderBy] = useState('studentName'); // Initial state is columns are sorted by Grade
+    const [order, setOrder] = useState('asc') // Initial State is ascending
+
+    function ascCompare(a, b ) {
+        if( a[orderBy] > b[orderBy]) return 1;
+        if( a[orderBy] < b[orderBy]) return -1;
+        return 0;
+    }
+    function desCompare(a,b ) {
+        if( a[orderBy] > b[orderBy]) return -1;
+        if( a[orderBy] < b[orderBy]) return 1;
+        return 0;
+    }
+    const handleSort = (tableHeader) => {
+        // is the sort orderBy Changed??
+        console.log('table header ', tableHeader, 'orderby ', orderBy);
+        if( orderBy !== tableHeader)
+            setOrderBy(tableHeader);
+        else 
+            setOrder(order === 'asc' ? 'desc': 'asc');
+       
+    }
     if(props.data == undefined) {
         return (
         <div>
@@ -132,17 +198,17 @@ function CreateAttendanceTable(props) {
         <Table>
             <TableHead>
                 <TableRow>
-                <TableCell className={props.tHead}>Student</TableCell>
-                <TableCell className={props.tHead}>Entry Date</TableCell>
-                <TableCell className={props.tHead}>Total Unexcused Absence</TableCell>
-                <TableCell className={props.tHead}>Total Excused Absence</TableCell>
-                <TableCell className={props.tHead}>Total Tardies</TableCell>
-                <TableCell className={props.tHead}>Average Daily Attendance</TableCell>
-                <TableCell className={props.tHead}>Final</TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('studentName')} >Student</TableSortLabel></TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('attendanceEntryDate')} >Entry Date</TableSortLabel></TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('totalUnexabs')} >Total Unexcused Absence</TableSortLabel></TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('totalExabs')} >Total Excused Absence</TableSortLabel></TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('totalTardies')} >Total Tardies</TableSortLabel></TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('avgDailyAttendance')} >Average Daily Attendance</TableSortLabel></TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('attendanceTermFinalValue')} >Final</TableSortLabel></TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
-                {props.data.map((attendanceDetail, i) => {
+            {props.data.sort(order === 'asc'? ascCompare: desCompare ).map((attendanceDetail, i) => {
                     const {
                         attendanceId,
                         attendanceEntryDate,
@@ -181,6 +247,29 @@ function CreateAttendanceTable(props) {
         }
 
 function CreateCourseTable(props) {
+    const [orderBy, setOrderBy] = useState('courseName'); // Initial state is columns are sorted by Grade
+    const [order, setOrder] = useState('asc') // Initial State is ascending
+
+    function ascCompare(a, b ) {
+        if( a[orderBy] > b[orderBy]) return 1;
+        if( a[orderBy] < b[orderBy]) return -1;
+        return 0;
+    }
+    function desCompare(a,b ) {
+        if( a[orderBy] > b[orderBy]) return -1;
+        if( a[orderBy] < b[orderBy]) return 1;
+        return 0;
+    }
+    const handleSort = (tableHeader) => {
+        // is the sort orderBy Changed??
+        console.log('table header ', tableHeader, 'orderby ', orderBy);
+        if( orderBy !== tableHeader)
+            setOrderBy(tableHeader);
+        else 
+            setOrder(order === 'asc' ? 'desc': 'asc');
+       
+    }
+    
     if(props.data == undefined) {
         return (
         <div>
@@ -193,14 +282,14 @@ function CreateCourseTable(props) {
         <Table>
             <TableHead>
                 <TableRow>
-                <TableCell className={props.tHead}>Course Name</TableCell>
-                <TableCell className={props.tHead}>School</TableCell>
-                <TableCell className={props.tHead}>Course Code</TableCell>
-                <TableCell className={props.tHead}>Course Subject</TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('courseName')} >Course Name</TableSortLabel></TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('schoolName')} >School</TableSortLabel></TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('courseCode')} >Course Code</TableSortLabel></TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('courseSubject')} >Course Subject</TableSortLabel></TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
-                {props.data.map((courseDetail, i) => {
+            {props.data.sort(order === 'asc'? ascCompare: desCompare ).map((courseDetail, i) => {
                     const {
                         courseId,
                         courseName,
@@ -211,7 +300,7 @@ function CreateCourseTable(props) {
                     } = courseDetail;
                     return (
                         <TableRow
-                        key={courseId}
+                        key={i}
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                         >
                             <TableCell align="left">
@@ -237,6 +326,29 @@ function CreateCourseTable(props) {
         }
 
 function CreateDistrictTable(props) {
+    const [orderBy, setOrderBy] = useState('districtName'); // Initial state is columns are sorted by Grade
+    const [order, setOrder] = useState('asc') // Initial State is ascending
+
+    function ascCompare(a, b ) {
+        if( a[orderBy] > b[orderBy]) return 1;
+        if( a[orderBy] < b[orderBy]) return -1;
+        return 0;
+    }
+    function desCompare(a,b ) {
+        if( a[orderBy] > b[orderBy]) return -1;
+        if( a[orderBy] < b[orderBy]) return 1;
+        return 0;
+    }
+    const handleSort = (tableHeader) => {
+        // is the sort orderBy Changed??
+        console.log('table header ', tableHeader, 'orderby ', orderBy);
+        if( orderBy !== tableHeader)
+            setOrderBy(tableHeader);
+        else 
+            setOrder(order === 'asc' ? 'desc': 'asc');
+       
+    }
+
     if(props.data == undefined) {
         return (
         <div>
@@ -249,14 +361,14 @@ function CreateDistrictTable(props) {
         <Table>
             <TableHead>
                 <TableRow>
-                <TableCell className={props.tHead}>District</TableCell>
-                <TableCell className={props.tHead}>State</TableCell>
-                <TableCell className={props.tHead}>City</TableCell>
-                <TableCell className={props.tHead}>Code</TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('districtName')} >District</TableSortLabel></TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('state')} >State</TableSortLabel></TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('city')} >City</TableSortLabel></TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('code')} >Code</TableSortLabel></TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
-                {props.data.map((districtDetail, i) => {
+            {props.data.sort(order === 'asc'? ascCompare: desCompare ).map((districtDetail, i) => {
                     const {
                         districtName,
                         districtId,
@@ -266,7 +378,7 @@ function CreateDistrictTable(props) {
                     } = districtDetail;
                     return (
                         <TableRow
-                        key={districtId}
+                        key={i}
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                         >
                             <TableCell align="left">
@@ -288,6 +400,29 @@ function CreateDistrictTable(props) {
         }
 
 function CreateProgramTable(props) {
+    const [orderBy, setOrderBy] = useState('programName'); // Initial state is columns are sorted by Grade
+    const [order, setOrder] = useState('asc') // Initial State is ascending
+
+    function ascCompare(a, b ) {
+        if( a[orderBy] > b[orderBy]) return 1;
+        if( a[orderBy] < b[orderBy]) return -1;
+        return 0;
+    }
+    function desCompare(a,b ) {
+        if( a[orderBy] > b[orderBy]) return -1;
+        if( a[orderBy] < b[orderBy]) return 1;
+        return 0;
+    }
+    const handleSort = (tableHeader) => {
+        // is the sort orderBy Changed??
+        console.log('table header ', tableHeader, 'orderby ', orderBy);
+        if( orderBy !== tableHeader)
+            setOrderBy(tableHeader);
+        else 
+            setOrder(order === 'asc' ? 'desc': 'asc');
+       
+    }
+
     if(props.data == undefined) {
         return (
         <div>
@@ -300,18 +435,18 @@ function CreateProgramTable(props) {
         <Table>
             <TableHead>
                 <TableRow>
-                <TableCell className={props.tHead}>Program</TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('programName')} >Program</TableSortLabel></TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
-                {props.data.map((programDetail, i) => {
+            {props.data.sort(order === 'asc'? ascCompare: desCompare ).map((programDetail, i) => {
                     const {
                         programName,
                         programId,
                     } = programDetail;
                     return (
                         <TableRow
-                        key={programId}
+                        key={i}
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                         >
                             <TableCell align="left">
@@ -330,6 +465,29 @@ function CreateProgramTable(props) {
         }
 
 function CreateSchoolTable(props) {
+    const [orderBy, setOrderBy] = useState('schoolName'); // Initial state is columns are sorted by Grade
+    const [order, setOrder] = useState('asc') // Initial State is ascending
+
+    function ascCompare(a, b ) {
+        if( a[orderBy] > b[orderBy]) return 1;
+        if( a[orderBy] < b[orderBy]) return -1;
+        return 0;
+    }
+    function desCompare(a,b ) {
+        if( a[orderBy] > b[orderBy]) return -1;
+        if( a[orderBy] < b[orderBy]) return 1;
+        return 0;
+    }
+    const handleSort = (tableHeader) => {
+        // is the sort orderBy Changed??
+        console.log('table header ', tableHeader, 'orderby ', orderBy);
+        if( orderBy !== tableHeader)
+            setOrderBy(tableHeader);
+        else 
+            setOrder(order === 'asc' ? 'desc': 'asc');
+       
+    }
+
     if(props.data == undefined) {
         return (
         <div>
@@ -342,12 +500,12 @@ function CreateSchoolTable(props) {
         <Table>
             <TableHead>
                 <TableRow>
-                <TableCell className={props.tHead}>School</TableCell>
-                <TableCell className={props.tHead}>District</TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('schoolName')} >School</TableSortLabel></TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('districtName')} >District</TableSortLabel></TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
-                {props.data.map((schoolDetail, i) => {
+            {props.data.sort(order === 'asc'? ascCompare: desCompare ).map((schoolDetail, i) => {
                     const {
                         schoolName,
                         schoolId,
@@ -357,7 +515,7 @@ function CreateSchoolTable(props) {
                     } = schoolDetail;
                     return (
                         <TableRow
-                        key={schoolId}
+                        key={i}
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                         >
                             <TableCell align="left">
@@ -383,6 +541,29 @@ function CreateSchoolTable(props) {
 
 
 function CreateBehaviorTable(props) {
+    const [orderBy, setOrderBy] = useState('studentName'); // Initial state is columns are sorted by Grade
+    const [order, setOrder] = useState('asc') // Initial State is ascending
+
+    function ascCompare(a, b ) {
+        if( a[orderBy] > b[orderBy]) return 1;
+        if( a[orderBy] < b[orderBy]) return -1;
+        return 0;
+    }
+    function desCompare(a,b ) {
+        if( a[orderBy] > b[orderBy]) return -1;
+        if( a[orderBy] < b[orderBy]) return 1;
+        return 0;
+    }
+    const handleSort = (tableHeader) => {
+        // is the sort orderBy Changed??
+        console.log('table header ', tableHeader, 'orderby ', orderBy);
+        if( orderBy !== tableHeader)
+            setOrderBy(tableHeader);
+        else 
+            setOrder(order === 'asc' ? 'desc': 'asc');
+       
+    }
+
     if(props.data == undefined) {
         return (
         <div>
@@ -395,14 +576,14 @@ function CreateBehaviorTable(props) {
         <Table>
             <TableHead>
                 <TableRow>
-                <TableCell className={props.tHead}>Student</TableCell>
-                <TableCell className={props.tHead}>Date</TableCell>
-                <TableCell className={props.tHead}>Context</TableCell>
-                <TableCell className={props.tHead}>Result</TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('studentName')} >Student</TableSortLabel></TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('date')} >Date</TableSortLabel></TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('context')} >Context</TableSortLabel></TableCell>
+                <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('result')} >Result</TableSortLabel></TableCell>
             </TableRow>
             </TableHead>
             <TableBody>
-                {props.data.map((behaviorDetail, i) => {
+            {props.data.sort(order === 'asc'? ascCompare: desCompare ).map((behaviorDetail, i) => {
                     const {
                         behaviorId,
                         studentName,
@@ -413,7 +594,7 @@ function CreateBehaviorTable(props) {
                     } = behaviorDetail;
                     return (
                         <TableRow
-                        key={behaviorId}
+                        key={i}
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                         >
                             <TableCell align="left">
@@ -436,45 +617,67 @@ function CreateBehaviorTable(props) {
 
 
 function CreateNoteTable(props) {
+    const [orderBy, setOrderBy] = useState('created'); // Initial state is columns are sorted by Grade
+    const [order, setOrder] = useState('asc') // Initial State is ascending
 
-if(props.data == undefined) {
+    function ascCompare(a, b ) {
+        if( a[orderBy] > b[orderBy]) return 1;
+        if( a[orderBy] < b[orderBy]) return -1;
+        return 0;
+    }
+    function desCompare(a,b ) {
+        if( a[orderBy] > b[orderBy]) return -1;
+        if( a[orderBy] < b[orderBy]) return 1;
+        return 0;
+    }
+    const handleSort = (tableHeader) => {
+        // is the sort orderBy Changed??
+        console.log('table header ', tableHeader, 'orderby ', orderBy);
+        if( orderBy !== tableHeader)
+            setOrderBy(tableHeader);
+        else 
+            setOrder(order === 'asc' ? 'desc': 'asc');
+       
+    }
+
+    if(props.data == undefined) {
+        return (
+        <div>
+            Currently there isn't any data available.
+        </div>
+        );
+    } else {
     return (
-    <div>
-        Currently there isn't any data available.
+        <div>
+        <Table>
+            <TableHead>
+                <TableRow>
+                    <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('created')} >Date</TableSortLabel></TableCell>
+                    <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('context')} >Note</TableSortLabel></TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
+            {props.data.sort(order === 'asc'? ascCompare: desCompare ).map((noteDetail, i) => {
+                    const {
+                    created,
+                    context,
+                    } = noteDetail;
+                    return (
+                        <TableRow
+                        key={i}
+                        className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
+                        >
+                            <TableCell align="left">{created}</TableCell>
+                            <TableCell align="left">{context}</TableCell>
+                        </TableRow>
+                    );
+                })}
+            </TableBody>
+        </Table>
     </div>
     );
-} else {
-return (
-    <div>
-    <Table>
-        <TableHead>
-            <TableRow>
-                <TableCell className={props.tHead}>Date</TableCell>
-                <TableCell className={props.tHead}>Note</TableCell>
-            </TableRow>
-        </TableHead>
-        <TableBody>
-            {props.data.map((noteDetail, i) => {
-                const {
-                created,
-                context,
-                } = noteDetail;
-                return (
-                    <TableRow
-                    key={context}
-                    className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
-                    >
-                        <TableCell align="left">{created}</TableCell>
-                        <TableCell align="left">{context}</TableCell>
-                    </TableRow>
-                );
-            })}
-        </TableBody>
-    </Table>
-</div>
-);
+            }
         }
-    }
 
 
 
