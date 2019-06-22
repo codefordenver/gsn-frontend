@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 
 
-function MyPrograms(props) {
+function ViewAllDataHomepage(props) {
   const [loading, setLoading] = useState(true);
   const { classes: { header }, match: { params } } = props;
   const {
@@ -26,14 +26,14 @@ function MyPrograms(props) {
 
   if (loading) {
     return (
-    loadingJSX('My Programs'));
+    loadingJSX('View All Data Homepage'));
   }
 
  
 
   return (
       <div>
-          <Typography className={header} component="h1" variant="h4">My Programs</Typography>
+          <Typography className={header} component="h1" variant="h4">View All Data</Typography>
           
           <Link to="/district" style={{ textDecoration: 'none'}}> <CreateTableHeader
             headerClassStyle = {tableTitle}
@@ -56,10 +56,10 @@ function MyPrograms(props) {
 
 
 
-MyPrograms.propTypes = {
+ViewAllDataHomepage.propTypes = {
   classes: PropTypes.object,
   match: PropTypes.object,
 };
 
-export default withStyles(TablePageStyles)(MyPrograms);
+export default withStyles(TablePageStyles)(ViewAllDataHomepage);
 

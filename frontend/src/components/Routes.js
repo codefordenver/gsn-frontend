@@ -57,6 +57,7 @@ export default function () {
 
                       <PrivateRoute exact path="/viewalldata" component={ViewAllDataHomepage} />
 
+
                   </Layout>
               </Switch>
           </Switch>
