@@ -12,7 +12,7 @@ function Programs(props) {
   const {
     classes: { header, striped, tHead, tRow }
   } = props;
-  
+
   const dispatch = useDispatch();
 
   const programs = useSelector(state => state.programs.programs);

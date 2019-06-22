@@ -2,6 +2,7 @@ import * as types from './StudentConstants';
 
 const initialState = ({
   students: [],
+  student: [],
 });
 
 export default (state = initialState, action) => {
@@ -10,7 +11,7 @@ export default (state = initialState, action) => {
       return { ...state, students: action.payload };
 
     case types.SET_STUDENT:
-      return action.student;
+      return { ...state, student: action.payload };
 
     default:
       return state;
