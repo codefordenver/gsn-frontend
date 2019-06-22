@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchStudents } from 'state/StudentActions';
+import { useDispatch, connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
 
@@ -13,7 +12,15 @@ import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateStudentTable } from 'components/sharedStyles/Table/CreateTablesStyle';
 
 
-function Students(props) {
+const mapStateToProps = (state, ownProps) => {
+  const props = state.props;
+  const my_or_all = ownProps.my_or_all;
+  return {
+    props, my_or_all
+  };
+};
+
+function Students(props,otherProps) {
   const {
     classes: {
       header, striped, tHead, tRow,
@@ -21,11 +28,11 @@ function Students(props) {
   } = props;
 
   const [loading, setLoading] = useState(true);
-  const students = useSelector(state => state.students.students);
+  const students = props.selector;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchStudents());
+    dispatch(props.fetchData);
     setLoading(false);
   }, []);
 
@@ -33,6 +40,8 @@ function Students(props) {
     return (
     loadingJSX('Students'));
   }
+
+  const my_or_all = props.my_or_all;
 
   return (
     <div>
@@ -47,7 +56,8 @@ function Students(props) {
         tHead = {tHead}
         data = {students}
         tRow = {tRow}
-        striped = {striped} />
+        striped = {striped} 
+        my_or_all_link = {my_or_all}/>
     </div>
   );
 }
@@ -57,4 +67,5 @@ Students.propTypes = {
   classes: PropTypes.object,
 };
 
-export default withStyles(TablePageStyles)(Students);
+const FullStudents = withStyles(TablePageStyles)(Students);
+export default connect(mapStateToProps)(FullStudents);
