@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Typography, withStyles,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-import { getStudentDetail } from 'services/studentServices';
 import { DetailLink, DetailItem, DetailTable } from 'components/sharedStyles/Table/DetailStyles';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateGradeTable, CreateAttendanceTable, CreateBehaviorTable } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
+import { fetchStudent } from '../../../state/StudentActions';
 
 
 function StudentDetail(props) {
-  const [studentDetail, setStudentDetail] = useState({});
-  const [loading, setLoading] = useState(true);
   const { classes: { header }, match: { params } } = props;
   const studentIdParam = params;
   const {
@@ -23,13 +22,15 @@ function StudentDetail(props) {
     },
   } = props;
 
-
+  // const [studentDetail, setStudentDetail] = useState({});
+  const [loading, setLoading] = useState(true);
+  const studentDetail = useSelector(state => state.students.student);
+  const dispatch = useDispatch();
+  console.log(studentDetail);
   useEffect(() => {
     console.log('useEffect ran in StudentDetail', studentIdParam);
-    getStudentDetail(studentIdParam).then((s) => {
-      setStudentDetail(s);
-      setLoading(false);
-    });
+    dispatch(fetchStudent(studentIdParam.studentId));
+    setLoading(false);
   }, []);
 
   if (loading) {
