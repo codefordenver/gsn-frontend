@@ -1,66 +1,61 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-    Link as StyledLink,
-    Table, TableBody, TableCell, TableHead, TableRow,
-  } from '@material-ui/core';
-
-
-
+  Link as StyledLink,
+  Table, TableBody, TableCell, TableHead, TableRow,
+} from '@material-ui/core';
 
 function CreateGradeTable(props) {
-    
-    return (
-        <div>
-        <Table>
-            <TableHead>
-                <TableRow>
-                    <TableCell className={props.tHead}>Student</TableCell>
-                    <TableCell className={props.tHead}>Course</TableCell>
-                    <TableCell className={props.tHead}>Term</TableCell>
-                    <TableCell className={props.tHead}>Grade</TableCell>
-                    <TableCell className={props.tHead}>Final</TableCell> 
-                </TableRow>
-            </TableHead>
-            <TableBody>
-                {props.data.map((gradeDetail, i) => {
-                  const {
-                    gradeId,
-                    courseName,
-                    courseId,
-                    studentName,
-                    studentId,
-                    courseTerm,
-                    grade,
-                    finalGradeForTerm,
-                  } = gradeDetail;
-                  return (
-                      <TableRow
-                        key={gradeId}
-                        className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
-                      >
-                          <TableCell>
-                              <Link to={`/student/${studentId}`}>
-                                  <StyledLink>{studentName}</StyledLink>
-                              </Link>
-                          </TableCell>
-                          <TableCell>
-                              <Link to={`/course/${courseId}`}>
-                                  <StyledLink>{courseName}</StyledLink>
-                              </Link>
-                          </TableCell>
-                          <TableCell align="left">{courseTerm}</TableCell>
-                          <TableCell align="left">{grade}</TableCell>
-                          <TableCell align="left">{finalGradeForTerm}</TableCell>
-                      </TableRow>
-                  );
-                })}
-            </TableBody>
-        </Table>
-    </div>
-    );
-
-        }
+  return (
+      <div>
+          <Table>
+              <TableHead>
+                  <TableRow>
+                      <TableCell className={props.tHead}>Student</TableCell>
+                      <TableCell className={props.tHead}>Course</TableCell>
+                      <TableCell className={props.tHead}>Term</TableCell>
+                      <TableCell className={props.tHead}>Grade</TableCell>
+                      <TableCell className={props.tHead}>Final</TableCell>
+                  </TableRow>
+              </TableHead>
+              <TableBody>
+                  {props.data.map((gradeDetail, i) => {
+                    const {
+                      gradeId,
+                      courseName,
+                      courseId,
+                      studentName,
+                      studentId,
+                      courseTerm,
+                      grade,
+                      finalGradeForTerm,
+                    } = gradeDetail;
+                    return (
+                        <TableRow
+                          key={gradeId}
+                          className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
+                        >
+                            <TableCell>
+                                <Link to={`/student/${studentId}`}>
+                                    <StyledLink>{studentName}</StyledLink>
+                                </Link>
+                            </TableCell>
+                            <TableCell>
+                                <Link to={`/course/${courseId}`}>
+                                    <StyledLink>{courseName}</StyledLink>
+                                </Link>
+                            </TableCell>
+                            <TableCell align="left">{courseTerm}</TableCell>
+                            <TableCell align="left">{grade}</TableCell>
+                            <TableCell align="left">{finalGradeForTerm}</TableCell>
+                        </TableRow>
+                    );
+                  })}
+              </TableBody>
+          </Table>
+      </div>
+  );
+}
 
 function CreateStudentTable(props) {
     return (
@@ -300,7 +295,7 @@ function CreateSchoolTable(props) {
                         schoolId,
                         districtName,
                         districtId,
-                        
+
                     } = schoolDetail;
                     return (
                         <TableRow
