@@ -15,21 +15,19 @@ import { fetchStudent } from '../../../state/StudentActions';
 
 function StudentDetail(props) {
   const { classes: { header }, match: { params } } = props;
-  const studentIdParam = params;
   const {
     classes: {
       striped, tHead, tRow, tableTitle,
     },
   } = props;
 
-  // const [studentDetail, setStudentDetail] = useState({});
   const [loading, setLoading] = useState(true);
   const studentDetail = useSelector(state => state.students.student);
   const dispatch = useDispatch();
-  console.log(studentDetail);
+  // console.log(studentDetail);
+
   useEffect(() => {
-    console.log('useEffect ran in StudentDetail', studentIdParam);
-    dispatch(fetchStudent(studentIdParam.studentId));
+    dispatch(fetchStudent(params.studentId));
     setLoading(false);
   }, []);
 
