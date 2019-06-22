@@ -14,6 +14,7 @@ import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
 
 function CourseDetail(props) {
+  const my_or_all = props.my_or_all;
   const [courseDetail, setCourseDetail] = useState({});
   const [loading, setLoading] = useState(true);
   const {
@@ -54,7 +55,8 @@ function CourseDetail(props) {
             tHead = {tHead} 
             data = {gradeSet} 
             tRow = {tRow} 
-            striped = {striped} />
+            striped = {striped}
+            my_or_all_link = {my_or_all} />
   );
 
   const attendanceTable = (
@@ -63,7 +65,8 @@ function CourseDetail(props) {
             tHead = {tHead} 
             data = {attendanceSet} 
             tRow = {tRow} 
-            striped = {striped} />
+            striped = {striped} 
+            my_or_all_link = {my_or_all}/>
   );
 
   const studentTable = (
@@ -72,7 +75,8 @@ function CourseDetail(props) {
             tHead = {tHead} 
             data = {studentSet} 
             tRow = {tRow} 
-            striped = {striped} />
+            striped = {striped} 
+            my_or_all_link = {my_or_all}/>
   );
 
   return (
@@ -80,12 +84,13 @@ function CourseDetail(props) {
           <Typography className={header} component="h1" variant="h4">{courseName}</Typography>
           <DetailItem k="Course Code" val={courseCode} />
           <DetailItem k="Subject" val={courseSubject} />
-          <DetailLink k="School" val={schoolName} link={`/school/${schoolId}`} />
+          <DetailLink k="School" val={schoolName} link={my_or_all + `/school/${schoolId}`} />
 
           <CreateTableHeader
             headerClassStyle = {tableTitle}
             title = "Grades" 
-            table = {gradeTable}/>
+            table = {gradeTable}
+            />
           <CreateTableHeader
             headerClassStyle = {tableTitle}
             title = "Attendance" 

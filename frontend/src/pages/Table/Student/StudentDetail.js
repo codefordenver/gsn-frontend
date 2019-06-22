@@ -13,6 +13,7 @@ import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
 
 function StudentDetail(props) {
+  const my_or_all = props.my_or_all;
   const [studentDetail, setStudentDetail] = useState({});
   const [loading, setLoading] = useState(true);
   const { classes: { header }, match: { params } } = props;
@@ -59,7 +60,8 @@ function StudentDetail(props) {
             tHead = {tHead} 
             data = {gradeSet} 
             tRow = {tRow} 
-            striped = {striped} />
+            striped = {striped}
+            my_or_all_link = {my_or_all} />
   );
 
   const attendanceTable = (
@@ -68,7 +70,8 @@ function StudentDetail(props) {
             tHead = {tHead} 
             data = {attendanceSet} 
             tRow = {tRow} 
-            striped = {striped} />
+            striped = {striped} 
+            my_or_all_link = {my_or_all}/>
   );
 
   const behaviorTable = (
@@ -77,7 +80,8 @@ function StudentDetail(props) {
             tHead = {tHead} 
             data = {behaviorSet} 
             tRow = {tRow} 
-            striped = {striped} />
+            striped = {striped} 
+            my_or_all_link = {my_or_all}/>
   );
 
 
@@ -91,7 +95,7 @@ function StudentDetail(props) {
           <DetailItem k="Year" val={studentYear} />
           <DetailItem k="Term" val={studentTerm} />
           <DetailItem k="State Id" val={stateId} />
-          <DetailLink k="School" val={school} link={`/school/${schoolId}`} />
+          <DetailLink k="School" val={school} link={my_or_all + `/school/${schoolId}`} />
           
           <CreateTableHeader
             title = "Grades" 

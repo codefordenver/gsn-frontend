@@ -13,6 +13,7 @@ import { Typography } from '@material-ui/core';
 
 
 function Schools(props) {
+  const my_or_all = props.my_or_all;
   const {
     classes: {
       header, striped, tHead, tRow,
@@ -48,7 +49,8 @@ function Schools(props) {
         tHead = {tHead} 
         data = {schools} 
         tRow = {tRow} 
-        striped = {striped} />
+        striped = {striped} 
+        my_or_all_link = {my_or_all}/>
     </div>
   );
 }

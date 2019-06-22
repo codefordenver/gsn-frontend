@@ -13,6 +13,7 @@ import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
 
 function ProgramDetail(props) {
+  const my_or_all = props.my_or_all;
   const [programDetail, setProgramDetail] = useState({});
   const [loading, setLoading] = useState(true);
   const {
@@ -49,7 +50,8 @@ function ProgramDetail(props) {
             tHead = {tHead} 
             data = {gradeSet} 
             tRow = {tRow} 
-            striped = {striped} />
+            striped = {striped} 
+            my_or_all_link = {my_or_all}/>
   );
 
   const courseTable = (
@@ -58,7 +60,8 @@ function ProgramDetail(props) {
             tHead = {tHead} 
             data = {courseSet} 
             tRow = {tRow} 
-            striped = {striped} />
+            striped = {striped} 
+            my_or_all_link = {my_or_all}/>
   );
 
   const studentTable = (
@@ -67,7 +70,8 @@ function ProgramDetail(props) {
             tHead = {tHead} 
             data = {studentSet} 
             tRow = {tRow} 
-            striped = {striped} />
+            striped = {striped} 
+            my_or_all_link = {my_or_all}/>
   );
 
   return (
@@ -78,7 +82,8 @@ function ProgramDetail(props) {
           <CreateTableHeader
             headerClassStyle = {tableTitle}
             title = "Grades" 
-            table = {gradeTable}/>
+            table = {gradeTable}
+            my_or_all_link = {my_or_all}/>
           <CreateTableHeader
             headerClassStyle = {tableTitle}
             title = "Course" 

@@ -13,6 +13,7 @@ import { CreateDistrictTable } from 'components/sharedStyles/Table/CreateTablesS
 
 
 function Districts(props) {
+  const my_or_all = props.my_or_all;
   const {
     classes: {
       header, striped, tHead, tRow,
@@ -48,7 +49,8 @@ function Districts(props) {
         tHead = {tHead} 
         data = {districts} 
         tRow = {tRow} 
-        striped = {striped} />
+        striped = {striped} 
+        my_or_all_link = {my_or_all}/>
     </div>
   );
 }

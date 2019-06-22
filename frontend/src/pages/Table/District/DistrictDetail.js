@@ -14,6 +14,7 @@ import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
 
 function DistrictDetail(props) {
+  const my_or_all = props.my_or_all;
   const [districtDetail, setDistrictDetail] = useState({});
   const [loading, setLoading] = useState(true);
   const { classes: { header }, match: { params } } = props;
@@ -51,7 +52,8 @@ function DistrictDetail(props) {
             tHead = {tHead} 
             data = {schoolSet} 
             tRow = {tRow} 
-            striped = {striped} />
+            striped = {striped} 
+            my_or_all_link = {my_or_all}/>
   );
 
   return (

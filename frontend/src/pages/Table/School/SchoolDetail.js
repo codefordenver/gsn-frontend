@@ -15,6 +15,7 @@ import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
 
 function SchoolDetail(props) {
+  const my_or_all = props.my_or_all;
   const [schoolDetail, setSchoolDetail] = useState({});
   const [loading, setLoading] = useState(true);
   const { classes: { header }, match: { params } } = props;
@@ -55,7 +56,8 @@ function SchoolDetail(props) {
             tHead = {tHead} 
             data = {gradeSet} 
             tRow = {tRow} 
-            striped = {striped} />
+            striped = {striped}
+            my_or_all_link = {my_or_all} />
   );
 
   const attendanceTable = (
@@ -64,7 +66,8 @@ function SchoolDetail(props) {
             tHead = {tHead} 
             data = {attendanceSet} 
             tRow = {tRow} 
-            striped = {striped} />
+            striped = {striped} 
+            my_or_all_link = {my_or_all}/>
   );
 
   const behaviorTable = (
@@ -73,7 +76,8 @@ function SchoolDetail(props) {
             tHead = {tHead} 
             data = {behaviorSet} 
             tRow = {tRow} 
-            striped = {striped} />
+            striped = {striped} 
+            my_or_all_link = {my_or_all}/>
   );
 
   const courseTable = (
@@ -82,7 +86,8 @@ function SchoolDetail(props) {
             tHead = {tHead} 
             data = {courseSet} 
             tRow = {tRow} 
-            striped = {striped} />
+            striped = {striped} 
+            my_or_all_link = {my_or_all}/>
   );
 
   const studentTable = (
@@ -91,18 +96,20 @@ function SchoolDetail(props) {
             tHead = {tHead} 
             data = {studentSet} 
             tRow = {tRow} 
-            striped = {striped} />
+            striped = {striped} 
+            my_or_all_link = {my_or_all}/>
   );
 
   return (
       <div>
           <Typography className={header} component="h1" variant="h4">{schoolName}</Typography>
-          <DetailLink k="District Name" val={districtName} link={`/district/${districtId}`} />
+          <DetailLink k="District Name" val={districtName} link={my_or_all + `/district/${districtId}`} />
 
           <CreateTableHeader
             headerClassStyle = {tableTitle}
             title = "Grades" 
-            table = {gradeTable}/>
+            table = {gradeTable}
+            />
           <CreateTableHeader
             headerClassStyle = {tableTitle}
             title = "Attendance" 

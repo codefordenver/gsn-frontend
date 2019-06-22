@@ -14,6 +14,7 @@ import { Typography } from '@material-ui/core';
 
 
 function Programs(props) {
+  const my_or_all = props.my_or_all;
   const {
     classes: {
       header, striped, tHead, tRow,
@@ -49,7 +50,8 @@ function Programs(props) {
       tHead = {tHead} 
       data = {programs} 
       tRow = {tRow} 
-      striped = {striped} />
+      striped = {striped} 
+      my_or_all_link = {my_or_all}/>
     </div>
   );
 }
