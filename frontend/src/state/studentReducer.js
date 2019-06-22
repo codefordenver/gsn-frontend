@@ -2,6 +2,7 @@ import * as types from './StudentConstants';
 
 const initialState = ({
   students: [],
+  student: [],
 });
 
 export default (state = initialState, action) => {

@@ -32,9 +32,9 @@ export const fetchStudents = (students) => {
 };
 
 
-export const fetchStudent = (student) => {
+export const fetchStudent = (studentId) => {
   return (dispatch) => {
-    return fetch('http://gsndev.com/gsndb/student/', {
+    return fetch(`http://gsndev.com/gsndb/student/${studentId}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -42,8 +42,8 @@ export const fetchStudent = (student) => {
       },
     })
       .then(response => response.json())
-      .then((s) => {
-        dispatch(getStudent(s));
+      .then((student) => {
+        dispatch(getStudent(student));
       })
       .catch(error => (error));
   };
