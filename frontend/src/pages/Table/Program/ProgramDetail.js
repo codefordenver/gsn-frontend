@@ -1,104 +1,99 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Typography, withStyles,
-} from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-
-import { getProgramDetail } from 'services/programServices';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
-import { CreateGradeTable, CreateStudentTable, CreateCourseTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+import {
+  CreateGradeTable,
+  CreateStudentTable,
+  CreateCourseTable
+} from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
-
+import { fetchProgramDetails } from '../../../state/ProgramActions';
 
 function ProgramDetail(props) {
-  const [programDetail, setProgramDetail] = useState({});
-  const [loading, setLoading] = useState(true);
   const {
-    classes: {
-       striped, tHead, tRow, tableTitle
-    },
+    classes: { striped, tHead, tRow, tableTitle, header },
+    match: { params }
   } = props;
-  const { classes: { header }, match: { params } } = props;
-  const programIdParam = params;
+  const { programId } = params;
+
+  const dispatch = useDispatch();
+
+  const programDetail = useSelector(state => {
+    return state.programs.program;
+  });
 
   useEffect(() => {
-    console.log('useEffect ran in ProgramDetail', programIdParam);
-    getProgramDetail(programIdParam).then((s) => {
-      setProgramDetail(s);
-      setLoading(false);
-    });
-  }, []);
+    dispatch(fetchProgramDetails(programId));
+  }, [dispatch, programId]);
 
-  if (loading) {
-    return (
-    loadingJSX('Program Detail'));
+  if (!programDetail) {
+    return loadingJSX('Program Detail');
   }
 
-  const {
-    programName,
-    studentSet,
-    courseSet,
-    gradeSet
-  } = programDetail;
+  const { programName, studentSet, courseSet, gradeSet } = programDetail;
 
   const gradeTable = (
-    < CreateGradeTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {gradeSet} 
-            tRow = {tRow} 
-            striped = {striped} />
+    <CreateGradeTable
+      header={header}
+      tHead={tHead}
+      data={gradeSet}
+      tRow={tRow}
+      striped={striped}
+    />
   );
 
   const courseTable = (
-    < CreateCourseTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {courseSet} 
-            tRow = {tRow} 
-            striped = {striped} />
+    <CreateCourseTable
+      header={header}
+      tHead={tHead}
+      data={courseSet}
+      tRow={tRow}
+      striped={striped}
+    />
   );
 
   const studentTable = (
-    < CreateStudentTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {studentSet} 
-            tRow = {tRow} 
-            striped = {striped} />
+    <CreateStudentTable
+      header={header}
+      tHead={tHead}
+      data={studentSet}
+      tRow={tRow}
+      striped={striped}
+    />
   );
 
   return (
-      <div>
-          <Typography className={header} component="h1" variant="h4">{programName}</Typography>
+    <div>
+      <Typography className={header} component="h1" variant="h4">
+        {programName}
+      </Typography>
 
-
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Grades" 
-            table = {gradeTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Course" 
-            table = {courseTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Student" 
-            table = {studentTable}/>
-          
-
-
-      </div>
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Grades"
+        table={gradeTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Course"
+        table={courseTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Student"
+        table={studentTable}
+      />
+    </div>
   );
 }
 
-
-
 ProgramDetail.propTypes = {
   classes: PropTypes.object,
-  match: PropTypes.object,
+  match: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(ProgramDetail);
