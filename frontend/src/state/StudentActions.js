@@ -14,9 +14,9 @@ const getStudent = student => ({
   payload: student
 });
 
-export const fetchStudents = students => {
+export const fetchStudents = ({ accessLevel }) => {
   return dispatch => {
-    return fetch('http://gsndev.com/gsndb/all/student/', {
+    return fetch(`http://gsndev.com/gsndb/${accessLevel}/student/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
