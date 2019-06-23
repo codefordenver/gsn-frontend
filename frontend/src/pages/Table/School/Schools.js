@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { getSchools } from 'services/schoolServices';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector, connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles, Typography } from '@material-ui/core';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateSchoolTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-
+import mapStateToProps from 'components/sharedStyles/Table/StateToProps';
 import { fetchSchools } from '../../../state/SchoolActions';
 
-function Schools(props) {
+function FullSchools(props) {
   const my_or_all = props.my_or_all;
+  const my_or_all_url = "/" + my_or_all;
   const {
     classes: { header, striped, tHead, tRow }
   } = props;
 
   const dispatch = useDispatch();
-
   const schools = useSelector(state => state.schools.schools);
   useEffect(() => {
-    dispatch(fetchSchools({ accessLevel: 'my' }));
+    dispatch(fetchSchools({ accessLevel: my_or_all }));
   }, [dispatch]);
 
   if (!schools) {
@@ -29,7 +28,7 @@ function Schools(props) {
   return (
     <div>
       <Typography variant="h4" component="h1" className={header}>
-        All Schools
+        { my_or_all + " Schools"}
       </Typography>
       < CreateSchoolTable 
         header = {header} 
@@ -37,13 +36,14 @@ function Schools(props) {
         data = {schools} 
         tRow = {tRow} 
         striped = {striped} 
-        my_or_all_link = {my_or_all}/>
+        my_or_all_link = {my_or_all_url}/>
     </div>
   );
 }
 
-Schools.propTypes = {
+FullSchools.propTypes = {
   classes: PropTypes.object
 };
 
-export default withStyles(TablePageStyles)(Schools);
+const Schools = withStyles(TablePageStyles)(FullSchools);
+export default connect(mapStateToProps)(Schools);

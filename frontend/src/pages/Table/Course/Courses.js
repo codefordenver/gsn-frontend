@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector, connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles, Typography } from '@material-ui/core';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateCourseTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-
+import mapStateToProps from 'components/sharedStyles/Table/StateToProps';
 import { fetchCourses } from '../../../state/CourseActions';
 
-function Courses(props) {
+function FullCourses(props) {
   const my_or_all = props.my_or_all;
+  const my_or_all_url = "/" + my_or_all;
   const {
     classes: { header, striped, tHead, tRow }
   } = props;
@@ -18,7 +19,7 @@ function Courses(props) {
 
   const courses = useSelector(state => state.courses.courses);
   useEffect(() => {
-    dispatch(fetchCourses({ accessLevel: 'my' }));
+    dispatch(fetchCourses({ accessLevel: my_or_all }));
   }, [dispatch]);
 
   if (!courses) {
@@ -28,7 +29,7 @@ function Courses(props) {
   return (
     <div>
       <Typography variant="h4" component="h1" className={header}>
-        All Courses
+        { my_or_all + " Courses" }
       </Typography>
       < CreateCourseTable 
         header = {header} 
@@ -36,13 +37,14 @@ function Courses(props) {
         data = {courses} 
         tRow = {tRow} 
         striped = {striped} 
-        my_or_all_link = {my_or_all}/>
+        my_or_all_link = {my_or_all_url}/>
     </div>
   );
 }
 
-Courses.propTypes = {
+FullCourses.propTypes = {
   classes: PropTypes.object
 };
 
-export default withStyles(TablePageStyles)(Courses);
+const Courses = withStyles(TablePageStyles)(FullCourses);
+export default connect(mapStateToProps)(Courses);

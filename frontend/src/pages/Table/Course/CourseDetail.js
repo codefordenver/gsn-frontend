@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector, connect } from 'react-redux';
 import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import {
@@ -14,17 +14,17 @@ import {
   CreateAttendanceTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
-
+import mapStateToProps from 'components/sharedStyles/Table/StateToProps';
 import { fetchCourseDetails } from '../../../state/CourseActions';
 
-function CourseDetail(props) {
+function FullCourseDetail(props) {
   const {
     classes: { striped, tHead, tRow, tableTitle, header },
-    match: { params }
   } = props;
+  const params = props.match;
   const { courseId } = params;
   const my_or_all = props.my_or_all;
-
+  const my_or_all_url = "/" + my_or_all;
   const dispatch = useDispatch();
 
   const courseDetail = useSelector(state => {
@@ -32,7 +32,7 @@ function CourseDetail(props) {
   });
 
   useEffect(() => {
-    dispatch(fetchCourseDetails({ accessLevel: 'my', courseId }));
+    dispatch(fetchCourseDetails({ accessLevel: my_or_all, courseId }));
   }, [dispatch, courseId]);
 
   if (!courseDetail) {
@@ -57,7 +57,7 @@ function CourseDetail(props) {
             data = {gradeSet} 
             tRow = {tRow} 
             striped = {striped}
-            my_or_all_link = {my_or_all} />
+            my_or_all_link = {my_or_all_url} />
   );
 
   const attendanceTable = (
@@ -67,7 +67,7 @@ function CourseDetail(props) {
             data = {attendanceSet} 
             tRow = {tRow} 
             striped = {striped} 
-            my_or_all_link = {my_or_all}/>
+            my_or_all_link = {my_or_all_url}/>
   );
 
   const studentTable = (
@@ -77,7 +77,7 @@ function CourseDetail(props) {
             data = {studentSet} 
             tRow = {tRow} 
             striped = {striped} 
-            my_or_all_link = {my_or_all}/>
+            my_or_all_link = {my_or_all_url}/>
   );
 
   return (
@@ -85,7 +85,7 @@ function CourseDetail(props) {
           <Typography className={header} component="h1" variant="h4">{courseName}</Typography>
           <DetailItem k="Course Code" val={courseCode} />
           <DetailItem k="Subject" val={courseSubject} />
-          <DetailLink k="School" val={schoolName} link={my_or_all + `/school/${schoolId}`} />
+          <DetailLink k="School" val={schoolName} link={my_or_all_url + `/school/${schoolId}`} />
 
           <CreateTableHeader
             headerClassStyle = {tableTitle}
@@ -104,9 +104,10 @@ function CourseDetail(props) {
   );
 }
 
-CourseDetail.propTypes = {
+FullCourseDetail.propTypes = {
   classes: PropTypes.object,
   match: PropTypes.object
 };
 
-export default withStyles(TablePageStyles)(CourseDetail);
+const CourseDetail = withStyles(TablePageStyles)(FullCourseDetail);
+export default connect(mapStateToProps)(CourseDetail);

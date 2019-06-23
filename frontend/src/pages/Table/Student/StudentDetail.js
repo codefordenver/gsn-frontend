@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, connect } from 'react-redux';
 import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-
 import {
   DetailLink,
-  DetailItem,
-  DetailTable
+  DetailItem
 } from 'components/sharedStyles/Table/DetailStyles';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
@@ -17,13 +15,15 @@ import {
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 import { fetchStudent } from '../../../state/StudentActions';
+import mapStateToProps from 'components/sharedStyles/Table/StateToProps';
 
-function StudentDetail(props) {
+function FullStudentDetail(props) {
   const {
-    classes: { header },
-    match: { params }
+    classes: { header }
   } = props;
   const my_or_all = props.my_or_all;
+  const my_or_all_url = "/" + my_or_all;
+  const params = props.match
   
   const {
     classes: { striped, tHead, tRow, tableTitle }
@@ -35,7 +35,7 @@ function StudentDetail(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchStudent({ accessLevel: 'all', studentId }));
+    dispatch(fetchStudent({ accessLevel: my_or_all, studentId }));
     setLoading(false);
   }, [dispatch, studentId]);
 
@@ -65,7 +65,7 @@ function StudentDetail(props) {
             data = {gradeSet} 
             tRow = {tRow} 
             striped = {striped}
-            my_or_all_link = {my_or_all} />
+            my_or_all_link = {my_or_all_url} />
   );
 
   const attendanceTable = (
@@ -75,7 +75,7 @@ function StudentDetail(props) {
             data = {attendanceSet} 
             tRow = {tRow} 
             striped = {striped} 
-            my_or_all_link = {my_or_all}/>
+            my_or_all_link = {my_or_all_url}/>
   );
 
   const behaviorTable = (
@@ -85,11 +85,10 @@ function StudentDetail(props) {
             data = {behaviorSet} 
             tRow = {tRow} 
             striped = {striped} 
-            my_or_all_link = {my_or_all}/>
+            my_or_all_link = {my_or_all_url}/>
   );
 
   return (
-<<<<<<< HEAD
       <div>
         
           <Typography className={header} component="h1" variant="h4">{studentName}</Typography>
@@ -99,7 +98,7 @@ function StudentDetail(props) {
           <DetailItem k="Year" val={studentYear} />
           <DetailItem k="Term" val={studentTerm} />
           <DetailItem k="State Id" val={stateId} />
-          <DetailLink k="School" val={school} link={my_or_all + `/school/${schoolId}`} />
+          <DetailLink k="School" val={school} link={my_or_all_url + `/school/${schoolId}`} />
           
           <CreateTableHeader
             title = "Grades" 
@@ -120,45 +119,15 @@ function StudentDetail(props) {
             haveCreateSaveButtonBool={true}
             /> 
 
-=======
-    <div>
-      <Typography className={header} component="h1" variant="h4">
-        {studentName}
-      </Typography>
-      <DetailItem k="Gender" val={gender} />
-      <DetailItem k="Birthdate" val={birthdate} />
-      <DetailItem k="Grade" val={grade} />
-      <DetailItem k="Year" val={studentYear} />
-      <DetailItem k="Term" val={studentTerm} />
-      <DetailItem k="State Id" val={stateId} />
-      <DetailLink k="School" val={school} link={`/school/${schoolId}`} />
-
-      <CreateTableHeader
-        title="Grades"
-        table={gradeTable}
-        headerClassStyle={tableTitle}
-      />
-
-      <CreateTableHeader
-        title="Attendance"
-        table={attendanceTable}
-        headerClassStyle={tableTitle}
-      />
-
-      <CreateTableHeader
-        title="Behavior"
-        table={behaviorTable}
-        headerClassStyle={tableTitle}
-        haveCreateSaveButtonBool={true}
-      />
->>>>>>> 91629fc076cc1281116bd274aa69ba4ce1c666aa
     </div>
   );
 }
 
-StudentDetail.propTypes = {
+FullStudentDetail.propTypes = {
   classes: PropTypes.object,
   match: PropTypes.object
 };
 
-export default withStyles(TablePageStyles)(StudentDetail);
+
+const StudentDetail = withStyles(TablePageStyles)(FullStudentDetail);
+export default connect(mapStateToProps)(StudentDetail);

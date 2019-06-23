@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector, connect } from 'react-redux';
 import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { DetailLink } from 'components/sharedStyles/Table/DetailStyles';
@@ -13,17 +13,17 @@ import {
   CreateBehaviorTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
-
+import mapStateToProps from 'components/sharedStyles/Table/StateToProps';
 import { fetchSchoolDetails } from '../../../state/SchoolActions';
 
-function SchoolDetail(props) {
+function FullSchoolDetail(props) {
   const {
     classes: { header, striped, tHead, tRow, tableTitle },
-    match: { params }
   } = props;
+  const params = props.match;
   const { schoolId } = params;
   const my_or_all = props.my_or_all;
-
+  const my_or_all_url = "/" + my_or_all;
   const dispatch = useDispatch();
 
   const schoolDetail = useSelector(state => {
@@ -31,7 +31,7 @@ function SchoolDetail(props) {
   });
 
   useEffect(() => {
-    dispatch(fetchSchoolDetails({ accessLevel: 'my', schoolId }));
+    dispatch(fetchSchoolDetails({ accessLevel: my_or_all, schoolId }));
   }, [dispatch, schoolId]);
 
   if (!schoolDetail) {
@@ -56,7 +56,7 @@ function SchoolDetail(props) {
             data = {gradeSet} 
             tRow = {tRow} 
             striped = {striped}
-            my_or_all_link = {my_or_all} />
+            my_or_all_link = {my_or_all_url} />
   );
 
   const attendanceTable = (
@@ -66,7 +66,7 @@ function SchoolDetail(props) {
             data = {attendanceSet} 
             tRow = {tRow} 
             striped = {striped} 
-            my_or_all_link = {my_or_all}/>
+            my_or_all_link = {my_or_all_url}/>
   );
 
   const behaviorTable = (
@@ -76,7 +76,7 @@ function SchoolDetail(props) {
             data = {behaviorSet} 
             tRow = {tRow} 
             striped = {striped} 
-            my_or_all_link = {my_or_all}/>
+            my_or_all_link = {my_or_all_url}/>
   );
 
   const courseTable = (
@@ -86,7 +86,7 @@ function SchoolDetail(props) {
             data = {courseSet} 
             tRow = {tRow} 
             striped = {striped} 
-            my_or_all_link = {my_or_all}/>
+            my_or_all_link = {my_or_all_url}/>
   );
 
   const studentTable = (
@@ -96,13 +96,13 @@ function SchoolDetail(props) {
             data = {studentSet} 
             tRow = {tRow} 
             striped = {striped} 
-            my_or_all_link = {my_or_all}/>
+            my_or_all_link = {my_or_all_url}/>
   );
 
   return (
       <div>
           <Typography className={header} component="h1" variant="h4">{schoolName}</Typography>
-          <DetailLink k="District Name" val={districtName} link={my_or_all + `/district/${districtId}`} />
+          <DetailLink k="District Name" val={districtName} link={my_or_all_url + `/district/${districtId}`} />
 
           <CreateTableHeader
             headerClassStyle = {tableTitle}
@@ -130,9 +130,10 @@ function SchoolDetail(props) {
   );
 }
 
-SchoolDetail.propTypes = {
+FullSchoolDetail.propTypes = {
   classes: PropTypes.object,
   match: PropTypes.object
 };
 
-export default withStyles(TablePageStyles)(SchoolDetail);
+const SchoolDetail = withStyles(TablePageStyles)(FullSchoolDetail);
+export default connect(mapStateToProps)(SchoolDetail);

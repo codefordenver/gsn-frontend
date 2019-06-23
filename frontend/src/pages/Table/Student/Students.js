@@ -1,31 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, connect } from 'react-redux';
+import { useDispatch, connect, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Typography, withStyles } from '@material-ui/core';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateStudentTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+import { fetchStudents } from 'state/StudentActions'
+import mapStateToProps from 'components/sharedStyles/Table/StateToProps';
 
-
-const mapStateToProps = (state, ownProps) => {
-  const props = state.props;
-  const my_or_all = ownProps.my_or_all;
-  return {
-    props, my_or_all
-  };
-};
-
-function Students(props,otherProps) {
+function FullStudents(props) {
   const {
     classes: { header, striped, tHead, tRow }
   } = props;
 
+  const my_or_all = props.my_or_all;
+  const my_or_all_url = "/" + my_or_all;
   const [loading, setLoading] = useState(true);
-  const students = props.selector;
+  const students = useSelector(state => state.students.students);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchStudents({ accessLevel: 'my' }));
+    dispatch(fetchStudents({ accessLevel: my_or_all }));
     setLoading(false);
   }, [dispatch]);
 
@@ -33,12 +28,12 @@ function Students(props,otherProps) {
     return loadingJSX('Students');
   }
 
-  const my_or_all = props.my_or_all;
+  
 
   return (
     <div>
       <Typography variant="h4" component="h1" className={header}>
-        My Students
+         { my_or_all + " Students" }
       </Typography>
       < CreateStudentTable
         header = {header}
@@ -46,14 +41,14 @@ function Students(props,otherProps) {
         data = {students}
         tRow = {tRow}
         striped = {striped} 
-        my_or_all_link = {my_or_all}/>
+        my_or_all_link = {"/" + my_or_all_url}/>
     </div>
   );
 }
 
-Students.propTypes = {
+FullStudents.propTypes = {
   classes: PropTypes.object
 };
 
-const FullStudents = withStyles(TablePageStyles)(Students);
-export default connect(mapStateToProps)(FullStudents);
+const Students = withStyles(TablePageStyles)(FullStudents);
+export default connect(mapStateToProps)(Students);
