@@ -22,30 +22,24 @@ function Students(props) {
   }, [dispatch]);
 
   if (loading) {
-    return (
-      loadingJSX('Students'));
+    return loadingJSX('Students');
   }
 
   return (
-      <div>
-          <Typography
-            variant="h4"
-            component="h1"
-            className={header}
-          >
-            My Students
-          </Typography>
-          <CreateStudentTable
-            header={header}
-            tHead={tHead}
-            data={students}
-            tRow={tRow}
-            striped={striped}
-          />
-      </div>
+    <div>
+      <Typography variant="h4" component="h1" className={header}>
+        My Students
+      </Typography>
+      <CreateStudentTable
+        header={header}
+        tHead={tHead}
+        data={students}
+        tRow={tRow}
+        striped={striped}
+      />
+    </div>
   );
 }
-
 
 Students.propTypes = {
   classes: PropTypes.object
