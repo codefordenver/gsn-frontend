@@ -6,45 +6,48 @@ export const setLoading = createAction(types.SET_LOADING);
 
 const getStudents = students => ({
   type: types.SET_STUDENTS,
-  payload: students,
+  payload: students
 });
 
 const getStudent = student => ({
   type: types.SET_STUDENT,
-  payload: student,
+  payload: student
 });
 
-export const fetchStudents = (students) => {
-  return (dispatch) => {
-    return fetch('http://gsndev.com/gsndb/student/', {
+export const fetchStudents = students => {
+  return dispatch => {
+    return fetch('http://gsndev.com/gsndb/all/student/', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
-        Authorization: `JWT ${localStorage.token}`,
-      },
+        Authorization: `JWT ${localStorage.token}`
+      }
     })
       .then(response => response.json())
-      .then((allStudents) => {
+      .then(allStudents => {
         dispatch(getStudents(allStudents));
       })
-      .catch(error => (error));
+      .catch(error => error);
   };
 };
 
-
-export const fetchStudent = (studentId) => {
-  return (dispatch) => {
-    return fetch(`http://gsndev.com/gsndb/student/${studentId}`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        Authorization: `JWT ${localStorage.token}`,
-      },
-    })
-      .then(response => response.json())
-      .then((student) => {
-        dispatch(getStudent(student));
+export const fetchStudent = ({ accessLevel, studentId }) => {
+  return dispatch => {
+    return fetch(
+      `http://gsndev.com/gsndb/${accessLevel}/student/${studentId}`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `JWT ${localStorage.token}`
+        }
       })
-      .catch(error => (error));
+      .then(response => {
+        return response.json();
+      })
+      .then(student => {
+        dispatch(getStudent(student['0']));
+      })
+      .catch(error => error);
   };
 };
