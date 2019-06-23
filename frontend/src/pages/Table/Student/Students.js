@@ -17,7 +17,7 @@ function Students(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchStudents());
+    dispatch(fetchStudents({ accessLevel: 'my' }));
     setLoading(false);
   }, [dispatch]);
 
