@@ -36,35 +36,50 @@ function ProgramDetail(props) {
 
   const { programName, studentSet, courseSet, gradeSet } = programDetail;
 
-  const gradeTable = (
-    <CreateGradeTable
-      header={header}
-      tHead={tHead}
-      data={gradeSet}
-      tRow={tRow}
-      striped={striped}
-    />
-  );
+  const gradeTable = () => {
+    if (!gradeSet) {
+      return <p>Data not found</p>;
+    }
+    return (
+      <CreateGradeTable
+        header={header}
+        tHead={tHead}
+        data={gradeSet}
+        tRow={tRow}
+        striped={striped}
+      />
+    );
+  };
 
-  const courseTable = (
-    <CreateCourseTable
-      header={header}
-      tHead={tHead}
-      data={courseSet}
-      tRow={tRow}
-      striped={striped}
-    />
-  );
+  const courseTable = () => {
+    if (!courseSet) {
+      return <p>Data not found</p>;
+    }
+    return (
+      <CreateCourseTable
+        header={header}
+        tHead={tHead}
+        data={courseSet}
+        tRow={tRow}
+        striped={striped}
+      />
+    );
+  };
 
-  const studentTable = (
-    <CreateStudentTable
-      header={header}
-      tHead={tHead}
-      data={studentSet}
-      tRow={tRow}
-      striped={striped}
-    />
-  );
+  const studentTable = () => {
+    if (!studentSet) {
+      return <p>Data not found</p>;
+    }
+    return (
+      <CreateStudentTable
+        header={header}
+        tHead={tHead}
+        data={studentSet}
+        tRow={tRow}
+        striped={striped}
+      />
+    );
+  };
 
   return (
     <div>
@@ -75,17 +90,17 @@ function ProgramDetail(props) {
       <CreateTableHeader
         headerClassStyle={tableTitle}
         title="Grades"
-        table={gradeTable}
+        table={gradeTable()}
       />
       <CreateTableHeader
         headerClassStyle={tableTitle}
         title="Course"
-        table={courseTable}
+        table={courseTable()}
       />
       <CreateTableHeader
         headerClassStyle={tableTitle}
         title="Student"
-        table={studentTable}
+        table={studentTable()}
       />
     </div>
   );
