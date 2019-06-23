@@ -17,7 +17,7 @@ function Programs(props) {
 
   const programs = useSelector(state => state.programs.programs);
   useEffect(() => {
-    dispatch(fetchPrograms());
+    dispatch(fetchPrograms({ accessLevel: 'my' }));
   }, [dispatch]);
 
   if (!programs) {
@@ -27,7 +27,7 @@ function Programs(props) {
   return (
     <div>
       <Typography variant="h4" component="h1" className={header}>
-        All Programs
+        My Programs
       </Typography>
       <CreateProgramTable
         header={header}

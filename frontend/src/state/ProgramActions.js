@@ -13,9 +13,9 @@ const setProgramDetails = data => ({
   payload: data
 });
 
-export const fetchPrograms = () => {
+export const fetchPrograms = ({ accessLevel }) => {
   return dispatch => {
-    return fetch('http://gsndev.com/gsndb/program/', {
+    return fetch(`http://gsndev.com/gsndb/${accessLevel}/program/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -30,18 +30,23 @@ export const fetchPrograms = () => {
   };
 };
 
-export const fetchProgramDetails = programId => {
+export const fetchProgramDetails = ({ accessLevel, programId }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/program/${programId}`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        Authorization: `JWT ${localStorage.token}`
+    return fetch(
+      `http://gsndev.com/gsndb/${accessLevel}/program/${programId}`,
+      {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `JWT ${localStorage.token}`
+        }
       }
-    })
-      .then(response => response.json())
+    )
+      .then(response => {
+        return response.json();
+      })
       .then(s => {
-        dispatch(setProgramDetails(s));
+        dispatch(setProgramDetails(s['0']));
       })
       .catch(error => error);
   };

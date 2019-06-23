@@ -27,7 +27,7 @@ function ProgramDetail(props) {
   });
 
   useEffect(() => {
-    dispatch(fetchProgramDetails(programId));
+    dispatch(fetchProgramDetails({ accessLevel: 'my', programId }));
   }, [dispatch, programId]);
 
   if (!programDetail) {
