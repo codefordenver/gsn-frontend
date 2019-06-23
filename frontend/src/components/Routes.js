@@ -27,9 +27,6 @@ import { MyStudents, AllStudents,
 
 import ViewAllDataHomepage from 'pages/Homepages/ViewAllDataHomepage';
 
-
-
-
 import PrivateRoute from './PrivateRoute';
 // username: user.get('username'),
 // loading: user.get('loading'),
@@ -81,13 +78,3 @@ export default function () {
   );
 }
 
-/* <div>
-              {isLoggedIn && <Nav navItems={navItems} />} */
-/*
-        <h3>
-            {isLoggedIn && (
-            <p>
-              Hello {username}
-            </p>
-            )}
-        </h3> */

@@ -1,41 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import {
- Typography, withStyles,
-} from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { getCourseDetail } from 'services/courseServices';
-import { DetailLink, DetailItem} from 'components/sharedStyles/Table/DetailStyles';
+import {
+  DetailLink,
+  DetailItem
+} from 'components/sharedStyles/Table/DetailStyles';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
-import { CreateGradeTable, CreateStudentTable, CreateAttendanceTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+import {
+  CreateGradeTable,
+  CreateStudentTable,
+  CreateAttendanceTable
+} from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
-
-
+import { fetchCourseDetails } from '../../../state/CourseActions';
 
 function CourseDetail(props) {
-  const my_or_all = props.my_or_all;
-  const [courseDetail, setCourseDetail] = useState({});
-  const [loading, setLoading] = useState(true);
   const {
-    classes: {
-       striped, tHead, tRow, tableTitle
-    },
+    classes: { striped, tHead, tRow, tableTitle, header },
+    match: { params }
   } = props;
-  const { classes: { header }, match: { params } } = props;
-  const courseIdParam = params;
+  const { courseId } = params;
+  const my_or_all = props.my_or_all;
+
+  const dispatch = useDispatch();
+
+  const courseDetail = useSelector(state => {
+    return state.courses.course;
+  });
 
   useEffect(() => {
-    console.log('useEffect ran in CourseDetail', courseIdParam);
-    getCourseDetail(courseIdParam).then((s) => {
-      setCourseDetail(s);
-      setLoading(false);
-    });
-  }, []);
+    dispatch(fetchCourseDetails({ accessLevel: 'my', courseId }));
+  }, [dispatch, courseId]);
 
-  if (loading) {
-    return (
-    loadingJSX('Course Detail'));
+  if (!courseDetail) {
+    return loadingJSX('Course Detail');
   }
 
   const {
@@ -103,11 +104,9 @@ function CourseDetail(props) {
   );
 }
 
-
-
 CourseDetail.propTypes = {
   classes: PropTypes.object,
-  match: PropTypes.object,
+  match: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(CourseDetail);

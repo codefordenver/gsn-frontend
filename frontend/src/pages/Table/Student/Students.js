@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Typography } from '@material-ui/core';
-
-import {
-  withStyles,
-} from '@material-ui/core';
-
+import { Typography, withStyles } from '@material-ui/core';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateStudentTable } from 'components/sharedStyles/Table/CreateTablesStyle';
@@ -22,9 +17,7 @@ const mapStateToProps = (state, ownProps) => {
 
 function Students(props,otherProps) {
   const {
-    classes: {
-      header, striped, tHead, tRow,
-    },
+    classes: { header, striped, tHead, tRow }
   } = props;
 
   const [loading, setLoading] = useState(true);
@@ -32,23 +25,19 @@ function Students(props,otherProps) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(props.fetchData);
+    dispatch(fetchStudents({ accessLevel: 'my' }));
     setLoading(false);
-  }, []);
+  }, [dispatch]);
 
   if (loading) {
-    return (
-    loadingJSX('Students'));
+    return loadingJSX('Students');
   }
 
   const my_or_all = props.my_or_all;
 
   return (
     <div>
-      <Typography
-        variant="h4"
-        component="h1"
-        className={header}>
+      <Typography variant="h4" component="h1" className={header}>
         My Students
       </Typography>
       < CreateStudentTable
@@ -62,9 +51,8 @@ function Students(props,otherProps) {
   );
 }
 
-
 Students.propTypes = {
-  classes: PropTypes.object,
+  classes: PropTypes.object
 };
 
 const FullStudents = withStyles(TablePageStyles)(Students);

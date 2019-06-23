@@ -1,53 +1,52 @@
 import React, { useEffect, useState } from 'react';
-import {
-   Typography, withStyles,
-} from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-
-import { getSchoolDetail } from 'services/schoolServices';
 import { DetailLink } from 'components/sharedStyles/Table/DetailStyles';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
-import { CreateGradeTable, CreateAttendanceTable, CreateStudentTable, 
-  CreateCourseTable, CreateBehaviorTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+import {
+  CreateGradeTable,
+  CreateAttendanceTable,
+  CreateStudentTable,
+  CreateCourseTable,
+  CreateBehaviorTable
+} from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
-
+import { fetchSchoolDetails } from '../../../state/SchoolActions';
 
 function SchoolDetail(props) {
-  const my_or_all = props.my_or_all;
-  const [schoolDetail, setSchoolDetail] = useState({});
-  const [loading, setLoading] = useState(true);
-  const { classes: { header }, match: { params } } = props;
   const {
-    classes: {
-       striped, tHead, tRow,tableTitle
-    },
+    classes: { header, striped, tHead, tRow, tableTitle },
+    match: { params }
   } = props;
-  const schoolIdParam = params;
+  const { schoolId } = params;
+  const my_or_all = props.my_or_all;
+
+  const dispatch = useDispatch();
+
+  const schoolDetail = useSelector(state => {
+    return state.schools.school;
+  });
 
   useEffect(() => {
-    console.log('useEffect ran in SchoolDetail', schoolIdParam);
-    getSchoolDetail(schoolIdParam).then((s) => {
-      setSchoolDetail(s);
-      setLoading(false);
-    });
-  }, []);
+    dispatch(fetchSchoolDetails({ accessLevel: 'my', schoolId }));
+  }, [dispatch, schoolId]);
 
-  if (loading) {
-    return (
-    loadingJSX('School Detail'));
+  if (!schoolDetail) {
+    return loadingJSX('School Detail');
   }
 
   const {
-      schoolName,
-      districtId,
-      districtName,
-      studentSet,
-      courseSet,
-      gradeSet,
-      attendanceSet,
-      behaviorSet
+    schoolName,
+    districtId,
+    districtName,
+    studentSet,
+    courseSet,
+    gradeSet,
+    attendanceSet,
+    behaviorSet
   } = schoolDetail;
 
   const gradeTable = (
@@ -131,11 +130,9 @@ function SchoolDetail(props) {
   );
 }
 
-
-
 SchoolDetail.propTypes = {
   classes: PropTypes.object,
-  match: PropTypes.object,
+  match: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(SchoolDetail);

@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-    Link as StyledLink,
-    Table, TableBody, TableCell, TableHead, TableRow,
-  } from '@material-ui/core';
-
-
-
+  Link as StyledLink,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow
+} from '@material-ui/core';
 
 function CreateGradeTable(props) {
     const my_or_all = props.my_or_all_link;
@@ -59,9 +60,8 @@ function CreateGradeTable(props) {
             </TableBody>
         </Table>
     </div>
-    );
-
-        }
+  );
+}
 
 function CreateStudentTable(props) {
     const my_or_all = props.my_or_all_link;
@@ -102,10 +102,8 @@ function CreateStudentTable(props) {
             </TableBody>
         </Table>
     </div>
-    );
-
-        }
-
+  );
+}
 
 function CreateAttendanceTable(props) {
     const my_or_all = props.my_or_all_link;
@@ -158,8 +156,8 @@ function CreateAttendanceTable(props) {
             </TableBody>
         </Table>
     </div>
-    );
-        }
+  );
+}
 
 function CreateCourseTable(props) {
     const my_or_all = props.my_or_all_link;
@@ -207,8 +205,8 @@ function CreateCourseTable(props) {
             </TableBody>
         </Table>
     </div>
-    );
-        }
+  );
+}
 
 function CreateDistrictTable(props) {
     const my_or_all = props.my_or_all_link;
@@ -251,8 +249,8 @@ function CreateDistrictTable(props) {
             </TableBody>
         </Table>
     </div>
-    );
-        }
+  );
+}
 
 function CreateProgramTable(props) {
     const my_or_all = props.my_or_all_link;
@@ -286,8 +284,8 @@ function CreateProgramTable(props) {
             </TableBody>
         </Table>
     </div>
-    );
-        }
+  );
+}
 
 function CreateSchoolTable(props) {
     const my_or_all = props.my_or_all_link;
@@ -331,9 +329,8 @@ function CreateSchoolTable(props) {
             </TableBody>
         </Table>
     </div>
-    );
-        }
-
+  );
+}
 
 function CreateBehaviorTable(props) {
     const my_or_all = props.my_or_all_link;
@@ -377,9 +374,16 @@ function CreateBehaviorTable(props) {
             </TableBody>
         </Table>
     </div>
-    );
-        }
+  );
+}
 
-
-
-export { CreateGradeTable, CreateSchoolTable, CreateStudentTable, CreateBehaviorTable, CreateProgramTable, CreateAttendanceTable, CreateCourseTable, CreateDistrictTable };
+export {
+  CreateGradeTable,
+  CreateSchoolTable,
+  CreateStudentTable,
+  CreateBehaviorTable,
+  CreateProgramTable,
+  CreateAttendanceTable,
+  CreateCourseTable,
+  CreateDistrictTable
+};

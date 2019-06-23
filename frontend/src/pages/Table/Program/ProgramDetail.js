@@ -1,48 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Typography, withStyles,
-} from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-
-import { getProgramDetail } from 'services/programServices';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
-import { CreateGradeTable, CreateStudentTable, CreateCourseTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+import {
+  CreateGradeTable,
+  CreateStudentTable,
+  CreateCourseTable
+} from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
-
+import { fetchProgramDetails } from '../../../state/ProgramActions';
 
 function ProgramDetail(props) {
-  const my_or_all = props.my_or_all;
-  const [programDetail, setProgramDetail] = useState({});
-  const [loading, setLoading] = useState(true);
   const {
-    classes: {
-       striped, tHead, tRow, tableTitle
-    },
+    classes: { striped, tHead, tRow, tableTitle, header },
+    match: { params }
   } = props;
-  const { classes: { header }, match: { params } } = props;
-  const programIdParam = params;
+  const { programId } = params;
+  const my_or_all = props.my_or_all;
+
+  const dispatch = useDispatch();
+
+  const programDetail = useSelector(state => {
+    return state.programs.program;
+  });
 
   useEffect(() => {
-    console.log('useEffect ran in ProgramDetail', programIdParam);
-    getProgramDetail(programIdParam).then((s) => {
-      setProgramDetail(s);
-      setLoading(false);
-    });
-  }, []);
-
-  if (loading) {
-    return (
-    loadingJSX('Program Detail'));
-  }
-
-  const {
-    programName,
-    studentSet,
-    courseSet,
-    gradeSet
-  } = programDetail;
+    dispatch(fetchProgramDetails({ accessLevel: 'my', programId }));
+  }, [dispatch, programId]);
 
   const gradeTable = (
     < CreateGradeTable 
@@ -99,11 +86,9 @@ function ProgramDetail(props) {
   );
 }
 
-
-
 ProgramDetail.propTypes = {
   classes: PropTypes.object,
-  match: PropTypes.object,
+  match: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(ProgramDetail);
