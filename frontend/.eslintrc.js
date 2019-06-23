@@ -1,5 +1,5 @@
 module.exports = {
-  "extends": ["airbnb", "plugin:jest/recommended", "react-app"],
+  "extends": ["airbnb", "plugin:jest/recommended", "react-app", "plugin:prettier/recommended"],
   "parser": "babel-eslint",
   "env": {
     "browser": true,
@@ -25,6 +25,7 @@ module.exports = {
     "react/no-string-refs": 0,
     "react/no-multi-comp": 0,
     "react/no-access-state-in-setstate": 0,
+    "react/jsx-indent": "none",
     "jsx-ally/no-static-element-interactions": 0,
     "jsx-ally/click-events-have-key-events": 0,
     "import/prefer-default-export": 0,
@@ -39,6 +40,7 @@ module.exports = {
     "linebreak-style": 0,
     "lines-between-class-members": 0,
     "camelcase": 0,
-    "strict": 0
+    "strict": 0,
+    "prettier/prettier": ["error", {"singleQuote": true}]
   }
 }
