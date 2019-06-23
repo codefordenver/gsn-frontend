@@ -17,141 +17,146 @@ import SchoolDetail from 'pages/Table/School/SchoolDetail';
 const my_url = "/my";
 const all_url = "/all";
 
+const my_const = "my";
+const all_const = "all";
+
 function MyStudents(props) {
     return(
-        <Students 
-            my_or_all={my_url}
-            fetchData={fetchStudents()}
-            selector={useSelector(state => state.students.students)}
-        />
+        <Students my_or_all={ my_const } />
     );
 }
 
 function AllStudents(props) {
     return(
-        <Students 
-            fetchData={fetchStudents()}
-            selector={useSelector(state => state.students.students)}
-            my_or_all={all_url}
-        />
+        <Students my_or_all={ all_const } />
     );
 }
 
 function MyStudentDetail(props) {
     return(
-        <StudentDetail match={props.match.params}
-            my_or_all={my_url}/>
+        <StudentDetail 
+            match={props.match.params}
+            my_or_all={my_const} />
     );
 }
 
 function AllStudentDetail(props) {
     return(
-        <StudentDetail match={props.match.params}
-            my_or_all={all_url}/>
+        <StudentDetail 
+            match={props.match.params}
+            my_or_all={all_const} />
     );
 }
 
 function MySchools(props) {
     return(
-        <Schools my_or_all={my_url}/>
+        <Schools my_or_all={ my_const }  />
     );
 }
 
 function AllSchools(props) {
     return(
-        <Schools my_or_all={all_url}/>
+        <Schools my_or_all={ all_const } />
     );
 }
 
 function MySchoolDetail(props) {
     return(
-        <SchoolDetail match={props.match.params}
-            my_or_all={my_url}/>
+        <SchoolDetail  
+            match={props.match.params}
+            my_or_all={my_const}/>
     );
 }
 
 function AllSchoolDetail(props) {
     return(
-        <SchoolDetail match={props.match.params}
-            my_or_all={all_url}/>
+        <SchoolDetail 
+            match={props.match.params}
+            my_or_all={all_const} />
     );
 }
 
 function MyCourses(props) {
     return(
-        <Courses my_or_all={my_url}/>
+        <Courses my_or_all={ my_const } />
     );
 }
 
 function AllCourses(props) {
     return(
-        <Courses my_or_all={all_url}/>
+        <Courses my_or_all={ all_const } />
     );
 }
 
 function MyCourseDetail(props) {
     return(
-        <CourseDetail match={props.match.params}
-            my_or_all={my_url}/>
+        <CourseDetail  
+            match={props.match.params}
+            my_or_all={my_const} />
     );
 }
 
 function AllCourseDetail(props) {
     return(
-        <CourseDetail match={props.match.params}
-            my_or_all={all_url}/>
+        <CourseDetail 
+            match={props.match.params}
+            my_or_all={all_const} />
     );
 }
 
 function MyDistricts(props) {
     return(
-        <Districts my_or_all={my_url}/>
+        <Districts my_or_all={ my_const } />
     );
 }
 
 function AllDistricts(props) {
     return(
-        <Districts my_or_all={all_url}/>
+        <Districts my_or_all={ all_const } />
     );
 }
 
 function MyDistrictDetail(props) {
     return(
-        <DistrictDetail match={props.match.params}
-            my_or_all={my_url}/>
+        <DistrictDetail  
+            match={props.match.params}
+            my_or_all={my_const} />
     );
 }
 
 function AllDistrictDetail(props) {
     return(
-        <DistrictDetail match={props.match.params}
-            my_or_all={all_url}/>
+        <DistrictDetail  
+            match={props.match.params}
+            my_or_all={all_const} />
     );
 }
 
 function MyPrograms(props) {
     return(
-        <Programs my_or_all={my_url}/>
+        <Programs my_or_all={ my_const } />
     );
 }
 
 function AllPrograms(props) {
     return(
-        <Programs my_or_all={all_url}/>
+        <Programs my_or_all={ all_const } />
     );
 }
 
 function MyProgramDetail(props) {
     return(
-        <ProgramDetail match={props.match.params}
-            my_or_all={my_url}/>
+        <ProgramDetail  
+            match={props.match.params}
+            my_or_all={my_const} />
     );
 }
 
 function AllProgramDetail(props) {
     return(
-        <ProgramDetail match={props.match.params}
-        my_or_all={all_url}/>
+        <ProgramDetail  
+            match={props.match.params}
+            my_or_all={all_const} />
     );
 }
 
