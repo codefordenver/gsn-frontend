@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { getSchools } from 'services/schoolServices';
 import PropTypes from 'prop-types';
 
-import { withStyles,
+import { withStyles, Select, MenuItem
 } from '@material-ui/core';
 
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
-
 
 
 function CSVParser(props) {
@@ -27,16 +26,23 @@ function CSVParser(props) {
     return (
     loadingJSX('Schools'));
   }
-
+  
 
   return (
-    <div>Hello World!</div>
+    <div>
+      <Select>
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+
+      </ Select>
+    </div>
 
   );
 }
 
 
-Schools.propTypes = {
+CSVParser.propTypes = {
   classes: PropTypes.object,
 };
 
