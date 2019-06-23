@@ -2,13 +2,15 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 import user from 'state/UserReducer';
 import studentReducer from './studentReducer';
-import programReudcer from './ProgramReducer';
+import programReducer from './ProgramReducer';
+import courseReducer from './CourseReducer';
 
 const store = createStore(
   combineReducers({
     user,
     students: studentReducer,
-    programs: programReudcer
+    programs: programReducer,
+    courses: courseReducer
   }),
   compose(
     applyMiddleware(thunk),
