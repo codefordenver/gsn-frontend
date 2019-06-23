@@ -2,16 +2,8 @@ import React from 'react';
 import { Switch, Route, Router } from 'react-router-dom';
 import history from 'utils/history';
 import Layout from 'components/layouts/Default';
-// import Nav from 'components/Nav';
-import HomePage from 'components/HomePage';
 import LoginContainer from 'pages/Login/LoginContainer';
 import SignupContainer from 'pages/Register';
-
-import DistrictDetail from 'pages/Table/District/DistrictDetail';
-import ProgramDetail from 'pages/Table/Program/ProgramDetail';
-import StudentDetail from 'pages/Table/Student/StudentDetail';
-import CourseDetail from 'pages/Table/Course/CourseDetail';
-import SchoolDetail from 'pages/Table/School/SchoolDetail';
 
 import { MyStudents, AllStudents, 
   MySchools, AllSchools,
@@ -26,6 +18,9 @@ import { MyStudents, AllStudents,
 
 
 import ViewAllDataHomepage from 'pages/Homepages/ViewAllDataHomepage';
+import ManageDataHomepage from 'pages/Homepages/ManageDataHomepage';
+
+import CSVParser from 'pages/ManageData/CSVParser/CsvParser';
 
 
 
@@ -44,6 +39,10 @@ export default function () {
               <Switch>
                   <Layout>
                       <PrivateRoute exact path="/" component={MyStudents} />
+                      <PrivateRoute exact path="/manage-data" component={ManageDataHomepage} />
+                      <PrivateRoute exact path="/all" component={ViewAllDataHomepage} />
+                      
+                      <PrivateRoute exact path="/manange-data/csvparser" component={CSVParser} />
 
                       <PrivateRoute exact path="/my/district" component={MyDistricts} />
                       <PrivateRoute exact path="/all/district" component={AllDistricts} />
@@ -70,8 +69,7 @@ export default function () {
                       <PrivateRoute exact path="/all/school/:schoolId" component={AllSchoolDetail} />
                       <PrivateRoute exact path="/my/school/:schoolId" component={MySchoolDetail} />
 
-                      <PrivateRoute exact path="/all" component={ViewAllDataHomepage} />
-                    >
+                      
 
                   </Layout>
               </Switch>
