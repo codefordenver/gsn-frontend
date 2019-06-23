@@ -1,9 +1,9 @@
 import * as types from './StudentConstants';
 
-const initialState = ({
+const initialState = {
   students: [],
-  student: [],
-});
+  student: []
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
