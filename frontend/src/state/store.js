@@ -5,6 +5,7 @@ import studentReducer from './studentReducer';
 import programReducer from './ProgramReducer';
 import courseReducer from './CourseReducer';
 import districtReducer from './DistrictReducer';
+import schoolReducer from './SchoolReducer';
 
 const store = createStore(
   combineReducers({
@@ -12,7 +13,8 @@ const store = createStore(
     students: studentReducer,
     programs: programReducer,
     courses: courseReducer,
-    districts: districtReducer
+    districts: districtReducer,
+    schools: schoolReducer
   }),
   compose(
     applyMiddleware(thunk),
