@@ -7,12 +7,9 @@ import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateStudentTable } from 'components/sharedStyles/Table/CreateTablesStyle';
 
-
 function Students(props) {
   const {
-    classes: {
-      header, striped, tHead, tRow,
-    },
+    classes: { header, striped, tHead, tRow }
   } = props;
 
   const [loading, setLoading] = useState(true);
@@ -22,7 +19,7 @@ function Students(props) {
   useEffect(() => {
     dispatch(fetchStudents());
     setLoading(false);
-  }, []);
+  }, [dispatch]);
 
   if (loading) {
     return (
@@ -51,7 +48,7 @@ function Students(props) {
 
 
 Students.propTypes = {
-  classes: PropTypes.object,
+  classes: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(Students);
