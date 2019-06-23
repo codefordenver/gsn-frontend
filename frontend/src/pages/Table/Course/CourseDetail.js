@@ -35,7 +35,7 @@ function CourseDetail(props) {
   }, [dispatch, courseId]);
 
   if (!courseDetail) {
-    return loadingJSX('Program Detail');
+    return loadingJSX('Course Detail');
   }
 
   const {

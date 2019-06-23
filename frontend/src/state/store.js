@@ -4,13 +4,15 @@ import user from 'state/UserReducer';
 import studentReducer from './studentReducer';
 import programReducer from './ProgramReducer';
 import courseReducer from './CourseReducer';
+import districtReducer from './DistrictReducer';
 
 const store = createStore(
   combineReducers({
     user,
     students: studentReducer,
     programs: programReducer,
-    courses: courseReducer
+    courses: courseReducer,
+    districts: districtReducer
   }),
   compose(
     applyMiddleware(thunk),
