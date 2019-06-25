@@ -11,7 +11,7 @@ import {
 
 function CreateGradeTable(props) {
     const my_or_all = props.my_or_all_link;
-    
+
     return (
         <div>
         <Table>
@@ -21,7 +21,7 @@ function CreateGradeTable(props) {
                     <TableCell className={props.tHead}>Course</TableCell>
                     <TableCell className={props.tHead}>Term</TableCell>
                     <TableCell className={props.tHead}>Grade</TableCell>
-                    <TableCell className={props.tHead}>Final</TableCell> 
+                    <TableCell className={props.tHead}>Final</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -305,7 +305,7 @@ function CreateSchoolTable(props) {
                         schoolId,
                         districtName,
                         districtId,
-                        
+
                     } = schoolDetail;
                     return (
                         <TableRow
