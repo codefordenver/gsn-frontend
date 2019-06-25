@@ -10,7 +10,7 @@ import { fetchSchools } from '../../../state/SchoolActions';
 
 function FullSchools(props) {
   const my_or_all = props.my_or_all;
-  const my_or_all_url = "/" + my_or_all;
+  const my_or_all_url = `/${my_or_all}`;
   const {
     classes: { header, striped, tHead, tRow }
   } = props;
@@ -19,7 +19,7 @@ function FullSchools(props) {
   const schools = useSelector(state => state.schools.schools);
   useEffect(() => {
     dispatch(fetchSchools({ accessLevel: my_or_all }));
-  }, [dispatch]);
+  }, [dispatch, my_or_all]);
 
   if (!schools) {
     return loadingJSX('Schools');
@@ -30,13 +30,14 @@ function FullSchools(props) {
       <Typography variant="h4" component="h1" className={header}>
         { my_or_all + " Schools"}
       </Typography>
-      < CreateSchoolTable 
-        header = {header} 
-        tHead = {tHead} 
-        data = {schools} 
-        tRow = {tRow} 
-        striped = {striped} 
-        my_or_all_link = {my_or_all_url}/>
+      <CreateSchoolTable
+        header={header}
+        tHead={tHead}
+        data={schools}
+        tRow={tRow}
+        striped={striped}
+        my_or_all_link={my_or_all_url}
+      />
     </div>
   );
 }
@@ -45,5 +46,5 @@ FullSchools.propTypes = {
   classes: PropTypes.object
 };
 
-const Schools = withStyles(TablePageStyles)(FullSchools);
-export default connect(mapStateToProps)(Schools);
+// const Schools = withStyles(TablePageStyles)(FullSchools);
+export default withStyles(TablePageStyles)(FullSchools);
