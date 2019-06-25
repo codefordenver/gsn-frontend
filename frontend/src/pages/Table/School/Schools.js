@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector, connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles, Typography } from '@material-ui/core';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateSchoolTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-import mapStateToProps from 'components/sharedStyles/Table/StateToProps';
 import { fetchSchools } from '../../../state/SchoolActions';
 
 function FullSchools(props) {
@@ -46,5 +45,4 @@ FullSchools.propTypes = {
   classes: PropTypes.object
 };
 
-// const Schools = withStyles(TablePageStyles)(FullSchools);
 export default withStyles(TablePageStyles)(FullSchools);
