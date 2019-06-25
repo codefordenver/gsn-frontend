@@ -1,36 +1,32 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector, connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-
-import { getDistrictDetail } from 'services/districtServices';
 import { DetailItem } from 'components/sharedStyles/Table/DetailStyles';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateSchoolTable } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
-import mapStateToProps from 'components/sharedStyles/Table/StateToProps';
 import { fetchDistrictDetails } from '../../../state/DistrictActions';
 
 function FullDistrictDetail(props) {
   const {
-    classes: { header, striped, tHead, tRow, tableTitle },
+    classes: { header, striped, tHead, tRow, tableTitle }
   } = props;
   const params = props.match;
   const { districtId } = params;
   const my_or_all = props.my_or_all;
-  const my_or_all_url = "/" + my_or_all;
+  const my_or_all_url = `/${my_or_all}`;
   const dispatch = useDispatch();
 
   const districtDetail = useSelector(state => {
     return state.districts.district;
   });
-
-  console.log(districtDetail);
+  // console.log(districtDetail);
 
   useEffect(() => {
     dispatch(fetchDistrictDetails({ accessLevel: my_or_all, districtId }));
-  }, [dispatch, districtId]);
+  }, [dispatch, districtId, my_or_all]);
 
   if (!districtDetail) {
     return loadingJSX('District Detail');
@@ -39,13 +35,14 @@ function FullDistrictDetail(props) {
   const { districtName, state, city, code, schoolSet } = districtDetail;
 
   const schoolTable = (
-    < CreateSchoolTable 
-            header = {header}
-            tHead = {tHead} 
-            data = {schoolSet} 
-            tRow = {tRow} 
-            striped = {striped} 
-            my_or_all_link = {my_or_all_url}/>
+    <CreateSchoolTable
+      header={header}
+      tHead={tHead}
+      data={schoolSet}
+      tRow={tRow}
+      striped={striped}
+      my_or_all_link={my_or_all_url}
+    />
   );
 
   return (
@@ -71,5 +68,4 @@ FullDistrictDetail.propTypes = {
   match: PropTypes.object
 };
 
-const DistrictDetail = withStyles(TablePageStyles)(FullDistrictDetail);
-export default connect(mapStateToProps)(DistrictDetail);
+export default withStyles(TablePageStyles)(FullDistrictDetail);
