@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, connect, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Typography, withStyles } from '@material-ui/core';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateStudentTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-import { fetchStudents } from 'state/StudentActions'
-import mapStateToProps from 'components/sharedStyles/Table/StateToProps';
+import { fetchStudents } from 'state/StudentActions';
 
 function FullStudents(props) {
   const {
@@ -14,7 +13,7 @@ function FullStudents(props) {
   } = props;
 
   const my_or_all = props.my_or_all;
-  const my_or_all_url = "/" + my_or_all;
+  const my_or_all_url = `/${my_or_all}`;
   const [loading, setLoading] = useState(true);
   const students = useSelector(state => state.students.students);
   const dispatch = useDispatch();
@@ -22,26 +21,24 @@ function FullStudents(props) {
   useEffect(() => {
     dispatch(fetchStudents({ accessLevel: my_or_all }));
     setLoading(false);
-  }, [dispatch]);
+  }, [dispatch, my_or_all]);
 
   if (loading) {
     return loadingJSX('Students');
   }
-
-  
 
   return (
     <div>
       <Typography variant="h4" component="h1" className={header}>
          { my_or_all + " Students" }
       </Typography>
-      < CreateStudentTable
-        header = {header}
-        tHead = {tHead}
-        data = {students}
-        tRow = {tRow}
-        striped = {striped} 
-        my_or_all_link = {"/" + my_or_all_url}/>
+      <CreateStudentTable
+        header={header}
+        tHead={tHead}
+        data={students}
+        tRow={tRow}
+        striped={striped}
+        my_or_all_link={"/" + my_or_all_url}/>
     </div>
   );
 }
@@ -50,5 +47,4 @@ FullStudents.propTypes = {
   classes: PropTypes.object
 };
 
-const Students = withStyles(TablePageStyles)(FullStudents);
-export default connect(mapStateToProps)(Students);
+export default withStyles(TablePageStyles)(FullStudents);
