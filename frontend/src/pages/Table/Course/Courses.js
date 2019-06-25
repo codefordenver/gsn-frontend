@@ -46,5 +46,4 @@ FullCourses.propTypes = {
   classes: PropTypes.object
 };
 
-// const Courses = withStyles(TablePageStyles)(FullCourses);
 export default withStyles(TablePageStyles)(FullCourses);
