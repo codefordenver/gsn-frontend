@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector, connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import {
@@ -14,17 +14,16 @@ import {
   CreateAttendanceTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
-import mapStateToProps from 'components/sharedStyles/Table/StateToProps';
 import { fetchCourseDetails } from '../../../state/CourseActions';
 
 function FullCourseDetail(props) {
   const {
-    classes: { striped, tHead, tRow, tableTitle, header },
+    classes: { striped, tHead, tRow, tableTitle, header }
   } = props;
   const params = props.match;
   const { courseId } = params;
   const my_or_all = props.my_or_all;
-  const my_or_all_url = "/" + my_or_all;
+  const my_or_all_url = `/${my_or_all}`;
   const dispatch = useDispatch();
 
   const courseDetail = useSelector(state => {
@@ -33,7 +32,7 @@ function FullCourseDetail(props) {
 
   useEffect(() => {
     dispatch(fetchCourseDetails({ accessLevel: my_or_all, courseId }));
-  }, [dispatch, courseId]);
+  }, [dispatch, courseId, my_or_all]);
 
   if (!courseDetail) {
     return loadingJSX('Course Detail');
@@ -51,56 +50,63 @@ function FullCourseDetail(props) {
   } = courseDetail;
 
   const gradeTable = (
-    < CreateGradeTable 
-            header = {header}
-            tHead = {tHead} 
-            data = {gradeSet} 
-            tRow = {tRow} 
-            striped = {striped}
-            my_or_all_link = {my_or_all_url} />
+    <CreateGradeTable
+      header={header}
+      tHead={tHead}
+      data={gradeSet}
+      tRow={tRow}
+      striped={striped}
+      my_or_all_link={my_or_all_url}
+    />
   );
 
   const attendanceTable = (
-    < CreateAttendanceTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {attendanceSet} 
-            tRow = {tRow} 
-            striped = {striped} 
-            my_or_all_link = {my_or_all_url}/>
+    <CreateAttendanceTable
+      header={header}
+      tHead={tHead}
+      data={attendanceSet}
+      tRow={tRow}
+      striped={striped}
+      my_or_all_link={my_or_all_url}
+    />
   );
 
   const studentTable = (
-    < CreateStudentTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {studentSet} 
-            tRow = {tRow} 
-            striped = {striped} 
-            my_or_all_link = {my_or_all_url}/>
+    <CreateStudentTable
+      header={header}
+      tHead={tHead}
+      data={studentSet}
+      tRow={tRow}
+      striped={striped}
+      my_or_all_link={my_or_all_url}
+    />
   );
 
   return (
-      <div>
-          <Typography className={header} component="h1" variant="h4">{courseName}</Typography>
-          <DetailItem k="Course Code" val={courseCode} />
-          <DetailItem k="Subject" val={courseSubject} />
-          <DetailLink k="School" val={schoolName} link={my_or_all_url + `/school/${schoolId}`} />
+    <div>
+      <Typography className={header} component="h1" variant="h4">
+        {courseName}
+      </Typography>
+      <DetailItem k="Course Code" val={courseCode} />
+      <DetailItem k="Subject" val={courseSubject} />
+      <DetailLink k="School" val={schoolName} link={my_or_all_url + `/school/${schoolId}`} />
 
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Grades" 
-            table = {gradeTable}
-            />
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Attendance" 
-            table = {attendanceTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Student" 
-            table = {studentTable}/>
-      </div>
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Grades"
+        table={gradeTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Attendance"
+        table={attendanceTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Student"
+        table={studentTable}
+      />
+    </div>
   );
 }
 
@@ -109,5 +115,4 @@ FullCourseDetail.propTypes = {
   match: PropTypes.object
 };
 
-const CourseDetail = withStyles(TablePageStyles)(FullCourseDetail);
-export default connect(mapStateToProps)(CourseDetail);
+export default withStyles(TablePageStyles)(FullCourseDetail);
