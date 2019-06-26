@@ -4,9 +4,8 @@ import history from 'utils/history';
 import Layout from 'components/layouts/Default';
 import LoginContainer from 'pages/Login/LoginContainer';
 import SignupContainer from 'pages/Register';
-
 import {
-  MyStudents,
+  // MyStudents,
   AllStudents,
   MySchools,
   AllSchools,
@@ -29,10 +28,14 @@ import {
 } from 'pages/Table/TablesAndData';
 
 import ViewAllDataHomepage from 'pages/Homepages/ViewAllDataHomepage';
+import Students from '../pages/Table/Student/Students';
 
 import PrivateRoute from './PrivateRoute';
 // username: user.get('username'),
 // loading: user.get('loading'),
+
+const MY_CONST = 'my';
+const ALL_CONST = 'all';
 
 export default function() {
   return (
@@ -42,7 +45,7 @@ export default function() {
         <Route exact path="/register" component={SignupContainer} />
         <Switch>
           <Layout>
-            <PrivateRoute exact path="/" component={MyStudents} />
+            <Route exact path="/" render={() => <Students myOrAll={MY_CONST} />} />
 
             <PrivateRoute exact path="/my/district" component={MyDistricts} />
             <PrivateRoute exact path="/all/district" component={AllDistricts} />
@@ -54,8 +57,8 @@ export default function() {
             <PrivateRoute exact path="/all/school/:schoolId" component={AllSchoolDetail} />
             <PrivateRoute exact path="/my/school/:schoolId" component={MySchoolDetail} />
 
-            <PrivateRoute exact path="/my/student" component={MyStudents} />
-            <PrivateRoute exact path="/all/student" component={AllStudents} />
+            <Route exact path="/my/student" render={(props) => <Students {...props} myOrAll={'my'} />} />
+            <Route exact path="/all/student" render={(props) => <Students {...props} myOrAll={'all'} />} />
             <PrivateRoute exact path="/my/student/:studentId" component={MyStudentDetail} />
             <PrivateRoute exact path="/all/student/:studentId" component={AllStudentDetail} />
 
