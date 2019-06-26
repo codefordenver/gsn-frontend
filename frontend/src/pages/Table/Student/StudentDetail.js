@@ -20,8 +20,8 @@ function FullStudentDetail(props) {
   const {
     classes: { header }
   } = props;
-  const my_or_all = props.my_or_all;
-  const my_or_all_url = `/${my_or_all}`;
+  const myOrAll = props.my_or_all;
+  const myOrAllUrl = `/${myOrAll}`;
   const params = props.match;
 
   const {
@@ -34,9 +34,9 @@ function FullStudentDetail(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchStudent({ accessLevel: my_or_all, studentId }));
+    dispatch(fetchStudent({ accessLevel: myOrAll, studentId }));
     setLoading(false);
-  }, [dispatch, my_or_all, studentId]);
+  }, [dispatch, myOrAll, studentId]);
 
   if (loading) {
     return loadingJSX('Student Detail');
@@ -64,7 +64,7 @@ function FullStudentDetail(props) {
       data={gradeSet}
       tRow={tRow}
       striped={striped}
-      my_or_all_link={my_or_all_url}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -75,7 +75,7 @@ function FullStudentDetail(props) {
       data={attendanceSet}
       tRow={tRow}
       striped={striped}
-      my_or_all_link={my_or_all_url}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -86,7 +86,7 @@ function FullStudentDetail(props) {
       data={behaviorSet}
       tRow={tRow}
       striped={striped}
-      my_or_all_link={my_or_all_url}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -101,7 +101,7 @@ function FullStudentDetail(props) {
       <DetailItem k="Year" val={studentYear} />
       <DetailItem k="Term" val={studentTerm} />
       <DetailItem k="State Id" val={stateId} />
-      <DetailLink k="School" val={school} link={my_or_all_url + `/school/${schoolId}`} />
+      <DetailLink k="School" val={school} link={myOrAllUrl + `/school/${schoolId}`} />
 
       <CreateTableHeader
         title="Grades"
