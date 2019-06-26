@@ -11,7 +11,8 @@ import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import {
   CreateGradeTable,
   CreateStudentTable,
-  CreateAttendanceTable
+  CreateAttendanceTable,
+  CreateNoteTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
@@ -46,7 +47,8 @@ function CourseDetail(props) {
     courseSubject,
     gradeSet,
     attendanceSet,
-    studentSet
+    studentSet,
+    noteSet
   } = courseDetail;
 
   const gradeTable = () => {
@@ -94,31 +96,40 @@ function CourseDetail(props) {
     );
   };
 
-  return (
-    <div>
-      <Typography className={header} component="h1" variant="h4">
-        {courseName}
-      </Typography>
-      <DetailItem k="Course Code" val={courseCode} />
-      <DetailItem k="Subject" val={courseSubject} />
-      <DetailLink k="School" val={schoolName} link={`/school/${schoolId}`} />
+  const noteTable = (
+    < CreateStudentTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {noteSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
 
-      <CreateTableHeader
-        headerClassStyle={tableTitle}
-        title="Grades"
-        table={gradeTable()}
-      />
-      <CreateTableHeader
-        headerClassStyle={tableTitle}
-        title="Attendance"
-        table={attendanceTable()}
-      />
-      <CreateTableHeader
-        headerClassStyle={tableTitle}
-        title="Student"
-        table={studentTable()}
-      />
-    </div>
+  return (
+      <div>
+          <Typography className={header} component="h1" variant="h4">{courseName}</Typography>
+          <DetailItem k="Course Code" val={courseCode} />
+          <DetailItem k="Subject" val={courseSubject} />
+          <DetailLink k="School" val={schoolName} link={`/school/${schoolId}`} />
+
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
+            title = "Grades" 
+            table = {gradeTable}/>
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
+            title = "Attendance" 
+            table = {attendanceTable}/>
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
+            title = "Student" 
+            table = {studentTable}/>
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
+            title = "Note" 
+            table = {noteTable}
+            haveCreateSaveButtonBool={true}/>
+      </div>
   );
 }
 

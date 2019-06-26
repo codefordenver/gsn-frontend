@@ -13,7 +13,8 @@ import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import {
   CreateGradeTable,
   CreateAttendanceTable,
-  CreateBehaviorTable
+  CreateBehaviorTable,
+  CreateNoteTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 import { fetchStudent } from '../../../state/StudentActions';
@@ -53,7 +54,8 @@ function StudentDetail(props) {
     studentTerm,
     gradeSet,
     attendanceSet,
-    behaviorSet
+    behaviorSet,
+    noteSet
   } = studentDetail;
 
   const gradeTable = (
@@ -86,37 +88,53 @@ function StudentDetail(props) {
     />
   );
 
+  const noteTable = (
+    < CreateNoteTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {behaviorSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
+
   return (
-    <div>
-      <Typography className={header} component="h1" variant="h4">
-        {studentName}
-      </Typography>
-      <DetailItem k="Gender" val={gender} />
-      <DetailItem k="Birthdate" val={birthdate} />
-      <DetailItem k="Grade" val={grade} />
-      <DetailItem k="Year" val={studentYear} />
-      <DetailItem k="Term" val={studentTerm} />
-      <DetailItem k="State Id" val={stateId} />
-      <DetailLink k="School" val={school} link={`/school/${schoolId}`} />
+      <div>
+        
+          <Typography className={header} component="h1" variant="h4">{studentName}</Typography>
+          <DetailItem k="Gender" val={gender} />
+          <DetailItem k="Birthdate" val={birthdate} />
+          <DetailItem k="Grade" val={grade} />
+          <DetailItem k="Year" val={studentYear} />
+          <DetailItem k="Term" val={studentTerm} />
+          <DetailItem k="State Id" val={stateId} />
+          <DetailLink k="School" val={school} link={`/school/${schoolId}`} />
+          
+          <CreateTableHeader
+            title = "Grades" 
+            table = {gradeTable}
+            headerClassStyle = {tableTitle}
+            />
 
-      <CreateTableHeader
-        title="Grades"
-        table={gradeTable}
-        headerClassStyle={tableTitle}
-      />
+          <CreateTableHeader
+            title = "Attendance" 
+            table = {attendanceTable}
+            headerClassStyle={tableTitle}
+            />
 
-      <CreateTableHeader
-        title="Attendance"
-        table={attendanceTable}
-        headerClassStyle={tableTitle}
-      />
-
-      <CreateTableHeader
-        title="Behavior"
-        table={behaviorTable}
-        headerClassStyle={tableTitle}
-        haveCreateSaveButtonBool={true}
-      />
+          <CreateTableHeader
+            title = "Behavior" 
+            table = {behaviorTable}
+            headerClassStyle={tableTitle}
+            haveCreateSaveButtonBool={true}
+            /> 
+          
+          <CreateTableHeader
+            title = "Note" 
+            table = {noteTable}
+            headerClassStyle={tableTitle}
+            haveCreateSaveButtonBool={true}
+            /> 
     </div>
   );
 }

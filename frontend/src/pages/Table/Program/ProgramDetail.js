@@ -7,7 +7,10 @@ import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import {
   CreateGradeTable,
   CreateStudentTable,
-  CreateCourseTable
+  CreateCourseTable,
+  CreateNoteTable,
+  CreateAttendanceTable,
+  CreateBehaviorTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
@@ -34,8 +37,17 @@ function ProgramDetail(props) {
     return loadingJSX('Program Detail');
   }
 
-  const { programName, studentSet, courseSet, gradeSet } = programDetail;
+  const { programName, studentSet, courseSet, gradeSet, behaviorSet, attendanceSet, noteSet } = programDetail;
 
+  const behaviorTable = (
+    < CreateBehaviorTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {behaviorSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+  
   const gradeTable = () => {
     if (!gradeSet) {
       return <p>Data not found</p>;
@@ -81,28 +93,57 @@ function ProgramDetail(props) {
     );
   };
 
-  return (
-    <div>
-      <Typography className={header} component="h1" variant="h4">
-        {programName}
-      </Typography>
+  const attendanceTable = (
+    < CreateAttendanceTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {attendanceSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
 
-      <CreateTableHeader
-        headerClassStyle={tableTitle}
-        title="Grades"
-        table={gradeTable()}
-      />
-      <CreateTableHeader
-        headerClassStyle={tableTitle}
-        title="Course"
-        table={courseTable()}
-      />
-      <CreateTableHeader
-        headerClassStyle={tableTitle}
-        title="Student"
-        table={studentTable()}
-      />
-    </div>
+  const noteTable = (
+    < CreateNoteTable 
+            header = {header} 
+            tHead = {tHead} 
+            data = {noteSet} 
+            tRow = {tRow} 
+            striped = {striped} />
+  );
+
+  return (
+      <div>
+          <Typography className={header} component="h1" variant="h4">{programName}</Typography>
+    
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
+            title = "Grades" 
+            table = {gradeTable}/>
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
+            title = "Attendance" 
+            table = {attendanceTable}/>
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
+            title = "Behavior" 
+            table = {behaviorTable}
+            haveCreateSaveButtonBool={true}/>
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
+            title = "Course" 
+            table = {courseTable}/>
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
+            title = "Student" 
+            table = {studentTable}/>
+          <CreateTableHeader
+            headerClassStyle = {tableTitle}
+            title = "Note" 
+            table = {noteTable}
+            haveCreateSaveButtonBool={true}/>
+
+
+      </div>
   );
 }
 
