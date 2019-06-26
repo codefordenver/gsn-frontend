@@ -7,9 +7,9 @@ import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateSchoolTable } from 'components/sharedStyles/Table/CreateTablesStyle';
 import { fetchSchools } from '../../../state/SchoolActions';
 
-function FullSchools(props) {
-  const my_or_all = props.my_or_all;
-  const my_or_all_url = `/${my_or_all}`;
+function Schools(props) {
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
   const {
     classes: { header, striped, tHead, tRow }
   } = props;
@@ -17,8 +17,8 @@ function FullSchools(props) {
   const dispatch = useDispatch();
   const schools = useSelector(state => state.schools.schools);
   useEffect(() => {
-    dispatch(fetchSchools({ accessLevel: my_or_all }));
-  }, [dispatch, my_or_all]);
+    dispatch(fetchSchools({ accessLevel: myOrAll }));
+  }, [dispatch, myOrAll]);
 
   if (!schools) {
     return loadingJSX('Schools');
@@ -27,7 +27,7 @@ function FullSchools(props) {
   return (
     <div>
       <Typography variant="h4" component="h1" className={header}>
-        { my_or_all + " Schools"}
+        {myOrAll + " Schools"}
       </Typography>
       <CreateSchoolTable
         header={header}
@@ -35,14 +35,14 @@ function FullSchools(props) {
         data={schools}
         tRow={tRow}
         striped={striped}
-        my_or_all_link={my_or_all_url}
+        my_or_all_link={myOrAllUrl}
       />
     </div>
   );
 }
 
-FullSchools.propTypes = {
+Schools.propTypes = {
   classes: PropTypes.object
 };
 
-export default withStyles(TablePageStyles)(FullSchools);
+export default withStyles(TablePageStyles)(Schools);
