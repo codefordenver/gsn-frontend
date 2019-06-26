@@ -29,6 +29,7 @@ import {
 
 import ViewAllDataHomepage from 'pages/Homepages/ViewAllDataHomepage';
 import Students from '../pages/Table/Student/Students';
+import StudentDetail from '../pages/Table/Student/StudentDetail';
 
 import PrivateRoute from './PrivateRoute';
 // username: user.get('username'),
@@ -59,8 +60,8 @@ export default function() {
 
             <Route exact path="/my/student" render={(props) => <Students {...props} myOrAll={MY_CONST} />} />
             <Route exact path="/all/student" render={(props) => <Students {...props} myOrAll={ALL_CONST} />} />
-            <PrivateRoute exact path="/my/student/:studentId" component={MyStudentDetail} />
-            <PrivateRoute exact path="/all/student/:studentId" component={AllStudentDetail} />
+            <Route exact path="/my/student/:studentId" render={(props) => <StudentDetail {...props} myOrAll={MY_CONST}/>} />
+            <Route exact path="/all/student/:studentId" render={(props) => <StudentDetail {...props} myOrAll={ALL_CONST}/>} />
 
             <PrivateRoute exact path="/my/program" component={MyPrograms} />
             <PrivateRoute exact path="/all/program" component={AllPrograms} />
