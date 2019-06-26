@@ -57,8 +57,8 @@ export default function() {
             <PrivateRoute exact path="/all/school/:schoolId" component={AllSchoolDetail} />
             <PrivateRoute exact path="/my/school/:schoolId" component={MySchoolDetail} />
 
-            <Route exact path="/my/student" render={(props) => <Students {...props} myOrAll={'my'} />} />
-            <Route exact path="/all/student" render={(props) => <Students {...props} myOrAll={'all'} />} />
+            <Route exact path="/my/student" render={(props) => <Students {...props} myOrAll={MY_CONST} />} />
+            <Route exact path="/all/student" render={(props) => <Students {...props} myOrAll={ALL_CONST} />} />
             <PrivateRoute exact path="/my/student/:studentId" component={MyStudentDetail} />
             <PrivateRoute exact path="/all/student/:studentId" component={AllStudentDetail} />
 
