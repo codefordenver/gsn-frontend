@@ -7,9 +7,9 @@ import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateProgramTable } from 'components/sharedStyles/Table/CreateTablesStyle';
 import { fetchPrograms } from '../../../state/ProgramActions';
 
-function FullPrograms(props) {
-  const my_or_all = props.my_or_all;
-  const my_or_all_url = `/${my_or_all}`;
+function Programs(props) {
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
   const {
     classes: { header, striped, tHead, tRow }
   } = props;
@@ -18,8 +18,8 @@ function FullPrograms(props) {
 
   const programs = useSelector(state => state.programs.programs);
   useEffect(() => {
-    dispatch(fetchPrograms({ accessLevel: my_or_all }));
-  }, [dispatch, my_or_all]);
+    dispatch(fetchPrograms({ accessLevel: myOrAll }));
+  }, [dispatch, myOrAll]);
 
   if (!programs) {
     return loadingJSX('Programs');
@@ -28,7 +28,7 @@ function FullPrograms(props) {
   return (
     <div>
       <Typography variant="h4" component="h1" className={header}>
-        { my_or_all + " Programs" }
+        {myOrAll + " Programs"}
       </Typography>
       <CreateProgramTable
         header={header}
@@ -36,14 +36,14 @@ function FullPrograms(props) {
         data={programs}
         tRow={tRow}
         striped={striped}
-        my_or_all_link={my_or_all_url}
+        my_or_all_link={myOrAllUrl}
       />
     </div>
   );
 }
 
-FullPrograms.propTypes = {
+Programs.propTypes = {
   classes: PropTypes.object
 };
 
-export default withStyles(TablePageStyles)(FullPrograms);
+export default withStyles(TablePageStyles)(Programs);
