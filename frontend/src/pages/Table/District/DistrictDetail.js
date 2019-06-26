@@ -14,17 +14,20 @@ function DistrictDetail(props) {
     classes: { header, striped, tHead, tRow, tableTitle }
   } = props;
 
+  // Props are provided by React Router
   const { districtId } = props.match.params;
 
+  // Access Level Variables
   const myOrAll = props.myOrAll;
   const myOrAllUrl = `/${myOrAll}`;
 
+  // Redux Hooks
   const dispatch = useDispatch();
-
   const districtDetail = useSelector(state => {
     return state.districts.district;
   });
 
+  // React Hook to fetch DistrictDetail data
   useEffect(() => {
     dispatch(fetchDistrictDetails({ accessLevel: myOrAll, districtId }));
   }, [dispatch, districtId, myOrAll]);

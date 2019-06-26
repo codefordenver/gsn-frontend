@@ -12,11 +12,15 @@ function Courses(props) {
     classes: { header, striped, tHead, tRow }
   } = props;
 
+  // Access Level Variables
   const myOrAll = props.myOrAll;
   const myOrAllUrl = `/${myOrAll}`;
 
+  // Redux Hooks
   const dispatch = useDispatch();
   const courses = useSelector(state => state.courses.courses);
+
+  // React Hook to fetch Course data
   useEffect(() => {
     dispatch(fetchCourses({ accessLevel: myOrAll }));
   }, [dispatch, myOrAll]);

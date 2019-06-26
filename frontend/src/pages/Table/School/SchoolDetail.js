@@ -20,17 +20,20 @@ function SchoolDetail(props) {
     classes: { header, striped, tHead, tRow, tableTitle }
   } = props;
 
+  // Props are provided by React Router
   const { schoolId } = props.match.params;
 
+  // Access Level Variables
   const myOrAll = props.myOrAll;
   const myOrAllUrl = `/${myOrAll}`;
 
+  // Redux Hooks
   const dispatch = useDispatch();
-
   const schoolDetail = useSelector(state => {
     return state.schools.school;
   });
 
+  // React Hook to fetch SchoolDetail data
   useEffect(() => {
     dispatch(fetchSchoolDetails({ accessLevel: myOrAll, schoolId }));
   }, [dispatch, myOrAll, schoolId]);

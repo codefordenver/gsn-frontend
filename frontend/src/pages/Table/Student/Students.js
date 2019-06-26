@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Typography, withStyles } from '@material-ui/core';
@@ -12,19 +12,21 @@ function Students(props) {
     classes: { header, striped, tHead, tRow }
   } = props;
 
+  // Access Level Variables
   const myOrAll = props.myOrAll;
   const myOrAllUrl = `/${myOrAll}`;
-  const [loading, setLoading] = useState(true);
+
+  // Redux Hooks
   const students = useSelector(state => state.students.students);
   const dispatch = useDispatch();
 
+  // React Hook to fetch Course data
   useEffect(() => {
     dispatch(fetchStudents({ accessLevel: myOrAll }));
-    setLoading(false);
   }, [dispatch, myOrAll]);
 
-  if (loading) {
-    return loadingJSX('Students');
+  if (!students) {
+    return loadingJSX('students');
   }
 
   return (

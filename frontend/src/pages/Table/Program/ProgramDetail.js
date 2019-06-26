@@ -17,16 +17,20 @@ function ProgramDetail(props) {
     classes: { striped, tHead, tRow, tableTitle, header }
   } = props;
 
+  // Props are provided by React Router
+  const { programId } = props.match.params;
+
+  // Access Level Variables
   const myOrAll = props.myOrAll;
   const myOrAllUrl = `/${myOrAll}`;
 
-  const { programId } = props.match.params;
-
+  // Redux Hooks
   const dispatch = useDispatch();
   const programDetail = useSelector(state => {
     return state.programs.program;
   });
 
+  // React Hook to fetch ProgramDetail data
   useEffect(() => {
     dispatch(fetchProgramDetails({ accessLevel: myOrAll, programId }));
   }, [dispatch, myOrAll, programId]);

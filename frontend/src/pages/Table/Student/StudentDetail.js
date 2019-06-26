@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
@@ -18,28 +18,26 @@ import { fetchStudent } from '../../../state/StudentActions';
 
 function StudentDetail(props) {
   const {
-    classes: { header }
+    classes: { header, striped, tHead, tRow, tableTitle }
   } = props;
 
+  // Props are provided by React Router
+  const { studentId } = props.match.params;
+
+  // Access Level Variables
   const myOrAll = props.myOrAll;
   const myOrAllUrl = `/${myOrAll}`;
 
-  const { studentId } = props.match.params;
-
-  const {
-    classes: { striped, tHead, tRow, tableTitle }
-  } = props;
-
-  const [loading, setLoading] = useState(true);
+  // Redux Hooks
   const studentDetail = useSelector(state => state.students.student);
   const dispatch = useDispatch();
 
+  // React Hook to fetch StudentDetail data
   useEffect(() => {
     dispatch(fetchStudent({ accessLevel: myOrAll, studentId }));
-    setLoading(false);
   }, [dispatch, myOrAll, studentId]);
 
-  if (loading) {
+  if (!studentDetail) {
     return loadingJSX('Student Detail');
   }
 

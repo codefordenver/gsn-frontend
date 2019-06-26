@@ -8,15 +8,19 @@ import { CreateProgramTable } from 'components/sharedStyles/Table/CreateTablesSt
 import { fetchPrograms } from '../../../state/ProgramActions';
 
 function Programs(props) {
-  const myOrAll = props.myOrAll;
-  const myOrAllUrl = `/${myOrAll}`;
   const {
     classes: { header, striped, tHead, tRow }
   } = props;
 
-  const dispatch = useDispatch();
+  // Access Level Variables
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
 
+  // Redux Hooks
+  const dispatch = useDispatch();
   const programs = useSelector(state => state.programs.programs);
+
+  // React Hook to fetch Program data
   useEffect(() => {
     dispatch(fetchPrograms({ accessLevel: myOrAll }));
   }, [dispatch, myOrAll]);

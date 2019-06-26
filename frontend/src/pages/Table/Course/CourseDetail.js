@@ -34,6 +34,7 @@ function CourseDetail(props) {
     return state.courses.course;
   });
 
+  // React Hook to fetch CourseDetail data
   useEffect(() => {
     dispatch(fetchCourseDetails({ accessLevel: myOrAll, courseId }));
   }, [dispatch, courseId, myOrAll]);

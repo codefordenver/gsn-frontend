@@ -8,14 +8,19 @@ import { CreateSchoolTable } from 'components/sharedStyles/Table/CreateTablesSty
 import { fetchSchools } from '../../../state/SchoolActions';
 
 function Schools(props) {
-  const myOrAll = props.myOrAll;
-  const myOrAllUrl = `/${myOrAll}`;
   const {
     classes: { header, striped, tHead, tRow }
   } = props;
 
+  // Access Level Variables
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
+
+  // Redux Hooks
   const dispatch = useDispatch();
   const schools = useSelector(state => state.schools.schools);
+
+  // React Hook to fetch Course data
   useEffect(() => {
     dispatch(fetchSchools({ accessLevel: myOrAll }));
   }, [dispatch, myOrAll]);

@@ -8,15 +8,19 @@ import { CreateDistrictTable } from 'components/sharedStyles/Table/CreateTablesS
 import { fetchDistricts } from '../../../state/DistrictActions';
 
 function Districts(props) {
-  const myOrAll = props.myOrAll;
-  const myOrAllUrl = `/${myOrAll}`;
   const {
     classes: { header, striped, tHead, tRow }
   } = props;
 
-  const dispatch = useDispatch();
+  // Access Level Variables
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
 
+  // Redux Hooks
+  const dispatch = useDispatch();
   const districts = useSelector(state => state.districts.districts);
+
+  // React Hook to fetch District data
   useEffect(() => {
     dispatch(fetchDistricts({ accessLevel: myOrAll }));
   }, [dispatch, myOrAll]);
@@ -28,7 +32,7 @@ function Districts(props) {
   return (
     <div>
       <Typography variant="h4" component="h1" className={header}>
-        { myOrAll + " Districts" }
+        {myOrAll + " Districts"}
       </Typography>
       <CreateDistrictTable
         header={header}
