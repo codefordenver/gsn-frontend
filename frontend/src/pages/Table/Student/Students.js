@@ -38,7 +38,7 @@ function FullStudents(props) {
         data={students}
         tRow={tRow}
         striped={striped}
-        my_or_all_link={"/" + my_or_all_url}/>
+        my_or_all_link={my_or_all_url}/>
     </div>
   );
 }
