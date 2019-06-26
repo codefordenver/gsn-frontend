@@ -16,23 +16,27 @@ import {
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 import { fetchCourseDetails } from '../../../state/CourseActions';
 
-function FullCourseDetail(props) {
+function CourseDetail(props) {
   const {
     classes: { striped, tHead, tRow, tableTitle, header }
   } = props;
-  const params = props.match;
-  const { courseId } = params;
-  const my_or_all = props.my_or_all;
-  const my_or_all_url = `/${my_or_all}`;
-  const dispatch = useDispatch();
 
+  // Props are provided by React Router
+  const { courseId } = props.match.params;
+
+  // Access Level Variables
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
+
+  // Redux Hooks
+  const dispatch = useDispatch();
   const courseDetail = useSelector(state => {
     return state.courses.course;
   });
 
   useEffect(() => {
-    dispatch(fetchCourseDetails({ accessLevel: my_or_all, courseId }));
-  }, [dispatch, courseId, my_or_all]);
+    dispatch(fetchCourseDetails({ accessLevel: myOrAll, courseId }));
+  }, [dispatch, courseId, myOrAll]);
 
   if (!courseDetail) {
     return loadingJSX('Course Detail');
@@ -56,7 +60,7 @@ function FullCourseDetail(props) {
       data={gradeSet}
       tRow={tRow}
       striped={striped}
-      my_or_all_link={my_or_all_url}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -67,7 +71,7 @@ function FullCourseDetail(props) {
       data={attendanceSet}
       tRow={tRow}
       striped={striped}
-      my_or_all_link={my_or_all_url}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -78,7 +82,7 @@ function FullCourseDetail(props) {
       data={studentSet}
       tRow={tRow}
       striped={striped}
-      my_or_all_link={my_or_all_url}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -89,7 +93,7 @@ function FullCourseDetail(props) {
       </Typography>
       <DetailItem k="Course Code" val={courseCode} />
       <DetailItem k="Subject" val={courseSubject} />
-      <DetailLink k="School" val={schoolName} link={my_or_all_url + `/school/${schoolId}`} />
+      <DetailLink k="School" val={schoolName} link={myOrAllUrl + `/school/${schoolId}`} />
 
       <CreateTableHeader
         headerClassStyle={tableTitle}
@@ -110,9 +114,9 @@ function FullCourseDetail(props) {
   );
 }
 
-FullCourseDetail.propTypes = {
+CourseDetail.propTypes = {
   classes: PropTypes.object,
   match: PropTypes.object
 };
 
-export default withStyles(TablePageStyles)(FullCourseDetail);
+export default withStyles(TablePageStyles)(CourseDetail);
