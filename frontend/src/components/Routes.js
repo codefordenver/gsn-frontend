@@ -5,18 +5,14 @@ import Layout from 'components/layouts/Default';
 import LoginContainer from 'pages/Login/LoginContainer';
 import SignupContainer from 'pages/Register';
 import {
-  // MyStudents,
-  AllStudents,
   MySchools,
   AllSchools,
   MyCourses,
   AllCourses,
   MyPrograms,
   AllPrograms,
-  MyDistricts,
+  // MyDistricts,
   AllDistricts,
-  MyStudentDetail,
-  AllStudentDetail,
   MySchoolDetail,
   AllSchoolDetail,
   MyCourseDetail,
@@ -30,10 +26,9 @@ import {
 import ViewAllDataHomepage from 'pages/Homepages/ViewAllDataHomepage';
 import Students from '../pages/Table/Student/Students';
 import StudentDetail from '../pages/Table/Student/StudentDetail';
+import Districts from '../pages/Table/District/Districts';
 
 import PrivateRoute from './PrivateRoute';
-// username: user.get('username'),
-// loading: user.get('loading'),
 
 const MY_CONST = 'my';
 const ALL_CONST = 'all';
@@ -48,8 +43,8 @@ export default function() {
           <Layout>
             <Route exact path="/" render={() => <Students myOrAll={MY_CONST} />} />
 
-            <PrivateRoute exact path="/my/district" component={MyDistricts} />
-            <PrivateRoute exact path="/all/district" component={AllDistricts} />
+            <Route exact path="/my/district" render={(props) => <Districts {...props} myOrAll={MY_CONST}/>} />
+            <Route exact path="/all/district" render={(props) => <Districts {...props} myOrAll={ALL_CONST}/>} />
             <PrivateRoute exact path="/all/district/:districtId" component={AllDistrictDetail} />
             <PrivateRoute exact path="/my/district/:districtId" component={MyDistrictDetail} />
 
