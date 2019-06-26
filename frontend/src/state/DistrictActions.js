@@ -51,3 +51,24 @@ export const fetchDistrictDetails = ({ accessLevel, districtId }) => {
       .catch(error => error);
   };
 };
+
+export const postDistrictNotes = ({ text, accessLevel, url }) => {
+  return dispatch => {
+    return fetch(`http://gsndev.com/gsndb/${accessLevel}${url}/`, {
+      method: 'POST',
+      body: JSON.stringify({ text }),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(s => {
+        dispatch(setDistrictDetails(s['0']));
+      })
+      .catch(error => error);
+  };
+};

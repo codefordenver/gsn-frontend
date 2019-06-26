@@ -10,13 +10,9 @@ import {
 } from '@material-ui/core';
 
 function CreateGradeTable(props) {
-  if(props.data == undefined) {
-      return (
-      <div>
-          Currently there isn't any data available.
-      </div>
-      );
-  } else {
+  if (props.data == undefined) {
+    return <div>Currently there isn't any data available.</div>;
+  }
   return (
     <div>
       <Table>
@@ -66,16 +62,12 @@ function CreateGradeTable(props) {
       </Table>
     </div>
   );
-}}
+}
 
 function CreateStudentTable(props) {
-  if(props.data == undefined) {
-      return (
-      <div>
-          Currently there isn't any data available.
-      </div>
-      );
-  } else {
+  if (props.data == undefined) {
+    return <div>Currently there isn't any data available.</div>;
+  }
   return (
     <div>
       <Table>
@@ -120,16 +112,12 @@ function CreateStudentTable(props) {
       </Table>
     </div>
   );
-}}
+}
 
 function CreateAttendanceTable(props) {
-  if(props.data == undefined) {
-      return (
-      <div>
-          Currently there isn't any data available.
-      </div>
-      );
-  } else {
+  if (props.data == undefined) {
+    return <div>Currently there isn't any data available.</div>;
+  }
   return (
     <div>
       <Table>
@@ -184,16 +172,12 @@ function CreateAttendanceTable(props) {
       </Table>
     </div>
   );
-}}
+}
 
 function CreateCourseTable(props) {
-  if(props.data == undefined) {
-      return (
-      <div>
-          Currently there isn't any data available.
-      </div>
-      );
-  } else {
+  if (props.data == undefined) {
+    return <div>Currently there isn't any data available.</div>;
+  }
   return (
     <div>
       <Table>
@@ -239,16 +223,12 @@ function CreateCourseTable(props) {
       </Table>
     </div>
   );
-}}
+}
 
 function CreateDistrictTable(props) {
-  if(props.data == undefined) {
-      return (
-      <div>
-          Currently there isn't any data available.
-      </div>
-      );
-  } else {
+  if (props.data == undefined) {
+    return <div>Currently there isn't any data available.</div>;
+  }
   return (
     <div>
       <Table>
@@ -289,16 +269,12 @@ function CreateDistrictTable(props) {
       </Table>
     </div>
   );
-}}
+}
 
 function CreateProgramTable(props) {
-  if(props.data == undefined) {
-    return (
-    <div>
-        Currently there isn't any data available.
-    </div>
-    );
-} else {
+  if (props.data == undefined) {
+    return <div>Currently there isn't any data available.</div>;
+  }
   return (
     <div>
       <Table>
@@ -327,16 +303,12 @@ function CreateProgramTable(props) {
       </Table>
     </div>
   );
-}}
+}
 
 function CreateSchoolTable(props) {
-  if(props.data == undefined) {
-      return (
-      <div>
-          Currently there isn't any data available.
-      </div>
-      );
-  } else {
+  if (props.data == undefined) {
+    return <div>Currently there isn't any data available.</div>;
+  }
   return (
     <div>
       <Table>
@@ -376,16 +348,12 @@ function CreateSchoolTable(props) {
       </Table>
     </div>
   );
-}}
+}
 
 function CreateBehaviorTable(props) {
-  if(props.data == undefined) {
-      return (
-      <div>
-          Currently there isn't any data available.
-      </div>
-      );
-  } else {
+  if (props.data == undefined) {
+    return <div>Currently there isn't any data available.</div>;
+  }
   return (
     <div>
       <Table>
@@ -427,48 +395,41 @@ function CreateBehaviorTable(props) {
       </Table>
     </div>
   );
-}}
+}
 
 function CreateNoteTable(props) {
-
-if(props.data == undefined) {
-    return (
+  console.log('This is the notes table');
+  console.log(props);
+  if (props.data == undefined) {
+    return <div>Currently there isn't any data available.</div>;
+  }
+  return (
     <div>
-        Currently there isn't any data available.
-    </div>
-    );
-} else {
-return (
-    <div>
-    <Table>
+      <Table>
         <TableHead>
-            <TableRow>
-                <TableCell className={props.tHead}>Date</TableCell>
-                <TableCell className={props.tHead}>Note</TableCell>
-            </TableRow>
+          <TableRow>
+            <TableCell className={props.tHead}>Date</TableCell>
+            <TableCell className={props.tHead}>Note</TableCell>
+          </TableRow>
         </TableHead>
         <TableBody>
-            {props.data.map((noteDetail, i) => {
-                const {
-                created,
-                context,
-                } = noteDetail;
-                return (
-                    <TableRow
-                    key={context}
-                    className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
-                    >
-                        <TableCell align="left">{created}</TableCell>
-                        <TableCell align="left">{context}</TableCell>
-                    </TableRow>
-                );
-            })}
+          {props.data.map((noteDetail, i) => {
+            const { createdUpdated, text } = noteDetail;
+            return (
+              <TableRow
+                key={text}
+                className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
+              >
+                <TableCell align="left">{createdUpdated}</TableCell>
+                <TableCell align="left">{text}</TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
-    </Table>
-</div>
-);
-        }
-    }
+      </Table>
+    </div>
+  );
+}
 
 export {
   CreateGradeTable,
@@ -481,4 +442,3 @@ export {
   CreateDistrictTable,
   CreateNoteTable
 };
-

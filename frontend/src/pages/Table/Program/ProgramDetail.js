@@ -14,9 +14,13 @@ import {
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
-import { fetchProgramDetails } from '../../../state/ProgramActions';
+import {
+  fetchProgramDetails,
+  postProgramNotes
+} from '../../../state/ProgramActions';
 
 function ProgramDetail(props) {
+  const accessLevel = 'my';
   const {
     classes: { striped, tHead, tRow, tableTitle, header },
     match: { params }
@@ -30,24 +34,33 @@ function ProgramDetail(props) {
   });
 
   useEffect(() => {
-    dispatch(fetchProgramDetails({ accessLevel: 'my', programId }));
+    dispatch(fetchProgramDetails({ accessLevel, programId }));
   }, [dispatch, programId]);
 
   if (!programDetail) {
     return loadingJSX('Program Detail');
   }
 
-  const { programName, studentSet, courseSet, gradeSet, behaviorSet, attendanceSet, noteSet } = programDetail;
+  const {
+    programName,
+    studentSet,
+    courseSet,
+    gradeSet,
+    behaviorSet,
+    attendanceSet,
+    noteSet
+  } = programDetail;
 
   const behaviorTable = (
-    < CreateBehaviorTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {behaviorSet} 
-            tRow = {tRow} 
-            striped = {striped} />
+    <CreateBehaviorTable
+      header={header}
+      tHead={tHead}
+      data={behaviorSet}
+      tRow={tRow}
+      striped={striped}
+    />
   );
-  
+
   const gradeTable = () => {
     if (!gradeSet) {
       return <p>Data not found</p>;
@@ -94,62 +107,74 @@ function ProgramDetail(props) {
   };
 
   const attendanceTable = (
-    < CreateAttendanceTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {attendanceSet} 
-            tRow = {tRow} 
-            striped = {striped} />
+    <CreateAttendanceTable
+      header={header}
+      tHead={tHead}
+      data={attendanceSet}
+      tRow={tRow}
+      striped={striped}
+    />
   );
 
   const noteTable = (
-    < CreateNoteTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {noteSet} 
-            tRow = {tRow} 
-            striped = {striped} />
+    <CreateNoteTable
+      header={header}
+      tHead={tHead}
+      data={noteSet}
+      tRow={tRow}
+      striped={striped}
+    />
   );
 
   return (
-      <div>
-          <Typography className={header} component="h1" variant="h4">{programName}</Typography>
-    
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Grades" 
-            table = {gradeTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Attendance" 
-            table = {attendanceTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Behavior" 
-            table = {behaviorTable}
-            haveCreateSaveButtonBool={true}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Course" 
-            table = {courseTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Student" 
-            table = {studentTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Note" 
-            table = {noteTable}
-            haveCreateSaveButtonBool={true}/>
+    <div>
+      <Typography className={header} component="h1" variant="h4">
+        {programName}
+      </Typography>
 
-
-      </div>
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Grades"
+        table={gradeTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Attendance"
+        table={attendanceTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Behavior"
+        table={behaviorTable}
+        haveCreateSaveButtonBool
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Course"
+        table={courseTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Student"
+        table={studentTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Note"
+        table={noteTable}
+        url={props.location.pathname}
+        accessLevel={accessLevel}
+        action={postProgramNotes}
+        haveCreateSaveButtonBool
+      />
+    </div>
   );
 }
 
 ProgramDetail.propTypes = {
   classes: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
+  location: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(ProgramDetail);
