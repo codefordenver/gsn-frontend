@@ -1,63 +1,51 @@
 import React, { useEffect, useState } from 'react';
-import {
-   Typography, withStyles,
-} from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 import { getDistrictDetail } from 'services/districtServices';
-import {  DetailItem} from 'components/sharedStyles/Table/DetailStyles';
+import { DetailItem } from 'components/sharedStyles/Table/DetailStyles';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateSchoolTable, CreateNoteTable, CreateAttendanceTable, 
   CreateBehaviorTable, CreateStudentTable, CreateGradeTable } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
-
+import { fetchDistrictDetails } from '../../../state/DistrictActions';
 
 function DistrictDetail(props) {
-  const [districtDetail, setDistrictDetail] = useState({});
-  const [loading, setLoading] = useState(true);
-  const { classes: { header }, match: { params } } = props;
   const {
-    classes: {
-       striped, tHead, tRow, tableTitle
-    },
+    classes: { header, striped, tHead, tRow, tableTitle },
+    match: { params }
   } = props;
-  const districtIdParam = params;
+  const { districtId } = params;
+
+  const dispatch = useDispatch();
+
+  const districtDetail = useSelector(state => {
+    return state.districts.district;
+  });
+
+  console.log(districtDetail);
 
   useEffect(() => {
-    console.log('useEffect ran in DistrictDetail', districtIdParam);
-    getDistrictDetail(districtIdParam).then((s) => {
-      setDistrictDetail(s);
-      setLoading(false);
-    });
-  }, []);
+    dispatch(fetchDistrictDetails({ accessLevel: 'my', districtId }));
+  }, [dispatch, districtId]);
 
-  if (loading) {
-    return (
-    loadingJSX('District Detail'));
+  if (!districtDetail) {
+    return loadingJSX('District Detail');
   }
 
-  const {
-    districtName,
-    state,
-    city,
-    code,
-    schoolSet,
-    noteSet,
-    studentSet,
-    gradeSet,
-    attendanceSet,
-    behaviorSet,
-  } = districtDetail;
+  const { districtName, state, city, code, schoolSet, noteSet, studentSet, gradeSet, attendanceSet, behaviorSet } = districtDetail;
 
   const schoolTable = (
-    < CreateSchoolTable 
-            header = {header}
-            tHead = {tHead} 
-            data = {schoolSet} 
-            tRow = {tRow} 
-            striped = {striped} />
+    <CreateSchoolTable
+      header={header}
+      tHead={tHead}
+      data={schoolSet}
+      tRow={tRow}
+      striped={striped}
+    />
   );
 
   const studentTable = (
@@ -146,12 +134,9 @@ function DistrictDetail(props) {
   );
 }
 
-
-
-
 DistrictDetail.propTypes = {
   classes: PropTypes.object,
-  match: PropTypes.object,
+  match: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(DistrictDetail);

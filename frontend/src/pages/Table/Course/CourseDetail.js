@@ -1,40 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import {
- Typography, withStyles,
-} from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { getCourseDetail } from 'services/courseServices';
-import { DetailLink, DetailItem} from 'components/sharedStyles/Table/DetailStyles';
+import {
+  DetailLink,
+  DetailItem
+} from 'components/sharedStyles/Table/DetailStyles';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
-import { CreateGradeTable, CreateStudentTable, CreateAttendanceTable, CreateNoteTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+import {
+  CreateGradeTable,
+  CreateStudentTable,
+  CreateAttendanceTable,
+  CreateNoteTable
+} from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
-
-
+import { fetchCourseDetails } from '../../../state/CourseActions';
 
 function CourseDetail(props) {
-  const [courseDetail, setCourseDetail] = useState({});
-  const [loading, setLoading] = useState(true);
   const {
-    classes: {
-       striped, tHead, tRow, tableTitle
-    },
+    classes: { striped, tHead, tRow, tableTitle, header },
+    match: { params }
   } = props;
-  const { classes: { header }, match: { params } } = props;
-  const courseIdParam = params;
+  const { courseId } = params;
+
+  const dispatch = useDispatch();
+
+  const courseDetail = useSelector(state => {
+    return state.courses.course;
+  });
 
   useEffect(() => {
-    console.log('useEffect ran in CourseDetail', courseIdParam);
-    getCourseDetail(courseIdParam).then((s) => {
-      setCourseDetail(s);
-      setLoading(false);
-    });
-  }, []);
+    dispatch(fetchCourseDetails({ accessLevel: 'my', courseId }));
+  }, [dispatch, courseId]);
 
-  if (loading) {
-    return (
-    loadingJSX('Course Detail'));
+  if (!courseDetail) {
+    return loadingJSX('Course Detail');
   }
 
   const {
@@ -49,32 +51,50 @@ function CourseDetail(props) {
     noteSet
   } = courseDetail;
 
-  const gradeTable = (
-    < CreateGradeTable 
-            header = {header}
-            tHead = {tHead} 
-            data = {gradeSet} 
-            tRow = {tRow} 
-            striped = {striped} />
-  );
+  const gradeTable = () => {
+    if (!gradeSet) {
+      return <p>Data not found</p>;
+    }
+    return (
+      <CreateGradeTable
+        header={header}
+        tHead={tHead}
+        data={gradeSet}
+        tRow={tRow}
+        striped={striped}
+      />
+    );
+  };
 
-  const attendanceTable = (
-    < CreateAttendanceTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {attendanceSet} 
-            tRow = {tRow} 
-            striped = {striped} />
-  );
+  const attendanceTable = () => {
+    if (!attendanceSet) {
+      return <p>Data not found</p>;
+    }
+    return (
+      <CreateAttendanceTable
+        header={header}
+        tHead={tHead}
+        data={attendanceSet}
+        tRow={tRow}
+        striped={striped}
+      />
+    );
+  };
 
-  const studentTable = (
-    < CreateStudentTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {studentSet} 
-            tRow = {tRow} 
-            striped = {striped} />
-  );
+  const studentTable = () => {
+    if (!studentSet) {
+      return <p>Data not found</p>;
+    }
+    return (
+      <CreateStudentTable
+        header={header}
+        tHead={tHead}
+        data={studentSet}
+        tRow={tRow}
+        striped={striped}
+      />
+    );
+  };
 
   const noteTable = (
     < CreateStudentTable 
@@ -113,11 +133,9 @@ function CourseDetail(props) {
   );
 }
 
-
-
 CourseDetail.propTypes = {
   classes: PropTypes.object,
-  match: PropTypes.object,
+  match: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(CourseDetail);
