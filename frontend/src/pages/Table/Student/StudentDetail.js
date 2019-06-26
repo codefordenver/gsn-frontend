@@ -16,18 +16,19 @@ import {
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 import { fetchStudent } from '../../../state/StudentActions';
 
-function FullStudentDetail(props) {
+function StudentDetail(props) {
   const {
     classes: { header }
   } = props;
-  const myOrAll = props.my_or_all;
+
+  const myOrAll = props.myOrAll;
   const myOrAllUrl = `/${myOrAll}`;
-  const params = props.match;
+
+  const { studentId } = props.match.params;
 
   const {
     classes: { striped, tHead, tRow, tableTitle }
   } = props;
-  const { studentId } = params;
 
   const [loading, setLoading] = useState(true);
   const studentDetail = useSelector(state => state.students.student);
@@ -125,9 +126,9 @@ function FullStudentDetail(props) {
   );
 }
 
-FullStudentDetail.propTypes = {
+StudentDetail.propTypes = {
   classes: PropTypes.object,
   match: PropTypes.object
 };
 
-export default withStyles(TablePageStyles)(FullStudentDetail);
+export default withStyles(TablePageStyles)(StudentDetail);
