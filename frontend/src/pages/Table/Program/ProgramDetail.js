@@ -12,23 +12,24 @@ import {
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 import { fetchProgramDetails } from '../../../state/ProgramActions';
 
-function FullProgramDetail(props) {
+function ProgramDetail(props) {
   const {
     classes: { striped, tHead, tRow, tableTitle, header }
   } = props;
-  const params = props.match;
-  const { programId } = params;
-  const my_or_all = props.my_or_all;
-  const my_or_all_url = `/${my_or_all}`;
-  const dispatch = useDispatch();
 
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
+
+  const { programId } = props.match.params;
+
+  const dispatch = useDispatch();
   const programDetail = useSelector(state => {
     return state.programs.program;
   });
 
   useEffect(() => {
-    dispatch(fetchProgramDetails({ accessLevel: my_or_all, programId }));
-  }, [dispatch, my_or_all, programId]);
+    dispatch(fetchProgramDetails({ accessLevel: myOrAll, programId }));
+  }, [dispatch, myOrAll, programId]);
 
   if (!programDetail) {
     return loadingJSX('District Detail');
@@ -43,7 +44,7 @@ function FullProgramDetail(props) {
       data={gradeSet}
       tRow={tRow}
       striped={striped}
-      my_or_all_link={my_or_all_url}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -54,7 +55,7 @@ function FullProgramDetail(props) {
       data={courseSet}
       tRow={tRow}
       striped={striped}
-      my_or_all_link={my_or_all_url}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -65,7 +66,7 @@ function FullProgramDetail(props) {
       data={studentSet}
       tRow={tRow}
       striped={striped}
-      my_or_all_link={my_or_all_url}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -93,9 +94,9 @@ function FullProgramDetail(props) {
   );
 }
 
-FullProgramDetail.propTypes = {
+ProgramDetail.propTypes = {
   classes: PropTypes.object,
   match: PropTypes.object
 };
 
-export default withStyles(TablePageStyles)(FullProgramDetail);
+export default withStyles(TablePageStyles)(ProgramDetail);
