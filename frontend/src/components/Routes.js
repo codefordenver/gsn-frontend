@@ -5,7 +5,7 @@ import Layout from 'components/layouts/Default';
 import LoginContainer from 'pages/Login/LoginContainer';
 import SignupContainer from 'pages/Register';
 import {
-  MySchools,
+  // MySchools,
   AllSchools,
   MyCourses,
   AllCourses,
@@ -16,9 +16,7 @@ import {
   MyCourseDetail,
   AllCourseDetail,
   MyProgramDetail,
-  AllProgramDetail,
-  MyDistrictDetail,
-  AllDistrictDetail
+  AllProgramDetail
 } from 'pages/Table/TablesAndData';
 
 import ViewAllDataHomepage from 'pages/Homepages/ViewAllDataHomepage';
@@ -26,6 +24,7 @@ import Students from '../pages/Table/Student/Students';
 import StudentDetail from '../pages/Table/Student/StudentDetail';
 import Districts from '../pages/Table/District/Districts';
 import DistrictDetail from '../pages/Table/District/DistrictDetail';
+import Schools from '../pages/Table/School/Schools';
 
 import PrivateRoute from './PrivateRoute';
 
@@ -42,18 +41,18 @@ export default function() {
           <Layout>
             <Route exact path="/" render={() => <Students myOrAll={MY_CONST} />} />
 
-            <Route exact path="/my/district" render={(props) => <Districts {...props} myOrAll={MY_CONST}/>} />
-            <Route exact path="/all/district" render={(props) => <Districts {...props} myOrAll={ALL_CONST}/>} />
+            <Route exact path="/my/district" render={() => <Districts myOrAll={MY_CONST}/>} />
+            <Route exact path="/all/district" render={() => <Districts myOrAll={ALL_CONST}/>} />
             <Route exact path="/all/district/:districtId" render={(props) => <DistrictDetail {...props} myOrAll={ALL_CONST}/>} />
             <Route exact path="/my/district/:districtId" render={(props) => <DistrictDetail {...props} myOrAll={MY_CONST}/>} />
 
-            <PrivateRoute exact path="/my/school" component={MySchools} />
-            <PrivateRoute exact path="/all/school" component={AllSchools} />
+            <Route exact path="/my/school" render={() => <Schools myOrAll={MY_CONST}/>} />
+            <Route exact path="/all/school" render={() => <Schools myOrAll={ALL_CONST}/>} />
             <PrivateRoute exact path="/all/school/:schoolId" component={AllSchoolDetail} />
             <PrivateRoute exact path="/my/school/:schoolId" component={MySchoolDetail} />
 
-            <Route exact path="/my/student" render={(props) => <Students {...props} myOrAll={MY_CONST} />} />
-            <Route exact path="/all/student" render={(props) => <Students {...props} myOrAll={ALL_CONST} />} />
+            <Route exact path="/my/student" render={() => <Students myOrAll={MY_CONST} />} />
+            <Route exact path="/all/student" render={() => <Students myOrAll={ALL_CONST} />} />
             <Route exact path="/my/student/:studentId" render={(props) => <StudentDetail {...props} myOrAll={MY_CONST}/>} />
             <Route exact path="/all/student/:studentId" render={(props) => <StudentDetail {...props} myOrAll={ALL_CONST}/>} />
 
