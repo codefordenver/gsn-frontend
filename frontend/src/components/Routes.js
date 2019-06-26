@@ -11,8 +11,6 @@ import {
   AllCourses,
   MyPrograms,
   AllPrograms,
-  // MyDistricts,
-  AllDistricts,
   MySchoolDetail,
   AllSchoolDetail,
   MyCourseDetail,
@@ -27,6 +25,7 @@ import ViewAllDataHomepage from 'pages/Homepages/ViewAllDataHomepage';
 import Students from '../pages/Table/Student/Students';
 import StudentDetail from '../pages/Table/Student/StudentDetail';
 import Districts from '../pages/Table/District/Districts';
+import DistrictDetail from '../pages/Table/District/DistrictDetail';
 
 import PrivateRoute from './PrivateRoute';
 
@@ -45,8 +44,8 @@ export default function() {
 
             <Route exact path="/my/district" render={(props) => <Districts {...props} myOrAll={MY_CONST}/>} />
             <Route exact path="/all/district" render={(props) => <Districts {...props} myOrAll={ALL_CONST}/>} />
-            <PrivateRoute exact path="/all/district/:districtId" component={AllDistrictDetail} />
-            <PrivateRoute exact path="/my/district/:districtId" component={MyDistrictDetail} />
+            <Route exact path="/all/district/:districtId" render={(props) => <DistrictDetail {...props} myOrAll={ALL_CONST}/>} />
+            <Route exact path="/my/district/:districtId" render={(props) => <DistrictDetail {...props} myOrAll={MY_CONST}/>} />
 
             <PrivateRoute exact path="/my/school" component={MySchools} />
             <PrivateRoute exact path="/all/school" component={AllSchools} />
