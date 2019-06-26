@@ -15,14 +15,16 @@ import {
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 import { fetchSchoolDetails } from '../../../state/SchoolActions';
 
-function FullSchoolDetail(props) {
+function SchoolDetail(props) {
   const {
     classes: { header, striped, tHead, tRow, tableTitle }
   } = props;
-  const params = props.match;
-  const { schoolId } = params;
-  const my_or_all = props.my_or_all;
-  const my_or_all_url = `/${my_or_all}`;
+
+  const { schoolId } = props.match.params;
+
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
+
   const dispatch = useDispatch();
 
   const schoolDetail = useSelector(state => {
@@ -30,8 +32,8 @@ function FullSchoolDetail(props) {
   });
 
   useEffect(() => {
-    dispatch(fetchSchoolDetails({ accessLevel: my_or_all, schoolId }));
-  }, [dispatch, my_or_all, schoolId]);
+    dispatch(fetchSchoolDetails({ accessLevel: myOrAll, schoolId }));
+  }, [dispatch, myOrAll, schoolId]);
 
   if (!schoolDetail) {
     return loadingJSX('School Detail');
@@ -55,7 +57,7 @@ function FullSchoolDetail(props) {
       data={gradeSet}
       tRow={tRow}
       striped={striped}
-      my_or_all_link={my_or_all_url}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -66,7 +68,7 @@ function FullSchoolDetail(props) {
       data={attendanceSet}
       tRow={tRow}
       striped={striped}
-      my_or_all_link={my_or_all_url}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -77,7 +79,7 @@ function FullSchoolDetail(props) {
       data={behaviorSet}
       tRow={tRow}
       striped={striped}
-      my_or_all_link={my_or_all_url}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -88,7 +90,7 @@ function FullSchoolDetail(props) {
       data={courseSet}
       tRow={tRow}
       striped={striped}
-      my_or_all_link={my_or_all_url}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -99,7 +101,7 @@ function FullSchoolDetail(props) {
       data={studentSet}
       tRow={tRow}
       striped={striped}
-      my_or_all_link={my_or_all_url}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -111,7 +113,7 @@ function FullSchoolDetail(props) {
       <DetailLink
         k="District Name"
         val={districtName}
-        link={my_or_all_url + `/district/${districtId}`}
+        link={myOrAllUrl + `/district/${districtId}`}
       />
 
       <CreateTableHeader
@@ -144,9 +146,9 @@ function FullSchoolDetail(props) {
   );
 }
 
-FullSchoolDetail.propTypes = {
+SchoolDetail.propTypes = {
   classes: PropTypes.object,
   match: PropTypes.object
 };
 
-export default withStyles(TablePageStyles)(FullSchoolDetail);
+export default withStyles(TablePageStyles)(SchoolDetail);
