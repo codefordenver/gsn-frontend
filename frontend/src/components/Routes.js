@@ -7,12 +7,8 @@ import SignupContainer from 'pages/Register';
 import {
   MyCourses,
   AllCourses,
-  MyPrograms,
-  AllPrograms,
   MyCourseDetail,
-  AllCourseDetail,
-  MyProgramDetail,
-  AllProgramDetail
+  AllCourseDetail
 } from 'pages/Table/TablesAndData';
 
 import ViewAllDataHomepage from 'pages/Homepages/ViewAllDataHomepage';
@@ -23,6 +19,7 @@ import DistrictDetail from '../pages/Table/District/DistrictDetail';
 import Schools from '../pages/Table/School/Schools';
 import SchoolDetail from '../pages/Table/School/SchoolDetail';
 import Programs from '../pages/Table/Program/Programs';
+import ProgramDetail from '../pages/Table/Program/ProgramDetail';
 
 import PrivateRoute from './PrivateRoute';
 
@@ -56,8 +53,8 @@ export default function() {
 
             <Route exact path="/my/program" render={() => <Programs myOrAll={MY_CONST} />} />
             <Route exact path="/all/program" render={() => <Programs myOrAll={ALL_CONST} />} />
-            <PrivateRoute exact path="/my/program/:programId" component={MyProgramDetail} />
-            <PrivateRoute exact path="/all/program/:programId" component={AllProgramDetail} />
+            <Route exact path="/my/program/:programId" render={(props) => <ProgramDetail {...props} myOrAll={MY_CONST} />} />
+            <Route exact path="/all/program/:programId" render={(props) => <ProgramDetail {...props} myOrAll={ALL_CONST} />} />
 
             <PrivateRoute exact path="/my/course" component={MyCourses} />
             <PrivateRoute exact path="/all/course" component={AllCourses} />
