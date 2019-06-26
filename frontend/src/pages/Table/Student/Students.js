@@ -7,21 +7,21 @@ import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateStudentTable } from 'components/sharedStyles/Table/CreateTablesStyle';
 import { fetchStudents } from 'state/StudentActions';
 
-function FullStudents(props) {
+function Students(props) {
   const {
     classes: { header, striped, tHead, tRow }
   } = props;
 
-  const my_or_all = props.my_or_all;
-  const my_or_all_url = `/${my_or_all}`;
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
   const [loading, setLoading] = useState(true);
   const students = useSelector(state => state.students.students);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchStudents({ accessLevel: my_or_all }));
+    dispatch(fetchStudents({ accessLevel: myOrAll }));
     setLoading(false);
-  }, [dispatch, my_or_all]);
+  }, [dispatch, myOrAll]);
 
   if (loading) {
     return loadingJSX('Students');
@@ -30,7 +30,7 @@ function FullStudents(props) {
   return (
     <div>
       <Typography variant="h4" component="h1" className={header}>
-         { my_or_all + " Students" }
+        {myOrAll + " Students"}
       </Typography>
       <CreateStudentTable
         header={header}
@@ -38,13 +38,14 @@ function FullStudents(props) {
         data={students}
         tRow={tRow}
         striped={striped}
-        my_or_all_link={my_or_all_url}/>
+        my_or_all_link={myOrAllUrl}
+      />
     </div>
   );
 }
 
-FullStudents.propTypes = {
+Students.propTypes = {
   classes: PropTypes.object
 };
 
-export default withStyles(TablePageStyles)(FullStudents);
+export default withStyles(TablePageStyles)(Students);
