@@ -7,9 +7,9 @@ import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateDistrictTable } from 'components/sharedStyles/Table/CreateTablesStyle';
 import { fetchDistricts } from '../../../state/DistrictActions';
 
-function FullDistricts(props) {
-  const my_or_all = props.my_or_all;
-  const my_or_all_url = `/${my_or_all}`;
+function Districts(props) {
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
   const {
     classes: { header, striped, tHead, tRow }
   } = props;
@@ -18,8 +18,8 @@ function FullDistricts(props) {
 
   const districts = useSelector(state => state.districts.districts);
   useEffect(() => {
-    dispatch(fetchDistricts({ accessLevel: my_or_all }));
-  }, [dispatch, my_or_all]);
+    dispatch(fetchDistricts({ accessLevel: myOrAll }));
+  }, [dispatch, myOrAll]);
 
   if (!districts) {
     return loadingJSX('Districts');
@@ -28,7 +28,7 @@ function FullDistricts(props) {
   return (
     <div>
       <Typography variant="h4" component="h1" className={header}>
-        { my_or_all + " Districts" }
+        { myOrAll + " Districts" }
       </Typography>
       <CreateDistrictTable
         header={header}
@@ -36,14 +36,14 @@ function FullDistricts(props) {
         data={districts}
         tRow={tRow}
         striped={striped}
-        my_or_all_link={my_or_all_url}
+        my_or_all_link={myOrAllUrl}
       />
     </div>
   );
 }
 
-FullDistricts.propTypes = {
+Districts.propTypes = {
   classes: PropTypes.object
 };
 
-export default withStyles(TablePageStyles)(FullDistricts);
+export default withStyles(TablePageStyles)(Districts);
