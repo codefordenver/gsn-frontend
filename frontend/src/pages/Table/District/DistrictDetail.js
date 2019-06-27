@@ -2,15 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-
-import { getDistrictDetail } from 'services/districtServices';
 import { DetailItem } from 'components/sharedStyles/Table/DetailStyles';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
-import { CreateSchoolTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+import {
+  CreateSchoolTable,
+  CreateNoteTable,
+  CreateAttendanceTable,
+  CreateBehaviorTable,
+  CreateStudentTable,
+  CreateGradeTable
+} from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
-import { fetchDistrictDetails } from '../../../state/DistrictActions';
+import {
+  fetchDistrictDetails,
+  postDistrictNotes
+} from '../../../state/DistrictActions';
 
 function DistrictDetail(props) {
   const {
@@ -18,6 +26,7 @@ function DistrictDetail(props) {
     match: { params }
   } = props;
   const { districtId } = params;
+  const accessLevel = 'my';
 
   const dispatch = useDispatch();
 
@@ -25,23 +34,82 @@ function DistrictDetail(props) {
     return state.districts.district;
   });
 
-  console.log(districtDetail);
-
   useEffect(() => {
-    dispatch(fetchDistrictDetails({ accessLevel: 'my', districtId }));
+    dispatch(fetchDistrictDetails({ accessLevel, districtId }));
   }, [dispatch, districtId]);
 
   if (!districtDetail) {
     return loadingJSX('District Detail');
   }
 
-  const { districtName, state, city, code, schoolSet } = districtDetail;
+  const {
+    districtName,
+    state,
+    city,
+    code,
+    schoolSet,
+    noteSet,
+    studentSet,
+    gradeSet,
+    attendanceSet,
+    behaviorSet
+  } = districtDetail;
 
   const schoolTable = (
     <CreateSchoolTable
       header={header}
       tHead={tHead}
       data={schoolSet}
+      tRow={tRow}
+      striped={striped}
+    />
+  );
+
+  const studentTable = (
+    <CreateStudentTable
+      header={header}
+      tHead={tHead}
+      data={studentSet}
+      tRow={tRow}
+      striped={striped}
+    />
+  );
+
+  const gradeTable = (
+    <CreateGradeTable
+      header={header}
+      tHead={tHead}
+      data={gradeSet}
+      tRow={tRow}
+      striped={striped}
+    />
+  );
+
+  const attendanceTable = (
+    <CreateAttendanceTable
+      header={header}
+      tHead={tHead}
+      data={attendanceSet}
+      tRow={tRow}
+      striped={striped}
+    />
+  );
+
+  const behaviorTable = (
+    <CreateBehaviorTable
+      header={header}
+      tHead={tHead}
+      data={behaviorSet}
+      tRow={tRow}
+      striped={striped}
+    />
+  );
+
+  const noteTable = (
+    <CreateNoteTable
+      header={header}
+      tHead={tHead}
+      data={noteSet}
       tRow={tRow}
       striped={striped}
     />
@@ -61,13 +129,48 @@ function DistrictDetail(props) {
         title="School"
         table={schoolTable}
       />
+
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Grade"
+        table={gradeTable}
+      />
+
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Attendance"
+        table={attendanceTable}
+      />
+
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Student"
+        table={studentTable}
+      />
+
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Behavior"
+        table={behaviorTable}
+      />
+
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Note"
+        table={noteTable}
+        url={props.location.pathname}
+        accessLevel={accessLevel}
+        action={postDistrictNotes}
+        haveCreateSaveButtonBool
+      />
     </div>
   );
 }
 
 DistrictDetail.propTypes = {
   classes: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
+  location: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(DistrictDetail);

@@ -10,13 +10,18 @@ import {
   CreateAttendanceTable,
   CreateStudentTable,
   CreateCourseTable,
-  CreateBehaviorTable
+  CreateBehaviorTable,
+  CreateNoteTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
-import { fetchSchoolDetails } from '../../../state/SchoolActions';
+import {
+  fetchSchoolDetails,
+  postSchoolNotes
+} from '../../../state/SchoolActions';
 
 function SchoolDetail(props) {
+  const accessLevel = 'my';
   const {
     classes: { header, striped, tHead, tRow, tableTitle },
     match: { params }
@@ -30,7 +35,7 @@ function SchoolDetail(props) {
   });
 
   useEffect(() => {
-    dispatch(fetchSchoolDetails({ accessLevel: 'my', schoolId }));
+    dispatch(fetchSchoolDetails({ accessLevel, schoolId }));
   }, [dispatch, schoolId]);
 
   if (!schoolDetail) {
@@ -45,7 +50,8 @@ function SchoolDetail(props) {
     courseSet,
     gradeSet,
     attendanceSet,
-    behaviorSet
+    behaviorSet,
+    noteSet
   } = schoolDetail;
 
   const gradeTable = (
@@ -98,6 +104,16 @@ function SchoolDetail(props) {
     />
   );
 
+  const noteTable = (
+    <CreateNoteTable
+      header={header}
+      tHead={tHead}
+      data={noteSet}
+      tRow={tRow}
+      striped={striped}
+    />
+  );
+
   return (
     <div>
       <Typography className={header} component="h1" variant="h4">
@@ -135,13 +151,23 @@ function SchoolDetail(props) {
         title="Student"
         table={studentTable}
       />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Note"
+        table={noteTable}
+        url={props.location.pathname}
+        accessLevel={accessLevel}
+        action={postSchoolNotes}
+        haveCreateSaveButtonBool
+      />
     </div>
   );
 }
 
 SchoolDetail.propTypes = {
   classes: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
+  location: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(SchoolDetail);

@@ -13,12 +13,14 @@ import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import {
   CreateGradeTable,
   CreateAttendanceTable,
-  CreateBehaviorTable
+  CreateBehaviorTable,
+  CreateNoteTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
-import { fetchStudent } from '../../../state/StudentActions';
+import { fetchStudent, postStudentNotes } from '../../../state/StudentActions';
 
 function StudentDetail(props) {
+  const accessLevel = 'all';
   const {
     classes: { header },
     match: { params }
@@ -33,7 +35,7 @@ function StudentDetail(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchStudent({ accessLevel: 'all', studentId }));
+    dispatch(fetchStudent({ accessLevel, studentId }));
     setLoading(false);
   }, [dispatch, studentId]);
 
@@ -53,7 +55,8 @@ function StudentDetail(props) {
     studentTerm,
     gradeSet,
     attendanceSet,
-    behaviorSet
+    behaviorSet,
+    noteSet
   } = studentDetail;
 
   const gradeTable = (
@@ -81,6 +84,16 @@ function StudentDetail(props) {
       header={header}
       tHead={tHead}
       data={behaviorSet}
+      tRow={tRow}
+      striped={striped}
+    />
+  );
+
+  const noteTable = (
+    <CreateNoteTable
+      header={header}
+      tHead={tHead}
+      data={noteSet}
       tRow={tRow}
       striped={striped}
     />
@@ -115,7 +128,17 @@ function StudentDetail(props) {
         title="Behavior"
         table={behaviorTable}
         headerClassStyle={tableTitle}
-        haveCreateSaveButtonBool={true}
+        haveCreateSaveButtonBool
+      />
+
+      <CreateTableHeader
+        title="Note"
+        table={noteTable}
+        headerClassStyle={tableTitle}
+        url={props.location.pathname}
+        accessLevel={accessLevel}
+        action={postStudentNotes}
+        haveCreateSaveButtonBool
       />
     </div>
   );
@@ -123,7 +146,8 @@ function StudentDetail(props) {
 
 StudentDetail.propTypes = {
   classes: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
+  location: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(StudentDetail);
