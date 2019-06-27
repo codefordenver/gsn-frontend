@@ -431,6 +431,53 @@ function CreateNoteTable(props) {
   );
 }
 
+function CreateReferralTable(props) {
+  if (props.data == undefined) {
+    return <div>Currently there isn't any data available.</div>;
+  }
+  return (
+    <div>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell className={props.tHead}>Referral Type</TableCell>
+            <TableCell className={props.tHead}>Date</TableCell>
+            <TableCell className={props.tHead}>Reference Name</TableCell>
+            <TableCell className={props.tHead}>Reference Address</TableCell>
+            <TableCell className={props.tHead}>Reference Phone</TableCell>
+            <TableCell className={props.tHead}>Reason</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {props.data.map((referralDetail, i) => {
+            const {
+              type,
+              dateGiven,
+              referenceName,
+              referenceAddress,
+              referencePhone,
+              reason
+            } = referralDetail;
+            return (
+              <TableRow
+                key={dateGiven}
+                className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
+              >
+                <TableCell align="left">{type}</TableCell>
+                <TableCell align="left">{dateGiven}</TableCell>
+                <TableCell align="left">{referenceName}</TableCell>
+                <TableCell align="left">{referenceAddress}</TableCell>
+                <TableCell align="left">{referencePhone}</TableCell>
+                <TableCell align="left">{reason}</TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </div>
+  );
+}
+
 export {
   CreateGradeTable,
   CreateSchoolTable,
@@ -440,5 +487,6 @@ export {
   CreateAttendanceTable,
   CreateCourseTable,
   CreateDistrictTable,
-  CreateNoteTable
+  CreateNoteTable,
+  CreateReferralTable
 };
