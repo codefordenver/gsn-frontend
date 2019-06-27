@@ -24,6 +24,7 @@ import Schools from 'pages/Table/School/Schools';
 import SchoolDetail from 'pages/Table/School/SchoolDetail';
 
 import ViewAllDataHomepage from 'pages/Homepages/ViewAllDataHomepage';
+import SearchPage from 'pages/SearchPage/SearchPage';
 
 import PrivateRoute from './PrivateRoute';
 // username: user.get('username'),
@@ -56,6 +57,8 @@ export default function () {
                       <PrivateRoute exact path="/school/:schoolId" component={SchoolDetail} />
 
                       <PrivateRoute exact path="/viewalldata" component={ViewAllDataHomepage} />
+                      
+                      <PrivateRoute exact path="/search" component={SearchPage} />
 
 
                   </Layout>
