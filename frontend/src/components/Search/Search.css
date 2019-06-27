@@ -1,0 +1,17 @@
+.search-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-input {
+    order: 1;
+    
+}
+
+.search-options {
+    order: 2;
+}
+
+.submit-button {
+    order: 3;
+}
