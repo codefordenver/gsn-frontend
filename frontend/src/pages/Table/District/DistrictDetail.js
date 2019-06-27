@@ -161,7 +161,7 @@ function DistrictDetail(props) {
         url={props.location.pathname}
         accessLevel={accessLevel}
         action={postDistrictNotes}
-        haveCreateSaveButtonBool
+        haveNoteButtonBool
       />
     </div>
   );

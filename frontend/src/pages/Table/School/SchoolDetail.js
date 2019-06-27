@@ -139,7 +139,6 @@ function SchoolDetail(props) {
         headerClassStyle={tableTitle}
         title="Behavior"
         table={behaviorTable}
-        haveCreateSaveButtonBool
       />
       <CreateTableHeader
         headerClassStyle={tableTitle}
@@ -158,7 +157,7 @@ function SchoolDetail(props) {
         url={props.location.pathname}
         accessLevel={accessLevel}
         action={postSchoolNotes}
-        haveCreateSaveButtonBool
+        haveNoteButtonBool
       />
     </div>
   );

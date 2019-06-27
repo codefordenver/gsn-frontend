@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Typography, withStyles } from '@material-ui/core';
+import { Typography, withStyles,  TextField, Select, MenuItem } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 import {
@@ -14,7 +14,8 @@ import {
   CreateGradeTable,
   CreateAttendanceTable,
   CreateBehaviorTable,
-  CreateNoteTable
+  CreateNoteTable,
+  CreateReferralTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 import { fetchStudent, postStudentNotes } from '../../../state/StudentActions';
@@ -56,7 +57,8 @@ function StudentDetail(props) {
     gradeSet,
     attendanceSet,
     behaviorSet,
-    noteSet
+    noteSet,
+    referralSet
   } = studentDetail;
 
   const gradeTable = (
@@ -99,6 +101,19 @@ function StudentDetail(props) {
     />
   );
 
+  const referralTable = (
+    <CreateReferralTable
+      header={header}
+      tHead={tHead}
+      data={referralSet}
+      tRow={tRow}
+      striped={striped}
+    />
+  );
+
+
+
+
   return (
     <div>
       <Typography className={header} component="h1" variant="h4">
@@ -128,7 +143,16 @@ function StudentDetail(props) {
         title="Behavior"
         table={behaviorTable}
         headerClassStyle={tableTitle}
-        haveCreateSaveButtonBool
+      />
+
+      <CreateTableHeader
+        title="Referral"
+        table={referralTable}
+        headerClassStyle={tableTitle}
+        url={props.location.pathname}
+        accessLevel={accessLevel}
+        action={postStudentNotes}
+        haveReferralButtonBool
       />
 
       <CreateTableHeader
@@ -138,8 +162,12 @@ function StudentDetail(props) {
         url={props.location.pathname}
         accessLevel={accessLevel}
         action={postStudentNotes}
-        haveCreateSaveButtonBool
+        haveNoteButtonBool
       />
+
+    
+
+
     </div>
   );
 }

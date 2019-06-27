@@ -141,7 +141,7 @@ function CourseDetail(props) {
         url={props.location.pathname}
         accessLevel={accessLevel}
         action={postCourseNotes}
-        haveCreateSaveButtonBool
+        haveNoteButtonBool
       />
     </div>
   );
