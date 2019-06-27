@@ -1,17 +1,37 @@
+.form-wrapper {
+    display: inline-block;
+}
+
 .search-form {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: auto;
 }
 
 .search-input {
     order: 1;
-    
+    border-radius: 3px;
+    border: 2px solid black;
+    height: 100px;
+    width: 300px;
+    margin-bottom: 10px;
 }
 
 .search-options {
     order: 2;
+    width: 200px;
+    height: 2em;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid gray;
 }
 
 .submit-button {
     order: 3;
+    border-radius: 3px;
+    border: 1px solid gray;
+    height: 1.8em;
+    width: 6em;
+
 }
