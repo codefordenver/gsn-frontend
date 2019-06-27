@@ -41,12 +41,34 @@ export const fetchStudent = ({ accessLevel, studentId }) => {
           Accept: 'application/json',
           Authorization: `JWT ${localStorage.token}`
         }
-      })
+      }
+    )
       .then(response => {
         return response.json();
       })
       .then(student => {
         dispatch(getStudent(student['0']));
+      })
+      .catch(error => error);
+  };
+};
+
+export const postStudentNotes = ({ text, accessLevel, url }) => {
+  return dispatch => {
+    return fetch(`http://gsndev.com/gsndb/${accessLevel}${url}/`, {
+      method: 'POST',
+      body: JSON.stringify({ text }),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(s => {
+        dispatch(getStudent(s['0']));
       })
       .catch(error => error);
   };

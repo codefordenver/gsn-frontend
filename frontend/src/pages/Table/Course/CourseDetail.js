@@ -16,9 +16,13 @@ import {
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
-import { fetchCourseDetails } from '../../../state/CourseActions';
+import {
+  fetchCourseDetails,
+  postCourseNotes
+} from '../../../state/CourseActions';
 
 function CourseDetail(props) {
+  const accessLevel = 'my';
   const {
     classes: { striped, tHead, tRow, tableTitle, header },
     match: { params }
@@ -32,7 +36,7 @@ function CourseDetail(props) {
   });
 
   useEffect(() => {
-    dispatch(fetchCourseDetails({ accessLevel: 'my', courseId }));
+    dispatch(fetchCourseDetails({ accessLevel, courseId }));
   }, [dispatch, courseId]);
 
   if (!courseDetail) {
@@ -97,45 +101,56 @@ function CourseDetail(props) {
   };
 
   const noteTable = (
-    < CreateStudentTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {noteSet} 
-            tRow = {tRow} 
-            striped = {striped} />
+    <CreateNoteTable
+      header={header}
+      tHead={tHead}
+      data={noteSet}
+      tRow={tRow}
+      striped={striped}
+    />
   );
 
   return (
-      <div>
-          <Typography className={header} component="h1" variant="h4">{courseName}</Typography>
-          <DetailItem k="Course Code" val={courseCode} />
-          <DetailItem k="Subject" val={courseSubject} />
-          <DetailLink k="School" val={schoolName} link={`/school/${schoolId}`} />
+    <div>
+      <Typography className={header} component="h1" variant="h4">
+        {courseName}
+      </Typography>
+      <DetailItem k="Course Code" val={courseCode} />
+      <DetailItem k="Subject" val={courseSubject} />
+      <DetailLink k="School" val={schoolName} link={`/school/${schoolId}`} />
 
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Grades" 
-            table = {gradeTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Attendance" 
-            table = {attendanceTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Student" 
-            table = {studentTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Note" 
-            table = {noteTable}
-            haveCreateSaveButtonBool={true}/>
-      </div>
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Grades"
+        table={gradeTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Attendance"
+        table={attendanceTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Student"
+        table={studentTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Note"
+        table={noteTable}
+        url={props.location.pathname}
+        accessLevel={accessLevel}
+        action={postCourseNotes}
+        haveCreateSaveButtonBool
+      />
+    </div>
   );
 }
 
 CourseDetail.propTypes = {
   classes: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
+  location: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(CourseDetail);

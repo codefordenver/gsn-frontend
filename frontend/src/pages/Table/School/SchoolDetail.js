@@ -15,9 +15,13 @@ import {
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
 
-import { fetchSchoolDetails } from '../../../state/SchoolActions';
+import {
+  fetchSchoolDetails,
+  postSchoolNotes
+} from '../../../state/SchoolActions';
 
 function SchoolDetail(props) {
+  const accessLevel = 'my';
   const {
     classes: { header, striped, tHead, tRow, tableTitle },
     match: { params }
@@ -31,7 +35,7 @@ function SchoolDetail(props) {
   });
 
   useEffect(() => {
-    dispatch(fetchSchoolDetails({ accessLevel: 'my', schoolId }));
+    dispatch(fetchSchoolDetails({ accessLevel, schoolId }));
   }, [dispatch, schoolId]);
 
   if (!schoolDetail) {
@@ -39,15 +43,15 @@ function SchoolDetail(props) {
   }
 
   const {
-      schoolName,
-      districtId,
-      districtName,
-      studentSet,
-      courseSet,
-      gradeSet,
-      attendanceSet,
-      behaviorSet,
-      noteSet
+    schoolName,
+    districtId,
+    districtName,
+    studentSet,
+    courseSet,
+    gradeSet,
+    attendanceSet,
+    behaviorSet,
+    noteSet
   } = schoolDetail;
 
   const gradeTable = (
@@ -101,53 +105,69 @@ function SchoolDetail(props) {
   );
 
   const noteTable = (
-    < CreateNoteTable 
-            header = {header}
-            tHead = {tHead} 
-            data = {noteSet} 
-            tRow = {tRow} 
-            striped = {striped} />
+    <CreateNoteTable
+      header={header}
+      tHead={tHead}
+      data={noteSet}
+      tRow={tRow}
+      striped={striped}
+    />
   );
 
   return (
-      <div>
-          <Typography className={header} component="h1" variant="h4">{schoolName}</Typography>
-          <DetailLink k="District Name" val={districtName} link={`/district/${districtId}`} />
+    <div>
+      <Typography className={header} component="h1" variant="h4">
+        {schoolName}
+      </Typography>
+      <DetailLink
+        k="District Name"
+        val={districtName}
+        link={`/district/${districtId}`}
+      />
 
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Grades" 
-            table = {gradeTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Attendance" 
-            table = {attendanceTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Behavior" 
-            table = {behaviorTable}
-            haveCreateSaveButtonBool={true}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Course" 
-            table = {courseTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Student" 
-            table = {studentTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Note" 
-            table = {noteTable}
-            haveCreateSaveButtonBool={true}/>
-      </div>
-
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Grades"
+        table={gradeTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Attendance"
+        table={attendanceTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Behavior"
+        table={behaviorTable}
+        haveCreateSaveButtonBool
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Course"
+        table={courseTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Student"
+        table={studentTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Note"
+        table={noteTable}
+        url={props.location.pathname}
+        accessLevel={accessLevel}
+        action={postSchoolNotes}
+        haveCreateSaveButtonBool
+      />
+    </div>
   );
 }
 
 SchoolDetail.propTypes = {
   classes: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
+  location: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(SchoolDetail);
