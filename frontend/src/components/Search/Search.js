@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-const options = ['All', 'Student', 'Course', 'School', 'District', 'Program']
 
 class Search extends Component {
     constructor(props) {
