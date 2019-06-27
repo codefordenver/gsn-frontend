@@ -35,6 +35,11 @@ const navItems = [
     icon: <Wrench />,
     route: '/manage-data',
   },
+  {
+    name: 'Search',
+    icon: <Wrench />, //placeholder - needs magnifying glass
+    route: '/search',
+  },
 ];
 
 function BaseLink(props) {
