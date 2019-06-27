@@ -11,10 +11,11 @@ import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import {
   CreateGradeTable,
   CreateAttendanceTable,
-  CreateBehaviorTable
+  CreateBehaviorTable,
+  CreateNoteTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
-import { fetchStudent } from '../../../state/StudentActions';
+import { fetchStudent, postStudentNotes } from '../../../state/StudentActions';
 
 function StudentDetail(props) {
   const {
@@ -23,6 +24,9 @@ function StudentDetail(props) {
 
   // Props are provided by React Router
   const { studentId } = props.match.params;
+  
+  // Access level for note table 
+  const accessLevel = 'all';
 
   // Access Level Variables
   const myOrAll = props.myOrAll;
@@ -53,7 +57,8 @@ function StudentDetail(props) {
     studentTerm,
     gradeSet,
     attendanceSet,
-    behaviorSet
+    behaviorSet,
+    noteSet
   } = studentDetail;
 
   const gradeTable = (
@@ -89,6 +94,16 @@ function StudentDetail(props) {
     />
   );
 
+  const noteTable = (
+    <CreateNoteTable
+      header={header}
+      tHead={tHead}
+      data={noteSet}
+      tRow={tRow}
+      striped={striped}
+    />
+  );
+
   return (
     <div>
       <Typography className={header} component="h1" variant="h4">
@@ -118,7 +133,17 @@ function StudentDetail(props) {
         title="Behavior"
         table={behaviorTable}
         headerClassStyle={tableTitle}
-        haveCreateSaveButtonBool={true}
+        haveCreateSaveButtonBool
+      />
+
+      <CreateTableHeader
+        title="Note"
+        table={noteTable}
+        headerClassStyle={tableTitle}
+        url={props.location.pathname}
+        accessLevel={accessLevel}
+        action={postStudentNotes}
+        haveCreateSaveButtonBool
       />
     </div>
   );
@@ -126,7 +151,8 @@ function StudentDetail(props) {
 
 StudentDetail.propTypes = {
   classes: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
+  location: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(StudentDetail);

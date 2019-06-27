@@ -11,10 +11,14 @@ import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import {
   CreateGradeTable,
   CreateStudentTable,
-  CreateAttendanceTable
+  CreateAttendanceTable,
+  CreateNoteTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
-import { fetchCourseDetails } from '../../../state/CourseActions';
+import {
+  fetchCourseDetails,
+  postCourseNotes
+} from '../../../state/CourseActions';
 
 function CourseDetail(props) {
   const {
@@ -23,6 +27,9 @@ function CourseDetail(props) {
 
   // Props are provided by React Router
   const { courseId } = props.match.params;
+  
+  // Access level for note table   
+  const accessLevel = 'my';
 
   // Access Level Variables
   const myOrAll = props.myOrAll;
@@ -51,7 +58,8 @@ function CourseDetail(props) {
     courseSubject,
     gradeSet,
     attendanceSet,
-    studentSet
+    studentSet,
+    noteSet
   } = courseDetail;
 
   const gradeTable = (
@@ -87,6 +95,16 @@ function CourseDetail(props) {
     />
   );
 
+  const noteTable = (
+    <CreateNoteTable
+      header={header}
+      tHead={tHead}
+      data={noteSet}
+      tRow={tRow}
+      striped={striped}
+    />
+  );
+
   return (
     <div>
       <Typography className={header} component="h1" variant="h4">
@@ -110,6 +128,16 @@ function CourseDetail(props) {
         headerClassStyle={tableTitle}
         title="Student"
         table={studentTable}
+
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Note"
+        table={noteTable}
+        url={props.location.pathname}
+        accessLevel={accessLevel}
+        action={postCourseNotes}
+        haveCreateSaveButtonBool
       />
     </div>
   );
@@ -117,7 +145,8 @@ function CourseDetail(props) {
 
 CourseDetail.propTypes = {
   classes: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
+  location: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(CourseDetail);

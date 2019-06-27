@@ -7,10 +7,16 @@ import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import {
   CreateGradeTable,
   CreateStudentTable,
-  CreateCourseTable
+  CreateCourseTable,
+  CreateNoteTable,
+  CreateAttendanceTable,
+  CreateBehaviorTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
-import { fetchProgramDetails } from '../../../state/ProgramActions';
+import {
+  fetchProgramDetails,
+  postProgramNotes
+} from '../../../state/ProgramActions';
 
 function ProgramDetail(props) {
   const {
@@ -19,6 +25,9 @@ function ProgramDetail(props) {
 
   // Props are provided by React Router
   const { programId } = props.match.params;
+  
+  // Access level for note table 
+  const accessLevel = 'my';
 
   // Access Level Variables
   const myOrAll = props.myOrAll;
@@ -39,7 +48,25 @@ function ProgramDetail(props) {
     return loadingJSX('District Detail');
   }
 
-  const { programName, gradeSet, courseSet, studentSet } = programDetail;
+  const {
+    programName,
+    studentSet,
+    courseSet,
+    gradeSet,
+    behaviorSet,
+    attendanceSet,
+    noteSet
+  } = programDetail;
+
+  const behaviorTable = (
+    <CreateBehaviorTable
+      header={header}
+      tHead={tHead}
+      data={behaviorSet}
+      tRow={tRow}
+      striped={striped}
+    />
+  );
 
   const gradeTable = (
     <CreateGradeTable
@@ -74,6 +101,26 @@ function ProgramDetail(props) {
     />
   );
 
+  const attendanceTable = (
+    <CreateAttendanceTable
+      header={header}
+      tHead={tHead}
+      data={attendanceSet}
+      tRow={tRow}
+      striped={striped}
+    />
+  );
+
+  const noteTable = (
+    <CreateNoteTable
+      header={header}
+      tHead={tHead}
+      data={noteSet}
+      tRow={tRow}
+      striped={striped}
+    />
+  );
+
   return (
     <div>
       <Typography className={header} component="h1" variant="h4">
@@ -86,6 +133,17 @@ function ProgramDetail(props) {
       />
       <CreateTableHeader
         headerClassStyle={tableTitle}
+        title="Attendance"
+        table={attendanceTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Behavior"
+        table={behaviorTable}
+        haveCreateSaveButtonBool
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
         title="Course"
         table={courseTable}
       />
@@ -94,13 +152,23 @@ function ProgramDetail(props) {
         title="Student"
         table={studentTable}
       />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Note"
+        table={noteTable}
+        url={props.location.pathname}
+        accessLevel={accessLevel}
+        action={postProgramNotes}
+        haveCreateSaveButtonBool
+      />
     </div>
   );
 }
 
 ProgramDetail.propTypes = {
   classes: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
+  location: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(ProgramDetail);

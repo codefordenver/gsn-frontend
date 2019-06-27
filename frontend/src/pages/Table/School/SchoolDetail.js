@@ -10,10 +10,14 @@ import {
   CreateAttendanceTable,
   CreateStudentTable,
   CreateCourseTable,
-  CreateBehaviorTable
+  CreateBehaviorTable,
+  CreateNoteTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
-import { fetchSchoolDetails } from '../../../state/SchoolActions';
+import {
+  fetchSchoolDetails,
+  postSchoolNotes
+} from '../../../state/SchoolActions';
 
 function SchoolDetail(props) {
   const {
@@ -22,6 +26,9 @@ function SchoolDetail(props) {
 
   // Props are provided by React Router
   const { schoolId } = props.match.params;
+  
+  // Access level for note table 
+  const accessLevel = 'my';
 
   // Access Level Variables
   const myOrAll = props.myOrAll;
@@ -50,7 +57,8 @@ function SchoolDetail(props) {
     courseSet,
     gradeSet,
     attendanceSet,
-    behaviorSet
+    behaviorSet,
+    noteSet
   } = schoolDetail;
 
   const gradeTable = (
@@ -108,6 +116,16 @@ function SchoolDetail(props) {
     />
   );
 
+  const noteTable = (
+    <CreateNoteTable
+      header={header}
+      tHead={tHead}
+      data={noteSet}
+      tRow={tRow}
+      striped={striped}
+    />
+  );
+
   return (
     <div>
       <Typography className={header} component="h1" variant="h4">
@@ -145,13 +163,23 @@ function SchoolDetail(props) {
         title="Student"
         table={studentTable}
       />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Note"
+        table={noteTable}
+        url={props.location.pathname}
+        accessLevel={accessLevel}
+        action={postSchoolNotes}
+        haveCreateSaveButtonBool
+      />
     </div>
   );
 }
 
 SchoolDetail.propTypes = {
   classes: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
+  location: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(SchoolDetail);
