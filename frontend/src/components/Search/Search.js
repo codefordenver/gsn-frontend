@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
 import './Search.css'
-//const  { DOM: { input, select, textarea } } = React
 
 class Search extends Component {
     constructor(props) {
@@ -13,7 +12,7 @@ class Search extends Component {
         }
     }
 
-    handleClick() {
+    handleClick() {  //feel free to remove handleClick and handleOnChange if not needed
         console.log('handle click')
     }
 
@@ -25,8 +24,8 @@ class Search extends Component {
     render() {
         const options = ['All', 'Student', 'Course', 'School', 'District', 'Program']
         return (
-            <form className="search-form">
-               
+            <div className="form-wrapper">
+                <form className="search-form">
                     <Field 
                         className="search-input"
                         name="search-input" 
@@ -39,9 +38,9 @@ class Search extends Component {
                             <option value={item} key={index}>{item}</option>
                         ))}
                     </Field>
-                    <button>Submit</button>
-                
-            </form>
+                    <button className="submit-button">Submit</button>                
+                </form>
+            </div>
         )
     }
 }
