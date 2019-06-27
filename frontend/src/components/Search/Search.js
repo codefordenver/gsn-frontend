@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+const options = ['All', 'Student', 'Course', 'School', 'District', 'Program']
 
 class Search extends Component {
     constructor(props) {
@@ -22,17 +23,19 @@ class Search extends Component {
     render() {
         const options = ['All', 'Student', 'Course', 'School', 'District', 'Program']
         return (
-            <div>
-                <textarea>
+            <form>
+                <div>
+                    <textarea>
 
-                </textarea>
-                <Field name="options" component="select">
-                    {options.map((item, index) => (
-                        <option value={item} key={index}>{item}</option>
-                    ))}
-                </Field>
-                <button>Submit</button>
-            </div>
+                    </textarea>
+                    <Field name="search-options" component="select">
+                        {options.map((item, index) => (
+                            <option value={item} key={index}>{item}</option>
+                        ))}
+                    </Field>
+                    <button>Submit</button>
+                </div>
+            </form>
         )
     }
 }
