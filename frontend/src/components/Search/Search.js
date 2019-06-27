@@ -1,21 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
 
-export default class Search extends React.Component {
+class Search extends Component {
     constructor(props) {
         super(props)
         this.state = {
-        
+            selectedOption: '',
         }
     }
 
+    handleClick() {
+        console.log('handle click')
+    }
+
+    handleOnChange(e) {
+        console.log('selected option', e.target.value);
+        this.setState({ selectedOption: e.target.value})
+    } 
+
     render() {
+        const options = ['All', 'Student', 'Course', 'School', 'District', 'Program']
         return (
             <div>
                 <textarea>
 
                 </textarea>
+                <Field name="options" component="select">
+                    {options.map((item, index) => (
+                        <option value={item} key={index}>{item}</option>
+                    ))}
+                </Field>
                 <button>Submit</button>
             </div>
         )
     }
 }
+
+const ReduxFormSearch = reduxForm({
+    form: 'search',
+})(Search)
+
+export default connect()(ReduxFormSearch)
