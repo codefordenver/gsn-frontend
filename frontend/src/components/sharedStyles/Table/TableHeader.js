@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Typography, Button, Grid } from '@material-ui/core';
 import { ChevronRightOutlined, ChevronDownOutlined } from 'components/Icons';
-import EntryComponent, {
+import NoteEntryComponent, {
   CreateButton
 } from 'components/sharedStyles/ManageData/Note';
 
@@ -14,12 +14,19 @@ function CreateTableHeader(props) {
   function ChangeButton() {
     setHaveCreateButton(!haveCreateButton);
   }
-  const entryComponent = props.haveCreateSaveButtonBool ? (
+  const noteEntryComponent = props.haveNoteButtonBool ? (
     haveCreateButton ? (
-      <EntryComponent {...props} />
+      <NoteEntryComponent {...props} />
     ) : null
   ) : null;
-  const button = props.haveCreateSaveButtonBool ? (
+
+  const referralEntryComponent = props.haveReferralButtonBool ? (
+    haveCreateButton ? (
+      <NoteEntryComponent {...props} />
+    ) : null
+  ) : null;
+
+  const button = (props.haveNoteButtonBool || props.haveReferralButtonBool) ? (
     haveCreateButton ? (
       <CreateButton text="Cancel" />
     ) : (
@@ -43,7 +50,8 @@ function CreateTableHeader(props) {
         </Button>
         <Typography onClick={ChangeButton}>{button}</Typography>
       </Grid>
-      {entryComponent}
+      {noteEntryComponent}
+      {referralEntryComponent}
       {table}
     </div>
   );
