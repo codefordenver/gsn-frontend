@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
@@ -14,7 +14,6 @@ import {
   CreateGradeTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
-
 import {
   fetchDistrictDetails,
   postDistrictNotes
@@ -22,21 +21,29 @@ import {
 
 function DistrictDetail(props) {
   const {
-    classes: { header, striped, tHead, tRow, tableTitle },
-    match: { params }
+    classes: { header, striped, tHead, tRow, tableTitle }
   } = props;
-  const { districtId } = params;
+
+  // Props are provided by React Router
+  const { districtId } = props.match.params;
+  
+  // Access level for note table 
   const accessLevel = 'my';
 
-  const dispatch = useDispatch();
+  // Access Level Variables
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
 
+  // Redux Hooks
+  const dispatch = useDispatch();
   const districtDetail = useSelector(state => {
     return state.districts.district;
   });
 
+  // React Hook to fetch DistrictDetail data
   useEffect(() => {
-    dispatch(fetchDistrictDetails({ accessLevel, districtId }));
-  }, [dispatch, districtId]);
+    dispatch(fetchDistrictDetails({ accessLevel: myOrAll, districtId }));
+  }, [dispatch, districtId, myOrAll]);
 
   if (!districtDetail) {
     return loadingJSX('District Detail');
@@ -62,6 +69,7 @@ function DistrictDetail(props) {
       data={schoolSet}
       tRow={tRow}
       striped={striped}
+      my_or_all_link={myOrAllUrl}
     />
   );
 

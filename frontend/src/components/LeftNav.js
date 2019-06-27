@@ -13,7 +13,7 @@ const navItems = [
   {
     name: 'My Students',
     icon: <UserGroup />,
-    route: '/student',
+    route: '/my/student',
   },
   {
     name: 'My Programs',
@@ -23,7 +23,7 @@ const navItems = [
   {
     name: 'View All Data',
     icon: <ViewShow />,
-    route: '/viewalldata',
+    route: '/all',
   },
   {
     name: 'Analyze Data',
