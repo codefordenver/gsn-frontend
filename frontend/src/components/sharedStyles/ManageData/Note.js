@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button, Typography, TextField } from '@material-ui/core';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Button, TextField } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-function Note(props) {
+function NoteEntryComponent(props) {
   const dispatch = useDispatch();
   const [fieldText, setFieldText] = useState('');
   const { action, url, accessLevel } = props;
@@ -25,7 +25,7 @@ function Note(props) {
         rowsMax="6"
         fullWidth="true"
         variant="outlined"
-        placeholder="Content"
+        placeholder="Enter note here"
         required="true"
         value={fieldText}
         onChange={updateTextState}
@@ -54,7 +54,7 @@ function CreateButton(props) {
   );
 }
 
-Note.propTypes = {
+NoteEntryComponent.propTypes = {
   action: PropTypes.func.isRequired,
   url: PropTypes.string.isRequired,
   accessLevel: PropTypes.string.isRequired
@@ -64,5 +64,5 @@ CreateButton.propTypes = {
   text: PropTypes.string.isRequired
 };
 
-export default Note;
+export default NoteEntryComponent;
 export { CreateButton };
