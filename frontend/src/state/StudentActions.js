@@ -53,7 +53,7 @@ export const fetchStudent = ({ accessLevel, studentId }) => {
   };
 };
 
-export const postStudentNotes = ({ text, accessLevel, url }) => {
+export const postStudentNotes = ({ text, accessLevel, url, callback }) => {
   return dispatch => {
     return fetch(`http://gsndev.com/gsndb/${accessLevel}${url}/`, {
       method: 'POST',
@@ -69,6 +69,29 @@ export const postStudentNotes = ({ text, accessLevel, url }) => {
       })
       .then(s => {
         dispatch(getStudent(s['0']));
+        callback();
+      })
+      .catch(error => error);
+  };
+};
+
+export const postStudentReferrals = ({ field, callback }) => {
+  return dispatch => {
+    return fetch(`http://gsndev.com/gsndb/all/referral/`, {
+      method: 'POST',
+      body: JSON.stringify(field),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(s => {
+        dispatch(getStudent(s['0']));
+        callback();
       })
       .catch(error => error);
   };

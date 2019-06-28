@@ -158,6 +158,7 @@ function SchoolDetail(props) {
         accessLevel={accessLevel}
         action={postSchoolNotes}
         haveNoteButtonBool
+        buttonText="New Note"
       />
     </div>
   );

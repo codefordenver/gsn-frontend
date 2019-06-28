@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Typography, withStyles,  TextField, Select, MenuItem } from '@material-ui/core';
+import {
+  Typography,
+  withStyles,
+  TextField,
+  Select,
+  MenuItem
+} from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 import {
@@ -18,7 +24,11 @@ import {
   CreateReferralTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
-import { fetchStudent, postStudentNotes } from '../../../state/StudentActions';
+import {
+  fetchStudent,
+  postStudentNotes,
+  postStudentReferrals
+} from '../../../state/StudentActions';
 
 function StudentDetail(props) {
   const accessLevel = 'all';
@@ -111,9 +121,6 @@ function StudentDetail(props) {
     />
   );
 
-
-
-
   return (
     <div>
       <Typography className={header} component="h1" variant="h4">
@@ -151,8 +158,10 @@ function StudentDetail(props) {
         headerClassStyle={tableTitle}
         url={props.location.pathname}
         accessLevel={accessLevel}
-        action={postStudentNotes}
+        action={postStudentReferrals}
+        student={studentDetail}
         haveReferralButtonBool
+        buttonText="New Referral"
       />
 
       <CreateTableHeader
@@ -162,12 +171,10 @@ function StudentDetail(props) {
         url={props.location.pathname}
         accessLevel={accessLevel}
         action={postStudentNotes}
+        student={studentDetail}
         haveNoteButtonBool
+        buttonText="New Note"
       />
-
-    
-
-
     </div>
   );
 }

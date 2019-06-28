@@ -162,6 +162,7 @@ function DistrictDetail(props) {
         accessLevel={accessLevel}
         action={postDistrictNotes}
         haveNoteButtonBool
+        buttonText="New Note"
       />
     </div>
   );

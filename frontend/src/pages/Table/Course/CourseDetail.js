@@ -142,6 +142,7 @@ function CourseDetail(props) {
         accessLevel={accessLevel}
         action={postCourseNotes}
         haveNoteButtonBool
+        buttonText="New Note"
       />
     </div>
   );

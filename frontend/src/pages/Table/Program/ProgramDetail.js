@@ -165,6 +165,7 @@ function ProgramDetail(props) {
         accessLevel={accessLevel}
         action={postProgramNotes}
         haveNoteButtonBool
+        buttonText="New Note"
       />
     </div>
   );

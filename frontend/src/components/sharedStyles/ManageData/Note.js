@@ -4,16 +4,16 @@ import { Button, TextField } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
 function NoteEntryComponent(props) {
+  const { action, url, accessLevel, callback } = props;
   const dispatch = useDispatch();
   const [fieldText, setFieldText] = useState('');
-  const { action, url, accessLevel } = props;
 
   const updateTextState = event => {
     setFieldText(event.target.value);
   };
 
   const postTextFromState = () => {
-    const data = { text: fieldText, url, accessLevel };
+    const data = { text: fieldText, url, accessLevel, callback };
     dispatch(action(data));
   };
 
@@ -56,6 +56,7 @@ function CreateButton(props) {
 
 NoteEntryComponent.propTypes = {
   action: PropTypes.func.isRequired,
+  callback: PropTypes.func.isRequired,
   url: PropTypes.string.isRequired,
   accessLevel: PropTypes.string.isRequired
 };

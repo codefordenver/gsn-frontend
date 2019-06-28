@@ -4,8 +4,10 @@ import { ChevronRightOutlined, ChevronDownOutlined } from 'components/Icons';
 import NoteEntryComponent, {
   CreateButton
 } from 'components/sharedStyles/ManageData/Note';
+import ReferralEntryComponent from 'components/sharedStyles/ManageData/Referral';
 
 function CreateTableHeader(props) {
+  const { haveReferralButtonBool, haveNoteButtonBool, buttonText } = props;
   const [hiddenTable, setHiddenTable] = useState(true);
   const [haveCreateButton, setHaveCreateButton] = useState(false);
   function ChangeHiddenTable() {
@@ -14,25 +16,28 @@ function CreateTableHeader(props) {
   function ChangeButton() {
     setHaveCreateButton(!haveCreateButton);
   }
-  const noteEntryComponent = props.haveNoteButtonBool ? (
-    haveCreateButton ? (
-      <NoteEntryComponent {...props} />
-    ) : null
-  ) : null;
 
-  const referralEntryComponent = props.haveReferralButtonBool ? (
-    haveCreateButton ? (
-      <NoteEntryComponent {...props} />
-    ) : null
-  ) : null;
+  let noteEntryComponent = null;
+  let referralEntryComponent = null;
+  let button = null;
 
-  const button = (props.haveNoteButtonBool || props.haveReferralButtonBool) ? (
-    haveCreateButton ? (
-      <CreateButton text="Cancel" />
-    ) : (
-      <CreateButton text="New" />
-    )
-  ) : null;
+  const setButtonText = type =>
+    type ? <CreateButton text="Cancel" /> : <CreateButton text={buttonText} />;
+
+  if (haveNoteButtonBool) {
+    noteEntryComponent = haveCreateButton && (
+      <NoteEntryComponent {...props} callback={ChangeButton} />
+    );
+    button = setButtonText(haveCreateButton);
+  }
+
+  if (haveReferralButtonBool) {
+    referralEntryComponent = haveCreateButton && (
+      <ReferralEntryComponent {...props} callback={ChangeButton} />
+    );
+    button = setButtonText(haveCreateButton);
+  }
+
   const table = hiddenTable ? null : props.table;
   const icon = hiddenTable ? <ChevronRightOutlined /> : <ChevronDownOutlined />;
 
