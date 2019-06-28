@@ -398,8 +398,6 @@ function CreateBehaviorTable(props) {
 }
 
 function CreateNoteTable(props) {
-  console.log('This is the notes table');
-  console.log(props);
   if (props.data == undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
@@ -414,14 +412,14 @@ function CreateNoteTable(props) {
         </TableHead>
         <TableBody>
           {props.data.map((noteDetail, i) => {
-            const { createdUpdated, text } = noteDetail;
+            const { created, context } = noteDetail;
             return (
               <TableRow
-                key={text}
+                key={context}
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
-                <TableCell align="left">{createdUpdated}</TableCell>
-                <TableCell align="left">{text}</TableCell>
+                <TableCell align="left">{created}</TableCell>
+                <TableCell align="left">{context}</TableCell>
               </TableRow>
             );
           })}
