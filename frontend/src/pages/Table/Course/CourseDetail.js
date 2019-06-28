@@ -27,9 +27,6 @@ function CourseDetail(props) {
 
   // Props are provided by React Router
   const { courseId } = props.match.params;
-  
-  // Access level for note table   
-  const accessLevel = 'my';
 
   // Access Level Variables
   const myOrAll = props.myOrAll;
@@ -135,7 +132,6 @@ function CourseDetail(props) {
         title="Note"
         table={noteTable}
         url={props.location.pathname}
-        accessLevel={accessLevel}
         action={postCourseNotes}
         haveCreateSaveButtonBool
       />
