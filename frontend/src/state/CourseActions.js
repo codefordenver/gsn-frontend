@@ -51,7 +51,7 @@ export const fetchCourseDetails = ({ accessLevel, courseId }) => {
 
 export const postCourseNotes = ({ text, accessLevel, url }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/${accessLevel}${url}/`, {
+    return fetch(`http://gsndev.com/gsndb${url}/`, {
       method: 'POST',
       body: JSON.stringify({ text }),
       headers: {
