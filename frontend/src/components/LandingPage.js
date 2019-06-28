@@ -4,6 +4,7 @@ import { Typography, Divider, withStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Layout from './layouts/SignUpLayout';
 import styles from './sharedStyles/LoginStyles';
+import GsnLogo from '../images/gsn_logo_mark.png';
 
 function LandingPage(props) {
   const {
@@ -13,7 +14,7 @@ function LandingPage(props) {
   return (
     <Layout>
       <Typography className={header} variant="h1" gutterBottom>
-        GSN
+        <img className="landing-image" src={GsnLogo} alt="gsn-logo" />
       </Typography>
 
       <Divider className={divider} />
