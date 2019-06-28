@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
@@ -13,32 +13,36 @@ import {
   CreateBehaviorTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
-
 import {
   fetchProgramDetails,
   postProgramNotes
 } from '../../../state/ProgramActions';
 
 function ProgramDetail(props) {
-  const accessLevel = 'my';
   const {
-    classes: { striped, tHead, tRow, tableTitle, header },
-    match: { params }
+    classes: { striped, tHead, tRow, tableTitle, header }
   } = props;
-  const { programId } = params;
 
+  // Props are provided by React Router
+  const { programId } = props.match.params;
+
+  // Access Level Variables
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
+
+  // Redux Hooks
   const dispatch = useDispatch();
-
   const programDetail = useSelector(state => {
     return state.programs.program;
   });
 
+  // React Hook to fetch ProgramDetail data
   useEffect(() => {
-    dispatch(fetchProgramDetails({ accessLevel, programId }));
-  }, [dispatch, programId]);
+    dispatch(fetchProgramDetails({ accessLevel: myOrAll, programId }));
+  }, [dispatch, myOrAll, programId]);
 
   if (!programDetail) {
-    return loadingJSX('Program Detail');
+    return loadingJSX('District Detail');
   }
 
   const {
@@ -61,50 +65,38 @@ function ProgramDetail(props) {
     />
   );
 
-  const gradeTable = () => {
-    if (!gradeSet) {
-      return <p>Data not found</p>;
-    }
-    return (
-      <CreateGradeTable
-        header={header}
-        tHead={tHead}
-        data={gradeSet}
-        tRow={tRow}
-        striped={striped}
-      />
-    );
-  };
+  const gradeTable = (
+    <CreateGradeTable
+      header={header}
+      tHead={tHead}
+      data={gradeSet}
+      tRow={tRow}
+      striped={striped}
+      my_or_all_link={myOrAllUrl}
+    />
+  );
 
-  const courseTable = () => {
-    if (!courseSet) {
-      return <p>Data not found</p>;
-    }
-    return (
-      <CreateCourseTable
-        header={header}
-        tHead={tHead}
-        data={courseSet}
-        tRow={tRow}
-        striped={striped}
-      />
-    );
-  };
+  const courseTable = (
+    <CreateCourseTable
+      header={header}
+      tHead={tHead}
+      data={courseSet}
+      tRow={tRow}
+      striped={striped}
+      my_or_all_link={myOrAllUrl}
+    />
+  );
 
-  const studentTable = () => {
-    if (!studentSet) {
-      return <p>Data not found</p>;
-    }
-    return (
-      <CreateStudentTable
-        header={header}
-        tHead={tHead}
-        data={studentSet}
-        tRow={tRow}
-        striped={striped}
-      />
-    );
-  };
+  const studentTable = (
+    <CreateStudentTable
+      header={header}
+      tHead={tHead}
+      data={studentSet}
+      tRow={tRow}
+      striped={striped}
+      my_or_all_link={myOrAllUrl}
+    />
+  );
 
   const attendanceTable = (
     <CreateAttendanceTable
@@ -131,7 +123,6 @@ function ProgramDetail(props) {
       <Typography className={header} component="h1" variant="h4">
         {programName}
       </Typography>
-
       <CreateTableHeader
         headerClassStyle={tableTitle}
         title="Grades"
@@ -146,6 +137,7 @@ function ProgramDetail(props) {
         headerClassStyle={tableTitle}
         title="Behavior"
         table={behaviorTable}
+        haveCreateSaveButtonBool
       />
       <CreateTableHeader
         headerClassStyle={tableTitle}
@@ -162,7 +154,7 @@ function ProgramDetail(props) {
         title="Note"
         table={noteTable}
         url={props.location.pathname}
-        accessLevel={accessLevel}
+        accessLevel={myOrAll}
         action={postProgramNotes}
         haveNoteButtonBool
         buttonText="New Note"

@@ -10,6 +10,8 @@ import {
 } from '@material-ui/core';
 
 function CreateGradeTable(props) {
+  const my_or_all = props.my_or_all_link;
+
   if (props.data == undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
@@ -43,12 +45,12 @@ function CreateGradeTable(props) {
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell>
-                  <Link to={`/student/${studentId}`}>
+                  <Link to={`${my_or_all}/student/${studentId}`}>
                     <StyledLink>{studentName}</StyledLink>
                   </Link>
                 </TableCell>
                 <TableCell>
-                  <Link to={`/course/${courseId}`}>
+                  <Link to={`${my_or_all}/course/${courseId}`}>
                     <StyledLink>{courseName}</StyledLink>
                   </Link>
                 </TableCell>
@@ -65,6 +67,8 @@ function CreateGradeTable(props) {
 }
 
 function CreateStudentTable(props) {
+  const my_or_all = props.my_or_all_link;
+
   if (props.data == undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
@@ -95,12 +99,12 @@ function CreateStudentTable(props) {
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell>
-                  <Link to={`/student/${studentId}`}>
+                  <Link to={`${my_or_all}/student/${studentId}`}>
                     <StyledLink>{studentName}</StyledLink>
                   </Link>
                 </TableCell>
                 <TableCell>
-                  <Link to={`/school/${schoolId}`}>
+                  <Link to={`${my_or_all}/school/${schoolId}`}>
                     <StyledLink>{schoolName}</StyledLink>
                   </Link>
                 </TableCell>
@@ -115,9 +119,12 @@ function CreateStudentTable(props) {
 }
 
 function CreateAttendanceTable(props) {
+  const my_or_all = props.my_or_all_link;
+
   if (props.data == undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
+
   return (
     <div>
       <Table>
@@ -155,7 +162,7 @@ function CreateAttendanceTable(props) {
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell>
-                  <Link to={`/student/${studentId}`}>
+                  <Link to={`${my_or_all}/student/${studentId}`}>
                     <StyledLink>{studentName}</StyledLink>
                   </Link>
                 </TableCell>
@@ -175,6 +182,8 @@ function CreateAttendanceTable(props) {
 }
 
 function CreateCourseTable(props) {
+  const my_or_all = props.my_or_all_link;
+
   if (props.data == undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
@@ -205,12 +214,12 @@ function CreateCourseTable(props) {
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell align="left">
-                  <Link to={`/course/${courseId}`}>
+                  <Link to={`${my_or_all}/course/${courseId}`}>
                     <StyledLink>{courseName}</StyledLink>
                   </Link>
                 </TableCell>
                 <TableCell align="left">
-                  <Link to={`/school/${schoolId}`}>
+                  <Link to={`${my_or_all}/school/${schoolId}`}>
                     <StyledLink>{schoolName}</StyledLink>
                   </Link>
                 </TableCell>
@@ -226,6 +235,8 @@ function CreateCourseTable(props) {
 }
 
 function CreateDistrictTable(props) {
+  const my_or_all = props.my_or_all_link;
+
   if (props.data == undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
@@ -255,7 +266,7 @@ function CreateDistrictTable(props) {
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell align="left">
-                  <Link to={`/district/${districtId}`}>
+                  <Link to={`${my_or_all}/district/${districtId}`}>
                     <StyledLink>{districtName}</StyledLink>
                   </Link>
                 </TableCell>
@@ -272,6 +283,8 @@ function CreateDistrictTable(props) {
 }
 
 function CreateProgramTable(props) {
+  const my_or_all = props.my_or_all_link;
+
   if (props.data == undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
@@ -292,7 +305,7 @@ function CreateProgramTable(props) {
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell align="left">
-                  <Link to={`/program/${programId}`}>
+                  <Link to={`${my_or_all}/program/${programId}`}>
                     <StyledLink>{programName}</StyledLink>
                   </Link>
                 </TableCell>
@@ -306,6 +319,8 @@ function CreateProgramTable(props) {
 }
 
 function CreateSchoolTable(props) {
+  const my_or_all = props.my_or_all_link;
+
   if (props.data == undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
@@ -332,12 +347,12 @@ function CreateSchoolTable(props) {
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell align="left">
-                  <Link to={`/school/${schoolId}`}>
+                  <Link to={`${my_or_all}/school/${schoolId}`}>
                     <StyledLink>{schoolName}</StyledLink>
                   </Link>
                 </TableCell>
                 <TableCell align="left">
-                  <Link to={`/district/${districtId}`}>
+                  <Link to={`${my_or_all}/district/${districtId}`}>
                     <StyledLink>{districtName}</StyledLink>
                   </Link>
                 </TableCell>
@@ -351,6 +366,8 @@ function CreateSchoolTable(props) {
 }
 
 function CreateBehaviorTable(props) {
+  const my_or_all = props.my_or_all_link;
+
   if (props.data == undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
@@ -381,7 +398,7 @@ function CreateBehaviorTable(props) {
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell align="left">
-                  <Link to={`/student/${studentId}`}>
+                  <Link to={`${my_or_all}/student/${studentId}`}>
                     <StyledLink>{studentName}</StyledLink>
                   </Link>
                 </TableCell>
@@ -398,6 +415,7 @@ function CreateBehaviorTable(props) {
 }
 
 function CreateNoteTable(props) {
+  console.log(props.data);
   if (props.data == undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
@@ -412,14 +430,14 @@ function CreateNoteTable(props) {
         </TableHead>
         <TableBody>
           {props.data.map((noteDetail, i) => {
-            const { created, context } = noteDetail;
+            const { createdUpdated, text, noteId } = noteDetail;
             return (
               <TableRow
-                key={context}
+                key={noteId}
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
-                <TableCell align="left">{created}</TableCell>
-                <TableCell align="left">{context}</TableCell>
+                <TableCell align="left">{createdUpdated}</TableCell>
+                <TableCell align="left">{text}</TableCell>
               </TableRow>
             );
           })}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
@@ -14,29 +14,33 @@ import {
   CreateNoteTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
-
 import {
   fetchSchoolDetails,
   postSchoolNotes
 } from '../../../state/SchoolActions';
 
 function SchoolDetail(props) {
-  const accessLevel = 'my';
   const {
-    classes: { header, striped, tHead, tRow, tableTitle },
-    match: { params }
+    classes: { header, striped, tHead, tRow, tableTitle }
   } = props;
-  const { schoolId } = params;
 
+  // Props are provided by React Router
+  const { schoolId } = props.match.params;
+
+  // Access Level Variables
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
+
+  // Redux Hooks
   const dispatch = useDispatch();
-
   const schoolDetail = useSelector(state => {
     return state.schools.school;
   });
 
+  // React Hook to fetch SchoolDetail data
   useEffect(() => {
-    dispatch(fetchSchoolDetails({ accessLevel, schoolId }));
-  }, [dispatch, schoolId]);
+    dispatch(fetchSchoolDetails({ accessLevel: myOrAll, schoolId }));
+  }, [dispatch, myOrAll, schoolId]);
 
   if (!schoolDetail) {
     return loadingJSX('School Detail');
@@ -61,6 +65,7 @@ function SchoolDetail(props) {
       data={gradeSet}
       tRow={tRow}
       striped={striped}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -71,6 +76,7 @@ function SchoolDetail(props) {
       data={attendanceSet}
       tRow={tRow}
       striped={striped}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -81,6 +87,7 @@ function SchoolDetail(props) {
       data={behaviorSet}
       tRow={tRow}
       striped={striped}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -91,6 +98,7 @@ function SchoolDetail(props) {
       data={courseSet}
       tRow={tRow}
       striped={striped}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -101,6 +109,7 @@ function SchoolDetail(props) {
       data={studentSet}
       tRow={tRow}
       striped={striped}
+      my_or_all_link={myOrAllUrl}
     />
   );
 
@@ -122,7 +131,7 @@ function SchoolDetail(props) {
       <DetailLink
         k="District Name"
         val={districtName}
-        link={`/district/${districtId}`}
+        link={`${myOrAllUrl}/district/${districtId}`}
       />
 
       <CreateTableHeader
@@ -139,6 +148,7 @@ function SchoolDetail(props) {
         headerClassStyle={tableTitle}
         title="Behavior"
         table={behaviorTable}
+        haveCreateSaveButtonBool
       />
       <CreateTableHeader
         headerClassStyle={tableTitle}
@@ -155,7 +165,7 @@ function SchoolDetail(props) {
         title="Note"
         table={noteTable}
         url={props.location.pathname}
-        accessLevel={accessLevel}
+        accessLevel={myOrAll}
         action={postSchoolNotes}
         haveNoteButtonBool
         buttonText="New Note"
