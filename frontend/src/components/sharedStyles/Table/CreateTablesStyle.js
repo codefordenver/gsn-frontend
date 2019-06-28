@@ -12,7 +12,7 @@ import {
 function CreateGradeTable(props) {
   const my_or_all = props.my_or_all_link;
 
-  if (props.data == undefined) {
+  if (props.data === undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
   return (
@@ -68,8 +68,8 @@ function CreateGradeTable(props) {
 
 function CreateStudentTable(props) {
   const my_or_all = props.my_or_all_link;
-  
-  if (props.data == undefined) {
+
+  if (props.data === undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
   return (
@@ -120,8 +120,8 @@ function CreateStudentTable(props) {
 
 function CreateAttendanceTable(props) {
   const my_or_all = props.my_or_all_link;
-    
-  if (props.data == undefined) {
+
+  if (props.data === undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
 
@@ -183,8 +183,8 @@ function CreateAttendanceTable(props) {
 
 function CreateCourseTable(props) {
   const my_or_all = props.my_or_all_link;
-    
-  if (props.data == undefined) {
+
+  if (props.data === undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
   return (
@@ -236,8 +236,8 @@ function CreateCourseTable(props) {
 
 function CreateDistrictTable(props) {
   const my_or_all = props.my_or_all_link;
-    
-  if (props.data == undefined) {
+
+  if (props.data === undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
   return (
@@ -284,8 +284,8 @@ function CreateDistrictTable(props) {
 
 function CreateProgramTable(props) {
   const my_or_all = props.my_or_all_link;
-   
-  if (props.data == undefined) {
+
+  if (props.data === undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
   return (
@@ -320,8 +320,8 @@ function CreateProgramTable(props) {
 
 function CreateSchoolTable(props) {
   const my_or_all = props.my_or_all_link;
-    
-  if (props.data == undefined) {
+
+  if (props.data === undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
   return (
@@ -367,8 +367,8 @@ function CreateSchoolTable(props) {
 
 function CreateBehaviorTable(props) {
   const my_or_all = props.my_or_all_link;
-  
-  if (props.data == undefined) {
+
+  if (props.data === undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
   return (
@@ -417,7 +417,7 @@ function CreateBehaviorTable(props) {
 function CreateNoteTable(props) {
   console.log('This is the notes table');
   console.log(props);
-  if (props.data == undefined) {
+  if (props.data === undefined) {
     return <div>Currently there isn't any data available.</div>;
   }
   return (
