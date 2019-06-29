@@ -5,6 +5,7 @@ import Layout from 'components/layouts/Default';
 import LoginContainer from 'pages/Login/LoginContainer';
 import SignupContainer from 'pages/Register';
 import ViewAllDataHomepage from 'pages/Homepages/ViewAllDataHomepage';
+import LandingPage from './LandingPage';
 import Students from '../pages/Table/Student/Students';
 import StudentDetail from '../pages/Table/Student/StudentDetail';
 import Districts from '../pages/Table/District/Districts';
@@ -25,12 +26,11 @@ export default function() {
   return (
     <Router history={history}>
       <Switch>
+        <Route exact path="/" component={LandingPage} />
         <Route exact path="/login" component={LoginContainer} />
         <Route exact path="/register" component={SignupContainer} />
         <Switch>
           <Layout>
-            <Route exact path="/" render={() => <Students myOrAll={MY_CONST} />} />
-
             <Route exact path="/my/district" render={() => <Districts myOrAll={MY_CONST} />} />
             <Route exact path="/all/district" render={() => <Districts myOrAll={ALL_CONST} />} />
             <Route exact path="/all/district/:districtId" render={(props) => <DistrictDetail {...props} myOrAll={ALL_CONST} />} />

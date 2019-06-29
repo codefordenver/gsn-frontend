@@ -25,7 +25,8 @@ function Note(props) {
         rowsMax="6"
         fullWidth="true"
         variant="outlined"
-        placeholder="Content"
+        placeholder="Write your note here"
+        label="Note"
         required="true"
         value={fieldText}
         onChange={updateTextState}
