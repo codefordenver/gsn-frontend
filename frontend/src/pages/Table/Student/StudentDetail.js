@@ -175,7 +175,6 @@ function StudentDetail(props) {
         table={noteTable}
         headerClassStyle={tableTitle}
         url={props.location.pathname}
-        accessLevel={myOrAll}
         action={postStudentNotes}
         student={studentDetail}
         haveNoteButtonBool

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   List,
   ListItem,
@@ -83,4 +84,10 @@ export default function Navigation() {
   );
 }
 
-BaseLink.propTypes = {};
+BaseLink.propTypes = {
+  classes: PropTypes.object,
+  item: PropTypes.object,
+  index: PropTypes.object,
+  selected: PropTypes.object,
+  setIndex: PropTypes.func
+};

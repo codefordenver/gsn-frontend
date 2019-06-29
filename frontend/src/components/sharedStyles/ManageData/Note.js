@@ -25,7 +25,8 @@ function NoteEntryComponent(props) {
         rowsMax="6"
         fullWidth="true"
         variant="outlined"
-        placeholder="Enter note here"
+        placeholder="Write your note here"
+        label="Note"
         required="true"
         value={fieldText}
         onChange={updateTextState}
