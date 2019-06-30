@@ -16,6 +16,7 @@ import Programs from '../pages/Table/Program/Programs';
 import ProgramDetail from '../pages/Table/Program/ProgramDetail';
 import Courses from '../pages/Table/Course/Courses';
 import CourseDetail from '../pages/Table/Course/CourseDetail';
+import CSVParser from '../pages/ManageData/CSVParser';
 
 import PrivateRoute from './PrivateRoute';
 
@@ -57,6 +58,11 @@ export default function() {
             <Route exact path="/all/course/:courseId" render={(props) => <CourseDetail {...props} myOrAll={ALL_CONST} />} />
 
             <PrivateRoute exact path="/all" component={ViewAllDataHomepage} />
+            <PrivateRoute
+              exact
+              path="/manage-data/upload"
+              component={CSVParser}
+            />
           </Layout>
         </Switch>
       </Switch>
