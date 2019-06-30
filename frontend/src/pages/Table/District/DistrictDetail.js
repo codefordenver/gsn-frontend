@@ -164,6 +164,7 @@ function DistrictDetail(props) {
         title="Note"
         table={noteTable}
         url={props.location.pathname}
+        accessLevel={myOrAll}
         action={postDistrictNotes}
         haveCreateSaveButtonBool
       />

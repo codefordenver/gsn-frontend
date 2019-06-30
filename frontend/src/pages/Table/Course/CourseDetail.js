@@ -109,7 +109,11 @@ function CourseDetail(props) {
       </Typography>
       <DetailItem k="Course Code" val={courseCode} />
       <DetailItem k="Subject" val={courseSubject} />
-      <DetailLink k="School" val={schoolName} link={myOrAllUrl + `/school/${schoolId}`} />
+      <DetailLink
+        k="School"
+        val={schoolName}
+        link={`${myOrAllUrl}/school/${schoolId}`}
+      />
 
       <CreateTableHeader
         headerClassStyle={tableTitle}
@@ -125,15 +129,16 @@ function CourseDetail(props) {
         headerClassStyle={tableTitle}
         title="Student"
         table={studentTable}
-
       />
       <CreateTableHeader
         headerClassStyle={tableTitle}
         title="Note"
         table={noteTable}
         url={props.location.pathname}
+        accessLevel={myOrAll}
         action={postCourseNotes}
-        haveCreateSaveButtonBool
+        haveNoteButtonBool
+        buttonText="New Note"
       />
     </div>
   );

@@ -32,7 +32,7 @@ function Courses(props) {
   return (
     <div>
       <Typography variant="h4" component="h1" className={header}>
-        {myOrAll + " Courses"}
+        {`${myOrAll} Courses`}
       </Typography>
       <CreateCourseTable
         header={header}

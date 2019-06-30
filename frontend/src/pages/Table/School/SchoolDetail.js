@@ -131,7 +131,7 @@ function SchoolDetail(props) {
       <DetailLink
         k="District Name"
         val={districtName}
-        link={myOrAllUrl + `/district/${districtId}`}
+        link={`${myOrAllUrl}/district/${districtId}`}
       />
 
       <CreateTableHeader
@@ -148,7 +148,7 @@ function SchoolDetail(props) {
         headerClassStyle={tableTitle}
         title="Behavior"
         table={behaviorTable}
-        haveCreateSaveButtonBool={true}
+        haveCreateSaveButtonBool
       />
       <CreateTableHeader
         headerClassStyle={tableTitle}
@@ -165,8 +165,10 @@ function SchoolDetail(props) {
         title="Note"
         table={noteTable}
         url={props.location.pathname}
+        accessLevel={myOrAll}
         action={postSchoolNotes}
-        haveCreateSaveButtonBool
+        haveNoteButtonBool
+        buttonText="New Note"
       />
     </div>
   );

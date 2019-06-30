@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Typography, withStyles } from '@material-ui/core';
+import {
+  Typography,
+  withStyles,
+  TextField,
+  Select,
+  MenuItem
+} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import {
   DetailLink,
@@ -12,10 +18,15 @@ import {
   CreateGradeTable,
   CreateAttendanceTable,
   CreateBehaviorTable,
-  CreateNoteTable
+  CreateNoteTable,
+  CreateReferralTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
-import { fetchStudent, postStudentNotes } from '../../../state/StudentActions';
+import {
+  fetchStudent,
+  postStudentNotes,
+  postStudentReferrals
+} from '../../../state/StudentActions';
 
 function StudentDetail(props) {
   const {
@@ -55,7 +66,8 @@ function StudentDetail(props) {
     gradeSet,
     attendanceSet,
     behaviorSet,
-    noteSet
+    noteSet,
+    referralSet
   } = studentDetail;
 
   const gradeTable = (
@@ -101,6 +113,16 @@ function StudentDetail(props) {
     />
   );
 
+  const referralTable = (
+    <CreateReferralTable
+      header={header}
+      tHead={tHead}
+      data={referralSet}
+      tRow={tRow}
+      striped={striped}
+    />
+  );
+
   return (
     <div>
       <Typography className={header} component="h1" variant="h4">
@@ -112,7 +134,11 @@ function StudentDetail(props) {
       <DetailItem k="Year" val={studentYear} />
       <DetailItem k="Term" val={studentTerm} />
       <DetailItem k="State Id" val={stateId} />
-      <DetailLink k="School" val={school} link={myOrAllUrl + `/school/${schoolId}`} />
+      <DetailLink
+        k="School"
+        val={school}
+        link={`${myOrAllUrl}/school/${schoolId}`}
+      />
 
       <CreateTableHeader
         title="Grades"
@@ -130,7 +156,18 @@ function StudentDetail(props) {
         title="Behavior"
         table={behaviorTable}
         headerClassStyle={tableTitle}
-        haveCreateSaveButtonBool
+      />
+
+      <CreateTableHeader
+        title="Referral"
+        table={referralTable}
+        headerClassStyle={tableTitle}
+        url={props.location.pathname}
+        accessLevel={myOrAll}
+        action={postStudentReferrals}
+        student={studentDetail}
+        haveReferralButtonBool
+        buttonText="New Referral"
       />
 
       <CreateTableHeader
@@ -139,7 +176,9 @@ function StudentDetail(props) {
         headerClassStyle={tableTitle}
         url={props.location.pathname}
         action={postStudentNotes}
-        haveCreateSaveButtonBool
+        student={studentDetail}
+        haveNoteButtonBool
+        buttonText="New Note"
       />
     </div>
   );

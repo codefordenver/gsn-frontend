@@ -154,8 +154,10 @@ function ProgramDetail(props) {
         title="Note"
         table={noteTable}
         url={props.location.pathname}
+        accessLevel={myOrAll}
         action={postProgramNotes}
-        haveCreateSaveButtonBool
+        haveNoteButtonBool
+        buttonText="New Note"
       />
     </div>
   );

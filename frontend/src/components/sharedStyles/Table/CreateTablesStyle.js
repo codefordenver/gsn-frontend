@@ -45,12 +45,12 @@ function CreateGradeTable(props) {
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell>
-                  <Link to={my_or_all + `/student/${studentId}`}>
+                  <Link to={`${my_or_all}/student/${studentId}`}>
                     <StyledLink>{studentName}</StyledLink>
                   </Link>
                 </TableCell>
                 <TableCell>
-                  <Link to={my_or_all + `/course/${courseId}`}>
+                  <Link to={`${my_or_all}/course/${courseId}`}>
                     <StyledLink>{courseName}</StyledLink>
                   </Link>
                 </TableCell>
@@ -99,12 +99,12 @@ function CreateStudentTable(props) {
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell>
-                  <Link to={my_or_all + `/student/${studentId}`}>
+                  <Link to={`${my_or_all}/student/${studentId}`}>
                     <StyledLink>{studentName}</StyledLink>
                   </Link>
                 </TableCell>
                 <TableCell>
-                  <Link to={my_or_all + `/school/${schoolId}`}>
+                  <Link to={`${my_or_all}/school/${schoolId}`}>
                     <StyledLink>{schoolName}</StyledLink>
                   </Link>
                 </TableCell>
@@ -162,7 +162,7 @@ function CreateAttendanceTable(props) {
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell>
-                  <Link to={my_or_all + `/student/${studentId}`}>
+                  <Link to={`${my_or_all}/student/${studentId}`}>
                     <StyledLink>{studentName}</StyledLink>
                   </Link>
                 </TableCell>
@@ -214,12 +214,12 @@ function CreateCourseTable(props) {
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell align="left">
-                  <Link to={my_or_all + `/course/${courseId}`}>
+                  <Link to={`${my_or_all}/course/${courseId}`}>
                     <StyledLink>{courseName}</StyledLink>
                   </Link>
                 </TableCell>
                 <TableCell align="left">
-                  <Link to={my_or_all + `/school/${schoolId}`}>
+                  <Link to={`${my_or_all}/school/${schoolId}`}>
                     <StyledLink>{schoolName}</StyledLink>
                   </Link>
                 </TableCell>
@@ -266,7 +266,7 @@ function CreateDistrictTable(props) {
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell align="left">
-                  <Link to={my_or_all + `/district/${districtId}`}>
+                  <Link to={`${my_or_all}/district/${districtId}`}>
                     <StyledLink>{districtName}</StyledLink>
                   </Link>
                 </TableCell>
@@ -305,7 +305,7 @@ function CreateProgramTable(props) {
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell align="left">
-                  <Link to={my_or_all + `/program/${programId}`}>
+                  <Link to={`${my_or_all}/program/${programId}`}>
                     <StyledLink>{programName}</StyledLink>
                   </Link>
                 </TableCell>
@@ -347,12 +347,12 @@ function CreateSchoolTable(props) {
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell align="left">
-                  <Link to={my_or_all + `/school/${schoolId}`}>
+                  <Link to={`${my_or_all}/school/${schoolId}`}>
                     <StyledLink>{schoolName}</StyledLink>
                   </Link>
                 </TableCell>
                 <TableCell align="left">
-                  <Link to={my_or_all + `/district/${districtId}`}>
+                  <Link to={`${my_or_all}/district/${districtId}`}>
                     <StyledLink>{districtName}</StyledLink>
                   </Link>
                 </TableCell>
@@ -398,7 +398,7 @@ function CreateBehaviorTable(props) {
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell align="left">
-                  <Link to={my_or_all + `/student/${studentId}`}>
+                  <Link to={`${my_or_all}/student/${studentId}`}>
                     <StyledLink>{studentName}</StyledLink>
                   </Link>
                 </TableCell>
@@ -431,14 +431,61 @@ function CreateNoteTable(props) {
         </TableHead>
         <TableBody>
           {props.data.map((noteDetail, i) => {
-            const { createdUpdated, text } = noteDetail;
+            const { createdUpdated, text, noteId } = noteDetail;
             return (
               <TableRow
-                key={text}
+                key={noteId}
                 className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
               >
                 <TableCell align="left">{createdUpdated}</TableCell>
                 <TableCell align="left">{text}</TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </div>
+  );
+}
+
+function CreateReferralTable(props) {
+  if (props.data == undefined) {
+    return <div>Currently there isn't any data available.</div>;
+  }
+  return (
+    <div>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell className={props.tHead}>Referral Type</TableCell>
+            <TableCell className={props.tHead}>Date</TableCell>
+            <TableCell className={props.tHead}>Reference Name</TableCell>
+            <TableCell className={props.tHead}>Reference Address</TableCell>
+            <TableCell className={props.tHead}>Reference Phone</TableCell>
+            <TableCell className={props.tHead}>Reason</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {props.data.map((referralDetail, i) => {
+            const {
+              type,
+              dateGiven,
+              referenceName,
+              referenceAddress,
+              referencePhone,
+              reason
+            } = referralDetail;
+            return (
+              <TableRow
+                key={dateGiven}
+                className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
+              >
+                <TableCell align="left">{type}</TableCell>
+                <TableCell align="left">{dateGiven}</TableCell>
+                <TableCell align="left">{referenceName}</TableCell>
+                <TableCell align="left">{referenceAddress}</TableCell>
+                <TableCell align="left">{referencePhone}</TableCell>
+                <TableCell align="left">{reason}</TableCell>
               </TableRow>
             );
           })}
@@ -457,5 +504,6 @@ export {
   CreateAttendanceTable,
   CreateCourseTable,
   CreateDistrictTable,
-  CreateNoteTable
+  CreateNoteTable,
+  CreateReferralTable
 };
