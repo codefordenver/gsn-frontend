@@ -1,8 +1,8 @@
 import { SET_ALL_DISTRICTS, SET_DISTRICT_DETAILS } from './DistrictActions';
 
 const initialState = {
-  courses: [],
-  course: []
+  districts: [],
+  district: []
 };
 
 export default (state = initialState, { type, payload }) => {
