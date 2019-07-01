@@ -5,6 +5,7 @@ import Layout from 'components/layouts/Default';
 import LoginContainer from 'pages/Login/LoginContainer';
 import SignupContainer from 'pages/Register';
 import ViewAllDataHomepage from 'pages/Homepages/ViewAllDataHomepage';
+import ManageDataHomepage from 'pages/Homepages/ManageDataHomepage';
 import LandingPage from './LandingPage';
 import Students from '../pages/Table/Student/Students';
 import StudentDetail from '../pages/Table/Student/StudentDetail';
@@ -17,6 +18,8 @@ import ProgramDetail from '../pages/Table/Program/ProgramDetail';
 import Courses from '../pages/Table/Course/Courses';
 import CourseDetail from '../pages/Table/Course/CourseDetail';
 import CSVParser from '../pages/ManageData/CSVParser';
+import CreateDistrict from '../pages/ManageData/CreateDistrict';
+import CreateSchool from '../pages/ManageData/CreateSchool';
 
 import PrivateRoute from './PrivateRoute';
 
@@ -60,9 +63,26 @@ export default function() {
             <PrivateRoute exact path="/all" component={ViewAllDataHomepage} />
             <PrivateRoute
               exact
+              path="/manage-data"
+              component={ManageDataHomepage}
+            />
+
+            <PrivateRoute
+              exact
               path="/manage-data/upload"
               component={CSVParser}
             />
+            <PrivateRoute
+              exact
+              path="/manage-data/create-district"
+              component={CreateDistrict}
+            />
+            <PrivateRoute
+              exact
+              path="/manage-data/create-school"
+              component={CreateSchool}
+            />
+
           </Layout>
         </Switch>
       </Switch>
