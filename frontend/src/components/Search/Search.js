@@ -31,10 +31,16 @@ class Search extends Component {
                 <form className="search-form">
                     <Field 
                         name="search-input" 
+                        label="Search box"
+                        variant="outlined"
+                        required="True"
                         className="search-input"
                         component={TextField} />               
                     <Select 
                         name="search-options"
+                        required="True"
+                        label="Search Type"
+                        variant="outlined"
                         className="search-options"
                         onChange={this.handleChange}
                         value={this.state.selectedOption}>
