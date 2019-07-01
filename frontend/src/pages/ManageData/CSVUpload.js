@@ -91,5 +91,4 @@ function CSVUpload(props) {
   );
 }
 
-function CSVUpload(props) {
-  export default withStyles(TablePageStyles)(CSVUpload);
+export default withStyles(TablePageStyles)(CSVUpload);
