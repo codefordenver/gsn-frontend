@@ -1,44 +1,54 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import './Search.css'
 
 class Search extends Component {
     constructor(props) {
         super(props)
+        this.handleChange = this.handleChange.bind(this);
         this.state = {
-            selectedOption: '',
+            selectedOption: 'All',
         }
     }
 
-    handleClick() {  //feel free to remove handleClick and handleOnChange if not needed
-        console.log('handle click')
+    handleChange(event) {
+        this.setState({
+            selectedOption: event.target.value
+        })
     }
-
-    handleOnChange(e) {
-        console.log('selected option', e.target.value);
-        this.setState({ selectedOption: e.target.value})
-    } 
 
     render() {
         const options = ['All', 'Student', 'Course', 'School', 'District', 'Program']
+      
         return (
             <div className="form-wrapper">
                 <form className="search-form">
                     <Field 
-                        className="search-input"
                         name="search-input" 
-                        component="textarea" />               
-                    <Field 
+                        className="search-input"
+                        component={TextField} />               
+                    <Select 
+                        name="search-options"
                         className="search-options"
-                        name="search-options" 
-                        component="select">
+                        onChange={this.handleChange}
+                        value={this.state.selectedOption}>
                         {options.map((item, index) => (
-                            <option value={item} key={index}>{item}</option>
+                            <MenuItem value={item} key={index}>{item}</MenuItem>
                         ))}
-                    </Field>
-                    <button className="submit-button">Submit</button>                
+                    </Select>
+                    <Button 
+                        size="small"
+                        variant="contained"
+                        color="secondary"
+                        className="submit-button">
+                        Submit
+                    </Button>                
                 </form>
             </div>
         )
