@@ -72,3 +72,38 @@ export const postDistrictNotes = ({ text, accessLevel, url }) => {
       .catch(error => error);
   };
 };
+
+export const fetchCreatableDistricts = ({ accessLevel }) => {
+  return dispatch => {
+    return fetch(`http://gsndev.com/gsndb/all/create-district/`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`
+      }
+    })
+      .then(response => response.json())
+      .then(s => {
+        dispatch(setDistricts(s));
+      })
+      .catch(error => error);
+  };
+};
+
+export const postDistricts = ({ field, callback }) => {
+  return dispatch => {
+    return fetch(`http://gsndev.com/gsndb/all/create-district/`, {
+      method: 'POST',
+      body: JSON.stringify(field),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .catch(error => error);
+  };
+};

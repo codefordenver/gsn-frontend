@@ -69,3 +69,21 @@ export const postSchoolNotes = ({ text, accessLevel, url }) => {
       .catch(error => error);
   };
 };
+
+export const postSchools = ({ field, callback }) => {
+  return dispatch => {
+    return fetch(`http://gsndev.com/gsndb/all/create-school/`, {
+      method: 'POST',
+      body: JSON.stringify(field),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .catch(error => error);
+  };
+};
