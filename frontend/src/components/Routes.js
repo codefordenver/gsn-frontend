@@ -17,7 +17,7 @@ import Programs from '../pages/Table/Program/Programs';
 import ProgramDetail from '../pages/Table/Program/ProgramDetail';
 import Courses from '../pages/Table/Course/Courses';
 import CourseDetail from '../pages/Table/Course/CourseDetail';
-import CSVParser from '../pages/ManageData/CSVParser';
+import CSVUpload from '../pages/ManageData/CSVUpload';
 import CreateDistrict from '../pages/ManageData/CreateDistrict';
 import CreateSchool from '../pages/ManageData/CreateSchool';
 
@@ -70,7 +70,7 @@ export default function() {
             <PrivateRoute
               exact
               path="/manage-data/upload"
-              component={CSVParser}
+              component={CSVUpload}
             />
             <PrivateRoute
               exact

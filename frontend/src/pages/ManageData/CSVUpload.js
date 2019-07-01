@@ -8,16 +8,15 @@ import {
   fetchCreatableDistricts
 } from '../../state/DistrictActions';
 
-function CSVParser(props) {
+function CSVUpload(props) {
   const {
     classes: { header }
   } = props;
-  const { action, url, accessLevel, student, callback } = props;
   const dispatch = useDispatch();
 
   const [field, setField] = useState({
     selectedDistrict: "",
-    seletedSchool: ""
+    selectedSchool: ""
   });
 
   const updateState = event => {
@@ -92,4 +91,5 @@ function CSVParser(props) {
   );
 }
 
-export default withStyles(TablePageStyles)(CSVParser);
+function CSVUpload(props) {
+  export default withStyles(TablePageStyles)(CSVUpload);
