@@ -5,6 +5,7 @@ import Layout from 'components/layouts/Default';
 import LoginContainer from 'pages/Login/LoginContainer';
 import SignupContainer from 'pages/Register';
 import ViewAllDataHomepage from 'pages/Homepages/ViewAllDataHomepage';
+import ManageDataHomepage from 'pages/Homepages/ManageDataHomepage';
 import LandingPage from './LandingPage';
 import Students from '../pages/Table/Student/Students';
 import StudentDetail from '../pages/Table/Student/StudentDetail';
@@ -16,6 +17,9 @@ import Programs from '../pages/Table/Program/Programs';
 import ProgramDetail from '../pages/Table/Program/ProgramDetail';
 import Courses from '../pages/Table/Course/Courses';
 import CourseDetail from '../pages/Table/Course/CourseDetail';
+import CSVUpload from '../pages/ManageData/CSVUpload';
+import CreateDistrict from '../pages/ManageData/CreateDistrict';
+import CreateSchool from '../pages/ManageData/CreateSchool';
 
 import PrivateRoute from './PrivateRoute';
 
@@ -57,6 +61,28 @@ export default function() {
             <Route exact path="/all/course/:courseId" render={(props) => <CourseDetail {...props} myOrAll={ALL_CONST} />} />
 
             <PrivateRoute exact path="/all" component={ViewAllDataHomepage} />
+            <PrivateRoute
+              exact
+              path="/manage-data"
+              component={ManageDataHomepage}
+            />
+
+            <PrivateRoute
+              exact
+              path="/manage-data/upload"
+              component={CSVUpload}
+            />
+            <PrivateRoute
+              exact
+              path="/manage-data/create-district"
+              component={CreateDistrict}
+            />
+            <PrivateRoute
+              exact
+              path="/manage-data/create-school"
+              component={CreateSchool}
+            />
+
           </Layout>
         </Switch>
       </Switch>
