@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Typography, withStyles, Select, MenuItem } from "@material-ui/core";
 import { loadingJSX } from "components/sharedStyles/LoadingStyles";
 import { TablePageStyles } from "components/sharedStyles/Table/TablePageStyles";
-import { fetchDistrictDetails, fetchDistricts } from "../../state/DistrictActions";
+import {
+  fetchDistrictDetails,
+  fetchCreatableDistricts
+} from '../../state/DistrictActions';
 
 function CSVParser(props) {
   const {
@@ -31,7 +34,7 @@ function CSVParser(props) {
 
   // React Hook to fetch DistrictDetail data
   useEffect(() => {
-    dispatch(fetchDistricts({ accessLevel: "all" }));
+    dispatch(fetchCreatableDistricts({ accessLevel: "all" }));
   }, [dispatch, districtId]);
 
   useEffect(() => {
