@@ -159,8 +159,7 @@ function CSVUpload(props) {
         value={field.csvFileName}
         onChange={updateState}
         size="small"
-        variant="contained"
-        color="secondary">
+        variant="contained">
         Browse
       </Button>
       <p />
