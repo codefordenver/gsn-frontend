@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles, Typography } from '@material-ui/core';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateProgramTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-
 import { fetchPrograms } from '../../../state/ProgramActions';
 
 function Programs(props) {
@@ -13,12 +12,18 @@ function Programs(props) {
     classes: { header, striped, tHead, tRow }
   } = props;
 
-  const dispatch = useDispatch();
+  // Access Level Variables
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
 
+  // Redux Hooks
+  const dispatch = useDispatch();
   const programs = useSelector(state => state.programs.programs);
+
+  // React Hook to fetch Program data
   useEffect(() => {
-    dispatch(fetchPrograms({ accessLevel: 'my' }));
-  }, [dispatch]);
+    dispatch(fetchPrograms({ accessLevel: myOrAll }));
+  }, [dispatch, myOrAll]);
 
   if (!programs) {
     return loadingJSX('Programs');
@@ -27,7 +32,7 @@ function Programs(props) {
   return (
     <div>
       <Typography variant="h4" component="h1" className={header}>
-        My Programs
+        {myOrAll + " Programs"}
       </Typography>
       <CreateProgramTable
         header={header}
@@ -35,6 +40,7 @@ function Programs(props) {
         data={programs}
         tRow={tRow}
         striped={striped}
+        my_or_all_link={myOrAllUrl}
       />
     </div>
   );

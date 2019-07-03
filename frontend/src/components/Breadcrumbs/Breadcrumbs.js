@@ -4,7 +4,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
 function getRoutes(paths) {
-  const pathArray = paths.split('/');
+  const pathArray = paths.toUpperCase().split('/');
+  pathArray.pop();
   pathArray.shift();
   let t = '';
   // eslint-disable-next-line no-return-assign
@@ -14,7 +15,7 @@ function getRoutes(paths) {
   }));
 }
 
-// TODO Should we have a link if it is the last item?
+
 function Breadcrumbs(props) {
   const {
     classes: {
@@ -23,7 +24,7 @@ function Breadcrumbs(props) {
   } = props;
   const routes = getRoutes(location.pathname);
 
-  const MapList = () => (
+  const MapList = () => 
     <nav className={nav}>
       <ul className={list}>
         {routes.map((x, i) => (
@@ -36,11 +37,13 @@ function Breadcrumbs(props) {
               {x.name}
             </Link>
             {i !== routes.length - 1 && <span className={spacer}>{'>'}</span>}
+            
           </Typography>
         ))}
       </ul>
     </nav>
-  );
+    
+
 
   return (
     <MapList />

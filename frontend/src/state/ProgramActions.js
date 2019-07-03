@@ -54,7 +54,7 @@ export const fetchProgramDetails = ({ accessLevel, programId }) => {
 
 export const postProgramNotes = ({ text, accessLevel, url }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/${accessLevel}${url}/`, {
+    return fetch(`http://gsndev.com/gsndb${url}/`, {
       method: 'POST',
       body: JSON.stringify({ text }),
       headers: {
