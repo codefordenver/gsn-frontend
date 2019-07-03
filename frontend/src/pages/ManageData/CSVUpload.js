@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Typography,
@@ -14,7 +15,6 @@ import {
 } from '@material-ui/core';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
-
 import { postCSVUpload } from '../../state/UserActions';
 import {
   fetchDistrictDetails,
@@ -107,7 +107,9 @@ function CSVUpload(props) {
         onChange={updateState}
         displayEmpty
       >
-        <MenuItem value="" disabled>Select one</MenuItem>
+        <MenuItem value="" disabled>
+          Select one
+        </MenuItem>
         {districts.map(districtData => {
           return (
             <MenuItem value={districtData.districtId}>
@@ -126,9 +128,11 @@ function CSVUpload(props) {
         displayEmpty
         value={field.selectedSchool}
         onChange={updateState}
-        disabled={field.selectedDistrict == ''}
+        disabled={field.selectedDistrict === ''}
       >
-        <MenuItem value="" disabled>Select one</MenuItem>
+        <MenuItem value="" disabled>
+          Select one
+        </MenuItem>
         {schools.map(school => {
           if (school.districtId === field.selectedDistrict)
             return (
@@ -145,7 +149,7 @@ function CSVUpload(props) {
         name="selectedFinal"
         value={field.selectedFinal}
         onChange={updateState}
-        disabled={field.selectedSchool == ''}
+        disabled={field.selectedSchool === ''}
       >
         <MenuItem value>Final</MenuItem>
         <MenuItem value={false}>Not Final</MenuItem>
@@ -159,7 +163,8 @@ function CSVUpload(props) {
         value={field.csvFileName}
         onChange={updateState}
         size="small"
-        variant="contained">
+        variant="contained"
+      >
         Browse
       </Button>
       <p />
@@ -195,5 +200,9 @@ function CSVUpload(props) {
     </>
   );
 }
+
+CSVUpload.propTypes = {
+  classes: PropTypes.object
+};
 
 export default withStyles(TablePageStyles)(CSVUpload);
