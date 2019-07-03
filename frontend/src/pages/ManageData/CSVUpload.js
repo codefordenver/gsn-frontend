@@ -105,7 +105,9 @@ function CSVUpload(props) {
         name="selectedDistrict"
         value={field.selectedDistrict}
         onChange={updateState}
+        displayEmpty
       >
+        <MenuItem value="" disabled>Select one</MenuItem>
         {districts.map(districtData => {
           return (
             <MenuItem value={districtData.districtId}>
@@ -121,10 +123,12 @@ function CSVUpload(props) {
         placeholder="School"
         required="true"
         name="selectedSchool"
+        displayEmpty
         value={field.selectedSchool}
         onChange={updateState}
         disabled={field.selectedDistrict == ''}
       >
+        <MenuItem value="" disabled>Select one</MenuItem>
         {schools.map(school => {
           if (school.districtId === field.selectedDistrict)
             return (
