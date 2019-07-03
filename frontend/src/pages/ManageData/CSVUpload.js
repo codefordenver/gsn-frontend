@@ -10,7 +10,9 @@ import {
   DialogTitle,
   DialogContentText,
   DialogContent,
-  DialogActions
+  DialogActions,
+  Input,
+  ButtonBase,
 } from '@material-ui/core';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
@@ -150,18 +152,24 @@ function CSVUpload(props) {
         <MenuItem value>Final</MenuItem>
         <MenuItem value={false}>Not Final</MenuItem>
       </Select>
-      <p>File</p>
-      <Button
-        label="File"
+      <p>File</p>  
+      <input
+        accept="*"
+        style={{display: "none"}}
+        id="outlined-button-file"
+        multiple
         type="file"
-        required="true"
         name="csvFileName"
-        value={field.csvFileName}
+        required="true"
+        label="File"
         onChange={updateState}
-        size="small"
-        variant="contained">
-        Browse
-      </Button>
+      />
+      <label htmlFor="outlined-button-file">
+        <Button variant="outlined" component="span" style={{margin: "theme.spacing(1)"}}>
+          Browse
+        </Button>
+      </label>
+     
       <p />
       <Button
         size="small"
