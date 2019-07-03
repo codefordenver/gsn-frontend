@@ -147,14 +147,18 @@ function CSVUpload(props) {
         <MenuItem value={false}>Not Final</MenuItem>
       </Select>
       <p>File</p>
-      <input
+      <Button
         label="File"
         type="file"
         required="true"
         name="csvFileName"
         value={field.csvFileName}
         onChange={updateState}
-      />
+        size="small"
+        variant="contained"
+        color="secondary">
+        Browse
+      </Button>
       <p />
       <Button
         size="small"
