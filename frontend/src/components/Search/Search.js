@@ -1,14 +1,8 @@
-import React, { Component, useState } from "react";
-import { connect } from "react-redux";
-import {
-  MenuItem,
-  Select,
-  Button,
-  TextField
-} from "@material-ui/core";
+import React from 'react';
+import { TextField } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 function SearchBar(props) {
-
   return (
     <>
       <TextField
@@ -21,5 +15,9 @@ function SearchBar(props) {
     </>
   );
 }
+
+SearchBar.propTypes = {
+  action: PropTypes.object
+};
 
 export default SearchBar;

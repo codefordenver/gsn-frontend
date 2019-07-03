@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchStudents } from "state/StudentActions";
-import { fetchDistricts } from "state/DistrictActions";
-import { fetchPrograms } from "state/ProgramActions";
-import { fetchSchools } from "state/SchoolActions";
-import { fetchCourses } from "state/CourseActions";
-import { loadingJSX } from "components/sharedStyles/LoadingStyles";
-import { Typography, withStyles, Link as StyledLink } from "@material-ui/core";
-import { TablePageStyles } from "components/sharedStyles/Table/TablePageStyles";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchStudents } from 'state/StudentActions';
+import { fetchDistricts } from 'state/DistrictActions';
+import { fetchPrograms } from 'state/ProgramActions';
+import { fetchSchools } from 'state/SchoolActions';
+import { fetchCourses } from 'state/CourseActions';
+import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
+import { Typography, withStyles, Link as StyledLink } from '@material-ui/core';
+import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
+import { Link } from 'react-router-dom';
 
 function SearchResults(props) {
   const {
@@ -25,18 +26,19 @@ function SearchResults(props) {
   const districts = useSelector(state => state.districts.districts);
 
   useEffect(() => {
-    dispatch(fetchStudents({ accessLevel: "all" }));
-    dispatch(fetchCourses({ accessLevel: "all" }));
-    dispatch(fetchSchools({ accessLevel: "all" }));
-    dispatch(fetchPrograms({ accessLevel: "all" }));
-    dispatch(fetchDistricts({ accessLevel: "all" }));
+    dispatch(fetchStudents({ accessLevel: 'all' }));
+    dispatch(fetchCourses({ accessLevel: 'all' }));
+    dispatch(fetchSchools({ accessLevel: 'all' }));
+    dispatch(fetchPrograms({ accessLevel: 'all' }));
+    dispatch(fetchDistricts({ accessLevel: 'all' }));
     setLoading(false);
   }, [dispatch]);
 
   if (loading) {
-    return loadingJSX("Search Results");
+    return loadingJSX('Search Results');
   }
-  if(searchTerm == "") {
+
+  if (searchTerm === '') {
     return null;
   }
   return (
@@ -65,10 +67,9 @@ function SearchResults(props) {
             <>
               <Link to={`/all/course/${courseData.courseId}`}>
                 <StyledLink>
-                  {courseData.courseName + " - " + courseData.courseCode} 
+                  {courseData.courseName + " - " + courseData.courseCode}
                 </StyledLink>
               </Link> (Course)
-
               <br />
             </>
           );
@@ -80,8 +81,7 @@ function SearchResults(props) {
             <>
               <Link to={`/all/district/${districtData.districtId}`}>
                 <StyledLink>{districtData.districtName}</StyledLink>
-              </Link>  (District)
-
+              </Link> (District)
               <br />
             </>
           );
@@ -94,7 +94,6 @@ function SearchResults(props) {
               <Link to={`/all/school/${schoolData.schoolId}`}>
                 <StyledLink>{schoolData.schoolName}</StyledLink>
               </Link> (School)
-
               <br />
             </>
           );
@@ -107,7 +106,6 @@ function SearchResults(props) {
               <Link to={`/all/program/${programData.programId}`}>
                 <StyledLink>{programData.programName}</StyledLink>
               </Link> (Program)
-
               <br />
             </>
           );
@@ -116,5 +114,10 @@ function SearchResults(props) {
     </>
   );
 }
+
+SearchResults.propTypes = {
+  classes: PropTypes.object,
+  searchTerm: PropTypes.object
+};
 
 export default withStyles(TablePageStyles)(SearchResults);
