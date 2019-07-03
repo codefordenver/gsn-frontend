@@ -28,8 +28,7 @@ function SearchPage(props) {
     const { name, value } = event.target;
     setField({ ...field, [name]: value });
   };
-
-  const ShowResults = field.showResults ? "hello" : "goodbye";
+ 
 
   return (
     <div>
