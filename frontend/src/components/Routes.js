@@ -2,80 +2,96 @@ import React from 'react';
 import { Switch, Route, Router } from 'react-router-dom';
 import history from 'utils/history';
 import Layout from 'components/layouts/Default';
-// import Nav from 'components/Nav';
-import HomePage from 'components/HomePage';
 import LoginContainer from 'pages/Login/LoginContainer';
 import SignupContainer from 'pages/Register';
-
-import Districts from 'pages/Table/District/Districts';
-import DistrictDetail from 'pages/Table/District/DistrictDetail';
-
-import Programs from 'pages/Table/Program/Programs';
-import ProgramDetail from 'pages/Table/Program/ProgramDetail';
-
-import Students from 'pages/Table/Student/Students';
-import StudentDetail from 'pages/Table/Student/StudentDetail';
-
-import MyStudents from 'pages/ManageData/MyStudents';
-
-import Courses from 'pages/Table/Course/Courses';
-import CourseDetail from 'pages/Table/Course/CourseDetail';
-
-import Schools from 'pages/Table/School/Schools';
-import SchoolDetail from 'pages/Table/School/SchoolDetail';
-
 import ViewAllDataHomepage from 'pages/Homepages/ViewAllDataHomepage';
-
+import ManageDataHomepage from 'pages/Homepages/ManageDataHomepage';
+import LandingPage from './LandingPage';
+import Students from '../pages/Table/Student/Students';
+import StudentDetail from '../pages/Table/Student/StudentDetail';
+import Districts from '../pages/Table/District/Districts';
+import DistrictDetail from '../pages/Table/District/DistrictDetail';
+import Schools from '../pages/Table/School/Schools';
+import SchoolDetail from '../pages/Table/School/SchoolDetail';
+import Programs from '../pages/Table/Program/Programs';
+import ProgramDetail from '../pages/Table/Program/ProgramDetail';
+import Courses from '../pages/Table/Course/Courses';
+import CourseDetail from '../pages/Table/Course/CourseDetail';
+import CSVUpload from '../pages/ManageData/CSVUpload';
+import CreateDistrict from '../pages/ManageData/CreateDistrict';
+import CreateSchool from '../pages/ManageData/CreateSchool';
+import MyStudents from 'pages/ManageData/MyStudents';
 import PrivateRoute from './PrivateRoute';
-// username: user.get('username'),
-// loading: user.get('loading'),
 
+const MY_CONST = 'my';
+const ALL_CONST = 'all';
 
-export default function () {
+export default function() {
   return (
-      <Router history={history}>
-          <Switch>
-              <Route exact path="/login" component={LoginContainer} />
-              <Route exact path="/register" component={SignupContainer} />
-              <Switch>
-                  <Layout>
-                      <PrivateRoute exact path="/" component={HomePage} />
+    <Router history={history}>
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/login" component={LoginContainer} />
+        <Route exact path="/register" component={SignupContainer} />
+        <Switch>
+          <Layout>
+            <Route exact path="/my/district" render={() => <Districts myOrAll={MY_CONST} />} />
+            <Route exact path="/all/district" render={() => <Districts myOrAll={ALL_CONST} />} />
+            <Route exact path="/all/district/:districtId" render={(props) => <DistrictDetail {...props} myOrAll={ALL_CONST} />} />
+            <Route exact path="/my/district/:districtId" render={(props) => <DistrictDetail {...props} myOrAll={MY_CONST} />} />
 
-                      <PrivateRoute exact path="/district" component={Districts} />
-                      <PrivateRoute exact path="/district/:districtId" component={DistrictDetail} />
+            <Route exact path="/my/school" render={() => <Schools myOrAll={MY_CONST} />} />
+            <Route exact path="/all/school" render={() => <Schools myOrAll={ALL_CONST} />} />
+            <Route exact path="/all/school/:schoolId" render ={(props) => <SchoolDetail {...props} myOrAll={ALL_CONST} />} />
+            <Route exact path="/my/school/:schoolId" render ={(props) => <SchoolDetail {...props} myOrAll={ALL_CONST} />} />
 
-                      <PrivateRoute exact path="/program" component={Programs} />
-                      <PrivateRoute exact path="/program/:programId" component={ProgramDetail} />
+            <Route exact path="/my/student" render={() => <Students myOrAll={MY_CONST} />} />
+            <Route exact path="/all/student" render={() => <Students myOrAll={ALL_CONST} />} />
+            <Route exact path="/my/student/:studentId" render={(props) => <StudentDetail {...props} myOrAll={MY_CONST} />} />
+            <Route exact path="/all/student/:studentId" render={(props) => <StudentDetail {...props} myOrAll={ALL_CONST} />} />
 
-                      <PrivateRoute exact path="/student" component={Students} />
-                      <PrivateRoute exact path="/student/:studentId" component={StudentDetail} />
+            <Route exact path="/my/program" render={() => <Programs myOrAll={MY_CONST} />} />
+            <Route exact path="/all/program" render => <Programs myOrAll={ALL_CONST} />} />
+            <Route exact path="/my/program/:programId" render={(props) => <ProgramDetail {...props} myOrAll={MY_CONST} />} />
+            <Route exact path="/all/program/:programId" render={(props) => <ProgramDetail {...props} myOrAll={ALL_CONST} />} />
 
-                      <PrivateRoute exact path="/course" component={Courses} />
-                      <PrivateRoute exact path="/course/:courseId" component={CourseDetail} />
+            <Route exact path="/my/course" render={() => <Courses myOrAll={MY_CONST} />} />
+            <Route exact path="/all/course" render={() => <Courses myOrAll={ALL_CONST} />} />
+            <Route exact path="/my/course/:courseId" render={(props) => <CourseDetail {...props} myOrAll={MY_CONST} />} />
+            <Route exact path="/all/course/:courseId" render={(props) => <CourseDetail {...props} myOrAll={ALL_CONST} />} />
 
-                      <PrivateRoute exact path="/school" component={Schools} />
-                      <PrivateRoute exact path="/school/:schoolId" component={SchoolDetail} />
+            <PrivateRoute exact path="/all" component={ViewAllDataHomepage} />
+            <PrivateRoute
+              exact
+              path="/manage-data"
+              component={ManageDataHomepage}
+            />
 
-                      <PrivateRoute exact path="/viewalldata" component={ViewAllDataHomepage} />
+            <PrivateRoute
+              exact
+              path="/manage-data/upload"
+              component={CSVUpload}
+            />
+            <PrivateRoute
+              exact
+              path="/manage-data/create-district"
+              component={CreateDistrict}
+            />
+            <PrivateRoute
+              exact
+              path="/manage-data/create-school"
+              component={CreateSchool}
+            />
+            <PrivateRoute 
+              exact 
+              path="/manage-data/modify-my-students" 
+              component={MyStudents} 
+            />
 
-                      <PrivateRoute exact path="/manage-data/modify-my-students" component={MyStudents} />
 
-
-                  </Layout>
-              </Switch>
-          </Switch>
-      </Router>
-
+          </Layout>
+        </Switch>
+      </Switch>
+    </Router>
   );
 }
-
-/* <div>
-              {isLoggedIn && <Nav navItems={navItems} />} */
-/*
-        <h3>
-            {isLoggedIn && (
-            <p>
-              Hello {username}
-            </p>
-            )}
-        </h3> */

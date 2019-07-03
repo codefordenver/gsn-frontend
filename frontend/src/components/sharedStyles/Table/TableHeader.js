@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Typography, Button, Grid } from '@material-ui/core';
 import { ChevronRightOutlined, ChevronDownOutlined } from 'components/Icons';
-import EntryComponent, {
+import NoteEntryComponent, {
   CreateButton
 } from 'components/sharedStyles/ManageData/Note';
+import ReferralEntryComponent from 'components/sharedStyles/ManageData/Referral';
 
 function CreateTableHeader(props) {
+  const { haveReferralButtonBool, haveNoteButtonBool, buttonText } = props;
   const [hiddenTable, setHiddenTable] = useState(true);
   const [haveCreateButton, setHaveCreateButton] = useState(false);
   function ChangeHiddenTable() {
@@ -14,18 +16,28 @@ function CreateTableHeader(props) {
   function ChangeButton() {
     setHaveCreateButton(!haveCreateButton);
   }
-  const entryComponent = props.haveCreateSaveButtonBool ? (
-    haveCreateButton ? (
-      <EntryComponent {...props} />
-    ) : null
-  ) : null;
-  const button = props.haveCreateSaveButtonBool ? (
-    haveCreateButton ? (
-      <CreateButton text="Cancel" />
-    ) : (
-      <CreateButton text="New" />
-    )
-  ) : null;
+
+  let noteEntryComponent = null;
+  let referralEntryComponent = null;
+  let button = null;
+
+  const setButtonText = type =>
+    type ? <CreateButton text="Cancel" /> : <CreateButton text={buttonText} />;
+
+  if (haveNoteButtonBool) {
+    noteEntryComponent = haveCreateButton && (
+      <NoteEntryComponent {...props} callback={ChangeButton} />
+    );
+    button = setButtonText(haveCreateButton);
+  }
+
+  if (haveReferralButtonBool) {
+    referralEntryComponent = haveCreateButton && (
+      <ReferralEntryComponent {...props} callback={ChangeButton} />
+    );
+    button = setButtonText(haveCreateButton);
+  }
+
   const table = hiddenTable ? null : props.table;
   const icon = hiddenTable ? <ChevronRightOutlined /> : <ChevronDownOutlined />;
 
@@ -43,7 +55,8 @@ function CreateTableHeader(props) {
         </Button>
         <Typography onClick={ChangeButton}>{button}</Typography>
       </Grid>
-      {entryComponent}
+      {noteEntryComponent}
+      {referralEntryComponent}
       {table}
     </div>
   );

@@ -35,19 +35,19 @@ function ViewAllDataHomepage(props) {
       <div>
           <Typography className={header} component="h1" variant="h4">View All Data</Typography>
           
-          <Link to="/district" style={{ textDecoration: 'none'}}> <CreateTableHeader
+          <Link to="/all/district" style={{ textDecoration: 'none'}}> <CreateTableHeader
             headerClassStyle = {tableTitle}
             title = "District"/></Link>
-          <Link to="/school" style={{ textDecoration: 'none'}}> <CreateTableHeader
+          <Link to="/all/school" style={{ textDecoration: 'none'}}> <CreateTableHeader
             headerClassStyle = {tableTitle}
             title = "School"/></Link>
-           <Link to="/program" style={{ textDecoration: 'none'}}> <CreateTableHeader
+           <Link to="/all/program" style={{ textDecoration: 'none'}}> <CreateTableHeader
             headerClassStyle = {tableTitle}
             title = "Program"/></Link>
-          <Link to="/course" style={{ textDecoration: 'none'}}> <CreateTableHeader
+          <Link to="/all/course" style={{ textDecoration: 'none'}}> <CreateTableHeader
             headerClassStyle = {tableTitle}
             title = "Course" /></Link>
-          <Link to="/student" style={{ textDecoration: 'none'}}> <CreateTableHeader
+          <Link to="/all/student" style={{ textDecoration: 'none'}}> <CreateTableHeader
             headerClassStyle = {tableTitle}
             title = "Student"/></Link>
       </div>

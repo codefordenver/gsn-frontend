@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Button, Typography, TextField } from '@material-ui/core';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Button, TextField } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-function Note(props) {
+function NoteEntryComponent(props) {
+  const { action, url, accessLevel, callback } = props;
   const dispatch = useDispatch();
   const [fieldText, setFieldText] = useState('');
-  const { action, url, accessLevel } = props;
 
   const updateTextState = event => {
     setFieldText(event.target.value);
   };
 
   const postTextFromState = () => {
-    const data = { text: fieldText, url, accessLevel };
+    const data = { text: fieldText, url, accessLevel, callback };
     dispatch(action(data));
   };
 
@@ -25,7 +25,8 @@ function Note(props) {
         rowsMax="6"
         fullWidth="true"
         variant="outlined"
-        placeholder="Content"
+        placeholder="Write your note here"
+        label="Note"
         required="true"
         value={fieldText}
         onChange={updateTextState}
@@ -54,8 +55,9 @@ function CreateButton(props) {
   );
 }
 
-Note.propTypes = {
+NoteEntryComponent.propTypes = {
   action: PropTypes.func.isRequired,
+  callback: PropTypes.func.isRequired,
   url: PropTypes.string.isRequired,
   accessLevel: PropTypes.string.isRequired
 };
@@ -64,5 +66,5 @@ CreateButton.propTypes = {
   text: PropTypes.string.isRequired
 };
 
-export default Note;
+export default NoteEntryComponent;
 export { CreateButton };

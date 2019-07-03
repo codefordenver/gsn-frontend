@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
@@ -15,29 +15,33 @@ import {
   CreateNoteTable
 } from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
-
 import {
   fetchCourseDetails,
   postCourseNotes
 } from '../../../state/CourseActions';
 
 function CourseDetail(props) {
-  const accessLevel = 'my';
   const {
-    classes: { striped, tHead, tRow, tableTitle, header },
-    match: { params }
+    classes: { striped, tHead, tRow, tableTitle, header }
   } = props;
-  const { courseId } = params;
 
+  // Props are provided by React Router
+  const { courseId } = props.match.params;
+
+  // Access Level Variables
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
+
+  // Redux Hooks
   const dispatch = useDispatch();
-
   const courseDetail = useSelector(state => {
     return state.courses.course;
   });
 
+  // React Hook to fetch CourseDetail data
   useEffect(() => {
-    dispatch(fetchCourseDetails({ accessLevel, courseId }));
-  }, [dispatch, courseId]);
+    dispatch(fetchCourseDetails({ accessLevel: myOrAll, courseId }));
+  }, [dispatch, courseId, myOrAll]);
 
   if (!courseDetail) {
     return loadingJSX('Course Detail');
@@ -55,50 +59,38 @@ function CourseDetail(props) {
     noteSet
   } = courseDetail;
 
-  const gradeTable = () => {
-    if (!gradeSet) {
-      return <p>Data not found</p>;
-    }
-    return (
-      <CreateGradeTable
-        header={header}
-        tHead={tHead}
-        data={gradeSet}
-        tRow={tRow}
-        striped={striped}
-      />
-    );
-  };
+  const gradeTable = (
+    <CreateGradeTable
+      header={header}
+      tHead={tHead}
+      data={gradeSet}
+      tRow={tRow}
+      striped={striped}
+      my_or_all_link={myOrAllUrl}
+    />
+  );
 
-  const attendanceTable = () => {
-    if (!attendanceSet) {
-      return <p>Data not found</p>;
-    }
-    return (
-      <CreateAttendanceTable
-        header={header}
-        tHead={tHead}
-        data={attendanceSet}
-        tRow={tRow}
-        striped={striped}
-      />
-    );
-  };
+  const attendanceTable = (
+    <CreateAttendanceTable
+      header={header}
+      tHead={tHead}
+      data={attendanceSet}
+      tRow={tRow}
+      striped={striped}
+      my_or_all_link={myOrAllUrl}
+    />
+  );
 
-  const studentTable = () => {
-    if (!studentSet) {
-      return <p>Data not found</p>;
-    }
-    return (
-      <CreateStudentTable
-        header={header}
-        tHead={tHead}
-        data={studentSet}
-        tRow={tRow}
-        striped={striped}
-      />
-    );
-  };
+  const studentTable = (
+    <CreateStudentTable
+      header={header}
+      tHead={tHead}
+      data={studentSet}
+      tRow={tRow}
+      striped={striped}
+      my_or_all_link={myOrAllUrl}
+    />
+  );
 
   const noteTable = (
     <CreateNoteTable
@@ -117,7 +109,11 @@ function CourseDetail(props) {
       </Typography>
       <DetailItem k="Course Code" val={courseCode} />
       <DetailItem k="Subject" val={courseSubject} />
-      <DetailLink k="School" val={schoolName} link={`/school/${schoolId}`} />
+      <DetailLink
+        k="School"
+        val={schoolName}
+        link={`${myOrAllUrl}/school/${schoolId}`}
+      />
 
       <CreateTableHeader
         headerClassStyle={tableTitle}
@@ -139,9 +135,10 @@ function CourseDetail(props) {
         title="Note"
         table={noteTable}
         url={props.location.pathname}
-        accessLevel={accessLevel}
+        accessLevel={myOrAll}
         action={postCourseNotes}
-        haveCreateSaveButtonBool
+        haveNoteButtonBool
+        buttonText="New Note"
       />
     </div>
   );

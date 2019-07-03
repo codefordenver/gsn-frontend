@@ -1,4 +1,3 @@
-
 import { createAction } from 'utils/actionUtils';
 import { getUserState, loginUser, signupUser } from 'services/authServices';
 
@@ -9,7 +8,7 @@ import {
   SET_LOADING,
   SET_IS_LOGGED_IN,
   SET_ERROR,
-  CLEAR_ERROR,
+  CLEAR_ERROR
 } from './UserConstants';
 
 export const setToken = createAction(SET_TOKEN);
@@ -19,17 +18,18 @@ export const setIsLoggedIn = createAction(SET_IS_LOGGED_IN);
 export const setError = createAction(SET_ERROR);
 export const clearError = createAction(CLEAR_ERROR);
 
-export const setUserState = () => (dispatch) => {
+export const setUserState = () => dispatch => {
   const token = localStorage.getItem('token');
 
   if (token != null) {
     dispatch(authRequest());
     getUserState(token)
-      .then((json) => {
+      .then(json => {
         dispatch(setUsername(json.username));
         dispatch(setIsLoggedIn(true));
         dispatch(setLoading(false));
-      }).catch((error) => {
+      })
+      .catch(error => {
         dispatch(authError(error));
       });
   } else {
@@ -38,52 +38,60 @@ export const setUserState = () => (dispatch) => {
   }
 };
 
-export const logIn = ({ username, password, path = '/student' }) => (dispatch) => {
+export const logIn = ({
+  username,
+  password,
+  path = '/my/student'
+}) => dispatch => {
   dispatch(authRequest());
   loginUser({ username, password })
-    .then((json) => {
+    .then(json => {
       dispatch(
         authSuccess({
           token: json.token,
-          username: json.user.username,
-        }),
+          username: json.user.username
+        })
       );
       history.push(path);
-    }).catch((error) => {
+    })
+    .catch(error => {
       dispatch(authError(error));
     });
 };
 
-export const register = ({ username, password, path = '/students' }) => (dispatch) => {
+export const register = ({ username, password, path = '/' }) => dispatch => {
   dispatch(setLoading(true));
   signupUser({ username, password })
-    .then((json) => {
+    .then(json => {
       // console.log('register json', json);
       dispatch(setLoading(false));
       dispatch(
         authSuccess({
           token: json.token,
-          username: json.username,
-        }),
+          username: json.username
+        })
       );
       history.push(path);
-    }).catch((error) => {
+    })
+    .catch(error => {
       dispatch(authError(error));
     });
 };
 
-export const logOut = () => (dispatch) => {
+export const logOut = () => dispatch => {
+  localStorage.removeItem('auth_token');
   localStorage.removeItem('token');
   dispatch(setIsLoggedIn(false));
   dispatch(setUsername(null));
+  history.push('/login');
 };
 
-export const authRequest = () => (dispatch) => {
+export const authRequest = () => dispatch => {
   dispatch(setLoading(true));
   dispatch(clearError());
 };
 
-export const authSuccess = user => (dispatch) => {
+export const authSuccess = user => dispatch => {
   console.log('authSuccess', user);
   if (user) {
     const { username, token } = user;
@@ -97,7 +105,7 @@ export const authSuccess = user => (dispatch) => {
   }
 };
 
-export const authError = error => (dispatch) => {
+export const authError = error => dispatch => {
   dispatch(setLoading(false));
   dispatch(logOut());
   console.error({ error });

@@ -51,7 +51,7 @@ export const fetchSchoolDetails = ({ accessLevel, schoolId }) => {
 
 export const postSchoolNotes = ({ text, accessLevel, url }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/${accessLevel}${url}/`, {
+    return fetch(`http://gsndev.com/gsndb${url}/`, {
       method: 'POST',
       body: JSON.stringify({ text }),
       headers: {
@@ -65,6 +65,24 @@ export const postSchoolNotes = ({ text, accessLevel, url }) => {
       })
       .then(s => {
         dispatch(setSchoolDetails(s['0']));
+      })
+      .catch(error => error);
+  };
+};
+
+export const postSchools = ({ field, callback }) => {
+  return dispatch => {
+    return fetch(`http://gsndev.com/gsndb/all/create-school/`, {
+      method: 'POST',
+      body: JSON.stringify(field),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`
+      }
+    })
+      .then(response => {
+        return response.json();
       })
       .catch(error => error);
   };

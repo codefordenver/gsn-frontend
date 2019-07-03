@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { getSchools } from 'services/schoolServices';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles, Typography } from '@material-ui/core';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateSchoolTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-
 import { fetchSchools } from '../../../state/SchoolActions';
 
 function Schools(props) {
@@ -14,12 +12,18 @@ function Schools(props) {
     classes: { header, striped, tHead, tRow }
   } = props;
 
-  const dispatch = useDispatch();
+  // Access Level Variables
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
 
+  // Redux Hooks
+  const dispatch = useDispatch();
   const schools = useSelector(state => state.schools.schools);
+
+  // React Hook to fetch Course data
   useEffect(() => {
-    dispatch(fetchSchools({ accessLevel: 'my' }));
-  }, [dispatch]);
+    dispatch(fetchSchools({ accessLevel: myOrAll }));
+  }, [dispatch, myOrAll]);
 
   if (!schools) {
     return loadingJSX('Schools');
@@ -28,7 +32,7 @@ function Schools(props) {
   return (
     <div>
       <Typography variant="h4" component="h1" className={header}>
-        All Schools
+        {myOrAll + " Schools"}
       </Typography>
       <CreateSchoolTable
         header={header}
@@ -36,6 +40,7 @@ function Schools(props) {
         data={schools}
         tRow={tRow}
         striped={striped}
+        my_or_all_link={myOrAllUrl}
       />
     </div>
   );

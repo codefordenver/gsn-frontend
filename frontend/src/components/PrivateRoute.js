@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.user.get('isLoggedIn'),
+  isLoggedIn: state.user.get('isLoggedIn')
 });
 
 const PrivateRoute = ({ component: Component, isLoggedIn, ...rest }) => (
-    <Route
-      {...rest}
+  <Route
+    {...rest}
       render={componentProps => (
         isLoggedIn
           ? <Component {...componentProps} />
