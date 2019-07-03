@@ -5,7 +5,7 @@ import {
 
 import { Link } from 'react-router-dom';
 import {
-  Radar, UserGroup, ViewShow, Wrench,
+  Radar, UserGroup, ViewShow, Wrench, Search
 } from './Icons';
 
 
@@ -37,7 +37,7 @@ const navItems = [
   },
   {
     name: 'Search',
-    icon: <Wrench />, //placeholder - needs magnifying glass
+    icon: <Search />,
     route: '/search',
   },
 ];
