@@ -16,7 +16,7 @@ import ProgramDetail from 'pages/Table/Program/ProgramDetail';
 import Students from 'pages/Table/Student/Students';
 import StudentDetail from 'pages/Table/Student/StudentDetail';
 
-import MyStudents from 'pages/MyStudents/MyStudents';
+import MyStudents from 'pages/ManageData/MyStudents';
 
 import Courses from 'pages/Table/Course/Courses';
 import CourseDetail from 'pages/Table/Course/CourseDetail';
@@ -58,7 +58,7 @@ export default function () {
 
                       <PrivateRoute exact path="/viewalldata" component={ViewAllDataHomepage} />
 
-                      <PrivateRoute exact path="/mystudents" component={MyStudents} />
+                      <PrivateRoute exact path="/manage-data/modify-my-students" component={MyStudents} />
 
 
                   </Layout>
