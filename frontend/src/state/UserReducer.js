@@ -6,6 +6,7 @@ import {
   SET_IS_LOGGED_IN,
   SET_ERROR,
   CLEAR_ERROR,
+  UPLOAD_CSV
 } from './UserConstants';
 
 const initialState = fromJS({
@@ -13,7 +14,7 @@ const initialState = fromJS({
   isLoggedIn: false,
   username: null,
   loading: true,
-  error: null,
+  error: null
 });
 
 export default function reducer(state = initialState, action) {
@@ -37,6 +38,9 @@ export default function reducer(state = initialState, action) {
 
     case CLEAR_ERROR:
       return state.delete('error');
+
+    case UPLOAD_CSV:
+      return state.set('csv', payload);
 
     default:
       return state;
