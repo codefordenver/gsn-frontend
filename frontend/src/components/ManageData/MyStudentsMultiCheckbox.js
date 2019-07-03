@@ -30,7 +30,7 @@ const names = [
   'Kelly Snyder',
 ];
 
-export default function MultiCheckbox() {
+export default function MyStudentsMultiCheckbox() {
   const [personName, setPersonName] = React.useState([]);
   function handleChange(event) {
     setPersonName(event.target.value);

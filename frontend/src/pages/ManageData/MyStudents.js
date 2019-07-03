@@ -6,7 +6,7 @@ import { Typography, withStyles } from '@material-ui/core';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateStudentTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-import MultiCheckbox from '../../components/MultiCheckbox';
+import MyStudentsMultiCheckbox from '../../components/ManageData/MyStudentsMultiCheckbox';
 
 function MyStudents(props) {
   const {
@@ -29,9 +29,9 @@ function MyStudents(props) {
   return (
     <div>
       <Typography variant="h4" component="h1" className={header}>
-        My Students
+        Add/Remove My Students
       </Typography>
-      <MultiCheckbox />
+      <MyStudentsMultiCheckbox />
       
     </div>
   );
