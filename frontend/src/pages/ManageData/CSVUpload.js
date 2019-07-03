@@ -1,22 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Typography, withStyles, Select, MenuItem } from "@material-ui/core";
+import {
+  Typography,
+  withStyles,
+  Select,
+  MenuItem,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContentText,
+  DialogContent,
+  DialogActions
+} from "@material-ui/core";
 import { loadingJSX } from "components/sharedStyles/LoadingStyles";
 import { TablePageStyles } from "components/sharedStyles/Table/TablePageStyles";
 import {
   fetchDistrictDetails,
   fetchCreatableDistricts
-} from '../../state/DistrictActions';
+} from "../../state/DistrictActions";
 
 function CSVUpload(props) {
   const {
     classes: { header }
   } = props;
   const dispatch = useDispatch();
-
+  const [openDialogue, setOpenDialogue] = useState(false);
   const [field, setField] = useState({
     selectedDistrict: "",
-    selectedSchool: ""
+    selectedSchool: "",
+    selectedFinal: ""
   });
 
   const updateState = event => {
@@ -40,8 +52,16 @@ function CSVUpload(props) {
     dispatch(fetchDistrictDetails({ accessLevel: "all", districtId }));
   }, [dispatch, districtId]);
 
-  if (!districtDetail) {
+  if (!districts) {
     return loadingJSX("Upload Data");
+  }
+
+  function handleOpenDialogue() {
+    setOpenDialogue(true);
+  }
+
+  function handleCloseDialogue() {
+    setOpenDialogue(false);
   }
 
   const schoolSet = districtDetail.schoolSet || [];
@@ -78,6 +98,7 @@ function CSVUpload(props) {
         name="selectedSchool"
         value={field.selectedSchool}
         onChange={updateState}
+        disabled={field.selectedDistrict == ""}
       >
         {schoolSet.map(schoolData => {
           return (
@@ -87,6 +108,50 @@ function CSVUpload(props) {
           );
         })}
       </Select>
+      <br />
+      <Select
+        label="Final"
+        variant="outlined"
+        placeholder="Final"
+        required="true"
+        name="selectedFinal"
+        value={field.selectedFinal}
+        onChange={updateState}
+        disabled={field.selectedSchool == ""}
+      >
+        <MenuItem value={"True"}>Final</MenuItem>
+        <MenuItem value={"False"}>Not Final</MenuItem>
+      </Select>
+      <br />
+      <input type="file" />
+      <br />
+      <Button
+        size="small"
+        variant="contained"
+        color="secondary"
+        onClick={handleOpenDialogue}
+      >
+        Submit
+      </Button>
+      <Dialog
+        open={openDialogue}
+        onClose={handleCloseDialogue}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Confirm Upload"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to upload this data?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button color="primary">Yes</Button>
+          <Button onClick={handleCloseDialogue} color="primary" autoFocus>
+            No
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
