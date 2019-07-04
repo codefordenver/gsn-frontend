@@ -161,7 +161,7 @@ function CSVUpload(props) {
         accept="*"
         style={{display: "none"}}
         id="outlined-button-file"
-        multiple
+        multiple={false}
         type="file"
         name="csvFileName"
         required="true"
@@ -169,7 +169,14 @@ function CSVUpload(props) {
         onChange={updateState}
       />
       <label htmlFor="outlined-button-file">
-        <Button variant="outlined" component="span" style={{margin: "theme.spacing(1)"}}>
+        <Button 
+          variant="outlined" 
+          component="span" 
+          style={{margin: "theme.spacing(1)"}}
+          size="small"
+          variant="contained"
+          color="secondary"
+          >
           Browse
         </Button>
       </label>
