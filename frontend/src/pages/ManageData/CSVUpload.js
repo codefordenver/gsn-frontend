@@ -173,6 +173,9 @@ function CSVUpload(props) {
           Browse
         </Button>
       </label>
+      <div>
+        <p>{field.csv && `${field.csv.name}`}</p>
+      </div>
      
       <p />
       <Button
