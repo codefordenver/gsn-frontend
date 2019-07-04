@@ -148,11 +148,15 @@ function CSVUpload(props) {
         variant="outlined"
         placeholder="Final"
         required="true"
+        displayEmpty
         name="selectedFinal"
         value={field.selectedFinal}
         onChange={updateState}
         disabled={field.selectedSchool === ''}
       >
+        <MenuItem value="" disabled>
+          Select one
+        </MenuItem>
         <MenuItem value>Final</MenuItem>
         <MenuItem value={false}>Not Final</MenuItem>
       </Select>
