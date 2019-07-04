@@ -107,3 +107,21 @@ export const postDistricts = ({ field, callback }) => {
       .catch(error => error);
   };
 };
+
+export const deleteDistricts = ({ field, callback }) => {
+  return dispatch => {
+    return fetch(`http://gsndev.com/gsndb/all/create-district/`, {
+      method: 'DELETE',
+      body: JSON.stringify(field),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .catch(error => error);
+  };
+};
