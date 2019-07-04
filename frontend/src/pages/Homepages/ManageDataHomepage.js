@@ -37,13 +37,13 @@ function ManageDataHomepage(props) {
       <Link to="/manage-data/create-district" style={{ textDecoration: "none" }}>
         <CreateTableHeader
           headerClassStyle={tableTitle}
-          title="Create New District"
+          title="Create/Edit/Delete District"
         />
       </Link>
       <Link to="/manage-data/create-school" style={{ textDecoration: "none" }}>
         <CreateTableHeader
           headerClassStyle={tableTitle}
-          title="Create New School"
+          title="Create/Edit/Delete School"
         />
       </Link>
     </div>

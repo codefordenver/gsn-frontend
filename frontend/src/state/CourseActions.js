@@ -15,7 +15,7 @@ const setCourseDetails = data => ({
 
 export const fetchCourses = ({ accessLevel }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/${accessLevel}/course/`, {
+    return fetch(`https://gsndev.com/gsndb/${accessLevel}/course/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -32,7 +32,7 @@ export const fetchCourses = ({ accessLevel }) => {
 
 export const fetchCourseDetails = ({ accessLevel, courseId }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/${accessLevel}/course/${courseId}`, {
+    return fetch(`https://gsndev.com/gsndb/${accessLevel}/course/${courseId}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -51,7 +51,7 @@ export const fetchCourseDetails = ({ accessLevel, courseId }) => {
 
 export const postCourseNotes = ({ text, accessLevel, url }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb${url}/`, {
+    return fetch(`https://gsndev.com/gsndb${url}/`, {
       method: 'POST',
       body: JSON.stringify({ text }),
       headers: {
