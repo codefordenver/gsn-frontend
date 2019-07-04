@@ -1,40 +1,50 @@
-import React, { useEffect, useState } from 'react';
-import {
- Typography, withStyles,
-} from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Typography, withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { getCourseDetail } from 'services/courseServices';
-import { DetailLink, DetailItem} from 'components/sharedStyles/Table/DetailStyles';
+import {
+  DetailLink,
+  DetailItem
+} from 'components/sharedStyles/Table/DetailStyles';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
-import { CreateGradeTable, CreateStudentTable, CreateAttendanceTable, CreateNoteTable } from 'components/sharedStyles/Table/CreateTablesStyle';
+import {
+  CreateGradeTable,
+  CreateStudentTable,
+  CreateAttendanceTable,
+  CreateNoteTable
+} from 'components/sharedStyles/Table/CreateTablesStyle';
 import CreateTableHeader from 'components/sharedStyles/Table/TableHeader';
-
-
-
+import {
+  fetchCourseDetails,
+  postCourseNotes
+} from '../../../state/CourseActions';
 
 function CourseDetail(props) {
-  const [courseDetail, setCourseDetail] = useState({});
-  const [loading, setLoading] = useState(true);
   const {
-    classes: {
-       striped, tHead, tRow, tableTitle
-    },
+    classes: { striped, tHead, tRow, tableTitle, header }
   } = props;
-  const { classes: { header }, match: { params } } = props;
-  const courseIdParam = params;
 
+  // Props are provided by React Router
+  const { courseId } = props.match.params;
+
+  // Access Level Variables
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
+
+  // Redux Hooks
+  const dispatch = useDispatch();
+  const courseDetail = useSelector(state => {
+    return state.courses.course;
+  });
+
+  // React Hook to fetch CourseDetail data
   useEffect(() => {
-    console.log('useEffect ran in CourseDetail', courseIdParam);
-    getCourseDetail(courseIdParam).then((s) => {
-      setCourseDetail(s);
-      setLoading(false);
-    });
-  }, []);
+    dispatch(fetchCourseDetails({ accessLevel: myOrAll, courseId }));
+  }, [dispatch, courseId, myOrAll]);
 
-  if (loading) {
-    return (
-    loadingJSX('Course Detail'));
+  if (!courseDetail) {
+    return loadingJSX('Course Detail');
   }
 
   const {
@@ -50,74 +60,94 @@ function CourseDetail(props) {
   } = courseDetail;
 
   const gradeTable = (
-    < CreateGradeTable 
-            header = {header}
-            tHead = {tHead} 
-            data = {gradeSet} 
-            tRow = {tRow} 
-            striped = {striped} />
+    <CreateGradeTable
+      header={header}
+      tHead={tHead}
+      data={gradeSet}
+      tRow={tRow}
+      striped={striped}
+      my_or_all_link={myOrAllUrl}
+    />
   );
 
   const attendanceTable = (
-    < CreateAttendanceTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {attendanceSet} 
-            tRow = {tRow} 
-            striped = {striped} />
+    <CreateAttendanceTable
+      header={header}
+      tHead={tHead}
+      data={attendanceSet}
+      tRow={tRow}
+      striped={striped}
+      my_or_all_link={myOrAllUrl}
+    />
   );
 
   const studentTable = (
-    < CreateStudentTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {studentSet} 
-            tRow = {tRow} 
-            striped = {striped} />
+    <CreateStudentTable
+      header={header}
+      tHead={tHead}
+      data={studentSet}
+      tRow={tRow}
+      striped={striped}
+      my_or_all_link={myOrAllUrl}
+    />
   );
 
   const noteTable = (
-    < CreateStudentTable 
-            header = {header} 
-            tHead = {tHead} 
-            data = {noteSet} 
-            tRow = {tRow} 
-            striped = {striped} />
+    <CreateNoteTable
+      header={header}
+      tHead={tHead}
+      data={noteSet}
+      tRow={tRow}
+      striped={striped}
+    />
   );
 
   return (
-      <div>
-          <Typography className={header} component="h1" variant="h4">{courseName}</Typography>
-          <DetailItem k="Course Code" val={courseCode} />
-          <DetailItem k="Subject" val={courseSubject} />
-          <DetailLink k="School" val={schoolName} link={`/school/${schoolId}`} />
+    <div>
+      <Typography className={header} component="h1" variant="h4">
+        {courseName}
+      </Typography>
+      <DetailItem k="Course Code" val={courseCode} />
+      <DetailItem k="Subject" val={courseSubject} />
+      <DetailLink
+        k="School"
+        val={schoolName}
+        link={`${myOrAllUrl}/school/${schoolId}`}
+      />
 
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Grades" 
-            table = {gradeTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Attendance" 
-            table = {attendanceTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Student" 
-            table = {studentTable}/>
-          <CreateTableHeader
-            headerClassStyle = {tableTitle}
-            title = "Note" 
-            table = {noteTable}
-            haveCreateSaveButtonBool={true}/>
-      </div>
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Grades"
+        table={gradeTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Attendance"
+        table={attendanceTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Student"
+        table={studentTable}
+      />
+      <CreateTableHeader
+        headerClassStyle={tableTitle}
+        title="Note"
+        table={noteTable}
+        url={props.location.pathname}
+        accessLevel={myOrAll}
+        action={postCourseNotes}
+        haveNoteButtonBool
+        buttonText="New Note"
+      />
+    </div>
   );
 }
-
-
 
 CourseDetail.propTypes = {
   classes: PropTypes.object,
   match: PropTypes.object,
+  location: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(CourseDetail);

@@ -9,6 +9,7 @@ import {
 
 
 function CreateGradeTable(props) {
+  const my_or_all = props.my_or_all_link;
     const [orderBy, setOrderBy] = useState('grade'); // Initial state is columns are sorted by Grade
     const [order, setOrder] = useState('asc') // Initial State is ascending
 
@@ -32,13 +33,9 @@ function CreateGradeTable(props) {
        
     }
 
-    if(props.data == undefined) {
-    return (
-    <div>
-        Currently there isn't any data available.
-    </div>
-    );
-} else {
+  if (props.data === undefined) {
+    return <div>Currently there isn't any data available.</div>;
+} 
     return (
         <div>
         <Table>
@@ -69,12 +66,12 @@ function CreateGradeTable(props) {
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                       >
                           <TableCell>
-                              <Link to={`/student/${studentId}`}>
+                              <Link to={`${my_or_all}/student/${studentId}`}>
                                   <StyledLink>{studentName}</StyledLink>
                               </Link>
                           </TableCell>
                           <TableCell>
-                              <Link to={`/course/${courseId}`}>
+                              <Link to={`${my_or_all}/course/${courseId}`}>
                                   <StyledLink>{courseName}</StyledLink>
                               </Link>
                           </TableCell>
@@ -87,11 +84,11 @@ function CreateGradeTable(props) {
             </TableBody>
         </Table>
     </div>
-    );
-            }
-        }
+  );
+}
 
 function CreateStudentTable(props) {
+    const my_or_all = props.my_or_all_link;    
     const [orderBy, setOrderBy] = useState('studentName'); // Initial state is columns are sorted by Grade
     const [order, setOrder] = useState('asc') // Initial State is ascending
 
@@ -120,7 +117,7 @@ function CreateStudentTable(props) {
             Currently there isn't any data available.
         </div>
         );
-    } else {
+    } 
     return (
         <div>
         <Table>
@@ -142,12 +139,12 @@ function CreateStudentTable(props) {
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                         >
                            <TableCell>
-                                <Link to={`/student/${studentId}`}>
+                                <Link to={`${my_or_all}/student/${studentId}`}>
                                     <StyledLink>{studentName}</StyledLink>
                                 </Link>
                             </TableCell>
                             <TableCell>
-                                <Link to={`/school/${schoolId}`}>
+                                <Link to={`${my_or_all}/school/${schoolId}`}>
                                     <StyledLink>{schoolName}</StyledLink>
                                 </Link>
                             </TableCell>
@@ -160,10 +157,11 @@ function CreateStudentTable(props) {
     </div>
     );
             }
-        }
+        
 
 
 function CreateAttendanceTable(props) {
+    const my_or_all = props.my_or_all_link;
     const [orderBy, setOrderBy] = useState('studentName'); // Initial state is columns are sorted by Grade
     const [order, setOrder] = useState('asc') // Initial State is ascending
 
@@ -192,7 +190,7 @@ function CreateAttendanceTable(props) {
             Currently there isn't any data available.
         </div>
         );
-    } else {
+    } 
     return (
         <div>
         <Table>
@@ -226,7 +224,7 @@ function CreateAttendanceTable(props) {
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                         >
                             <TableCell>
-                                <Link to={`/student/${studentId}`}>
+                                <Link to={`${my_or_all}/student/${studentId}`}>
                                     <StyledLink>{studentName}</StyledLink>
                                 </Link>
                             </TableCell>
@@ -242,11 +240,11 @@ function CreateAttendanceTable(props) {
             </TableBody>
         </Table>
     </div>
-    );
-            }
-        }
+  );
+}
 
 function CreateCourseTable(props) {
+    const my_or_all = props.my_or_all_link;
     const [orderBy, setOrderBy] = useState('courseName'); // Initial state is columns are sorted by Grade
     const [order, setOrder] = useState('asc') // Initial State is ascending
 
@@ -276,7 +274,7 @@ function CreateCourseTable(props) {
             Currently there isn't any data available.
         </div>
         );
-    } else {
+    } 
     return (
         <div>
         <Table>
@@ -304,12 +302,12 @@ function CreateCourseTable(props) {
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                         >
                             <TableCell align="left">
-                                <Link to={`/course/${courseId}`}>
+                                <Link to={`${my_or_all}/course/${courseId}`}>
                                     <StyledLink>{courseName}</StyledLink>
                                 </Link>
                             </TableCell>
                             <TableCell align="left">
-                                <Link to={`/school/${schoolId}`}>
+                                <Link to={`${my_or_all}/school/${schoolId}`}>
                                     <StyledLink>{schoolName}</StyledLink>
                                 </Link>
                             </TableCell>
@@ -321,11 +319,11 @@ function CreateCourseTable(props) {
             </TableBody>
         </Table>
     </div>
-    );
-            }
-        }
+  );
+}
 
 function CreateDistrictTable(props) {
+    const my_or_all = props.my_or_all_link;
     const [orderBy, setOrderBy] = useState('districtName'); // Initial state is columns are sorted by Grade
     const [order, setOrder] = useState('asc') // Initial State is ascending
 
@@ -355,7 +353,7 @@ function CreateDistrictTable(props) {
             Currently there isn't any data available.
         </div>
         );
-    } else {
+    } 
     return (
         <div>
         <Table>
@@ -382,7 +380,7 @@ function CreateDistrictTable(props) {
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                         >
                             <TableCell align="left">
-                                <Link to={`/district/${districtId}`}>
+                                <Link to={`${my_or_all}/district/${districtId}`}>
                                     <StyledLink>{districtName}</StyledLink>
                                 </Link>
                             </TableCell>
@@ -395,11 +393,11 @@ function CreateDistrictTable(props) {
             </TableBody>
         </Table>
     </div>
-    );
-            }
-        }
+  );
+}
 
 function CreateProgramTable(props) {
+    const my_or_all = props.my_or_all_link;
     const [orderBy, setOrderBy] = useState('programName'); // Initial state is columns are sorted by Grade
     const [order, setOrder] = useState('asc') // Initial State is ascending
 
@@ -429,7 +427,7 @@ function CreateProgramTable(props) {
             Currently there isn't any data available.
         </div>
         );
-    } else {
+    } 
     return (
         <div>
         <Table>
@@ -450,7 +448,7 @@ function CreateProgramTable(props) {
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                         >
                             <TableCell align="left">
-                                <Link to={`/program/${programId}`}>
+                                <Link to={`${my_or_all}/program/${programId}`}>
                                     <StyledLink>{programName}</StyledLink>
                                 </Link>
                             </TableCell>
@@ -460,11 +458,11 @@ function CreateProgramTable(props) {
             </TableBody>
         </Table>
     </div>
-    );
-            }
-        }
+  );
+}
 
 function CreateSchoolTable(props) {
+    const my_or_all = props.my_or_all_link;
     const [orderBy, setOrderBy] = useState('schoolName'); // Initial state is columns are sorted by Grade
     const [order, setOrder] = useState('asc') // Initial State is ascending
 
@@ -494,7 +492,7 @@ function CreateSchoolTable(props) {
             Currently there isn't any data available.
         </div>
         );
-    } else {
+    }
     return (
         <div>
         <Table>
@@ -519,28 +517,26 @@ function CreateSchoolTable(props) {
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                         >
                             <TableCell align="left">
-                                <Link to={`/school/${schoolId}`}>
+                                <Link to={`${my_or_all}/school/${schoolId}`}>
                                     <StyledLink>{schoolName}</StyledLink>
                                 </Link>
                             </TableCell>
                             <TableCell align="left">
-                                <Link to={`/district/${districtId}`}>
+                                <Link to={`${my_or_all}/district/${districtId}`}>
                                     <StyledLink>{districtName}</StyledLink>
                                 </Link>
                             </TableCell>
-
-                        </TableRow>
-                    );
-                })}
-            </TableBody>
-        </Table>
+                            </TableRow>
+                            );
+          })}
+        </TableBody>
+      </Table>
     </div>
-    );
-            }
-        }
-
+  );
+}
 
 function CreateBehaviorTable(props) {
+    const my_or_all = props.my_or_all_link;
     const [orderBy, setOrderBy] = useState('studentName'); // Initial state is columns are sorted by Grade
     const [order, setOrder] = useState('asc') // Initial State is ascending
 
@@ -570,7 +566,7 @@ function CreateBehaviorTable(props) {
             Currently there isn't any data available.
         </div>
         );
-    } else {
+    }
     return (
         <div>
         <Table>
@@ -598,7 +594,7 @@ function CreateBehaviorTable(props) {
                         className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
                         >
                             <TableCell align="left">
-                                <Link to={`/student/${studentId}`}>
+                                <Link to={`${my_or_all}/student/${studentId}`}>
                                     <StyledLink>{studentName}</StyledLink>
                                 </Link>
                             </TableCell>
@@ -613,7 +609,6 @@ function CreateBehaviorTable(props) {
     </div>
     );
             }
-        }
 
 
 function CreateNoteTable(props) {
@@ -646,7 +641,7 @@ function CreateNoteTable(props) {
             Currently there isn't any data available.
         </div>
         );
-    } else {
+    } 
     return (
         <div>
         <Table>
@@ -677,8 +672,86 @@ function CreateNoteTable(props) {
     </div>
     );
             }
-        }
+        
 
+function CreateReferralTable(props) {
+    const [orderBy, setOrderBy] = useState('dateGiven'); // Initial state is columns are sorted by Grade
+    const [order, setOrder] = useState('asc') // Initial State is ascending
 
+    function ascCompare(a, b ) {
+        if( a[orderBy] > b[orderBy]) return 1;
+        if( a[orderBy] < b[orderBy]) return -1;
+        return 0;
+    }
+    function desCompare(a,b ) {
+        if( a[orderBy] > b[orderBy]) return -1;
+        if( a[orderBy] < b[orderBy]) return 1;
+        return 0;
+    }
+    const handleSort = (tableHeader) => {
+        // is the sort orderBy Changed??
+        console.log('table header ', tableHeader, 'orderby ', orderBy);
+        if( orderBy !== tableHeader)
+            setOrderBy(tableHeader);
+        else 
+            setOrder(order === 'asc' ? 'desc': 'asc');
+       
+    }
+    if (props.data == undefined) {
+      return <div>Currently there isn't any data available.</div>;
+    }
+    return (
+      <div>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('type')} >Referral Type</TableSortLabel></TableCell>
+              <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('dateGiven')} >Date</TableSortLabel></TableCell>
+              <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('referenceName')} >Reference Name</TableSortLabel></TableCell>
+              <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('referenceAddress')} >Reference Address</TableSortLabel></TableCell>
+              <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('referencePhone')} >Reference Phone</TableSortLabel></TableCell>
+              <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('reason')} >Reason</TableSortLabel></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {props.data.sort(order === 'asc'? ascCompare: desCompare ).map((referralDetail, i) => {
+              const {
+                type,
+                dateGiven,
+                referenceName,
+                referenceAddress,
+                referencePhone,
+                reason
+              } = referralDetail;
+              return (
+                <TableRow
+                  key={i}
+                  className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
+                >
+                  <TableCell align="left">{type}</TableCell>
+                  <TableCell align="left">{dateGiven}</TableCell>
+                  <TableCell align="left">{referenceName}</TableCell>
+                  <TableCell align="left">{referenceAddress}</TableCell>
+                  <TableCell align="left">{referencePhone}</TableCell>
+                  <TableCell align="left">{reason}</TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </div>
+    );
+  }
 
-export { CreateGradeTable, CreateSchoolTable, CreateStudentTable, CreateBehaviorTable, CreateProgramTable, CreateAttendanceTable, CreateCourseTable, CreateDistrictTable, CreateNoteTable };
+export {
+  CreateGradeTable,
+  CreateSchoolTable,
+  CreateStudentTable,
+  CreateBehaviorTable,
+  CreateProgramTable,
+  CreateAttendanceTable,
+  CreateCourseTable,
+  CreateDistrictTable,
+  CreateNoteTable,
+  CreateReferralTable
+};

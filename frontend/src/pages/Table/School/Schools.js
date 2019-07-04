@@ -1,61 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import { getSchools } from 'services/schoolServices';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import { withStyles,
-} from '@material-ui/core';
-
+import { withStyles, Typography } from '@material-ui/core';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
 import { CreateSchoolTable } from 'components/sharedStyles/Table/CreateTablesStyle';
-import { Typography } from '@material-ui/core';
-
-
+import { fetchSchools } from '../../../state/SchoolActions';
 
 function Schools(props) {
   const {
-    classes: {
-      header, striped, tHead, tRow,
-    },
+    classes: { header, striped, tHead, tRow }
   } = props;
 
-  const [schools, setSchools] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // Access Level Variables
+  const myOrAll = props.myOrAll;
+  const myOrAllUrl = `/${myOrAll}`;
 
+  // Redux Hooks
+  const dispatch = useDispatch();
+  const schools = useSelector(state => state.schools.schools);
+
+  // React Hook to fetch Course data
   useEffect(() => {
-    getSchools().then((s) => {
-      setSchools(s);
-      setLoading(false);
-    });
-  }, []);
+    dispatch(fetchSchools({ accessLevel: myOrAll }));
+  }, [dispatch, myOrAll]);
 
-  if (loading) {
-    return (
-    loadingJSX('Schools'));
+  if (!schools) {
+    return loadingJSX('Schools');
   }
-
 
   return (
     <div>
-      <Typography
-        variant="h4"
-        component="h1"
-        className={header}>
-        All Schools
+      <Typography variant="h4" component="h1" className={header}>
+        {myOrAll + " Schools"}
       </Typography>
-      < CreateSchoolTable 
-        header = {header} 
-        tHead = {tHead} 
-        data = {schools} 
-        tRow = {tRow} 
-        striped = {striped} />
+      <CreateSchoolTable
+        header={header}
+        tHead={tHead}
+        data={schools}
+        tRow={tRow}
+        striped={striped}
+        my_or_all_link={myOrAllUrl}
+      />
     </div>
   );
 }
 
-
 Schools.propTypes = {
-  classes: PropTypes.object,
+  classes: PropTypes.object
 };
 
 export default withStyles(TablePageStyles)(Schools);
