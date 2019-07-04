@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Typography,
   withStyles,
@@ -11,16 +11,16 @@ import {
   DialogContentText,
   DialogContent,
   DialogActions
-} from '@material-ui/core';
-import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
-import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
+} from "@material-ui/core";
+import { loadingJSX } from "components/sharedStyles/LoadingStyles";
+import { TablePageStyles } from "components/sharedStyles/Table/TablePageStyles";
 
-import { postCSVUpload } from '../../state/UserActions';
+import { postCSVUpload } from "../../state/UserActions";
 import {
   fetchDistrictDetails,
   fetchCreatableDistricts
-} from '../../state/DistrictActions';
-import { fetchSchools } from '../../state/SchoolActions';
+} from "../../state/DistrictActions";
+import { fetchSchools } from "../../state/SchoolActions";
 
 function CSVUpload(props) {
   const {
@@ -29,11 +29,11 @@ function CSVUpload(props) {
   const dispatch = useDispatch();
 
   const defaultState = {
-    selectedDistrict: '',
-    selectedSchool: '',
-    selectedFinal: '',
-    csvFileName: '',
-    csv: ''
+    selectedDistrict: "",
+    selectedSchool: "",
+    selectedFinal: "",
+    csvFileName: "",
+    csv: ""
   };
 
   const [openDialogue, setOpenDialogue] = useState(false);
@@ -41,36 +41,31 @@ function CSVUpload(props) {
 
   const updateState = event => {
     const { name, value, files } = event.target;
-    if (name !== 'csvFileName') {
+    if (name !== "csvFileName") {
       setField({ ...field, [name]: value });
     } else {
       setField({ ...field, [name]: value, csv: files[0] });
     }
   };
 
-  // Props are provided by React Router
-  const districtId = 1;
-
-  // Redux Hooks
   const districts = useSelector(state => state.districts.districts);
-  const districtDetail = useSelector(state => state.districts.district);
 
-  // React Hook to fetch DistrictDetail data
-  useEffect(() => {
-    dispatch(fetchCreatableDistricts({ accessLevel: 'all' }));
-  }, [dispatch, districtId]);
+  const schoolOptions =
+    districts.filter(districtData => {
+      return districtData.districtId === field.selectedDistrict;
+    }) || [];
+
+  const schoolOptionsData =
+    schoolOptions[0] && schoolOptions[0].schoolSet
+      ? schoolOptions[0].schoolSet
+      : null;
 
   useEffect(() => {
-    dispatch(fetchDistrictDetails({ accessLevel: 'all', districtId }));
-  }, [dispatch, districtId]);
-
-  const schools = useSelector(state => state.schools.schools);
-  useEffect(() => {
-    dispatch(fetchSchools({ accessLevel: 'all' }));
+    dispatch(fetchCreatableDistricts({ accessLevel: "all" }));
   }, [dispatch]);
 
   if (!districts) {
-    return loadingJSX('Upload Data');
+    return loadingJSX("Upload Data");
   }
 
   function handleOpenDialogue() {
@@ -123,14 +118,14 @@ function CSVUpload(props) {
         name="selectedSchool"
         value={field.selectedSchool}
         onChange={updateState}
-        disabled={field.selectedDistrict == ''}
+        disabled={field.selectedDistrict == ""}
       >
-        {schools.map(school => {
-          if (school.districtId === field.selectedDistrict)
+        {schoolOptionsData &&
+          schoolOptionsData.map(school => {
             return (
               <MenuItem value={school.schoolId}>{school.schoolName}</MenuItem>
             );
-        })}
+          })}
       </Select>
       <p>Final</p>
       <Select
@@ -141,7 +136,7 @@ function CSVUpload(props) {
         name="selectedFinal"
         value={field.selectedFinal}
         onChange={updateState}
-        disabled={field.selectedSchool == ''}
+        disabled={field.selectedSchool == ""}
       >
         <MenuItem value>Final</MenuItem>
         <MenuItem value={false}>Not Final</MenuItem>
