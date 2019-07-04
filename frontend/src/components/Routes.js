@@ -5,6 +5,7 @@ import Layout from 'components/layouts/Default';
 import LoginContainer from 'pages/Login/LoginContainer';
 import SignupContainer from 'pages/Register';
 import ViewAllDataHomepage from 'pages/Homepages/ViewAllDataHomepage';
+import SearchPage from 'pages/SearchPage/SearchPage';
 import ManageDataHomepage from 'pages/Homepages/ManageDataHomepage';
 import LandingPage from './LandingPage';
 import Students from '../pages/Table/Student/Students';
@@ -83,6 +84,8 @@ export default function() {
               component={CreateSchool}
             />
 
+            <PrivateRoute exact path="/search" component={SearchPage} />
+            
           </Layout>
         </Switch>
       </Switch>
