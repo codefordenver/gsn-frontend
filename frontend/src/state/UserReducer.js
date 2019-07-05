@@ -6,6 +6,7 @@ import {
   SET_IS_LOGGED_IN,
   SET_ERROR,
   CLEAR_ERROR,
+  SET_REGISTERED_KEYS
 } from './UserConstants';
 
 const initialState = fromJS({
@@ -14,6 +15,7 @@ const initialState = fromJS({
   username: null,
   loading: true,
   error: null,
+  registrationKey: []
 });
 
 export default function reducer(state = initialState, action) {
@@ -37,6 +39,9 @@ export default function reducer(state = initialState, action) {
 
     case CLEAR_ERROR:
       return state.delete('error');
+
+    case SET_REGISTERED_KEYS:
+      return state.set('registrationKey', payload);
 
     default:
       return state;

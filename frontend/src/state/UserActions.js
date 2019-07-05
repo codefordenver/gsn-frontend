@@ -8,7 +8,8 @@ import {
   SET_LOADING,
   SET_IS_LOGGED_IN,
   SET_ERROR,
-  CLEAR_ERROR
+  CLEAR_ERROR,
+  SET_REGISTERED_KEYS
 } from "./UserConstants";
 
 export const setToken = createAction(SET_TOKEN);
@@ -17,6 +18,7 @@ export const setLoading = createAction(SET_LOADING);
 export const setIsLoggedIn = createAction(SET_IS_LOGGED_IN);
 export const setError = createAction(SET_ERROR);
 export const clearError = createAction(CLEAR_ERROR);
+export const setRegistrationKey = createAction(SET_REGISTERED_KEYS);
 
 export const setUserState = () => dispatch => {
   const token = localStorage.getItem("token");
@@ -37,6 +39,7 @@ export const setUserState = () => dispatch => {
     dispatch(setIsLoggedIn(false));
   }
 };
+
 
 export const logIn = ({
   username,
@@ -115,4 +118,21 @@ export const authError = error => dispatch => {
   dispatch(logOut());
   console.error({ error });
   dispatch(setError(error.message));
+};
+
+export const fetchCurrentRegistrationKeys = () => {
+  return dispatch => {
+    return fetch(`https://gsndev.com/user_app/special-key/`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`
+      }
+    })
+      .then(response => response.json())
+      .then(s => {
+        dispatch(setRegistrationKey(s));
+      })
+      .catch(error => error);
+  };
 };
