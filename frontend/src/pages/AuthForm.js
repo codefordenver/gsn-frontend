@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { InputBase, Button } from '@material-ui/core';
+import React from "react";
+import PropTypes from "prop-types";
+import { InputBase, Button } from "@material-ui/core";
 
-const AuthForm = (props) => {
+function AuthForm(props) {
   const {
     classes: input,
     error,
@@ -11,69 +11,86 @@ const AuthForm = (props) => {
     setUsername,
     username,
     password,
+    specialKey,
     setPassword,
+    setSpecialKey,
     submitted,
     completeLogin,
     completeSignup,
-    buttonLabel,
+    buttonLabel
   } = props;
 
   const handleSubmit = () => {
-    window.location.href.includes('login') ? completeLogin() : completeSignup();
+    window.location.href.includes("login") ? completeLogin() : completeSignup();
   };
 
   return (
-      <form onSubmit={handleSubmit}>
-          {/* TODO Add Error Field */}
-          {error && (
-          <p>
-    Error:
-              {error}
-          </p>
-          )}
+    <form onSubmit={handleSubmit}>
+      {/* TODO Add Error Field */}
+      {error && (
+        <p>
+          Error:
+          {error}
+        </p>
+      )}
 
-          <InputBase
-            className={input}
-            onChange={e => setUsername(e.target.value)}
-            type="text"
-            error={submitted && !username}
-            name="username"
-            placeholder="User Name"
-            value={username}
-            disabled={loading}
-            // onKeyPress={e => (e.key === 'Enter' ? completeLogin() : () => {})}
-            fullWidth
-          />
+      <InputBase
+        className={input}
+        onChange={e => setUsername(e.target.value)}
+        type="text"
+        error={submitted && !username}
+        name="username"
+        placeholder="User Name"
+        value={username}
+        disabled={loading}
+        // onKeyPress={e => (e.key === 'Enter' ? completeLogin() : () => {})}
+        fullWidth
+      />
 
-          <InputBase
-            className={input}
-            onChange={e => setPassword(e.target.value)}
-            type="password"
-            error={submitted && !password}
-            name="password"
-            placeholder="Password"
-            value={password}
-            disabled={loading}
-            // onKeyPress={e => (e.key === 'Enter' ? completeLogin() : () => {})}
-            fullWidth
-          />
+      <InputBase
+        className={input}
+        onChange={e => setPassword(e.target.value)}
+        type="password"
+        error={submitted && !password}
+        name="password"
+        placeholder="Password"
+        value={password}
+        disabled={loading}
+        // onKeyPress={e => (e.key === 'Enter' ? completeLogin() : () => {})}
+        fullWidth
+      />
 
-          <Button
-            type="submit"
-            disabled={loading}
-            variant="contained"
-            color="secondary"
-            fullWidth
-          >
-              {buttonLabel}
-          </Button>
-      </form>
+      <InputBase
+        className={input}
+        onChange={e => setSpecialKey(e.target.value)}
+        type="specialKey"
+        error={submitted && (!password || !specialKey)}
+        name="specialKey"
+        placeholder="Registration Key"
+        value={specialKey}
+        disabled={loading}
+        // onKeyPress={e => (e.key === 'Enter' ? completeLogin() : () => {})}
+        fullWidth
+      />
+
+      <Button
+        type="submit"
+        disabled={loading}
+        variant="contained"
+        color="secondary"
+        fullWidth
+      >
+        {buttonLabel}
+      </Button>
+    </form>
   );
-};
+}
 
 AuthForm.propTypes = {
   loading: PropTypes.bool,
   setUsername: PropTypes.func,
+  setSpecialKey: PropTypes.func,
+  specialKey: PropTypes.func,
   username: PropTypes.func,
   password: PropTypes.func,
   setPassword: PropTypes.func,
@@ -83,8 +100,8 @@ AuthForm.propTypes = {
   buttonLabel: PropTypes.func,
   error: PropTypes.objectOf(PropTypes.string),
   classes: PropTypes.shape({
-    input: PropTypes.string,
-  }),
+    input: PropTypes.string
+  })
 };
 
 export default AuthForm;

@@ -1,7 +1,7 @@
-import { createAction } from 'utils/actionUtils';
-import { getUserState, loginUser, signupUser } from 'services/authServices';
+import { createAction } from "utils/actionUtils";
+import { getUserState, loginUser, signupUser } from "services/authServices";
 
-import history from 'utils/history';
+import history from "utils/history";
 import {
   SET_TOKEN,
   SET_USERNAME,
@@ -9,7 +9,7 @@ import {
   SET_IS_LOGGED_IN,
   SET_ERROR,
   CLEAR_ERROR
-} from './UserConstants';
+} from "./UserConstants";
 
 export const setToken = createAction(SET_TOKEN);
 export const setUsername = createAction(SET_USERNAME);
@@ -19,7 +19,7 @@ export const setError = createAction(SET_ERROR);
 export const clearError = createAction(CLEAR_ERROR);
 
 export const setUserState = () => dispatch => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   if (token != null) {
     dispatch(authRequest());
@@ -41,7 +41,7 @@ export const setUserState = () => dispatch => {
 export const logIn = ({
   username,
   password,
-  path = '/my/student'
+  path = "/my/student"
 }) => dispatch => {
   dispatch(authRequest());
   loginUser({ username, password })
@@ -59,9 +59,14 @@ export const logIn = ({
     });
 };
 
-export const register = ({ username, password, path = '/' }) => dispatch => {
+export const register = ({
+  username,
+  password,
+  registrationKey,
+  path = "/"
+}) => dispatch => {
   dispatch(setLoading(true));
-  signupUser({ username, password })
+  signupUser({ username, password, registrationKey })
     .then(json => {
       // console.log('register json', json);
       dispatch(setLoading(false));
@@ -79,11 +84,11 @@ export const register = ({ username, password, path = '/' }) => dispatch => {
 };
 
 export const logOut = () => dispatch => {
-  localStorage.removeItem('auth_token');
-  localStorage.removeItem('token');
+  localStorage.removeItem("auth_token");
+  localStorage.removeItem("token");
   dispatch(setIsLoggedIn(false));
   dispatch(setUsername(null));
-  history.push('/login');
+  history.push("/login");
 };
 
 export const authRequest = () => dispatch => {
@@ -92,16 +97,16 @@ export const authRequest = () => dispatch => {
 };
 
 export const authSuccess = user => dispatch => {
-  console.log('authSuccess', user);
+  console.log("authSuccess", user);
   if (user) {
     const { username, token } = user;
     dispatch(setLoading(false));
     dispatch(setIsLoggedIn(true));
     dispatch(setUsername(username));
     dispatch(setToken(token));
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
   } else {
-    console.error('null passed into authSuccess');
+    console.error("null passed into authSuccess");
   }
 };
 
