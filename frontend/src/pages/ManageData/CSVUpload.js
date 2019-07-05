@@ -21,8 +21,8 @@ import { postCSVUpload } from '../../state/UserActions';
 import {
   fetchDistrictDetails,
   fetchCreatableDistricts
-} from '../../state/DistrictActions';
-import { fetchSchools } from '../../state/SchoolActions';
+} from "../../state/DistrictActions";
+import { fetchSchools } from "../../state/SchoolActions";
 
 function CSVUpload(props) {
   const {
@@ -31,11 +31,11 @@ function CSVUpload(props) {
   const dispatch = useDispatch();
 
   const defaultState = {
-    selectedDistrict: '',
-    selectedSchool: '',
-    selectedFinal: '',
-    csvFileName: '',
-    csv: ''
+    selectedDistrict: "",
+    selectedSchool: "",
+    selectedFinal: "",
+    csvFileName: "",
+    csv: ""
   };
 
   const [openDialogue, setOpenDialogue] = useState(false);
@@ -43,36 +43,31 @@ function CSVUpload(props) {
 
   const updateState = event => {
     const { name, value, files } = event.target;
-    if (name !== 'csvFileName') {
+    if (name !== "csvFileName") {
       setField({ ...field, [name]: value });
     } else {
       setField({ ...field, [name]: value, csv: files[0] });
     }
   };
 
-  // Props are provided by React Router
-  const districtId = 1;
-
-  // Redux Hooks
   const districts = useSelector(state => state.districts.districts);
-  const districtDetail = useSelector(state => state.districts.district);
 
-  // React Hook to fetch DistrictDetail data
-  useEffect(() => {
-    dispatch(fetchCreatableDistricts({ accessLevel: 'all' }));
-  }, [dispatch, districtId]);
+  const schoolOptions =
+    districts.filter(districtData => {
+      return districtData.districtId === field.selectedDistrict;
+    }) || [];
+
+  const schoolOptionsData =
+    schoolOptions[0] && schoolOptions[0].schoolSet
+      ? schoolOptions[0].schoolSet
+      : null;
 
   useEffect(() => {
-    dispatch(fetchDistrictDetails({ accessLevel: 'all', districtId }));
-  }, [dispatch, districtId]);
-
-  const schools = useSelector(state => state.schools.schools);
-  useEffect(() => {
-    dispatch(fetchSchools({ accessLevel: 'all' }));
+    dispatch(fetchCreatableDistricts({ accessLevel: "all" }));
   }, [dispatch]);
 
   if (!districts) {
-    return loadingJSX('Upload Data');
+    return loadingJSX("Upload Data");
   }
 
   function handleOpenDialogue() {
@@ -135,12 +130,13 @@ function CSVUpload(props) {
         <MenuItem value="" disabled>
           Select one
         </MenuItem>
-        {schools.map(school => {
+        {schoolOptionsData &&
+          schoolOptionsData.map(school => {
           if (school.districtId === field.selectedDistrict)
             return (
               <MenuItem value={school.schoolId}>{school.schoolName}</MenuItem>
             );
-        })}
+          })}
       </Select>
       <p>Final</p>
       <Select
