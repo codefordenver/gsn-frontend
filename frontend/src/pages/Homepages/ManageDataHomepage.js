@@ -34,7 +34,10 @@ function ManageDataHomepage(props) {
       <Link to="/manage-data/upload" style={{ textDecoration: "none" }}>
         <CreateTableHeader headerClassStyle={tableTitle} title="Data Upload" />
       </Link>
-      <Link to="/manage-data/create-district" style={{ textDecoration: "none" }}>
+      <Link
+        to="/manage-data/create-district"
+        style={{ textDecoration: "none" }}
+      >
         <CreateTableHeader
           headerClassStyle={tableTitle}
           title="Create/Edit/Delete District"
@@ -44,6 +47,15 @@ function ManageDataHomepage(props) {
         <CreateTableHeader
           headerClassStyle={tableTitle}
           title="Create/Edit/Delete School"
+        />
+      </Link>
+      <Link
+        to="/manage-data/registration-key"
+        style={{ textDecoration: "none" }}
+      >
+        <CreateTableHeader
+          headerClassStyle={tableTitle}
+          title="Registration Key for New User"
         />
       </Link>
     </div>

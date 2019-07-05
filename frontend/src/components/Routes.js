@@ -21,6 +21,7 @@ import CourseDetail from '../pages/Table/Course/CourseDetail';
 import CSVUpload from '../pages/ManageData/CSVUpload';
 import CreateDistrict from '../pages/ManageData/CreateDistrict';
 import CreateSchool from '../pages/ManageData/CreateSchool';
+import CreateRegisterUserKey from '../pages/ManageData/CreateRegisterUserKey';
 
 import PrivateRoute from './PrivateRoute';
 
@@ -82,6 +83,11 @@ export default function() {
               exact
               path="/manage-data/create-school"
               component={CreateSchool}
+            />
+            <PrivateRoute
+              exact
+              path="/manage-data/registration-key"
+              component={CreateRegisterUserKey}
             />
 
             <PrivateRoute exact path="/search" component={SearchPage} />
