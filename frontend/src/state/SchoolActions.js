@@ -15,7 +15,7 @@ const setSchoolDetails = data => ({
 
 export const fetchSchools = ({ accessLevel }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/${accessLevel}/school/`, {
+    return fetch(`https://gsndev.com/gsndb/${accessLevel}/school/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -32,7 +32,7 @@ export const fetchSchools = ({ accessLevel }) => {
 
 export const fetchSchoolDetails = ({ accessLevel, schoolId }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/${accessLevel}/school/${schoolId}`, {
+    return fetch(`https://gsndev.com/gsndb/${accessLevel}/school/${schoolId}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -51,7 +51,7 @@ export const fetchSchoolDetails = ({ accessLevel, schoolId }) => {
 
 export const postSchoolNotes = ({ text, accessLevel, url }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb${url}/`, {
+    return fetch(`https://gsndev.com/gsndb${url}/`, {
       method: 'POST',
       body: JSON.stringify({ text }),
       headers: {
@@ -72,7 +72,7 @@ export const postSchoolNotes = ({ text, accessLevel, url }) => {
 
 export const fetchCreatableSchools = () => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/all/create-school/`, {
+    return fetch(`https://gsndev.com/gsndb/all/create-school/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -89,7 +89,7 @@ export const fetchCreatableSchools = () => {
 
 export const postSchools = ({ field, callback }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/all/create-school/`, {
+    return fetch(`https://gsndev.com/gsndb/all/create-school/`, {
       method: 'POST',
       body: JSON.stringify(field),
       headers: {
@@ -107,7 +107,7 @@ export const postSchools = ({ field, callback }) => {
 
 export const deleteSchools = ({ field, callback }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/all/create-school/`, {
+    return fetch(`https://gsndev.com/gsndb/all/create-school/`, {
       method: 'DELETE',
       body: JSON.stringify(field),
       headers: {

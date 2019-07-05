@@ -15,7 +15,7 @@ const setDistrictDetails = data => ({
 
 export const fetchDistricts = ({ accessLevel }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/${accessLevel}/district/`, {
+    return fetch(`https://gsndev.com/gsndb/${accessLevel}/district/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -33,7 +33,7 @@ export const fetchDistricts = ({ accessLevel }) => {
 export const fetchDistrictDetails = ({ accessLevel, districtId }) => {
   return dispatch => {
     return fetch(
-      `http://gsndev.com/gsndb/${accessLevel}/district/${districtId}`,
+      `https://gsndev.com/gsndb/${accessLevel}/district/${districtId}`,
       {
         method: 'GET',
         headers: {
@@ -54,7 +54,7 @@ export const fetchDistrictDetails = ({ accessLevel, districtId }) => {
 
 export const postDistrictNotes = ({ text, accessLevel, url }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb${url}/`, {
+    return fetch(`https://gsndev.com/gsndb${url}/`, {
       method: 'POST',
       body: JSON.stringify({ text }),
       headers: {
@@ -75,7 +75,7 @@ export const postDistrictNotes = ({ text, accessLevel, url }) => {
 
 export const fetchCreatableDistricts = ({ accessLevel }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/all/create-district/`, {
+    return fetch(`https://gsndev.com/gsndb/all/create-district/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -92,7 +92,7 @@ export const fetchCreatableDistricts = ({ accessLevel }) => {
 
 export const postDistricts = ({ field, callback }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/all/create-district/`, {
+    return fetch(`https://gsndev.com/gsndb/all/create-district/`, {
       method: 'POST',
       body: JSON.stringify(field),
       headers: {
@@ -110,7 +110,7 @@ export const postDistricts = ({ field, callback }) => {
 
 export const deleteDistricts = ({ field, callback }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/all/create-district/`, {
+    return fetch(`https://gsndev.com/gsndb/all/create-district/`, {
       method: 'DELETE',
       body: JSON.stringify(field),
       headers: {
