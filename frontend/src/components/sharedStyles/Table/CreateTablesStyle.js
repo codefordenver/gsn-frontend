@@ -743,6 +743,64 @@ function CreateReferralTable(props) {
     );
   }
 
+function CreateRegistrationKeyTable(props) {
+const [orderBy, setOrderBy] = useState('created'); // Initial state is columns are sorted by Grade
+const [order, setOrder] = useState('asc') // Initial State is ascending
+
+function ascCompare(a, b ) {
+    if( a[orderBy] > b[orderBy]) return 1;
+    if( a[orderBy] < b[orderBy]) return -1;
+    return 0;
+}
+function desCompare(a,b ) {
+    if( a[orderBy] > b[orderBy]) return -1;
+    if( a[orderBy] < b[orderBy]) return 1;
+    return 0;
+}
+const handleSort = (tableHeader) => {
+    // is the sort orderBy Changed??
+    console.log('table header ', tableHeader, 'orderby ', orderBy);
+    if( orderBy !== tableHeader)
+        setOrderBy(tableHeader);
+    else 
+        setOrder(order === 'asc' ? 'desc': 'asc');
+    
+}
+if (props.data == undefined) {
+    return <div>Currently there isn't any data available.</div>;
+}
+return (
+    <div>
+    <Table>
+        <TableHead>
+        <TableRow>
+            <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('special_key')} >Registration Key</TableSortLabel></TableCell>
+            <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('created')} >Date Created</TableSortLabel></TableCell>
+        </TableRow>
+        </TableHead>
+        <TableBody>
+        {props.data.sort(order === 'asc'? ascCompare: desCompare ).map((referralDetail, i) => {
+            const {
+                special_key,
+                created
+            } = referralDetail;
+            return (
+            <TableRow
+                key={i}
+                className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
+            >
+                <TableCell align="left">{special_key}</TableCell>
+                <TableCell align="left">{created}</TableCell>
+            </TableRow>
+            );
+        })}
+        </TableBody>
+    </Table>
+    </div>
+);
+}
+
+
 export {
   CreateGradeTable,
   CreateSchoolTable,
@@ -753,5 +811,6 @@ export {
   CreateCourseTable,
   CreateDistrictTable,
   CreateNoteTable,
-  CreateReferralTable
+  CreateReferralTable,
+  CreateRegistrationKeyTable
 };
