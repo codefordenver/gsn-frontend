@@ -28,6 +28,10 @@ function SchoolEntryComponent(props) {
   const postTextFromState = () => {
     //! Add Validation here to make sure all fields have data
     dispatch(action({ field, callback }));
+    setField({
+      ["district_id"]: "",
+      ["school_name"]: ""
+    });
   };
 
   return (

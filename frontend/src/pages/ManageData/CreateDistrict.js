@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Typography, withStyles, Select, MenuItem } from "@material-ui/core";
 import { loadingJSX } from "components/sharedStyles/LoadingStyles";
 import { TablePageStyles } from "components/sharedStyles/Table/TablePageStyles";
-import DistrictEntryComponent, { DistrictDeleteComponent } from "components/sharedStyles/ManageData/District";
+import DistrictEntryComponent, {
+  DistrictDeleteComponent
+} from "components/sharedStyles/ManageData/District";
 import { postDistricts, deleteDistricts } from "../../state/DistrictActions";
 
 function CreateDistrict(props) {

@@ -1,7 +1,7 @@
-import fetch from 'isomorphic-fetch';
+import fetch from "isomorphic-fetch";
 
-export const SET_ALL_SCHOOLS = 'GET_ALL_SCHOOLS';
-export const SET_SCHOOL_DETAILS = 'SET_SCHOOL_DETAILS';
+export const SET_ALL_SCHOOLS = "GET_ALL_SCHOOLS";
+export const SET_SCHOOL_DETAILS = "SET_SCHOOL_DETAILS";
 
 const setSchools = data => ({
   type: SET_ALL_SCHOOLS,
@@ -16,9 +16,9 @@ const setSchoolDetails = data => ({
 export const fetchSchools = ({ accessLevel }) => {
   return dispatch => {
     return fetch(`http://gsndev.com/gsndb/${accessLevel}/school/`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        Accept: 'application/json',
+        Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
       }
     })
@@ -33,9 +33,9 @@ export const fetchSchools = ({ accessLevel }) => {
 export const fetchSchoolDetails = ({ accessLevel, schoolId }) => {
   return dispatch => {
     return fetch(`http://gsndev.com/gsndb/${accessLevel}/school/${schoolId}`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        Accept: 'application/json',
+        Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
       }
     })
@@ -43,7 +43,7 @@ export const fetchSchoolDetails = ({ accessLevel, schoolId }) => {
         return response.json();
       })
       .then(s => {
-        dispatch(setSchoolDetails(s['0']));
+        dispatch(setSchoolDetails(s["0"]));
       })
       .catch(error => error);
   };
@@ -52,11 +52,11 @@ export const fetchSchoolDetails = ({ accessLevel, schoolId }) => {
 export const postSchoolNotes = ({ text, accessLevel, url }) => {
   return dispatch => {
     return fetch(`http://gsndev.com/gsndb${url}/`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({ text }),
       headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
+        "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
       }
     })
@@ -64,7 +64,7 @@ export const postSchoolNotes = ({ text, accessLevel, url }) => {
         return response.json();
       })
       .then(s => {
-        dispatch(setSchoolDetails(s['0']));
+        dispatch(setSchoolDetails(s["0"]));
       })
       .catch(error => error);
   };
@@ -73,9 +73,9 @@ export const postSchoolNotes = ({ text, accessLevel, url }) => {
 export const fetchCreatableSchools = () => {
   return dispatch => {
     return fetch(`http://gsndev.com/gsndb/all/create-school/`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        Accept: 'application/json',
+        Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
       }
     })
@@ -90,16 +90,19 @@ export const fetchCreatableSchools = () => {
 export const postSchools = ({ field, callback }) => {
   return dispatch => {
     return fetch(`http://gsndev.com/gsndb/all/create-school/`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(field),
       headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
+        "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
       }
     })
       .then(response => {
         return response.json();
+      })
+      .then(s => {
+        dispatch(setSchools(s));
       })
       .catch(error => error);
   };
@@ -108,16 +111,19 @@ export const postSchools = ({ field, callback }) => {
 export const deleteSchools = ({ field, callback }) => {
   return dispatch => {
     return fetch(`http://gsndev.com/gsndb/all/create-school/`, {
-      method: 'DELETE',
+      method: "DELETE",
       body: JSON.stringify(field),
       headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
+        "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
       }
     })
       .then(response => {
         return response.json();
+      })
+      .then(s => {
+        dispatch(setSchools(s));
       })
       .catch(error => error);
   };

@@ -24,6 +24,16 @@ function DistrictEntryComponent(props) {
     dispatch(action({ field, callback }));
   };
 
+  const updatePage = () => {
+    postTextFromState();
+    setField({
+      ["district_name"]: "",
+      ["city"]: "",
+      ["state"]: "",
+      ["code"]: ""
+    });
+  };
+
   return (
     <>
       <TextField
@@ -71,7 +81,7 @@ function DistrictEntryComponent(props) {
         size="small"
         variant="contained"
         color="secondary"
-        onClick={postTextFromState}
+        onClick={updatePage}
       >
         Create District
       </Button>
@@ -88,7 +98,7 @@ function DistrictDeleteComponent(props) {
   const { action, callback } = props;
   const dispatch = useDispatch();
   const [field, setField] = useState({
-    district_id: ""
+    id: ""
   });
 
   const districts = useSelector(state => state.districts.districts);
@@ -113,8 +123,8 @@ function DistrictDeleteComponent(props) {
         variant="outlined"
         placeholder="District"
         required="true"
-        name="district_id"
-        value={field.district_id}
+        name="id"
+        value={field.id}
         onChange={updateState}
       >
         {districts.map(districtData => {
@@ -139,8 +149,7 @@ function DistrictDeleteComponent(props) {
 }
 
 DistrictDeleteComponent.propTypes = {
-  action: PropTypes.func.isRequired,
-  callback: PropTypes.func.isRequired
+  action: PropTypes.func.isRequired
 };
 
 export default DistrictEntryComponent;
