@@ -24,6 +24,21 @@ function AuthForm(props) {
     window.location.href.includes("login") ? completeLogin() : completeSignup();
   };
 
+  /*
+  <InputBase
+        className={input}
+        onChange={e => setSpecialKey(e.target.value)}
+        type="specialKey"
+        error={submitted && (!password || !specialKey)}
+        name="specialKey"
+        placeholder="Registration Key"
+        value={specialKey}
+        disabled={loading}
+        // onKeyPress={e => (e.key === 'Enter' ? completeLogin() : () => {})}
+        fullWidth
+      />
+      */
+
   return (
     <form onSubmit={handleSubmit}>
       {/* TODO Add Error Field */}
@@ -60,18 +75,7 @@ function AuthForm(props) {
         fullWidth
       />
 
-      <InputBase
-        className={input}
-        onChange={e => setSpecialKey(e.target.value)}
-        type="specialKey"
-        error={submitted && (!password || !specialKey)}
-        name="specialKey"
-        placeholder="Registration Key"
-        value={specialKey}
-        disabled={loading}
-        // onKeyPress={e => (e.key === 'Enter' ? completeLogin() : () => {})}
-        fullWidth
-      />
+      
 
       <Button
         type="submit"

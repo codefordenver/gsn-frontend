@@ -23,3 +23,9 @@ export const signupUser = ({ username, password, registrationKey }) =>
     method: "POST",
     body: JSON.stringify({ username, password, registrationKey })
   });
+
+export const createRegistrationKey = () =>
+  request({
+    url: "user_app/special-key/",
+    method: "POST"
+  });
