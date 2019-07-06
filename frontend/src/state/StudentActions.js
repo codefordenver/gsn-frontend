@@ -14,6 +14,12 @@ const getStudent = student => ({
   payload: student
 });
 
+const getOtherStudents = otherStudents => ({
+  type: types.SET_OTHER_STUDENTS,
+  payload: otherStudents
+});
+
+
 export const fetchStudents = ({ accessLevel }) => {
   return dispatch => {
     return fetch(`http://gsndev.com/gsndb/${accessLevel}/student/`, {
@@ -26,6 +32,23 @@ export const fetchStudents = ({ accessLevel }) => {
       .then(response => response.json())
       .then(allStudents => {
         dispatch(getStudents(allStudents));
+      })
+      .catch(error => error);
+  };
+};
+
+export const fetchOtherStudents = ({ accessLevel }) => {
+  return dispatch => {
+    return fetch(`http://gsndev.com/gsndb/${accessLevel}/student/`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`
+      }
+    })
+      .then(response => response.json())
+      .then(allStudents => {
+        dispatch(getOtherStudents(allStudents));
       })
       .catch(error => error);
   };
@@ -93,6 +116,48 @@ export const postStudentReferrals = ({ field, callback }) => {
       .then(s => {
         dispatch(getStudent(s['0']));
         callback();
+      })
+      .catch(error => error);
+  };
+};
+
+export const postMyStudentList = ({ JSONData }) => {
+  return dispatch => {
+    return fetch(`https://gsndev.com/gsndb/my/modify-my-students/`, {
+      method: 'POST',
+      body: JSONData,
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(s => {
+        dispatch(getStudents(s['0']));
+      })
+      .catch(error => error);
+  };
+};
+
+export const postNotMyStudentList = ({ JSONData }) => {
+  return dispatch => {
+    return fetch(`https://gsndev.com/gsndb/my/modify-my-students/`, {
+      method: 'POST',
+      body: JSONData,
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(s => {
+        dispatch(getOtherStudents(s['0']));
       })
       .catch(error => error);
   };
