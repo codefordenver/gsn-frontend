@@ -46,6 +46,7 @@ function CreateGradeTable(props) {
                     <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('courseTerm')} >Term</TableSortLabel></TableCell>
                     <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('grade')} >Grade</TableSortLabel></TableCell>
                     <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('finalGradeForTerm')} >Final</TableSortLabel></TableCell> 
+                    <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('entryDate')} >Entry Date</TableSortLabel></TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -59,6 +60,7 @@ function CreateGradeTable(props) {
                     courseTerm,
                     grade,
                     finalGradeForTerm,
+                    entryDate
                   } = gradeDetail;
                   return (
                       <TableRow
@@ -78,6 +80,7 @@ function CreateGradeTable(props) {
                           <TableCell align="left">{courseTerm}</TableCell>
                           <TableCell align="left">{grade}</TableCell>
                           <TableCell align="left">{finalGradeForTerm}</TableCell>
+                          <TableCell align="left">{entryDate}</TableCell>
                       </TableRow>
                   );
                 })}
