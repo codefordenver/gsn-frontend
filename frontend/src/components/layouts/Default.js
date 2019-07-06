@@ -54,8 +54,8 @@ function ClippedDrawer(props) {
             <MenuItem onClick={logOut}>Logout</MenuItem>
           </Menu>
           <Typography className={classes.name} variant="h6" noWrap>
-            {user_name}
           </Typography>
+          <div>{`Hello, ${user_name}!`}</div> {/*Currently undefined, will need to pass in user name as prop*/}
           <div className={classes.spacer} />
           <div>
             {<img src={GsnLogo} alt="gsn-logo" height="auto" width="130" />}
