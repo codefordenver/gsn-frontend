@@ -9,6 +9,7 @@ import {
   TableRow,
   TableSortLabel
 } from "@material-ui/core";
+import moment from "moment";
 
 function CreateGradeTable(props) {
   const my_or_all = props.my_or_all_link;
@@ -295,7 +296,7 @@ function CreateAttendanceTable(props) {
                       <StyledLink>{studentName}</StyledLink>
                     </Link>
                   </TableCell>
-                  <TableCell align="left">{attendanceEntryDate}</TableCell>
+                  <TableCell align="left">{moment(attendanceEntryDate).format("MM-DD-YYYY hh:mm a")}</TableCell>
                   <TableCell align="left">{totalUnexabs}</TableCell>
                   <TableCell align="left">{totalExabs}</TableCell>
                   <TableCell align="left">{totalTardies}</TableCell>
@@ -706,7 +707,7 @@ function CreateBehaviorTable(props) {
                       <StyledLink>{studentName}</StyledLink>
                     </Link>
                   </TableCell>
-                  <TableCell align="left">{date}</TableCell>
+                  <TableCell align="left">{moment(date).format("MM-DD-YYYY hh:mm a")}</TableCell>
                   <TableCell align="left">{context}</TableCell>
                   <TableCell align="left">{result}</TableCell>
                 </TableRow>
@@ -771,7 +772,9 @@ function CreateNoteTable(props) {
                     i % 2 !== 0 ? props.striped : ""
                   }`}
                 >
-                  <TableCell align="left">{createdUpdated}</TableCell>
+                  <TableCell align="left">
+                    {moment(createdUpdated).format("MM-DD-YYYY hh:mm a")}
+                  </TableCell>
                   <TableCell align="left">{text}</TableCell>
                 </TableRow>
               );
@@ -862,7 +865,7 @@ function CreateReferralTable(props) {
                   }`}
                 >
                   <TableCell align="left">{type}</TableCell>
-                  <TableCell align="left">{dateGiven}</TableCell>
+                  <TableCell align="left">{moment(dateGiven).format("MM-DD-YYYY hh:mm a")}</TableCell>
                   <TableCell align="left">{referenceName}</TableCell>
                   <TableCell align="left">{referenceAddress}</TableCell>
                   <TableCell align="left">{referencePhone}</TableCell>
