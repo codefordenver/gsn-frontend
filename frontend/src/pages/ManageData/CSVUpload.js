@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Typography,
   withStyles,
@@ -10,12 +11,13 @@ import {
   DialogTitle,
   DialogContentText,
   DialogContent,
-  DialogActions
-} from "@material-ui/core";
-import { loadingJSX } from "components/sharedStyles/LoadingStyles";
-import { TablePageStyles } from "components/sharedStyles/Table/TablePageStyles";
-
-import { postCSVUpload } from "../../state/UserActions";
+  DialogActions,
+  Input,
+  ButtonBase,
+} from '@material-ui/core';
+import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
+import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
+import { postCSVUpload } from '../../state/UserActions';
 import {
   fetchDistrictDetails,
   fetchCreatableDistricts
@@ -100,7 +102,11 @@ function CSVUpload(props) {
         name="selectedDistrict"
         value={field.selectedDistrict}
         onChange={updateState}
+        displayEmpty
       >
+        <MenuItem value="" disabled>
+          Select one
+        </MenuItem>
         {districts.map(districtData => {
           return (
             <MenuItem value={districtData.districtId}>
@@ -116,12 +122,17 @@ function CSVUpload(props) {
         placeholder="School"
         required="true"
         name="selectedSchool"
+        displayEmpty
         value={field.selectedSchool}
         onChange={updateState}
-        disabled={field.selectedDistrict == ""}
+        disabled={field.selectedDistrict === ''}
       >
+        <MenuItem value="" disabled>
+          Select one
+        </MenuItem>
         {schoolOptionsData &&
           schoolOptionsData.map(school => {
+          if (school.districtId === field.selectedDistrict)
             return (
               <MenuItem value={school.schoolId}>{school.schoolName}</MenuItem>
             );
@@ -133,23 +144,46 @@ function CSVUpload(props) {
         variant="outlined"
         placeholder="Final"
         required="true"
+        displayEmpty
         name="selectedFinal"
         value={field.selectedFinal}
         onChange={updateState}
-        disabled={field.selectedSchool == ""}
+        disabled={field.selectedSchool === ''}
       >
+        <MenuItem value="" disabled>
+          Select one
+        </MenuItem>
         <MenuItem value>Final</MenuItem>
         <MenuItem value={false}>Not Final</MenuItem>
       </Select>
-      <p>File</p>
+      <p>File</p>  
       <input
-        label="File"
+        accept="*"
+        style={{display: "none"}}
+        id="outlined-button-file"
+        multiple={false}
         type="file"
-        required="true"
         name="csvFileName"
-        value={field.csvFileName}
+        required="true"
+        label="File"
         onChange={updateState}
       />
+      <label htmlFor="outlined-button-file">
+        <Button 
+          variant="outlined" 
+          component="span" 
+          style={{margin: "theme.spacing(1)"}}
+          size="small"
+          variant="contained"
+          color="secondary"
+          >
+          Browse
+        </Button>
+      </label>
+      <div>
+        <p>{field.csv && `Files uploaded: ${field.csv.name}`}</p>
+      </div>
+     
       <p />
       <Button
         size="small"
@@ -183,5 +217,9 @@ function CSVUpload(props) {
     </>
   );
 }
+
+CSVUpload.propTypes = {
+  classes: PropTypes.object
+};
 
 export default withStyles(TablePageStyles)(CSVUpload);
