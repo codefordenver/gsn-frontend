@@ -56,13 +56,12 @@ function StudentDetail(props) {
   const {
     studentName,
     gender,
-    school,
     schoolId,
+    schoolName,
     birthdate,
-    grade,
+    reasonInProgram,
     stateId,
     studentYear,
-    studentTerm,
     gradeSet,
     attendanceSet,
     behaviorSet,
@@ -130,13 +129,12 @@ function StudentDetail(props) {
       </Typography>
       <DetailItem k="Gender" val={gender} />
       <DetailItem k="Birthdate" val={birthdate} />
-      <DetailItem k="Grade" val={grade} />
+      <DetailItem k="Reason in Program" val={reasonInProgram} />
       <DetailItem k="Year" val={studentYear} />
-      <DetailItem k="Term" val={studentTerm} />
       <DetailItem k="State Id" val={stateId} />
       <DetailLink
         k="School"
-        val={school}
+        val={schoolName}
         link={`${myOrAllUrl}/school/${schoolId}`}
       />
 
