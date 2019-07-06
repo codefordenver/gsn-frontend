@@ -60,6 +60,7 @@ function CreateGradeTable(props) {
                     courseTerm,
                     grade,
                     finalGradeForTerm,
+                    entryDate
                   } = gradeDetail;
                   return (
                       <TableRow
@@ -79,6 +80,7 @@ function CreateGradeTable(props) {
                           <TableCell align="left">{courseTerm}</TableCell>
                           <TableCell align="left">{grade}</TableCell>
                           <TableCell align="left">{finalGradeForTerm}</TableCell>
+                          <TableCell align="left">{entryDate}</TableCell>
                       </TableRow>
                   );
                 })}
