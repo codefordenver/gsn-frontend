@@ -51,7 +51,7 @@ export default function() {
             <Route exact path="/all/student/:studentId" render={(props) => <StudentDetail {...props} myOrAll={ALL_CONST} />} />
 
             <Route exact path="/my/program" render={() => <Programs myOrAll={MY_CONST} />} />
-            <Route exact path="/all/program" render => <Programs myOrAll={ALL_CONST} />} />
+            <Route exact path="/all/program" render={() => <Programs myOrAll={ALL_CONST} />} />
             <Route exact path="/my/program/:programId" render={(props) => <ProgramDetail {...props} myOrAll={MY_CONST} />} />
             <Route exact path="/all/program/:programId" render={(props) => <ProgramDetail {...props} myOrAll={ALL_CONST} />} />
 
