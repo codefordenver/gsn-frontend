@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import IconButton from '@material-ui/core/IconButton';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -17,10 +16,12 @@ import LeftNav from '../LeftNav';
 import Breadcrumbs from '../Breadcrumbs';
 
 function ClippedDrawer(props) {
-  const { classes, logOut, user_name } = props;
+  const { classes, logOut, username } = props;
   // const [open, toggleOpen] = useState(false);
   const [anchorEl, setAnchor] = useState(null);
   const open = Boolean(anchorEl);
+
+  // const user = useSelector(state => state.user)
 
   const handleMenu = event => setAnchor(event.currentTarget);
   const handleClose = event => setAnchor(null);
@@ -53,9 +54,10 @@ function ClippedDrawer(props) {
           >
             <MenuItem onClick={logOut}>Logout</MenuItem>
           </Menu>
-          <Typography className={classes.name} variant="h6" noWrap>
+          <Typography className={classes.name} variant="h6" Wrap>
+            <div>{`${username}`}</div>
           </Typography>
-          <div>{`Hello, ${user_name}!`}</div> {/*Currently undefined, will need to pass in user name as prop*/}
+
           <div className={classes.spacer} />
           <div>
             {<img src={GsnLogo} alt="gsn-logo" height="auto" width="130" />}
@@ -128,7 +130,11 @@ const styles = theme => ({
   toolbar: theme.mixins.toolbar
 });
 
+const mapStateToProps = ({ user }) => ({
+  username: user.get('username')
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { logOut: userActions.logOut }
 )(withStyles(styles)(ClippedDrawer));
