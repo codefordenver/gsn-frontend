@@ -39,7 +39,7 @@ export const fetchStudents = ({ accessLevel }) => {
 
 export const fetchOtherStudents = ({ accessLevel }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/${accessLevel}/student/`, {
+    return fetch(`https://gsndev.com/gsndb/${accessLevel}/student/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
