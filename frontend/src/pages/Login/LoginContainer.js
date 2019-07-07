@@ -10,6 +10,7 @@ import {
 import AuthForm from '../AuthForm';
 import Layout from '../../components/layouts/SignUpLayout';
 import styles from '../../components/sharedStyles/LoginStyles';
+import GsnLogo from '../../images/gsn_logo_white.png';
 
 function LoginContainer(props) {
   const [username, setUsername] = useState('');
@@ -33,6 +34,15 @@ function LoginContainer(props) {
 
   return (
       <Layout>
+      <Typography className={header} variant="h1" gutterBottom>
+        <img
+          className="landing-image"
+          src={GsnLogo}
+          alt="gsn-logo"
+          height="auto"
+          width="210"
+        />
+      </Typography>
           <Typography
             className={header}
             variant="h1"

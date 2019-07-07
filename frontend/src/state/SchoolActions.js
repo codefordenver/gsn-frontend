@@ -15,8 +15,8 @@ const setSchoolDetails = data => ({
 
 export const fetchSchools = ({ accessLevel }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/${accessLevel}/school/`, {
-      method: "GET",
+    return fetch(`https://gsndev.com/gsndb/${accessLevel}/school/`, {
+      method: 'GET',
       headers: {
         Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
@@ -32,8 +32,8 @@ export const fetchSchools = ({ accessLevel }) => {
 
 export const fetchSchoolDetails = ({ accessLevel, schoolId }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/${accessLevel}/school/${schoolId}`, {
-      method: "GET",
+    return fetch(`https://gsndev.com/gsndb/${accessLevel}/school/${schoolId}`, {
+      method: 'GET',
       headers: {
         Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
@@ -51,8 +51,8 @@ export const fetchSchoolDetails = ({ accessLevel, schoolId }) => {
 
 export const postSchoolNotes = ({ text, accessLevel, url }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb${url}/`, {
-      method: "POST",
+    return fetch(`https://gsndev.com/gsndb${url}/`, {
+      method: 'POST',
       body: JSON.stringify({ text }),
       headers: {
         "Content-Type": "application/json",
@@ -72,8 +72,8 @@ export const postSchoolNotes = ({ text, accessLevel, url }) => {
 
 export const fetchCreatableSchools = () => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/all/create-school/`, {
-      method: "GET",
+    return fetch(`https://gsndev.com/gsndb/all/create-school/`, {
+      method: 'GET',
       headers: {
         Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
@@ -89,8 +89,8 @@ export const fetchCreatableSchools = () => {
 
 export const postSchools = ({ field, callback }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/all/create-school/`, {
-      method: "POST",
+    return fetch(`https://gsndev.com/gsndb/all/create-school/`, {
+      method: 'POST',
       body: JSON.stringify(field),
       headers: {
         "Content-Type": "application/json",
@@ -110,8 +110,8 @@ export const postSchools = ({ field, callback }) => {
 
 export const deleteSchools = ({ field, callback }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/all/create-school/`, {
-      method: "DELETE",
+    return fetch(`https://gsndev.com/gsndb/all/create-school/`, {
+      method: 'DELETE',
       body: JSON.stringify(field),
       headers: {
         "Content-Type": "application/json",

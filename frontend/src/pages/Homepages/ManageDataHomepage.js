@@ -46,6 +46,12 @@ function ManageDataHomepage(props) {
           title="Create/Edit/Delete School"
         />
       </Link>
+      <Link to="/manage-data/modify-my-students" style={{ textDecoration: "none" }}>
+        <CreateTableHeader
+          headerClassStyle={tableTitle}
+          title="Modify My Student List"
+        />
+      </Link>
     </div>
   );
 }

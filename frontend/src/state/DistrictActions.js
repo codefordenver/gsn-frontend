@@ -15,8 +15,8 @@ const setDistrictDetails = data => ({
 
 export const fetchDistricts = ({ accessLevel }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/${accessLevel}/district/`, {
-      method: "GET",
+    return fetch(`https://gsndev.com/gsndb/${accessLevel}/district/`, {
+      method: 'GET',
       headers: {
         Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
@@ -33,7 +33,7 @@ export const fetchDistricts = ({ accessLevel }) => {
 export const fetchDistrictDetails = ({ accessLevel, districtId }) => {
   return dispatch => {
     return fetch(
-      `http://gsndev.com/gsndb/${accessLevel}/district/${districtId}`,
+      `https://gsndev.com/gsndb/${accessLevel}/district/${districtId}`,
       {
         method: "GET",
         headers: {
@@ -54,8 +54,8 @@ export const fetchDistrictDetails = ({ accessLevel, districtId }) => {
 
 export const postDistrictNotes = ({ text, accessLevel, url }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb${url}/`, {
-      method: "POST",
+    return fetch(`https://gsndev.com/gsndb${url}/`, {
+      method: 'POST',
       body: JSON.stringify({ text }),
       headers: {
         "Content-Type": "application/json",
@@ -75,8 +75,8 @@ export const postDistrictNotes = ({ text, accessLevel, url }) => {
 
 export const fetchCreatableDistricts = ({ accessLevel }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/all/create-district/`, {
-      method: "GET",
+    return fetch(`https://gsndev.com/gsndb/all/create-district/`, {
+      method: 'GET',
       headers: {
         Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
@@ -92,8 +92,8 @@ export const fetchCreatableDistricts = ({ accessLevel }) => {
 
 export const postDistricts = ({ field }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/all/create-district/`, {
-      method: "POST",
+    return fetch(`https://gsndev.com/gsndb/all/create-district/`, {
+      method: 'POST',
       body: JSON.stringify(field),
       headers: {
         "Content-Type": "application/json",
@@ -113,8 +113,8 @@ export const postDistricts = ({ field }) => {
 
 export const deleteDistricts = ({ field }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/all/create-district/`, {
-      method: "DELETE",
+    return fetch(`https://gsndev.com/gsndb/all/create-district/`, {
+      method: 'DELETE',
       body: JSON.stringify(field),
       headers: {
         "Content-Type": "application/json",

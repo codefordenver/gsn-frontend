@@ -9,7 +9,10 @@ import {
 } from '@material-ui/core';
 
 import { Link } from 'react-router-dom';
-import { Radar, UserGroup, ViewShow, Wrench } from './Icons';
+import {
+  Radar, UserGroup, ViewShow, Wrench, Search
+} from './Icons';
+
 
 const navItems = [
   {
@@ -35,8 +38,13 @@ const navItems = [
   {
     name: 'Manage Data',
     icon: <Wrench />,
-    route: '/manage-data'
-  }
+    route: '/manage-data',
+  },
+  {
+    name: 'Search',
+    icon: <Search />,
+    route: '/search',
+  },
 ];
 
 function BaseLink(props) {
