@@ -35,81 +35,57 @@ function CreateGradeTable(props) {
 
   if (props.data === undefined) {
     return <div>Currently there isn't any data available.</div>;
-  }
-  return (
-    <div>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell className={props.tHead}>
-              <TableSortLabel onClick={() => handleSort("studentName")}>
-                Student
-              </TableSortLabel>
-            </TableCell>
-            <TableCell className={props.tHead}>
-              <TableSortLabel onClick={() => handleSort("courseName")}>
-                Course
-              </TableSortLabel>
-            </TableCell>
-            <TableCell className={props.tHead}>
-              <TableSortLabel onClick={() => handleSort("courseTerm")}>
-                Term
-              </TableSortLabel>
-            </TableCell>
-            <TableCell className={props.tHead}>
-              <TableSortLabel onClick={() => handleSort("grade")}>
-                Grade
-              </TableSortLabel>
-            </TableCell>
-            <TableCell className={props.tHead}>
-              <TableSortLabel onClick={() => handleSort("finalGradeForTerm")}>
-                Final
-              </TableSortLabel>
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {props.data
-            .sort(order === "asc" ? ascCompare : desCompare)
-            .map((gradeDetail, i) => {
-              const {
-                gradeId,
-                courseName,
-                courseId,
-                studentName,
-                studentId,
-                courseTerm,
-                grade,
-                finalGradeForTerm
-              } = gradeDetail;
-
-              const Final = finalGradeForTerm ? "Final" : "Not Final";
-
-              return (
-                <TableRow
-                  key={i}
-                  className={`${props.tRow} ${
-                    i % 2 !== 0 ? props.striped : ""
-                  }`}
-                >
-                  <TableCell>
-                    <Link to={`${my_or_all}/student/${studentId}`}>
-                      <StyledLink>{studentName}</StyledLink>
-                    </Link>
-                  </TableCell>
-                  <TableCell>
-                    <Link to={`${my_or_all}/course/${courseId}`}>
-                      <StyledLink>{courseName}</StyledLink>
-                    </Link>
-                  </TableCell>
-                  <TableCell align="left">{courseTerm}</TableCell>
-                  <TableCell align="left">{grade}</TableCell>
-                  <TableCell align="left">{Final}</TableCell>
+} 
+    return (
+        <div>
+        <Table>
+            <TableHead>
+                <TableRow>
+                    <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('studentName')} >Student</TableSortLabel></TableCell>
+                    <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('courseName')} >Course</TableSortLabel></TableCell>
+                    <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('courseTerm')} >Term</TableSortLabel></TableCell>
+                    <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('grade')} >Grade</TableSortLabel></TableCell>
+                    <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('finalGradeForTerm')} >Final</TableSortLabel></TableCell> 
+                    <TableCell className={props.tHead}><TableSortLabel  onClick={() => handleSort('entryDate')} >Entry Date</TableSortLabel></TableCell>
                 </TableRow>
-              );
-            })}
-        </TableBody>
-      </Table>
+            </TableHead>
+            <TableBody>
+                {props.data.sort(order === 'asc'? ascCompare: desCompare ).map((gradeDetail, i) => {
+                  const {
+                    gradeId,
+                    courseName,
+                    courseId,
+                    studentName,
+                    studentId,
+                    courseTerm,
+                    grade,
+                    finalGradeForTerm,
+                    entryDate
+                  } = gradeDetail;
+                  return (
+                      <TableRow
+                        key={i}
+                        className={`${props.tRow} ${i % 2 !== 0 ? props.striped : ''}`}
+                      >
+                          <TableCell>
+                              <Link to={`${my_or_all}/student/${studentId}`}>
+                                  <StyledLink>{studentName}</StyledLink>
+                              </Link>
+                          </TableCell>
+                          <TableCell>
+                              <Link to={`${my_or_all}/course/${courseId}`}>
+                                  <StyledLink>{courseName}</StyledLink>
+                              </Link>
+                          </TableCell>
+                          <TableCell align="left">{courseTerm}</TableCell>
+                          <TableCell align="left">{grade}</TableCell>
+                          <TableCell align="left">{finalGradeForTerm}</TableCell>
+                          <TableCell align="left">{moment(entryDate).format("MM-DD-YYYY hh:mm a")}</TableCell>
+                      </TableRow>
+                  );
+                })}
+            </TableBody>
+        </Table>
     </div>
   );
 }
