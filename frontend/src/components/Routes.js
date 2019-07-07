@@ -21,7 +21,7 @@ import CourseDetail from '../pages/Table/Course/CourseDetail';
 import CSVUpload from '../pages/ManageData/CSVUpload';
 import CreateDistrict from '../pages/ManageData/CreateDistrict';
 import CreateSchool from '../pages/ManageData/CreateSchool';
-
+import MyStudents from 'pages/ManageData/MyStudents';
 import PrivateRoute from './PrivateRoute';
 
 const MY_CONST = 'my';
@@ -83,6 +83,12 @@ export default function() {
               path="/manage-data/create-school"
               component={CreateSchool}
             />
+            <PrivateRoute 
+              exact 
+              path="/manage-data/modify-my-students" 
+              component={MyStudents} 
+            />
+
 
             <PrivateRoute exact path="/search" component={SearchPage} />
             

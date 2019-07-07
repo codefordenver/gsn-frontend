@@ -1,8 +1,9 @@
-import * as types from './StudentConstants';
+import * as types from "./StudentConstants";
 
 const initialState = {
   students: [],
-  student: []
+  student: [],
+  otherStudents: []
 };
 
 export default (state = initialState, action) => {
@@ -12,6 +13,9 @@ export default (state = initialState, action) => {
 
     case types.SET_STUDENT:
       return { ...state, student: action.payload };
+
+    case types.SET_OTHER_STUDENTS:
+      return { ...state, otherStudents: action.payload };
 
     default:
       return state;
