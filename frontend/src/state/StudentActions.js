@@ -136,7 +136,8 @@ export const postMyStudentList = ({ JSONData }) => {
         return response.json();
       })
       .then(s => {
-        dispatch(getStudents(s['0']));
+        dispatch(getOtherStudents(s['notmyStudents']));
+        dispatch(getStudents(s['myStudents']));
       })
       .catch(error => error);
   };
@@ -157,7 +158,8 @@ export const postNotMyStudentList = ({ JSONData }) => {
         return response.json();
       })
       .then(s => {
-        dispatch(getOtherStudents(s['0']));
+        dispatch(getOtherStudents(s['notmyStudents']));
+        dispatch(getStudents(s['myStudents']));
       })
       .catch(error => error);
   };

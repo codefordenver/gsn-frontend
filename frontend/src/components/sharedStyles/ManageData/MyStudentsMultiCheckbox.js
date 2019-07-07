@@ -12,14 +12,15 @@ import { postMyStudentList, postNotMyStudentList } from "state/StudentActions";
 
 function MyStudentsMultiCheckbox(props) {
   const [field, setField] = useState({
-    student_id: [],
-    remove: props.remove
+    student_id: []
   });
+
+  const [remove] = useState(props.remove);
 
   let JSONData = "[";
   for (const [index, value] of field.student_id.entries()) {
     JSONData =
-      JSONData + '{"student_id": ' + value + ', "remove": ' + field.remove + '},';
+      JSONData + '{"student_id": ' + value + ', "remove": ' + remove + '},';
   }
 
   JSONData = JSONData.substring(0, JSONData.length - 1);
@@ -33,7 +34,6 @@ function MyStudentsMultiCheckbox(props) {
   const postTextFromState = () => {
     dispatch(action({ JSONData }));
     setField({student_id: [] });
-    console.log(props.data);
   };
   const { action } = props;
   const dispatch = useDispatch();
