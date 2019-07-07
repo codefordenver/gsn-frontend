@@ -9,7 +9,10 @@ import {
   SET_IS_LOGGED_IN,
   SET_ERROR,
   CLEAR_ERROR,
-  UPLOAD_CSV
+  UPLOAD_CSV,
+  SET_LOADING_CSV,
+  SET_ERROR_CSV,
+  CLEAR_ERROR_CSV
 } from './UserConstants';
 
 export const setToken = createAction(SET_TOKEN);
@@ -20,6 +23,9 @@ export const setError = createAction(SET_ERROR);
 export const clearError = createAction(CLEAR_ERROR);
 
 export const setCSVReturn = createAction(UPLOAD_CSV);
+export const setLoadingCsv = createAction(SET_LOADING_CSV);
+export const setErrorCsv = createAction(SET_ERROR_CSV);
+export const clearErrorCSV = createAction(CLEAR_ERROR_CSV);
 
 export const setUserState = () => dispatch => {
   const token = localStorage.getItem('token');
@@ -116,12 +122,8 @@ export const authError = error => dispatch => {
 };
 
 export const postCSVUpload = ({ field }) => {
-  console.log({
-    csv: field.csv,
-    school_of_csv_origin: field.selectedSchool,
-    term_final_value: field.selectedFinal
-  });
   return dispatch => {
+    dispatch(setLoadingCsv(true));
     return fetch(`http://gsndev.com/gsndb/all/uploadcsv/`, {
       method: 'POST',
       body: {
@@ -139,9 +141,12 @@ export const postCSVUpload = ({ field }) => {
         return response.json();
       })
       .then(csv => {
-        console.log(csv);
         dispatch(setCSVReturn(csv));
+        dispatch(setLoadingCsv(false));
       })
-      .catch(error => error);
+      .catch(error => {
+        dispatch(setErrorCsv(error));
+        dispatch(setLoadingCsv(false));
+      });
   };
 };

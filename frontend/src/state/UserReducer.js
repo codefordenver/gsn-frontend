@@ -1,4 +1,4 @@
-import { fromJS } from 'immutable';
+import { fromJS, setIn } from 'immutable';
 import {
   SET_TOKEN,
   SET_USERNAME,
@@ -6,7 +6,10 @@ import {
   SET_IS_LOGGED_IN,
   SET_ERROR,
   CLEAR_ERROR,
-  UPLOAD_CSV
+  UPLOAD_CSV,
+  SET_LOADING_CSV,
+  SET_ERROR_CSV,
+  CLEAR_ERROR_CSV
 } from './UserConstants';
 
 const initialState = fromJS({
@@ -14,7 +17,12 @@ const initialState = fromJS({
   isLoggedIn: false,
   username: null,
   loading: true,
-  error: null
+  error: null,
+  csv: {
+    file: null,
+    loading: false,
+    error: null
+  }
 });
 
 export default function reducer(state = initialState, action) {
@@ -40,7 +48,16 @@ export default function reducer(state = initialState, action) {
       return state.delete('error');
 
     case UPLOAD_CSV:
-      return state.set('csv', payload);
+      return setIn(state, ['csv', 'file'], payload);
+
+    case SET_LOADING_CSV:
+      return setIn(state, ['csv', 'loading'], payload);
+
+    case SET_ERROR_CSV:
+      return setIn(state, ['csv', 'error'], payload);
+
+    case CLEAR_ERROR_CSV:
+      return setIn(state, ['csv', 'error'], null);
 
     default:
       return state;
