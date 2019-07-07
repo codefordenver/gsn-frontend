@@ -17,13 +17,8 @@ import {
 } from '@material-ui/core';
 import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
 import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
-import { get } from 'immutable';
 import { postCSVUpload, clearErrorCSV } from '../../state/UserActions';
-import {
-  fetchDistrictDetails,
-  fetchCreatableDistricts
-} from '../../state/DistrictActions';
-import { fetchSchools } from '../../state/SchoolActions';
+import { fetchCreatableDistricts } from '../../state/DistrictActions';
 
 const style = {
   formControl: {
@@ -132,7 +127,7 @@ function CSVUpload(props) {
         <Typography className={header} component="h1" variant="h4">
           Error uploading CSV data...
         </Typography>
-        <Typography>{`The following error occured: ${error.message.toString()}`}</Typography>
+        <Typography>{`The following error occurred: ${error.message.toString()}`}</Typography>
 
         <Button
           size="small"
