@@ -24,8 +24,9 @@ function AuthForm(props) {
     window.location.href.includes("login") ? completeLogin() : completeSignup();
   };
 
-  /*
-  <InputBase
+  function KeyInput() {
+    return (
+      <InputBase
         className={input}
         onChange={e => setSpecialKey(e.target.value)}
         type="specialKey"
@@ -37,7 +38,16 @@ function AuthForm(props) {
         // onKeyPress={e => (e.key === 'Enter' ? completeLogin() : () => {})}
         fullWidth
       />
-      */
+    );
+  }
+
+  function RegistrationKeyInput() {
+    const isLogin = window.location.href.includes("login");
+    if (isLogin) {
+      return null;
+    }
+    return <KeyInput />;
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -74,8 +84,7 @@ function AuthForm(props) {
         // onKeyPress={e => (e.key === 'Enter' ? completeLogin() : () => {})}
         fullWidth
       />
-
-      
+      <RegistrationKeyInput />
 
       <Button
         type="submit"
