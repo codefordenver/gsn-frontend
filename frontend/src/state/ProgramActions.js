@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import API_ROOT from '../services/request';
 
 export const SET_ALL_PROGRAMS = 'GET_ALL_PROGRAMS';
 export const SET_PROGRAM_DETAILS = 'GET_PROGRAM_DETAILS';
@@ -15,7 +16,7 @@ const setProgramDetails = data => ({
 
 export const fetchPrograms = ({ accessLevel }) => {
   return dispatch => {
-    return fetch(`https://gsndev.com/gsndb/${accessLevel}/program/`, {
+    return fetch(`${API_ROOT}/gsndb/${accessLevel}/program/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -33,7 +34,7 @@ export const fetchPrograms = ({ accessLevel }) => {
 export const fetchProgramDetails = ({ accessLevel, programId }) => {
   return dispatch => {
     return fetch(
-      `https://gsndev.com/gsndb/${accessLevel}/program/${programId}`,
+      `${API_ROOT}/gsndb/${accessLevel}/program/${programId}`,
       {
         method: 'GET',
         headers: {
@@ -54,7 +55,7 @@ export const fetchProgramDetails = ({ accessLevel, programId }) => {
 
 export const postProgramNotes = ({ text, accessLevel, url }) => {
   return dispatch => {
-    return fetch(`https://gsndev.com/gsndb${url}/`, {
+    return fetch(`${API_ROOT}/gsndb${url}/`, {
       method: 'POST',
       body: JSON.stringify({ text }),
       headers: {
