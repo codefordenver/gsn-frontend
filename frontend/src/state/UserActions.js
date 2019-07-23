@@ -124,13 +124,20 @@ export const authError = error => dispatch => {
 export const postCSVUpload = ({ field }) => {
   return dispatch => {
     dispatch(setLoadingCsv(true));
+    let formData = new FormData();
+    formData.append('school_of_csv_origin', field.selectedSchool);
+    formData.append('term_final_value', field.selectedFinal);
+
+    for (var pair of formData.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]); 
+  }
     return fetch(`http://gsndev.com/gsndb/all/uploadcsv/`, {
       method: 'POST',
-      body: {
-        csv: field.csv,
+      body: formData/*{
+        //csv: field.csv,
         school_of_csv_origin: field.selectedSchool,
         term_final_value: field.selectedFinal
-      },
+      }*/,
       headers: {
         'Content-Type': 'multipart/form-data',
         Accept: 'application/json',
