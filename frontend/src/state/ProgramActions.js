@@ -15,7 +15,7 @@ const setProgramDetails = data => ({
 
 export const fetchPrograms = ({ accessLevel }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/${accessLevel}/program/`, {
+    return fetch(`https://gsndev.com/gsndb/${accessLevel}/program/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -33,7 +33,7 @@ export const fetchPrograms = ({ accessLevel }) => {
 export const fetchProgramDetails = ({ accessLevel, programId }) => {
   return dispatch => {
     return fetch(
-      `http://gsndev.com/gsndb/${accessLevel}/program/${programId}`,
+      `https://gsndev.com/gsndb/${accessLevel}/program/${programId}`,
       {
         method: 'GET',
         headers: {
@@ -54,7 +54,7 @@ export const fetchProgramDetails = ({ accessLevel, programId }) => {
 
 export const postProgramNotes = ({ text, accessLevel, url }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb${url}/`, {
+    return fetch(`https://gsndev.com/gsndb${url}/`, {
       method: 'POST',
       body: JSON.stringify({ text }),
       headers: {

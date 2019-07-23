@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import AuthForm from '../AuthForm';
 import styles from '../../components/sharedStyles/LoginStyles';
+import GsnLogo from '../../images/gsn_logo_white.png';
 
 function SignupForm(props) {
   const [username, setUsername] = useState('');
@@ -34,6 +35,15 @@ function SignupForm(props) {
 
   return (
       <Layout>
+      <Typography className={header} variant="h1" gutterBottom>
+        <img
+          className="landing-image"
+          src={GsnLogo}
+          alt="gsn-logo"
+          height="auto"
+          width="210"
+        />
+      </Typography>
           <Typography
             className={header}
             variant="h1"

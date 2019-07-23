@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Button, TextField, Select, MenuItem } from '@material-ui/core';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Button, TextField, Select, MenuItem } from "@material-ui/core";
+import PropTypes from "prop-types";
+import { fetchCreatableDistricts } from "../../../state/DistrictActions";
 
 function DistrictEntryComponent(props) {
   const { action, callback } = props;
   const dispatch = useDispatch();
 
-  //! 1. Need program to be sent as part of student details
-  //! 2. Need referral to send back student data based on ID
-  //! 3. Need to setup form validation
-  //! 4. Referral table needs to be populated based on returned student data
   const [field, setField] = useState({
-    district_name: '',
-    city: '',
-    state: '',
-    code: ''
+    district_name: "",
+    city: "",
+    state: "",
+    code: ""
   });
 
   const updateState = event => {
@@ -24,13 +21,12 @@ function DistrictEntryComponent(props) {
   };
 
   const postTextFromState = () => {
-    //! Add Validation here to make sure all fields have data
     dispatch(action({ field, callback }));
   };
 
   return (
     <>
-       <TextField
+      <TextField
         fullWidth="true"
         variant="outlined"
         placeholder="District name"
@@ -77,7 +73,7 @@ function DistrictEntryComponent(props) {
         color="secondary"
         onClick={postTextFromState}
       >
-        Save
+        Create District
       </Button>
     </>
   );
@@ -88,4 +84,64 @@ DistrictEntryComponent.propTypes = {
   callback: PropTypes.func.isRequired
 };
 
+function DistrictDeleteComponent(props) {
+  const { action, callback } = props;
+  const dispatch = useDispatch();
+  const [field, setField] = useState({
+    district_id: ""
+  });
+
+  const districts = useSelector(state => state.districts.districts);
+
+  useEffect(() => {
+    dispatch(fetchCreatableDistricts({ accessLevel: "all" }));
+  }, [dispatch]);
+
+  const updateState = event => {
+    const { name, value } = event.target;
+    setField({ ...field, [name]: value });
+  };
+
+  const postTextFromState = () => {
+    dispatch(action({ field, callback }));
+  };
+
+  return (
+    <>
+      <Select
+        label="District"
+        variant="outlined"
+        placeholder="District"
+        required="true"
+        name="district_id"
+        value={field.district_id}
+        onChange={updateState}
+      >
+        {districts.map(districtData => {
+          return (
+            <MenuItem value={districtData.districtId}>
+              {districtData.districtName}
+            </MenuItem>
+          );
+        })}
+      </Select>
+      <br />
+      <Button
+        size="small"
+        variant="contained"
+        color="secondary"
+        onClick={postTextFromState}
+      >
+        Delete District
+      </Button>
+    </>
+  );
+}
+
+DistrictDeleteComponent.propTypes = {
+  action: PropTypes.func.isRequired,
+  callback: PropTypes.func.isRequired
+};
+
 export default DistrictEntryComponent;
+export { DistrictDeleteComponent };

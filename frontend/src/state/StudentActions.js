@@ -14,9 +14,15 @@ const getStudent = student => ({
   payload: student
 });
 
+const getOtherStudents = otherStudents => ({
+  type: types.SET_OTHER_STUDENTS,
+  payload: otherStudents
+});
+
+
 export const fetchStudents = ({ accessLevel }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/${accessLevel}/student/`, {
+    return fetch(`https://gsndev.com/gsndb/${accessLevel}/student/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -31,10 +37,27 @@ export const fetchStudents = ({ accessLevel }) => {
   };
 };
 
+export const fetchOtherStudents = ({ accessLevel }) => {
+  return dispatch => {
+    return fetch(`https://gsndev.com/gsndb/${accessLevel}/student/`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`
+      }
+    })
+      .then(response => response.json())
+      .then(allStudents => {
+        dispatch(getOtherStudents(allStudents));
+      })
+      .catch(error => error);
+  };
+};
+
 export const fetchStudent = ({ accessLevel, studentId }) => {
   return dispatch => {
     return fetch(
-      `http://gsndev.com/gsndb/${accessLevel}/student/${studentId}`,
+      `https://gsndev.com/gsndb/${accessLevel}/student/${studentId}`,
       {
         method: 'GET',
         headers: {
@@ -56,7 +79,7 @@ export const fetchStudent = ({ accessLevel, studentId }) => {
 export const postStudentNotes = ({ text, accessLevel, url, callback }) => {
   console.log(url);
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb${url}/`, {
+    return fetch(`https://gsndev.com/gsndb${url}/`, {
       method: 'POST',
       body: JSON.stringify({ text }),
       headers: {
@@ -78,7 +101,7 @@ export const postStudentNotes = ({ text, accessLevel, url, callback }) => {
 
 export const postStudentReferrals = ({ field, callback }) => {
   return dispatch => {
-    return fetch(`http://gsndev.com/gsndb/all/referral/`, {
+    return fetch(`https://gsndev.com/gsndb/all/referral/`, {
       method: 'POST',
       body: JSON.stringify(field),
       headers: {
@@ -93,6 +116,50 @@ export const postStudentReferrals = ({ field, callback }) => {
       .then(s => {
         dispatch(getStudent(s['0']));
         callback();
+      })
+      .catch(error => error);
+  };
+};
+
+export const postMyStudentList = ({ JSONData }) => {
+  return dispatch => {
+    return fetch(`https://gsndev.com/gsndb/my/modify-my-students/`, {
+      method: 'POST',
+      body: JSONData,
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(s => {
+        dispatch(getOtherStudents(s['notmyStudents']));
+        dispatch(getStudents(s['myStudents']));
+      })
+      .catch(error => error);
+  };
+};
+
+export const postNotMyStudentList = ({ JSONData }) => {
+  return dispatch => {
+    return fetch(`https://gsndev.com/gsndb/my/modify-my-students/`, {
+      method: 'POST',
+      body: JSONData,
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(s => {
+        dispatch(getOtherStudents(s['notmyStudents']));
+        dispatch(getStudents(s['myStudents']));
       })
       .catch(error => error);
   };
