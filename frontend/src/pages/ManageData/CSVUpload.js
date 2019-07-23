@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Typography,
   withStyles,
@@ -14,35 +14,35 @@ import {
   DialogContentText,
   DialogContent,
   DialogActions
-} from '@material-ui/core';
-import { loadingJSX } from 'components/sharedStyles/LoadingStyles';
-import { TablePageStyles } from 'components/sharedStyles/Table/TablePageStyles';
-import { postCSVUpload, clearErrorCSV } from '../../state/UserActions';
-import { fetchCreatableDistricts } from '../../state/DistrictActions';
+} from "@material-ui/core";
+import { loadingJSX } from "components/sharedStyles/LoadingStyles";
+import { TablePageStyles } from "components/sharedStyles/Table/TablePageStyles";
+import { postCSVUpload, clearErrorCSV } from "../../state/UserActions";
+import { fetchCreatableDistricts } from "../../state/DistrictActions";
 
 const style = {
   formControl: {
     minWidth: 200,
-    marginTop: '1em'
+    marginTop: "1em"
   },
   fileInput: {
-    display: 'none'
+    display: "none"
   },
   fileName: {
-    display: 'inline',
+    display: "inline",
     marginLeft: 10
   },
   button: {
-    marginTop: '2em'
+    marginTop: "2em"
   }
 };
 
 const defaultState = {
-  selectedDistrict: '',
-  selectedSchool: '',
-  selectedFinal: '',
-  csvFileName: '',
-  csv: ''
+  selectedDistrict: "",
+  selectedSchool: "",
+  selectedFinal: "",
+  csvFileName: "",
+  csv: ""
 };
 
 function CSVUpload(props) {
@@ -56,34 +56,37 @@ function CSVUpload(props) {
 
   const updateState = event => {
     const { name, value, files } = event.target;
-    if (name !== 'csvFileName') {
+    if (name !== "csvFileName") {
       setField({ ...field, [name]: value });
     } else {
+      console.log(value);
+      console.log(files);
+      console.log(files[0]);
       setField({ ...field, [name]: value, csv: files[0] });
     }
   };
 
   // Get CSV status from the redux store
   const user = useSelector(state => state.user);
-  const csv = user.get('csv');
+  const csv = user.get("csv");
   let loading = false;
   let error = null;
   let file = null;
   if (csv) {
-    loading = csv.get('loading');
-    error = csv.get('error');
-    file = csv.get('file');
+    loading = csv.get("loading");
+    error = csv.get("error");
+    file = csv.get("file");
   }
 
   // Get District information from the redux store
   useEffect(() => {
-    dispatch(fetchCreatableDistricts({ accessLevel: 'all' }));
+    dispatch(fetchCreatableDistricts({ accessLevel: "all" }));
   }, [dispatch]);
 
   const districts = useSelector(state => state.districts.districts);
   const schoolOptions =
     districts.filter(districtData => {
-      return districtData.districtId === field.selectedDistrict;
+      return districtData.districtName === field.selectedDistrict;
     }) || [];
 
   const schoolOptionsData =
@@ -92,7 +95,7 @@ function CSVUpload(props) {
       : null;
 
   if (!districts) {
-    return loadingJSX('Upload Data');
+    return loadingJSX("Upload Data");
   }
 
   function handleOpenDialogue() {
@@ -161,7 +164,7 @@ function CSVUpload(props) {
         >
           {districts.map(districtData => {
             return (
-              <MenuItem value={districtData.districtId}>
+              <MenuItem value={districtData.districtName}>
                 {districtData.districtName}
               </MenuItem>
             );
@@ -184,11 +187,11 @@ function CSVUpload(props) {
           displayEmpty
           value={field.selectedSchool}
           onChange={updateState}
-          disabled={field.selectedDistrict === ''}
+          disabled={field.selectedDistrict === ""}
         >
           {schoolOptionsData &&
             schoolOptionsData.map(school => {
-              if (school.districtId === field.selectedDistrict)
+              if (school.districtName === field.selectedDistrict)
                 return (
                   <MenuItem value={school.schoolId}>
                     {school.schoolName}
@@ -210,7 +213,7 @@ function CSVUpload(props) {
           name="selectedFinal"
           value={field.selectedFinal}
           onChange={updateState}
-          disabled={field.selectedSchool === ''}
+          disabled={field.selectedSchool === ""}
         >
           <MenuItem value>Final</MenuItem>
           <MenuItem value={false}>Not Final</MenuItem>
