@@ -181,11 +181,13 @@ function DistrictDeleteComponent(props) {
         onChange={updateState}
       >
         {districts.map(districtData => {
-          return (
-            <MenuItem value={districtData.districtId}>
-              {districtData.districtName}
-            </MenuItem>
-          );
+          if (districtData.schoolSet && districtData.schoolSet.length === 0) {
+            return (
+              <MenuItem value={districtData.districtId}>
+                {districtData.districtName}
+              </MenuItem>
+            );
+          }
         })}
       </Select>
       <br />

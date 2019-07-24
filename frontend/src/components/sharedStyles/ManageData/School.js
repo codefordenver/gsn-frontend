@@ -86,7 +86,7 @@ function SchoolDeleteComponent(props) {
   const dispatch = useDispatch();
 
   const [field, setField] = useState({
-    school_id: ""
+    id: ""
   });
 
   const schools = useSelector(state => state.schools.schools);
@@ -111,8 +111,8 @@ function SchoolDeleteComponent(props) {
         variant="outlined"
         placeholder="School"
         required="true"
-        name="school_id"
-        value={field.school_id}
+        name="id"
+        value={field.id}
         onChange={updateState}
       >
         {schools.map(schoolData => {
