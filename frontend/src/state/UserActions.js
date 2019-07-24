@@ -8,7 +8,11 @@ import {
   SET_LOADING,
   SET_IS_LOGGED_IN,
   SET_ERROR,
-  CLEAR_ERROR
+  CLEAR_ERROR,
+  UPLOAD_CSV,
+  SET_LOADING_CSV,
+  SET_ERROR_CSV,
+  CLEAR_ERROR_CSV
 } from './UserConstants';
 
 export const setToken = createAction(SET_TOKEN);
@@ -17,6 +21,11 @@ export const setLoading = createAction(SET_LOADING);
 export const setIsLoggedIn = createAction(SET_IS_LOGGED_IN);
 export const setError = createAction(SET_ERROR);
 export const clearError = createAction(CLEAR_ERROR);
+
+export const setCSVReturn = createAction(UPLOAD_CSV);
+export const setLoadingCsv = createAction(SET_LOADING_CSV);
+export const setErrorCsv = createAction(SET_ERROR_CSV);
+export const clearErrorCSV = createAction(CLEAR_ERROR_CSV);
 
 export const setUserState = () => dispatch => {
   const token = localStorage.getItem('token');
@@ -110,4 +119,34 @@ export const authError = error => dispatch => {
   dispatch(logOut());
   console.error({ error });
   dispatch(setError(error.message));
+};
+
+export const postCSVUpload = ({ field }) => {
+  return dispatch => {
+    dispatch(setLoadingCsv(true));
+    let formData = new FormData();
+    formData.append('school_of_csv_origin', field.selectedSchool);
+    formData.append('term_final_value', field.selectedFinal);
+    formData.append('csv', field.csv);
+
+    return fetch(`http://gsndev.com/gsndb/all/uploadcsv/`, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        Accept: 'application/json',
+        Authorization: `JWT ${localStorage.token}`
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(csv => {
+        dispatch(setCSVReturn(csv));
+        dispatch(setLoadingCsv(false));
+      })
+      .catch(error => {
+        dispatch(setErrorCsv(error));
+        dispatch(setLoadingCsv(false));
+      });
+  };
 };
