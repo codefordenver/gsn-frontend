@@ -1,8 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import API_ROOT from '../services/request';
 
-export const SET_ALL_SCHOOLS = 'GET_ALL_SCHOOLS';
-export const SET_SCHOOL_DETAILS = 'SET_SCHOOL_DETAILS';
+export const SET_ALL_SCHOOLS = "GET_ALL_SCHOOLS";
+export const SET_SCHOOL_DETAILS = "SET_SCHOOL_DETAILS";
 
 const setSchools = data => ({
   type: SET_ALL_SCHOOLS,
@@ -19,7 +19,7 @@ export const fetchSchools = ({ accessLevel }) => {
     return fetch(`${API_ROOT}/gsndb/${accessLevel}/school/`, {
       method: 'GET',
       headers: {
-        Accept: 'application/json',
+        Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
       }
     })
@@ -36,7 +36,7 @@ export const fetchSchoolDetails = ({ accessLevel, schoolId }) => {
     return fetch(`${API_ROOT}/gsndb/${accessLevel}/school/${schoolId}`, {
       method: 'GET',
       headers: {
-        Accept: 'application/json',
+        Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
       }
     })
@@ -44,7 +44,7 @@ export const fetchSchoolDetails = ({ accessLevel, schoolId }) => {
         return response.json();
       })
       .then(s => {
-        dispatch(setSchoolDetails(s['0']));
+        dispatch(setSchoolDetails(s["0"]));
       })
       .catch(error => error);
   };
@@ -56,8 +56,8 @@ export const postSchoolNotes = ({ text, accessLevel, url }) => {
       method: 'POST',
       body: JSON.stringify({ text }),
       headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
+        "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
       }
     })
@@ -65,7 +65,7 @@ export const postSchoolNotes = ({ text, accessLevel, url }) => {
         return response.json();
       })
       .then(s => {
-        dispatch(setSchoolDetails(s['0']));
+        dispatch(setSchoolDetails(s["0"]));
       })
       .catch(error => error);
   };
@@ -76,7 +76,7 @@ export const fetchCreatableSchools = () => {
     return fetch(`${API_ROOT}/gsndb/all/create-school/`, {
       method: 'GET',
       headers: {
-        Accept: 'application/json',
+        Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
       }
     })
@@ -94,13 +94,16 @@ export const postSchools = ({ field, callback }) => {
       method: 'POST',
       body: JSON.stringify(field),
       headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
+        "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
       }
     })
       .then(response => {
         return response.json();
+      })
+      .then(s => {
+        dispatch(setSchools(s));
       })
       .catch(error => error);
   };
@@ -112,13 +115,16 @@ export const deleteSchools = ({ field, callback }) => {
       method: 'DELETE',
       body: JSON.stringify(field),
       headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
+        "Content-Type": "application/json",
+        Accept: "application/json",
         Authorization: `JWT ${localStorage.token}`
       }
     })
       .then(response => {
         return response.json();
+      })
+      .then(s => {
+        dispatch(setSchools(s));
       })
       .catch(error => error);
   };
