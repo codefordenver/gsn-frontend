@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import { createAction } from 'utils/actionUtils';
 import * as types from './StudentConstants';
+import API_ROOT from '../services/request';
 
 export const setLoading = createAction(types.SET_LOADING);
 
@@ -22,7 +23,7 @@ const getOtherStudents = otherStudents => ({
 
 export const fetchStudents = ({ accessLevel }) => {
   return dispatch => {
-    return fetch(`https://gsndev.com/gsndb/${accessLevel}/student/`, {
+    return fetch(`${API_ROOT}/gsndb/${accessLevel}/student/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -56,9 +57,7 @@ export const fetchOtherStudents = ({ accessLevel }) => {
 
 export const fetchStudent = ({ accessLevel, studentId }) => {
   return dispatch => {
-    return fetch(
-      `https://gsndev.com/gsndb/${accessLevel}/student/${studentId}`,
-      {
+    return fetch(`${API_ROOT}/gsndb/${accessLevel}/student/${studentId}`, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
@@ -79,7 +78,7 @@ export const fetchStudent = ({ accessLevel, studentId }) => {
 export const postStudentNotes = ({ text, accessLevel, url, callback }) => {
   console.log(url);
   return dispatch => {
-    return fetch(`https://gsndev.com/gsndb${url}/`, {
+    return fetch(`${API_ROOT}/gsndb${url}/`, {
       method: 'POST',
       body: JSON.stringify({ text }),
       headers: {
@@ -101,7 +100,7 @@ export const postStudentNotes = ({ text, accessLevel, url, callback }) => {
 
 export const postStudentReferrals = ({ field, callback }) => {
   return dispatch => {
-    return fetch(`https://gsndev.com/gsndb/all/referral/`, {
+    return fetch(`${API_ROOT}/gsndb/all/referral/`, {
       method: 'POST',
       body: JSON.stringify(field),
       headers: {

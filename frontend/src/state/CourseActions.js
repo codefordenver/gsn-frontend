@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import API_ROOT from '../services/request';
 
 export const SET_ALL_COURSES = 'GET_ALL_COURSES';
 export const SET_COURSE_DETAILS = 'GET_COURSE_DETAILS';
@@ -15,7 +16,7 @@ const setCourseDetails = data => ({
 
 export const fetchCourses = ({ accessLevel }) => {
   return dispatch => {
-    return fetch(`https://gsndev.com/gsndb/${accessLevel}/course/`, {
+    return fetch(`${API_ROOT}/gsndb/${accessLevel}/course/`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -32,7 +33,7 @@ export const fetchCourses = ({ accessLevel }) => {
 
 export const fetchCourseDetails = ({ accessLevel, courseId }) => {
   return dispatch => {
-    return fetch(`https://gsndev.com/gsndb/${accessLevel}/course/${courseId}`, {
+    return fetch(`${API_ROOT}/gsndb/${accessLevel}/course/${courseId}`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -51,7 +52,7 @@ export const fetchCourseDetails = ({ accessLevel, courseId }) => {
 
 export const postCourseNotes = ({ text, accessLevel, url }) => {
   return dispatch => {
-    return fetch(`https://gsndev.com/gsndb${url}/`, {
+    return fetch(`${API_ROOT}/gsndb${url}/`, {
       method: 'POST',
       body: JSON.stringify({ text }),
       headers: {

@@ -1,6 +1,6 @@
 // const API_ROOT = 'https://127.0.0.1:8000/';
 
-const API_ROOT = 'https://gsndev.com/';
+const API_ROOT = 'https://gsndev.com';
 
 export function request({
   url,
@@ -10,7 +10,7 @@ export function request({
 }) {
   return new Promise((resolve, reject) => {
     if (url) {
-      fetch(`${API_ROOT}${url}`, { method, headers, body })
+      fetch(`${API_ROOT}/${url}`, { method, headers, body })
         .then((result) => {
           const { status, statusText } = result;
           if (status >= 400 && status < 600) {
@@ -29,3 +29,5 @@ export function request({
     }
   });
 }
+
+export default API_ROOT;
